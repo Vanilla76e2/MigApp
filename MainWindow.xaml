@@ -1,0 +1,319 @@
+﻿<Window x:Class="MigApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MigApp"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="MigApp" MinHeight="450" MinWidth="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResize">
+    <Grid Background="#323232">
+
+        <!-- <Border VerticalAlignment="Top" Background="#292929">
+            <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+                <TextBlock Text="   Migapp" Style="{DynamicResource Title}"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="🔲" Style="{DynamicResource CloseButton}" Click="ExpandClick"/>
+                    <Button Content="➖" Style="{DynamicResource CloseButton}" Click="WrapClick"/>
+                    <Button Content="✖" Style="{DynamicResource CloseButton}" Click="CloseClick"/>
+                </StackPanel>
+            </Grid>
+        </Border> -->
+
+        <TabControl TabStripPlacement="Left">
+
+            <!-- Избранное -->
+            <TabItem Height="50" Width="100" Padding="3" Margin="0 0 0 10">
+                <TabItem.Header>
+                    <Image Source="images/FavImage.png"/>
+                </TabItem.Header>
+
+                <Grid>
+                    <Border VerticalAlignment="Top" Background="#323232" Height="50">
+                        <Grid>
+                            <TextBlock Text="Избранное" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
+                        </Grid>
+                    </Border>
+
+                    <DataGrid Name="FavTable" Background="#525252" Foreground="White" Margin="0 50 5 5" IsReadOnly="True">
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Редактировать"/>
+                                <MenuItem Header="Убрать из избранного"/>
+                                <MenuItem Header="Удалить"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <!-- Сотрудники -->
+            <TabItem Height="50" Width="100" Padding="3" Margin="0 0 0 10">
+                <TabItem.Header>
+                    <Image Source="images/Employees.png"/>
+                </TabItem.Header>
+
+                <Grid Background="#323232">
+                    <Border VerticalAlignment="Top" Background="#323232" Height="50">
+                        <Grid>
+                            <Button Content="➕" HorizontalAlignment="Left" Width="50" Margin="10 0 0 0" Style="{DynamicResource MaterialDesignOutlinedButton}"/>
+                            <TextBlock Text="Сотрудники" Style="{DynamicResource Header}" Margin="70 8 0 8"/>
+                            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                <Border Name="Filter_Emp" Margin="0 2 5 2" BorderThickness="1" BorderBrush="Orange" CornerRadius="3" Visibility="Collapsed">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Name="FilterEmpText"  Width="300" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 5 0"/>
+                                        <Button Click="FilterEmpClear" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}"/>
+                                    </StackPanel>
+                                </Border>
+                                <Button Content="🔎" Style="{DynamicResource MaterialDesignFlatButton}" Click="SEmployee" Margin="0 0 5 0"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <DataGrid Name="EmployeeTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="В избранное"/>
+                                <MenuItem Header="Редактировать"/>
+                                <MenuItem Header="Удалить" Click="Delete_Emp"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
+            <!-- Техника -->
+            <TabItem Height="50" Width="100" Padding="5" Margin="0 0 0 10">
+                <TabItem.Header>
+                    <Image Source="images/PC.png"/>
+                </TabItem.Header>
+
+                <Grid Background="#404040">
+                    <TabControl TabStripPlacement="Left">
+
+                        <!-- ПК -->
+                        <TabItem Header="ПК">
+
+                            <Grid Background="#404040">
+                                <Border VerticalAlignment="Top" Background="#404040" Height="50">
+                                    <Grid>
+                                        <Button Content="➕" HorizontalAlignment="Left" Width="50" Margin="10 0 0 0" Style="{DynamicResource MaterialDesignOutlinedButton}"/>
+                                        <TextBlock Text="ПК" Style="{DynamicResource Header}" Margin="70 8 0 8"/>
+                                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                            <Button Content="🔎" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+
+                                <DataGrid Name="PCTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Удалить" Click="Delete_PC"/>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+
+                        <!-- Ноутбуки -->
+                        <TabItem Header="Ноутбуки" Height="50" Width="100" Padding="3" Margin="0 0 0 10">
+
+                            <Grid Background="#404040">
+                                <Border VerticalAlignment="Top" Background="#404040" Height="50">
+                                    <Grid>
+                                        <Button Content="➕" HorizontalAlignment="Left" Width="50" Margin="10 0 0 0" Style="{DynamicResource MaterialDesignOutlinedButton}"/>
+                                        <TextBlock Text="Ноутбуки" Style="{DynamicResource Header}" Margin="70 8 0 8"/>
+                                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                            <Button Content="🔎" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+
+                                <DataGrid Name="LaptopTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Удалить" Click="Delete_Lap"/>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+
+                        <!-- Планшеты -->
+                        <TabItem Header="Планшеты" Height="50" Width="100" Padding="0" Margin="0 0 0 10">
+
+                            <Grid Background="#404040">
+                                <Border VerticalAlignment="Top" Background="#404040" Height="50">
+                                    <Grid>
+                                        <Button Content="➕" HorizontalAlignment="Left" Width="50" Margin="10 0 0 0" Style="{DynamicResource MaterialDesignOutlinedButton}"/>
+                                        <TextBlock Text="Планшеты" Style="{DynamicResource Header}" Margin="70 8 0 8"/>
+                                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                            <Button Content="🔎" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+
+                                <DataGrid Name="TabletsTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Удалить" Click="Delete_Tab"/>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+
+                        <!-- Орг. техника -->
+                        <TabItem Header="Орг. техника" Height="50" Width="100" Padding="3" Margin="0 0 0 10">
+
+                            <Grid Background="#404040">
+                                <Border VerticalAlignment="Top" Background="#404040" Height="50">
+                                    <Grid>
+                                        <Button Content="➕" HorizontalAlignment="Left" Width="50" Margin="10 0 0 0" Style="{DynamicResource MaterialDesignOutlinedButton}"/>
+                                        <TextBlock Text="Орг. Техника" Style="{DynamicResource Header}" Margin="70 8 0 8"/>
+                                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                            <Button Content="🔎" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+
+                                <DataGrid Name="PrintersTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Удалить" Click="Delete_Pri"/>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+
+                        <!-- Мониторы -->
+                        <TabItem Header="Мониторы" Height="50" Width="100" Padding="3" Margin="0 0 0 10">
+
+                            <Grid Background="#404040">
+                                <Border VerticalAlignment="Top" Background="#404040" Height="50">
+                                    <Grid>
+                                        <Button Content="➕" HorizontalAlignment="Left" Width="50" Margin="10 0 0 0" Style="{DynamicResource MaterialDesignOutlinedButton}"/>
+                                        <TextBlock Text="Мониторы" Style="{DynamicResource Header}" Margin="70 8 0 8"/>
+                                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                            <Button Content="🔎" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+
+                                <DataGrid Name="MonitorsTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Удалить" Click="Delete_Mon"/>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+
+            <!-- Отчёты -->
+            <TabItem Height="50" Width="100" Padding="5" Margin="0 0 0 10">
+                <TabItem.Header>
+                    <Image Source="images/Document.png"/>
+                </TabItem.Header>
+
+                <Grid Background="#323232">
+                    <Border VerticalAlignment="Top" Background="#323232" Height="50">
+                        <Grid>
+                            <TextBlock Text="Отчёт" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
+                        </Grid>
+                    </Border>
+
+                    <DataGrid Name="Report1" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True"/>
+                </Grid>
+            </TabItem>
+
+            <!-- Админпанель -->
+            <TabItem Height="50" Width="100" Padding="5" Margin="0 0 0 10">
+                <TabItem.Header>
+                    <Image Source="images/Users.png"/>
+                </TabItem.Header>
+
+                <Grid Background="#404040">
+                    <TabControl TabStripPlacement="Left">
+                        
+                        <!-- Пользователи -->
+                        <TabItem Header="Пользователи">
+                            <Grid>
+                                <Border VerticalAlignment="Top" Background="#404040" Height="50">
+                                    <Grid>
+                                        <Button Content="➕" HorizontalAlignment="Left" Width="50" Margin="10 0 0 0" Style="{DynamicResource MaterialDesignOutlinedButton}"/>
+                                        <TextBlock Text="Пользователи" Style="{DynamicResource Header}" Margin="70 8 0 8"/>
+                                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                            <Button Content="🔎" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+
+                                <DataGrid Name="UsersTable" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True"/>
+                            </Grid>
+                        </TabItem>
+
+                        <!-- Роли -->
+                        <TabItem Header="Роли">
+                            <Grid>
+                                <Grid>
+                                    <Border VerticalAlignment="Top" Background="#404040" Height="50">
+                                        <Grid>
+                                            <Button Content="➕" HorizontalAlignment="Left" Width="50" Margin="10 0 0 0" Style="{DynamicResource MaterialDesignOutlinedButton}"/>
+                                            <TextBlock Text="Роли" Style="{DynamicResource Header}" Margin="70 8 0 8"/>
+                                            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                                <Button Content="🔎" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+
+                                    <DataGrid Name="RolesTable" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True"/>
+                                </Grid>
+                            </Grid>
+                        </TabItem>
+
+                        <!-- Логи -->
+                        <TabItem Header="Логи">
+                            <Grid>
+                                <Border VerticalAlignment="Top" Background="#404040" Height="50">
+                                    <Grid>
+                                        <TextBlock Text="Логи" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
+                                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                            <Button Content="🔎" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+
+                                <DataGrid Name="LogsTable" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True"/>
+                            </Grid>
+                        </TabItem>
+                        
+                        <!-- Архив -->
+                        <TabItem Header="Архив">
+                            <Grid>
+                                <Border VerticalAlignment="Top" Background="#404040" Height="50">
+                                    <Grid>
+                                        <TextBlock Text="Архив" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
+                                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                            <Button Content="🔎" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+
+                                <DataGrid Name="DeletedTable" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True"/>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button Click="ExitClick" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="25" Style="{DynamicResource MaterialDesignFloatingActionButton}" Width="40" Height="40">
+            <Image Source="images/Exit.png" Height="30"/>
+        </Button>
+        <Border x:Name="Blindfall" Background="Black" Opacity="0.35" Visibility="Collapsed"/>
+    </Grid>
+</Window>
