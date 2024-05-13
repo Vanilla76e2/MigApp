@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "G:\\\u0414\u0438\u043F\u043B\u043E\u043C\\MigApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|g:\\\u0434\u0438\u043F\u043B\u043E\u043C\\migapp\\migapp\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|G:\\\u0414\u0438\u043F\u043B\u043E\u043C\\MigApp\\migapp\\loginwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\loginwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|G:\\\u0414\u0438\u043F\u043B\u043E\u043C\\MigApp\\migapp\\classes\\sqlconnectionclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\classes\\sqlconnectionclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|G:\\\u0414\u0438\u043F\u043B\u043E\u043C\\MigApp\\migapp\\loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "G:\\\u0414\u0438\u043F\u043B\u043E\u043C\\MigApp\\MigApp\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "MigApp\\MainWindow.xaml",
+              "ToolTip": "G:\\\u0414\u0438\u043F\u043B\u043E\u043C\\MigApp\\MigApp\\MainWindow.xaml",
+              "RelativeToolTip": "MigApp\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-05-06T11:03:32.519Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SQLConnectionClass.cs",
+              "DocumentMoniker": "G:\\\u0414\u0438\u043F\u043B\u043E\u043C\\MigApp\\MigApp\\Classes\\SQLConnectionClass.cs",
+              "RelativeDocumentMoniker": "MigApp\\Classes\\SQLConnectionClass.cs",
+              "ToolTip": "G:\\\u0414\u0438\u043F\u043B\u043E\u043C\\MigApp\\MigApp\\Classes\\SQLConnectionClass.cs",
+              "RelativeToolTip": "MigApp\\Classes\\SQLConnectionClass.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-12T13:52:02.318Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LoginWindow.xaml",
+              "DocumentMoniker": "G:\\\u0414\u0438\u043F\u043B\u043E\u043C\\MigApp\\MigApp\\LoginWindow.xaml",
+              "RelativeDocumentMoniker": "MigApp\\LoginWindow.xaml",
+              "ToolTip": "G:\\\u0414\u0438\u043F\u043B\u043E\u043C\\MigApp\\MigApp\\LoginWindow.xaml",
+              "RelativeToolTip": "MigApp\\LoginWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-05-08T10:18:12.272Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LoginWindow.xaml.cs",
+              "DocumentMoniker": "G:\\\u0414\u0438\u043F\u043B\u043E\u043C\\MigApp\\MigApp\\LoginWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MigApp\\LoginWindow.xaml.cs",
+              "ToolTip": "G:\\\u0414\u0438\u043F\u043B\u043E\u043C\\MigApp\\MigApp\\LoginWindow.xaml.cs",
+              "RelativeToolTip": "MigApp\\LoginWindow.xaml.cs",
+              "ViewState": "AQIAAJIAAAAAAAAAAAAqwK8AAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-08T10:18:42.313Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
