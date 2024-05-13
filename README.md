@@ -3,26 +3,33 @@
 </p>
 
 <p align="center">
-   <img src="" alt="Unity Version">
-   <img src="" alt="Game Version">
-   <img src="" alt="License">
+   <img src="https://img.shields.io/badge/.NET-4.7.2-orange" alt=".NET Version">
+   <img src="https://img.shields.io/badge/App_Version-1.0-green" alt="App Version">
+   <img src="https://img.shields.io/badge/License-GPL--3.0-blue" alt="License">
 </p>
 
-## About
+## О проекте
 
-About Text Here
+MigApp - это система учета компьютерной техники, разработанная для организации НТИА «Миг». С помощью MigApp вы сможете хранить информацию о сотрудниках, компьютерах, ноутбуках, планшетах, мониторах и организационной технике в одном месте.
 
-## Documentation
+Система MigApp позволяет создавать отчеты о том, какая техника используется каждым сотрудником, как она связана друг с другом и как организована в вашем офисе. Это помогает оптимизировать использование ресурсов и улучшить производительность вашей компании.
+
+Кроме того, MigApp имеет систему ролей и пользователей, что обеспечивает безопасность данных и позволяет ограничивать доступ к информации только определенным сотрудникам. Таким образом, вы можете быть уверены, что конфиденциальная информация о вашей компьютерной технике надежно защищена.
+
+Благодаря MigApp вы сможете легко отслеживать и контролировать все активы организации, что поможет вам экономить время и деньги, обеспечивая более эффективное управление.
+
+## Документация
 
 Documentation Here
 
-## Distribute
+## Дистрибуция
 
-- [Service Name](Page Link)
+- Скачать MigApp [Google Drive](https://drive.google.com/file/d/1FAwKvy5CLYKQJbut8_UoxVpkClf98W1z/view?usp=sharing)
+- Скачать MigApp [Яндекс Диск](https://disk.yandex.ru/d/Vi0GlxRSou9OiQ)
 
+## Разработчики
 
-## Developers
+- [Vanilla76e2](https://github.com/Vanilla76e2)
 
-- [Delevoper Name](GitHub Profile Link)
-
-## License
+## Лицензия
+Прект MigApp распростроняется под лицензией GNU GPL-3.0
