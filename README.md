@@ -24,8 +24,8 @@ Documentation Here
 
 ## Дистрибуция
 
-- Скачать MigApp [Google Drive](https://drive.google.com/file/d/1FAwKvy5CLYKQJbut8_UoxVpkClf98W1z/view?usp=sharing)
-- Скачать MigApp [Яндекс Диск](https://disk.yandex.ru/d/Vi0GlxRSou9OiQ)
+- [Google Drive](https://drive.google.com/file/d/1FAwKvy5CLYKQJbut8_UoxVpkClf98W1z/view?usp=sharing)
+- [Яндекс Диск](https://disk.yandex.ru/d/Vi0GlxRSou9OiQ)
 
 ## Разработчики
 
