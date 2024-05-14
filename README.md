@@ -20,9 +20,10 @@ MigApp - это система учета компьютерной техник�
 
 ## Руководство
 
-Руководство пользователя [Yandex Disk](https://disk.yandex.ru/i/f3Ie9Wuwiq6o-w)
+Скачать руководство пользователя 
 
-Руководство пользователя [Google Drive](https://drive.google.com/drive/home)
+[Yandex Disk](https://disk.yandex.ru/i/f3Ie9Wuwiq6o-w)
+[Google Drive](https://drive.google.com/drive/home)
 
 ## Разработчики
 
