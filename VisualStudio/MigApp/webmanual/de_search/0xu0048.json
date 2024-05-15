@@ -1,0 +1,11 @@
+[
+	{ "s": "HDD", "p": [4] },
+	{ "s": "HTML", "p": [29] },
+	{ "s": "HTTPS", "p": [30, 8, 29, 7] },
+	{ "s": "HTTPS://AKA.MS/SSMSFULLSETUP?CLCID", "p": [8] },
+	{ "s": "HTTPS://DISCORDAPP.COM/USERS/376272307997638657", "p": [30] },
+	{ "s": "HTTPS://DOWNLOAD.MICROSOFT.COM/DOWNLOAD/SQL2022-SSEI-EXPR.EXE", "p": [8] },
+	{ "s": "HTTPS://GITHUB.COM/VANILLA76E2", "p": [30] },
+	{ "s": "HTTPS://GITHUB.COM/VANILLA76E2/MIGAPP", "p": [30, 7] },
+	{ "s": "HTTPS://WWW.GNU.ORG/LICENSES/GPL-3.0.HTML", "p": [29] }
+]
