@@ -28,7 +28,7 @@ namespace MigApp
         public LoginWindow()
         {
             InitializeComponent();
-
+            UserLogin.Focus();
             //Проверка на запомнить пароль
             if (MigApp.Properties.Settings.Default.RemPass)
             {
@@ -81,6 +81,7 @@ namespace MigApp
                 Registration();
             }
             else MessageBox.Show("Логин или Пароль введены не верно", "Внимание", MessageBoxButton.OK, MessageBoxImage.Stop);
+
         }
 
         //Если пароль был сохранён
@@ -112,8 +113,8 @@ namespace MigApp
         //Открытие окна настроек
         private void SettingsClick(object sender, RoutedEventArgs e)
         {
-                SettingsWin win = new SettingsWin();
-                win.ShowDialog();
+            SettingsWin win = new SettingsWin();
+            win.ShowDialog();
         }
 
         #region Безопасность
@@ -127,16 +128,13 @@ namespace MigApp
         //Смена поля для пароля
         private void PasswordFlip()
         {
-            if (UserPassword2.Password != MigApp.Properties.Settings.Default.UserPassword)
-            {
-                UserPassword2.Password = "";
-                UserPassword2.Visibility = Visibility.Collapsed;
-                UserPassword1.Visibility = Visibility.Visible;
-                Enter2.Visibility = Visibility.Collapsed;
-                Enter1.Visibility = Visibility.Visible;
-                RemPass.IsChecked = false;
-                UserPassword1.Focus();
-            }
+            UserPassword2.Password = "";
+            UserPassword2.Visibility = Visibility.Collapsed;
+            UserPassword1.Visibility = Visibility.Visible;
+            Enter2.Visibility = Visibility.Collapsed;
+            Enter1.Visibility = Visibility.Visible;
+            RemPass.IsChecked = false;
+            UserPassword1.Focus();
         }
 
         #endregion
@@ -186,14 +184,11 @@ namespace MigApp
                 DragMove();
         }
 
-
-
-
         #endregion
 
         private void User_Manual(object sender, RoutedEventArgs e)
         {
-            Process.Start(@"webmanual\index.htm");
+            Process.Start(@"https://vanilla76e2.github.io/MigApp_Manual/");
         }
     }
 }

@@ -85,8 +85,10 @@ namespace MigApp.CRWindows.AdminPanel
         {
             if (MessageBox.Show($"Вы уверены что хотите сбросить пароль пользователя '{Login.Text}'?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                sqlcc.ReqNonRef($"UPDATE Useres SET Password = NULL WHERE Login LIKE '{Login.Text}'");
+                sqlcc.ReqNonRef($"UPDATE Users SET Password = NULL WHERE Login LIKE '{Login.Text}'");
                 sqlcc.Loging(CurrentUser, "Сброс пароля", "Пользователи", Login.Text, "");
+                DialogResult = true; Close();
+                ResetPasswordButton.IsEnabled = false;
             }
         }
 
