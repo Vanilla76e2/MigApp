@@ -1418,36 +1418,42 @@ namespace MigApp
         // Cоздать сотрудника
         private void EmployeeCreateClick(object sender, RoutedEventArgs e)
         {
+            if (EmpRedPerm)
             EmployeeCROpen(true, null, false);
         }
 
         // Создать компьютер
         private void PCCreateClick(object sender, RoutedEventArgs e)
         {
+            if (PCRedPerm)
             PCCROpen(true, null, false);
         }
 
         // Создать ноутбук
         private void NotebookCreateClick(object sender, RoutedEventArgs e)
         {
+            if (NbRedPerm)
             NotebookCROpen(true, null, false);
         }
 
         // Создать планшет
         private void TabletsCreateClick(object sender, RoutedEventArgs e)
         {
+            if (TabRedPerm)
             TabletsCROpen(true, null, false);
         }
 
         // Создать ррг. технику
         private void OrgTechCreateClick(object sender, RoutedEventArgs e)
         {
+            if (OTRedPerm)
             OrgTechCROpen(true, null, false);
         }
 
         // Создать монитор
         private void MonitorCreateClick(object sender, RoutedEventArgs e)
         {
+            if (MonRedPerm)
             MonitorCROpen(true, null, false);
         }
 
@@ -1759,7 +1765,7 @@ namespace MigApp
 
         private void Manual_Open(object sender, RoutedEventArgs e)
         {
-            Process.Start(@"webmanual\index.htm");
+            Process.Start(@"https://vanilla76e2.github.io/MigApp_Manual/");
         }
     }
 }
