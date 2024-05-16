@@ -781,15 +781,18 @@ namespace MigApp
         {
             try
             {
-                foreach (var items in EmployeesDeleted.SelectedItems)
+                if (MessageBox.Show("Вы уверены что хотите восстановить запись?","Внимание",MessageBoxButton.YesNo,MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    DataRowView row = (DataRowView)items;
-                    string id = row.Row["ID"].ToString();
-                    string name = row.Row["ФИО"].ToString();
-                    sqlcc.Recovery("Employees", "ID", id);
-                    sqlcc.Loging(CurrentUser, "Восстановление", "Сотрудники", name, "");
+                    foreach (var items in EmployeesDeleted.SelectedItems)
+                    {
+                        DataRowView row = (DataRowView)items;
+                        string id = row.Row["ID"].ToString();
+                        string name = row.Row["ФИО"].ToString();
+                        sqlcc.Recovery("Employees", "ID", id);
+                        sqlcc.Loging(CurrentUser, "Восстановление", "Сотрудники", name, "");
+                    }
+                    UpdateAllTables();
                 }
-                UpdateAllTables();
             }
             catch { }
         }
@@ -799,14 +802,17 @@ namespace MigApp
         {
             try
             {
-                foreach (var items in PCDeleted.SelectedItems)
+                if (MessageBox.Show("Вы уверены что хотите восстановить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    DataRowView row = (DataRowView)items;
-                    string invnum = row.Row["Инвентарный номер"].ToString();
-                    sqlcc.Recovery("Computers", "InvNum", invnum);
-                    sqlcc.Loging(CurrentUser, "Восстановление", "Компьютеры", invnum, "");
+                    foreach (var items in PCDeleted.SelectedItems)
+                    {
+                        DataRowView row = (DataRowView)items;
+                        string invnum = row.Row["Инвентарный номер"].ToString();
+                        sqlcc.Recovery("Computers", "InvNum", invnum);
+                        sqlcc.Loging(CurrentUser, "Восстановление", "Компьютеры", invnum, "");
+                    }
+                    UpdateAllTables();
                 }
-                UpdateAllTables();
             }
             catch { }
         }
@@ -816,14 +822,17 @@ namespace MigApp
         {
             try
             {
-                foreach (var items in NotebookDeleted.SelectedItems)
+                if (MessageBox.Show("Вы уверены что хотите восстановить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    DataRowView row = (DataRowView)items;
-                    string invnum = row.Row["Инвентарный номер"].ToString();
-                    sqlcc.Recovery("Notebooks", "InvNum", invnum);
-                    sqlcc.Loging(CurrentUser, "Восстановление", "Ноутбуки", invnum, "");
+                    foreach (var items in NotebookDeleted.SelectedItems)
+                    {
+                        DataRowView row = (DataRowView)items;
+                        string invnum = row.Row["Инвентарный номер"].ToString();
+                        sqlcc.Recovery("Notebooks", "InvNum", invnum);
+                        sqlcc.Loging(CurrentUser, "Восстановление", "Ноутбуки", invnum, "");
+                    }
+                    UpdateAllTables();
                 }
-                UpdateAllTables();
             }
             catch { }
         }
@@ -833,14 +842,17 @@ namespace MigApp
         {
             try
             {
-                foreach (var items in TabletsDeleted.SelectedItems)
+                if (MessageBox.Show("Вы уверены что хотите восстановить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    DataRowView row = (DataRowView)items;
-                    string invnum = row.Row["Инвентарный номер"].ToString();
-                    sqlcc.Recovery("Tablets", "InvNum", invnum);
-                    sqlcc.Loging(CurrentUser, "Восстановление", "Ноутбуки", invnum, "");
+                    foreach (var items in TabletsDeleted.SelectedItems)
+                    {
+                        DataRowView row = (DataRowView)items;
+                        string invnum = row.Row["Инвентарный номер"].ToString();
+                        sqlcc.Recovery("Tablets", "InvNum", invnum);
+                        sqlcc.Loging(CurrentUser, "Восстановление", "Ноутбуки", invnum, "");
+                    }
+                    UpdateAllTables();
                 }
-                UpdateAllTables();
             }
             catch { }
         }
@@ -850,14 +862,17 @@ namespace MigApp
         {
             try
             {
-                foreach (var items in OrgTechDeleted.SelectedItems)
+                if (MessageBox.Show("Вы уверены что хотите восстановить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    DataRowView row = (DataRowView)items;
-                    string invnum = row.Row["Инвентарный номер"].ToString();
-                    sqlcc.Recovery("OrgTech", "InvNum", invnum);
-                    sqlcc.Loging(CurrentUser, "Восстановление", "Оргтехника", invnum, "");
+                    foreach (var items in OrgTechDeleted.SelectedItems)
+                    {
+                        DataRowView row = (DataRowView)items;
+                        string invnum = row.Row["Инвентарный номер"].ToString();
+                        sqlcc.Recovery("OrgTech", "InvNum", invnum);
+                        sqlcc.Loging(CurrentUser, "Восстановление", "Оргтехника", invnum, "");
+                    }
+                    UpdateAllTables();
                 }
-                UpdateAllTables();
             }
             catch { }
         }
@@ -867,14 +882,17 @@ namespace MigApp
         {
             try
             {
-                foreach (var items in MonitorsDeleted.SelectedItems)
+                if (MessageBox.Show("Вы уверены что хотите восстановить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    DataRowView row = (DataRowView)items;
-                    string invnum = row.Row["Инвентарный номер"].ToString();
-                    sqlcc.Recovery("Monitor", "InvNum", invnum);
-                    sqlcc.Loging(CurrentUser, "Восстановление", "Мониторы", invnum, "");
+                    foreach (var items in MonitorsDeleted.SelectedItems)
+                    {
+                        DataRowView row = (DataRowView)items;
+                        string invnum = row.Row["Инвентарный номер"].ToString();
+                        sqlcc.Recovery("Monitor", "InvNum", invnum);
+                        sqlcc.Loging(CurrentUser, "Восстановление", "Мониторы", invnum, "");
+                    }
+                    UpdateAllTables();
                 }
-                UpdateAllTables();
             }
             catch { }
         }

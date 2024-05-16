@@ -14,23 +14,42 @@
             <!--Сотрудники-->
             <StackPanel x:Name="SearchPanel_0" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                    <TextBlock Text="ID" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 50 0" FontSize="18"/>
-                    <TextBox Name="ID_Emp" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16" PreviewTextInput="NumOnly"/>
+                    <TextBlock Text="ID" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 0 0" FontSize="18"/>
+                    <TextBox Name="ID_Emp" Width="380" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16" PreviewTextInput="NumOnly"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                    <TextBlock Text="ФИО" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 50 0" FontSize="18"/>
-                    <TextBox Name="FIO_Emp" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
+                    <TextBlock Text="ФИО" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 0 0" FontSize="18"/>
+                    <TextBox Name="FIO_Emp" Width="380" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                    <TextBlock Text="Отдел" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 50 0" FontSize="18"/>
-                    <TextBox Name="Group_Emp" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
+                    <TextBlock Text="Отдел" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 0 0" FontSize="18"/>
+                    <ComboBox Name="Group_Emp" Width="380" Style="{DynamicResource MaterialDesignComboBox}" Foreground="White" FontSize="16">
+                        <ComboBoxItem Content="Информационно-аналитический отдел"/>
+                        <ComboBoxItem Content="Отдел бухгалтерского учёта"/>
+                        <ComboBoxItem Content="Отдел звукорежессуры"/>
+                        <ComboBoxItem Content="Отдел кадров"/>
+                        <ComboBoxItem Content="Отдел маркетинга"/>
+                        <ComboBoxItem Content="Отдел монтажа и оформления"/>
+                        <ComboBoxItem Content="Отдел планирования и формирования вещания"/>
+                        <ComboBoxItem Content="Отдел по снабжению и содержанию"/>
+                        <ComboBoxItem Content="Отдел производства РВ программ"/>
+                        <ComboBoxItem Content="Отдел производства ТВ программ"/>
+                        <ComboBoxItem Content="Отдел развития и продвижения СМИ"/>
+                        <ComboBoxItem Content="Отдел телеоператоров"/>
+                        <ComboBoxItem Content="Планово-экономический отдел"/>
+                        <ComboBoxItem Content="Производственный отдел"/>
+                        <ComboBoxItem Content="Творческий отдел"/>
+                        <ComboBoxItem Content="Хозяйственный отдел"/>
+                        <ComboBoxItem Content="Художественно-производствнный отдел"/>
+                        <ComboBoxItem Content="Юридический отдел"/>
+                    </ComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                    <TextBlock Text="Кабинет" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 50 0" FontSize="18"/>
-                    <TextBox Name="Room_Emp" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" MaxLength="3" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed" PreviewTextInput="NumOnly" FontSize="16"/>
+                    <TextBlock Text="Кабинет" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 0 0" FontSize="18"/>
+                    <TextBox Name="Room_Emp" Width="380" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" MaxLength="3" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed" PreviewTextInput="NumOnly" FontSize="16"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                    <TextBlock Text="Дата рождения" Style="{DynamicResource TextBlock_14}" Width="130" Margin="0 0 20 0" FontSize="18"/>
+                    <TextBlock Text="Дата рождения" Style="{DynamicResource TextBlock_14}" Width="130" Margin="0 0 150 0" FontSize="18"/>
                     <DatePicker Name="Birthdate_Emp" Width="200" Foreground="White" Language="ru" FontSize="16"/>
                 </StackPanel>
                 
@@ -343,23 +362,42 @@
             <!--Сотрудники архив-->
             <StackPanel x:Name="SearchPanel_8" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                    <TextBlock Text="ID" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 50 0" FontSize="18"/>
-                    <TextBox Name="ID_Emp_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16" PreviewTextInput="NumOnly"/>
+                    <TextBlock Text="ID" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 0 0" FontSize="18"/>
+                    <TextBox Name="ID_Emp_Del" Width="380" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16" PreviewTextInput="NumOnly"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                    <TextBlock Text="ФИО" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 50 0" FontSize="18"/>
-                    <TextBox Name="FIO_Emp_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
+                    <TextBlock Text="ФИО" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 0 0" FontSize="18"/>
+                    <TextBox Name="FIO_Emp_Del" Width="380" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                    <TextBlock Text="Отдел" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 50 0" FontSize="18"/>
-                    <TextBox Name="Group_Emp_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
+                    <TextBlock Text="Отдел" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 0 0" FontSize="18"/>
+                    <ComboBox Name="Group_Emp_Del" Width="380" Style="{DynamicResource MaterialDesignComboBox}" Foreground="White" FontSize="16">
+                        <ComboBoxItem Content="Информационно-аналитический отдел"/>
+                        <ComboBoxItem Content="Отдел бухгалтерского учёта"/>
+                        <ComboBoxItem Content="Отдел звукорежессуры"/>
+                        <ComboBoxItem Content="Отдел кадров"/>
+                        <ComboBoxItem Content="Отдел маркетинга"/>
+                        <ComboBoxItem Content="Отдел монтажа и оформления"/>
+                        <ComboBoxItem Content="Отдел планирования и формирования вещания"/>
+                        <ComboBoxItem Content="Отдел по снабжению и содержанию"/>
+                        <ComboBoxItem Content="Отдел производства РВ программ"/>
+                        <ComboBoxItem Content="Отдел производства ТВ программ"/>
+                        <ComboBoxItem Content="Отдел развития и продвижения СМИ"/>
+                        <ComboBoxItem Content="Отдел телеоператоров"/>
+                        <ComboBoxItem Content="Планово-экономический отдел"/>
+                        <ComboBoxItem Content="Производственный отдел"/>
+                        <ComboBoxItem Content="Творческий отдел"/>
+                        <ComboBoxItem Content="Хозяйственный отдел"/>
+                        <ComboBoxItem Content="Художественно-производствнный отдел"/>
+                        <ComboBoxItem Content="Юридический отдел"/>
+                    </ComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                    <TextBlock Text="Кабинет" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 50 0" FontSize="18"/>
-                    <TextBox Name="Room_Emp_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" MaxLength="3" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed" PreviewTextInput="NumOnly" FontSize="16"/>
+                    <TextBlock Text="Кабинет" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 0 0" FontSize="18"/>
+                    <TextBox Name="Room_Emp_Del" Width="380" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" MaxLength="3" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed" PreviewTextInput="NumOnly" FontSize="16"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                    <TextBlock Text="Дата рождения" Style="{DynamicResource TextBlock_14}" Width="130" Margin="0 0 20 0" FontSize="18"/>
+                    <TextBlock Text="Дата рождения" Style="{DynamicResource TextBlock_14}" Width="130" Margin="0 0 150 0" FontSize="18"/>
                     <DatePicker Name="Birthdate_Emp_Del" Width="200" Foreground="White" Language="ru" FontSize="16"/>
                 </StackPanel>
 

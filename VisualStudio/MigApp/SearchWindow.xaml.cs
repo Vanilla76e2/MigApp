@@ -40,6 +40,7 @@ namespace MigApp
             { 
                 SearchPanel_0.Visibility = Visibility.Visible;
                 this.Height = 330;
+                this.Width = 550;
                 if (MigApp.Properties.Settings.Default.Params0 != null)
                 {
                     string[] Parametrs = MigApp.Properties.Settings.Default.Params0.Split('|');
@@ -235,6 +236,7 @@ namespace MigApp
             {
                 SearchPanel_8.Visibility = Visibility.Visible;
                 this.Height = 330;
+                this.Width = 550;
                 if (MigApp.Properties.Settings.Default.Params8 != null)
                 {
                     string[] Parametrs = MigApp.Properties.Settings.Default.Params8.Split('|');

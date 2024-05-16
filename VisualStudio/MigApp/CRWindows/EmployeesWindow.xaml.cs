@@ -166,7 +166,7 @@ namespace MigApp.CRWindows
         private void LockAll()
         {
             FIO.IsReadOnly = true;
-            Group.IsReadOnly = true;
+            Group.IsEnabled = false;
             Room.IsReadOnly = true;
             BirthDate.IsEnabled = false;
         }
