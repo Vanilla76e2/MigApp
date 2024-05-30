@@ -21,7 +21,7 @@ namespace MigApp.CRWindows
     /// </summary>
     public partial class MonitorWindow : Window
     {
-        SQLConnectionClass sqlcc = new SQLConnectionClass();
+        SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
         MiscClass mc = new MiscClass();
         DataTable table = new DataTable();
         string InventoryNum;
@@ -122,6 +122,7 @@ namespace MigApp.CRWindows
 
         private void UserListFill()
         {
+            userList.Clear();
             DataTable table = new DataTable();
             table = sqlcc.DataGridUpdate("FIO", "Employees", "WHERE Deleted = 0");
             foreach (DataRow row in table.Rows)
@@ -133,9 +134,14 @@ namespace MigApp.CRWindows
 
         private void UserSelected(object sender, SelectionChangedEventArgs e)
         {
+            PCListFill(User.Text);
+        }
+
+        private void PCListFill(string user)
+        {
             PC.IsEnabled = true;
             PCList.Clear();
-            DataTable table1 = sqlcc.DataGridUpdate("Имя", "PC_View", $"WHERE [Пользователь] Like '{User.Text}'");
+            DataTable table1 = sqlcc.DataGridUpdate("Имя", "PC_View", $"WHERE [Пользователь] Like '{user}'");
             foreach (DataRow row in table1.Rows)
             {
                 PCList.Add(row["Имя"].ToString());
@@ -260,6 +266,24 @@ namespace MigApp.CRWindows
             ScreenType.IsReadOnly = true;
             User.IsEnabled = false;
             PC.IsEnabled = false;
+        }
+
+        private void CreateNewEmployee(object sender, RoutedEventArgs e)
+        {
+            EmployeesWindow win = new EmployeesWindow(true, null, false);
+            win.ShowDialog();
+            UserListFill();
+        }
+
+        private void CreateNewPC(object sender, RoutedEventArgs e)
+        {
+            PCWindow win = new PCWindow(true, null, false);
+            win.ShowDialog();
+            PCListFill(User.Text);
+            if (PCList.Count() == 0)
+            {
+                PC.IsEnabled = false;
+            }
         }
     }
 }

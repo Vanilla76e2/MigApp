@@ -21,7 +21,7 @@ namespace MigApp.CRWindows
     /// </summary>
     public partial class OrgTechWindow : Window
     {
-        SQLConnectionClass sqlcc = new SQLConnectionClass();
+        SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
         MiscClass mc = new MiscClass();
         DataTable table = new DataTable();
         string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
@@ -245,6 +245,7 @@ namespace MigApp.CRWindows
 
         private void UserListFill()
         {
+            userList.Clear();
             DataTable table = new DataTable();
             table = sqlcc.DataGridUpdate("FIO", "Employees", "WHERE Deleted = 0");
             foreach (DataRow row in table.Rows)
@@ -396,6 +397,24 @@ namespace MigApp.CRWindows
             Cartrige.IsReadOnly = true;
             User.IsEnabled = false; 
             PC.IsEnabled = false;
+        }
+
+        private void CreateNewEmployee(object sender, RoutedEventArgs e)
+        {
+            EmployeesWindow win = new EmployeesWindow(true, null, false);
+            win.ShowDialog();
+            UserListFill();
+        }
+
+        private void CreateNewPC(object sender, RoutedEventArgs e)
+        {
+            PCWindow win = new PCWindow(true, null, false);
+            win.ShowDialog();
+            PCListFill(User.Text);
+            if (PCList.Count() == 0)
+            {
+                PC.IsEnabled = false;
+            }
         }
     }
 }

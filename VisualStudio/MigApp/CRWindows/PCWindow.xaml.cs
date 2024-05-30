@@ -21,7 +21,7 @@ namespace MigApp.CRWindows
     /// </summary>
     public partial class PCWindow : Window
     {
-        SQLConnectionClass sqlcc = new SQLConnectionClass();
+        SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
         MiscClass mc = new MiscClass();
         DataTable table = new DataTable();
         string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
@@ -248,6 +248,7 @@ namespace MigApp.CRWindows
 
         private void ListFill()
         {
+            userList.Clear();
             DataTable table = new DataTable();
             table = sqlcc.DataGridUpdate("FIO", "Employees", "WHERE Deleted = 0");
             foreach (DataRow row in table.Rows)
@@ -366,6 +367,13 @@ namespace MigApp.CRWindows
             RAM.IsReadOnly = true;
             Drive.IsReadOnly = true;
             Other.IsReadOnly = true;
+        }
+
+        private void CreateNewEmployee(object sender, RoutedEventArgs e)
+        {
+            EmployeesWindow win = new EmployeesWindow(true, null, false);
+            win.ShowDialog();
+            ListFill();
         }
     }
 }

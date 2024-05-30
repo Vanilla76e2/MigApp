@@ -6,19 +6,19 @@
         xmlns:local="clr-namespace:MigApp.CRWindows"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Оргтехника [режим]" Height="560" Width="500" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/CRWindows/AdminPanel/Icon.png">
+        Title="Оргтехника [режим]" Height="560" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/CRWindows/AdminPanel/Icon.png">
     <Grid Background="#323232">
 
 
         <StackPanel VerticalAlignment="Top" Margin="0 20 0 0">
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 20">
-                <TextBlock Text="Инвентарный номер*" Style="{DynamicResource TextBlock_20}" MinWidth="200" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
-                <TextBox Name="InvNum" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" Width="250" FontSize="18" MaxLength="12" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed" PreviewTextInput="NumOnly"/>
+                <TextBlock Text="Инвентарный номер*" Style="{DynamicResource TextBlock_20}" MinWidth="270" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
+                <TextBox Name="InvNum" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" Width="270" FontSize="18" MaxLength="12" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed" PreviewTextInput="NumOnly"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 20">
-                <TextBlock Text="Тип техники*" Style="{DynamicResource TextBlock_20}" MinWidth="200" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
-                <ComboBox Name="Type" Style="{DynamicResource MaterialDesignComboBox}" Foreground="White" Width="250" FontSize="16">
+                <TextBlock Text="Тип техники*" Style="{DynamicResource TextBlock_20}" MinWidth="270" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
+                <ComboBox Name="Type" Style="{DynamicResource MaterialDesignComboBox}" Foreground="White" Width="270" FontSize="16">
                     <ComboBoxItem Content="МФУ"/>
                     <ComboBoxItem Content="Принтер"/>
                     <ComboBoxItem Content="Сканер"/>
@@ -31,25 +31,27 @@
                     <TabItem Header="Основное">
                         <Grid>
                             <StackPanel>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 15 0 20">
-                                    <TextBlock Text="Модель*" Style="{DynamicResource TextBlock_20}" MinWidth="200" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
-                                    <TextBox Name="Model" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" Width="250" FontSize="16" MaxLength="50" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 15 0 20" Width="550">
+                                    <TextBlock Text="Модель*" Style="{DynamicResource TextBlock_20}" MinWidth="210" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
+                                    <TextBox Name="Model" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" Width="330" FontSize="16" MaxLength="50" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
                                 </StackPanel>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20">
-                                    <TextBlock Text="Серийный номер*" Style="{DynamicResource TextBlock_20}" MinWidth="200" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
-                                    <TextBox Name="SeriaNum" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" Width="250" FontSize="16" MaxLength="25" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20" Width="550">
+                                    <TextBlock Text="Серийный номер*" Style="{DynamicResource TextBlock_20}" MinWidth="210" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
+                                    <TextBox Name="SeriaNum" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" Width="330" FontSize="16" MaxLength="25" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
                                 </StackPanel>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20">
-                                    <TextBlock Text="Имя" Style="{DynamicResource TextBlock_20}" MinWidth="200" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
-                                    <TextBox Name="OTName" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" Width="250" FontSize="16" MaxLength="50" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20" Width="550">
+                                    <TextBlock Text="Сетевое имя" Style="{DynamicResource TextBlock_20}" MinWidth="210" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
+                                    <TextBox Name="OTName" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" Width="330" FontSize="16" MaxLength="50" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
                                 </StackPanel>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20" Width="460">
-                                    <TextBlock Text="Пользователь" Style="{DynamicResource TextBlock_20}" MinWidth="200" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
-                                    <ComboBox Name="User" Style="{DynamicResource MaterialDesignComboBox}" Foreground="White" FontSize="16" Width="250" IsEditable="True" MaxDropDownHeight="200" IsTextSearchEnabled="False" TextBoxBase.TextChanged="UserChanged" SelectionChanged="UserSelected"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20" Width="550">
+                                    <TextBlock Text="Пользователь" Style="{DynamicResource TextBlock_20}" MinWidth="210" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
+                                    <ComboBox Name="User" Style="{DynamicResource MaterialDesignComboBox}" Foreground="White" FontSize="16" Width="278" IsEditable="True" MaxDropDownHeight="200" IsTextSearchEnabled="False" TextBoxBase.TextChanged="UserChanged" SelectionChanged="UserSelected"/>
+                                    <Button Content="+" Click="CreateNewEmployee" Margin="10 0 0 0"/>
                                 </StackPanel>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20" Width="460">
-                                    <TextBlock Text="Компьютер" Style="{DynamicResource TextBlock_20}" MinWidth="200" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
-                                    <ComboBox Name="PC" Style="{DynamicResource MaterialDesignComboBox}" Foreground="White" FontSize="16" Width="250" MaxDropDownHeight="200" IsEnabled="False"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20" Width="550">
+                                    <TextBlock Text="Компьютер" Style="{DynamicResource TextBlock_20}" MinWidth="210" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
+                                    <ComboBox Name="PC" Style="{DynamicResource MaterialDesignComboBox}" Foreground="White" FontSize="16" Width="278" MaxDropDownHeight="200" IsEnabled="False"/>
+                                    <Button Content="+" Click="CreateNewPC" Margin="10 0 0 0"/>
                                 </StackPanel>
                                
                             </StackPanel>
@@ -59,32 +61,32 @@
                     <TabItem Header="Техническая информация">
                         <Grid>
                             <StackPanel>
-                                
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 20">
-                                    <TextBlock Text="IP" Style="{DynamicResource TextBlock_20}" MinWidth="200" Margin="0 0 10 0" VerticalAlignment="Center"/>
-                                    <Border Name="IPBorder" Width="250">
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 20" Width="550">
+                                    <TextBlock Text="IP" Style="{DynamicResource TextBlock_20}" MinWidth="210" Margin="0 0 10 0" VerticalAlignment="Center"/>
+                                    <Border Name="IPBorder" Width="330">
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBox Name="ip1" Width="55" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck1" PreviewTextInput="NumOnlyIP" KeyDown="NextIP1"/>
+                                            <TextBox Name="ip1" Width="75" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck1" PreviewTextInput="NumOnlyIP" KeyDown="NextIP1"/>
                                             <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                                            <TextBox Name="ip2" Width="55" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck2" PreviewTextInput="NumOnlyIP" KeyDown="NextIP2"/>
+                                            <TextBox Name="ip2" Width="75" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck2" PreviewTextInput="NumOnlyIP" KeyDown="NextIP2"/>
                                             <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                                            <TextBox Name="ip3" Width="55" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck3" PreviewTextInput="NumOnlyIP" KeyDown="NextIP3"/>
+                                            <TextBox Name="ip3" Width="75" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck3" PreviewTextInput="NumOnlyIP" KeyDown="NextIP3"/>
                                             <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                                            <TextBox Name="ip4" Width="55" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck4" PreviewTextInput="NumOnlyIP" KeyDown="NextIP4"/>
+                                            <TextBox Name="ip4" Width="75" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck4" PreviewTextInput="NumOnlyIP" KeyDown="NextIP4"/>
                                         </StackPanel>
                                     </Border>
                                 </StackPanel>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20">
-                                    <TextBlock Text="Логин" Style="{DynamicResource TextBlock_20}" MinWidth="200" Margin="0 0 10 0" VerticalAlignment="Center"/>
-                                    <PasswordBox Name="Login" Style="{DynamicResource MaterialDesignRevealPasswordBox}" Foreground="White" Width="250" FontSize="16" MaxLength="25" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20" Width="550">
+                                    <TextBlock Text="Логин" Style="{DynamicResource TextBlock_20}" MinWidth="210" Margin="0 0 10 0" VerticalAlignment="Center"/>
+                                    <PasswordBox Name="Login" Style="{DynamicResource MaterialDesignRevealPasswordBox}" Foreground="White" Width="330" FontSize="16" MaxLength="25" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
                                 </StackPanel>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20">
-                                    <TextBlock Text="Пароль" Style="{DynamicResource TextBlock_20}" MinWidth="200" Margin="0 0 10 0" VerticalAlignment="Center"/>
-                                    <PasswordBox Name="Password" Style="{DynamicResource MaterialDesignRevealPasswordBox}" Foreground="White" Width="250" FontSize="16" MaxLength="25" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20" Width="550">
+                                    <TextBlock Text="Пароль" Style="{DynamicResource TextBlock_20}" MinWidth="210" Margin="0 0 10 0" VerticalAlignment="Center"/>
+                                    <PasswordBox Name="Password" Style="{DynamicResource MaterialDesignRevealPasswordBox}" Foreground="White" Width="330" FontSize="16" MaxLength="25" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
                                 </StackPanel>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20">
-                                    <TextBlock Text="Модель картриджа*" Style="{DynamicResource TextBlock_20}" MinWidth="200" Margin="0 0 10 0" VerticalAlignment="Center"/>
-                                    <TextBox Name="Cartrige" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" Width="250" FontSize="16" MaxLength="50" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20" Width="550">
+                                    <TextBlock Text="Модель картриджа*" Style="{DynamicResource TextBlock_20}" MinWidth="210" Margin="0 0 10 0" VerticalAlignment="Center"/>
+                                    <TextBox Name="Cartrige" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" Width="330" FontSize="16" MaxLength="50" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
                                 </StackPanel>
                             </StackPanel>
                         </Grid>

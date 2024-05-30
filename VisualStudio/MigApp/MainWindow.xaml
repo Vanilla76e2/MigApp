@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MigApp"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MigApp" MinHeight="510" MinWidth="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResize" Icon="images\Icon.png">
+        Title="MigApp" MinHeight="550" MinWidth="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResize" Icon="images\Icon.png">
     <Grid Background="#323232">
 
         <TabControl TabStripPlacement="Left">
@@ -18,17 +18,13 @@
                 </TabItem.Header>
 
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="167*"/>
-                        <RowDefinition Height="317*"/>
-                    </Grid.RowDefinitions>
                     <Border VerticalAlignment="Top" Background="#323232" Height="50">
                         <Grid>
                             <TextBlock Text="Избранное" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
                         </Grid>
                     </Border>
 
-                    <DataGrid Name="FavTable" Background="#525252" Foreground="White" Margin="0 50 5 5" IsReadOnly="True" Grid.RowSpan="2">
+                    <DataGrid Name="FavTable" Background="#525252" Foreground="White" Margin="0 50 5 5" IsReadOnly="True" Sorting="FavSorting">
                         <DataGrid.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Редактировать" Click="Fav_Redact"/>
@@ -624,6 +620,10 @@
         <Button Click="ExitClick" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="30 0 0 10" Style="{DynamicResource MaterialDesignFloatingActionButton}" Width="40" Height="40">
             <Image Source="images/Exit.png" Height="30" ToolTip="Выход"/>
         </Button>
+        <Button Click="ReloadTables" Name="ReloadButton" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="30 0 0 120" Style="{DynamicResource MaterialDesignFloatingActionButton}" Width="40" Height="40">
+            <Image Source="images/Reload.png" Height="30" ToolTip="Обновить таблицы"/>
+        </Button>
         <Border x:Name="Blindfall" Background="Black" Opacity="0.35" Visibility="Collapsed"/>
+        <TextBlock Name="UserLoginText" Text="[Login]" FontSize="24" FontWeight="SemiBold" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 5 130 0"/>
     </Grid>
 </Window>
