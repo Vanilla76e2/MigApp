@@ -2,17 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MigApp.CRWindows.AdminPanel
 {
@@ -21,7 +12,7 @@ namespace MigApp.CRWindows.AdminPanel
     /// </summary>
     public partial class UsersWindow : Window
     {
-        SQLConnectionClass sqlcc = new SQLConnectionClass();
+        SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
         MiscClass mc = new MiscClass();
         DataTable table = new DataTable();
         string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
@@ -44,24 +35,32 @@ namespace MigApp.CRWindows.AdminPanel
         {
             if (Login.Text.Length > 0 && Employee.Text.Length > 0 && Role.Text.Length > 0)
             {
-                if (Convert.ToInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM Users Where Login LIKE '{Login.Text}'")) < 1)
+                try
                 {
-                    if (Mode)
+                    if (Convert.ToInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM Users Where Login LIKE '{Login.Text}'")) < 1 || !Mode)
                     {
-                        sqlcc.ReqNonRef($"INSERT INTO Users (Login, Employee, Role) Values ('{Login.Text}', (SELECT ID FROM Employees WHERE FIO LIKE '{Employee.Text}'), (SELECT ID FROM Roles WHERE Name LIKE '{Role.Text}'))");
-                        sqlcc.Loging(CurrentUser, "Создание", "Пользователи", Login.Text, "");
+                        if (Mode)
+                        {
+                            sqlcc.ReqNonRef($"INSERT INTO Users (Login, Employee, Role) Values ('{Login.Text}', (SELECT ID FROM Employees WHERE FIO LIKE '{Employee.Text}'), (SELECT ID FROM Roles WHERE Name LIKE '{Role.Text}'))");
+                            sqlcc.Loging(CurrentUser, "Создание", "Пользователи", Login.Text, "");
+                        }
+                        else
+                        {
+                            sqlcc.ReqNonRef($"UPDATE Users SET Login = '{Login.Text}', Employee = (SELECT ID FROM Employees WHERE FIO LIKE '{Employee.Text}'), Role = (SELECT ID FROM Roles WHERE Name LIKE '{Role.Text}') Where ID = '{ID}'");
+                            sqlcc.Loging(CurrentUser, "Редактирование", "Пользователи", Login.Text, "");
+                        }
+                        DialogResult = true; Close();
                     }
                     else
                     {
-                        sqlcc.ReqNonRef($"UPDATE Users SET Login = '{Login.Text}', Employee = (SELECT ID FROM Employees WHERE FIO LIKE '{Employee.Text}'), Role = (SELECT ID FROM Roles WHERE Name LIKE '{Role.Text}')");
-                        sqlcc.Loging(CurrentUser, "Редактирование", "Пользователи", Login.Text, "");
+                        Login.Focus();
+                        MessageBox.Show("Такой пользователь уже существует.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                    DialogResult = true; Close();
                 }
-                else
+                catch
                 {
-                    Login.Focus();
-                    MessageBox.Show("Такой пользователь уже существует.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("В имени пользователя есть недопустимые символы!","Ошибка",MessageBoxButton.OK,MessageBoxImage.Error);
+                    return;
                 }
             }
             else
@@ -75,8 +74,11 @@ namespace MigApp.CRWindows.AdminPanel
         {
             if (MessageBox.Show($"Вы уверены что хотите удалить пользователя '{Login.Text}'?\nПользователь будет безвозвратно удалён!", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                sqlcc.ReqDel($"DELETE FROM Users WHERE Login LIKE '{Login.Text}'");
-                DialogResult = true; Close();
+                if (Convert.ToInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM Users WHERE Role LIKE 'Администратор'")) > 1)
+                {
+                    sqlcc.ReqDel($"DELETE FROM Users WHERE Login LIKE '{Login.Text}'");
+                    DialogResult = true; Close();
+                }
             }
         }
 

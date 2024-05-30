@@ -20,7 +20,7 @@ namespace MigApp
     /// </summary>
     public partial class SearchWindow : Window
     {
-        SQLConnectionClass sqlcc = new SQLConnectionClass();
+        SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
         MiscClass mc = new MiscClass();
         int Mode;
 

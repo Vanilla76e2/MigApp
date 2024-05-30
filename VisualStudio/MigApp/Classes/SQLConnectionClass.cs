@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 using System.Windows;
@@ -11,13 +7,31 @@ namespace MigApp
 {
     internal class SQLConnectionClass
     {
-        SqlConnection sqlConnection = new SqlConnection($@"Data Source = {MigApp.Properties.Settings.Default.Server}; Initial Catalog = {MigApp.Properties.Settings.Default.Database}; Integrated Security = True");
+        SqlConnection sqlConnection = new SqlConnection($@"Data Source = {MigApp.Properties.Settings.Default.Server}; Initial Catalog = {MigApp.Properties.Settings.Default.Database}; Integrated Security = false; User id = sa; Password = {MigApp.Properties.Settings.Default.DBPassword}");
         DataTable Table = new DataTable("");
+
+        private static SQLConnectionClass instance;
+
+        private SQLConnectionClass()
+        {
+
+        }
+
+        public static SQLConnectionClass getinstance()
+        {
+            if (instance == null)
+            {
+                instance = new SQLConnectionClass();
+            }
+            return instance;
+        }
 
         // Проверка подключения
         public bool SQLtest()
         {
-            sqlConnection.ConnectionString = $@"Data Source = {MigApp.Properties.Settings.Default.Server}; Initial Catalog = {MigApp.Properties.Settings.Default.Database}; Integrated Security = True";
+            //SqlConnection sqlConnection = new SqlConnection($@"Data Source = {MigApp.Properties.Settings.Default.Server}; Initial Catalog = {MigApp.Properties.Settings.Default.Database}; Integrated Security = false; User id = sa; Password = {MigApp.Properties.Settings.Default.DBPassword}");
+
+            sqlConnection.ConnectionString = $@"Data Source = {MigApp.Properties.Settings.Default.Server}; Initial Catalog = {MigApp.Properties.Settings.Default.Database}; Integrated Security = false; User id = sa; Password = {MigApp.Properties.Settings.Default.DBPassword}";
             try
             {
                 sqlConnection.Open();
@@ -53,15 +67,15 @@ namespace MigApp
         // Запрос без возврата
         public void ReqNonRef (string text)
         {
-            //try
-            //{
+            try
+            {
                 sqlConnection.Open();
                 SqlCommand com = new SqlCommand(text, sqlConnection);
                 com.ExecuteNonQuery();
                 sqlConnection.Close();
-            //}
-            //catch { MessageBox.Show("Error ReqNonRef\nНе удалось выполнить запрос.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); }
-            //finally { sqlConnection.Close(); }
+            }
+            catch { MessageBox.Show("Error ReqNonRef\nНе удалось выполнить запрос.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); }
+            finally { sqlConnection.Close(); }
         }
 
         // Запрос на удаление
@@ -128,18 +142,18 @@ namespace MigApp
         public void Delete_DeletedEmployee(string ID)
         {
             if (ReqRef($"SELECT COUNT(*) FROM Computers WHERE User LIKE '{ID}'") != "0")
-                ReqNonRef($"UPDATE Computers SET User = NULL WHERE User LIKE '{ID}'");
+                ReqDel($"UPDATE Computers SET User = NULL WHERE User LIKE '{ID}'");
             if (ReqRef($"SELECT COUNT(*) FROM Notebooks WHERE User LIKE '{ID}'") != "0")
-                ReqNonRef($"UPDATE Notebooks SET User = NULL WHERE User LIKE '{ID}'");
+                ReqDel($"UPDATE Notebooks SET User = NULL WHERE User LIKE '{ID}'");
             if (ReqRef($"SELECT COUNT(*) FROM Tablets WHERE User LIKE '{ID}'") != "0")
-                ReqNonRef($"UPDATE Tablets SET User = NULL WHERE User LIKE '{ID}'");
+                ReqDel($"UPDATE Tablets SET User = NULL WHERE User LIKE '{ID}'");
             ReqNonRef($"DELETE FROM Employees WHERE ID LIKE '{ID}'");
         }
 
         // Удаление ПК из архива
         public void Delete_DeletedPC(string invnum)
         {
-            ReqNonRef($"UPDATE OrgTech SET PC = NULL WHERE PC LIKE '{invnum}' " +
+            ReqDel($"UPDATE OrgTech SET PC = NULL WHERE PC LIKE '{invnum}' " +
                     $"UPDATE Monitor SET PC = NULL WHERE PC LIKE '{invnum}' " +
                     $"DELETE FROM Computers WHERE InvNum LIKE '{invnum}'");
         }

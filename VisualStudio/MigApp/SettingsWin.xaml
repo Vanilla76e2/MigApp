@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MigApp"
         mc:Ignorable="d"
-        Title="Настройки" Height="250" Width="450" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" Icon="images\Icon.png">
+        Title="Настройки" Height="350" Width="450" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" Icon="images\Icon.png">
     <Grid Background="#323232">
         <StackPanel VerticalAlignment="Top" Margin="0 55 0 0">
             <StackPanel Orientation="Horizontal">
@@ -15,6 +15,10 @@
             <StackPanel Orientation="Horizontal" Margin="0 35 0 0">
                 <TextBlock VerticalAlignment="Center" Text="База данных" Width="120" Style="{DynamicResource TextBlock_20}" Margin="30 0 10 0"/>
                 <TextBox Name="DBName" Width="250" FontSize="16" Style="{DynamicResource MaterialDesignFloatingHintTextBox}" Foreground="White"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 35 0 0">
+                <TextBlock VerticalAlignment="Center" Text="Пароль" Width="120" Style="{DynamicResource TextBlock_20}" Margin="30 0 10 0"/>
+                <PasswordBox Name="DBPassword" Width="250" FontSize="16" Style="{DynamicResource MaterialDesignFloatingHintPasswordBox}" Foreground="White"/>
             </StackPanel>
         </StackPanel>
         <Button Name="Enter" Content="Подтвердить" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="20" Click="Button_Click_1" IsDefault="True"/>

@@ -17,7 +17,7 @@ namespace MigApp.CRWindows
 {
     public partial class EmployeesWindow : Window
     {
-        SQLConnectionClass sqlcc = new SQLConnectionClass();
+        SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
         MiscClass mc = new MiscClass();
         DataTable table = new DataTable();
         string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;

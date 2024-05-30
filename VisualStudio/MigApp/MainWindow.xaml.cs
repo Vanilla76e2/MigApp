@@ -1,29 +1,12 @@
 ﻿using MigApp.CRWindows;
 using MigApp.CRWindows.AdminPanel;
 using System;
-using System.IO;
-using System.CodeDom;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Reflection;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-
+using System.Threading;
+using System.Threading.Tasks;
 namespace MigApp
 {
     /// <summary>
@@ -31,7 +14,7 @@ namespace MigApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        SQLConnectionClass sqlcc = new SQLConnectionClass();
+        SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
         MiscClass mc = new MiscClass();
         #region Переменные
         string CurrentUser;
@@ -59,6 +42,7 @@ namespace MigApp
             CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
             RoleCheck();
             UpdateAllTables();
+            UserLoginText.Text = CurrentUser;
         }
 
         #region Обновления
@@ -66,7 +50,7 @@ namespace MigApp
         private void UpdateAllTables()
         {
             // Таблицы
-            FavTable.ItemsSource = sqlcc.DataGridUpdate("Дата, Таблица, Запись", "Fav_View",$"WHERE [User] LIKE '{CurrentUser}'").DefaultView;
+            FavTable.ItemsSource = sqlcc.DataGridUpdate("Дата, Таблица, Запись, Подробности", "Fav_View",$"WHERE [User] LIKE '{CurrentUser}'").DefaultView;
             if  (EmpRead == true)
                 EmployeeTable.ItemsSource = sqlcc.DataGridUpdate("*", "Employees_View", $"{MigApp.Properties.Settings.Default.com0}").DefaultView;
             if (PCRead == true)
@@ -291,7 +275,7 @@ namespace MigApp
                     {
                         DataRowView row = (DataRowView)items;
                         string id = row.Row["ID"].ToString();
-                        if (Convert.ToInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM Users WHERE Role LIKE 'True'")) > 1)
+                        if (Convert.ToInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM Users WHERE Role LIKE 'Администратор'")) > 1)
                         {
                             sqlcc.ReqNonRef($"DELETE FROM Users WHERE ID LIKE {id}");
                             sqlcc.Loging(CurrentUser, "Стирание", "Пользователи", row.Row["Логин"].ToString(), "");
@@ -309,16 +293,20 @@ namespace MigApp
         // Удаление сотрудников
         private void Delete_DeletedEmployee(object sender, RoutedEventArgs e)
         {
-            try 
+            try
             {
-                DataRowView item = EmployeesDeleted.Items[EmployeesDeleted.SelectedIndex] as DataRowView;
-                string id = item.Row["ID"].ToString();
                 if (MessageBox.Show("Запись будет безвозвозвратно удалена.\nУдалить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    sqlcc.Delete_DeletedEmployee(id);
-                    sqlcc.Loging(CurrentUser, "Стирание", "Сотрудники", item.Row["ФИО"].ToString(), "");
+                    foreach (var items in EmployeesDeleted.SelectedItems)
+                    {
+                        DataRowView row = (DataRowView)items;
+                        string id = row.Row["ID"].ToString();
+                        string name = row.Row["ФИО"].ToString();
+                        sqlcc.Delete_DeletedEmployee(id);
+                        sqlcc.Loging(CurrentUser, "Стирание", "Сотрудники", name, "");
+                    }
+                    UpdateAllTables();
                 }
-                UpdateAllTables();
             }
             catch { }
         }
@@ -328,14 +316,17 @@ namespace MigApp
         {
             try
             {
-                DataRowView item = PCDeleted.Items[PCDeleted.SelectedIndex] as DataRowView;
-                string invnum = item.Row["Инвентарный номер"].ToString();
                 if (MessageBox.Show("Запись будет безвозвозвратно удалена.\nУдалить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    sqlcc.Delete_DeletedPC(invnum);
-                    sqlcc.Loging(CurrentUser, "Стирание", "Компьютеры", invnum, "");
+                    foreach (var items in PCDeleted.SelectedItems)
+                    {
+                        DataRowView row = (DataRowView)items;
+                        string invnum = row.Row["Инвентарный номер"].ToString();
+                        sqlcc.Delete_DeletedPC(invnum);
+                        sqlcc.Loging(CurrentUser, "Стирание", "Компьютеры", invnum, "");
+                    }
+                    UpdateAllTables();
                 }
-                UpdateAllTables();
             }
             catch { }
         }
@@ -345,14 +336,19 @@ namespace MigApp
         {
             try
             {
-                DataRowView item = NotebookDeleted.Items[NotebookDeleted.SelectedIndex] as DataRowView;
-                string invnum = item.Row["Инвентарный номер"].ToString();
                 if (MessageBox.Show("Запись будет безвозвозвратно удалена.\nУдалить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    sqlcc.ReqNonRef($"DELETE FROM Notebooks WHERE InvNum LIKE '{invnum}'");
-                    sqlcc.Loging(CurrentUser, "Стирание", "Ноутбуки", invnum, "");
+                    foreach (var items in PCDeleted.SelectedItems)
+                    {
+                        DataRowView row = (DataRowView)items;
+                        string id = row.Row["ID"].ToString();
+                        string name = row.Row["ФИО"].ToString();
+                        sqlcc.ReqDel($"Delete from Notebooks Where InvNum Like '{id}'");
+                        sqlcc.Loging(CurrentUser, "Стирание", "Сотрудники", name, "");
+                    }
+                    UpdateAllTables();
                 }
-                UpdateAllTables();
+
             }
             catch { }
         }
@@ -362,14 +358,18 @@ namespace MigApp
         {
             try
             {
-                DataRowView item = TabletsDeleted.Items[TabletsDeleted.SelectedIndex] as DataRowView;
-                string invnum = item.Row["Инвентарный номер"].ToString();
                 if (MessageBox.Show("Запись будет безвозвозвратно удалена.\nУдалить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    sqlcc.ReqNonRef($"DELETE FROM Tablets WHERE InvNum LIKE '{invnum}'");
-                    sqlcc.Loging(CurrentUser, "Стирание", "Планшеты", invnum, "");
+                    foreach (var items in TabletsDeleted.SelectedItems)
+                    {
+                        DataRowView row = (DataRowView)items;
+                        string id = row.Row["ID"].ToString();
+                        string name = row.Row["ФИО"].ToString();
+                        sqlcc.ReqDel($"Delete from Tablets Where InvNum Like '{id}'");
+                        sqlcc.Loging(CurrentUser, "Стирание", "Сотрудники", name, "");
+                    }
+                    UpdateAllTables();
                 }
-                UpdateAllTables();
             }
             catch { }
         }
@@ -537,6 +537,7 @@ namespace MigApp
             {
                 DataRowView item = EmployeeTable.Items[EmployeeTable.SelectedIndex] as DataRowView;
                 string id = item.Row["ID"].ToString();
+                string FIO = item.Row["ФИО"].ToString();
                 bool allow = true;
                 foreach (DataRowView row in FavTable.Items)
                 {
@@ -547,8 +548,8 @@ namespace MigApp
                 }
                 if (allow)
                 {
-                    sqlcc.ReqNonRef($"INSERT INTO Favourite ([User], Date, [Table], Row) VALUES ('{CurrentUser}', '{DateTime.Now.Date}', 'Сотрудники', '{id}')");
-                    FavTable.ItemsSource = sqlcc.DataGridUpdate("Дата, Таблица, Запись", "Fav_View", $"WHERE [User] LIKE '{CurrentUser}'").DefaultView;
+                    sqlcc.ReqNonRef($"INSERT INTO Favourite ([User], Date, [Table], Row) VALUES ('{CurrentUser}', '{DateTime.Now.Date}', 'Сотрудники', '{FIO}')");
+                    FavTable.ItemsSource = sqlcc.DataGridUpdate("Дата, Таблица, Запись, Подробности", "Fav_View", $"WHERE [User] LIKE '{CurrentUser}'").DefaultView;
                 }
                 else
                     MessageBox.Show("Запись уже находится в избранном", "Внимание", MessageBoxButton.OK, MessageBoxImage.Stop);
@@ -562,7 +563,8 @@ namespace MigApp
             try
             {
                 DataRowView item = PCTable.Items[PCTable.SelectedIndex] as DataRowView;
-                string invnum = item.Row[0].ToString();
+                string invnum = item.Row["Инвентарный номер"].ToString();
+                string name = item.Row["Имя"].ToString();
                 bool allow = true;
                 foreach (DataRowView row in FavTable.Items)
                 {
@@ -573,8 +575,8 @@ namespace MigApp
                 }
                 if (allow)
                 {
-                    sqlcc.ReqNonRef($"INSERT INTO Favourite ([User], Date, [Table], Row) VALUES ('{CurrentUser}', '{DateTime.Now}', 'Компьютеры', '{invnum}')");
-                    FavTable.ItemsSource = sqlcc.DataGridUpdate("Дата, Таблица, Запись", "Fav_View", $"WHERE [User] LIKE '{CurrentUser}'").DefaultView;
+                    sqlcc.ReqNonRef($"INSERT INTO Favourite ([User], Date, [Table], Row, Comment) VALUES ('{CurrentUser}', '{DateTime.Now}', 'Компьютеры', '{invnum}','{name}')");
+                    FavTable.ItemsSource = sqlcc.DataGridUpdate("Дата, Таблица, Запись, Подробности", "Fav_View", $"WHERE [User] LIKE '{CurrentUser}'").DefaultView;
                 }
                 else
                     MessageBox.Show("Запись уже находится в избранном", "Внимание", MessageBoxButton.OK, MessageBoxImage.Stop);
@@ -588,7 +590,8 @@ namespace MigApp
             try
             {
                 DataRowView item = NotebookTable.Items[NotebookTable.SelectedIndex] as DataRowView;
-                string invnum = item.Row[0].ToString();
+                string invnum = item.Row["Инвентарный номер"].ToString();
+                string model = item.Row["Модель"].ToString();
                 bool allow = true;
                 foreach (DataRowView row in FavTable.Items)
                 {
@@ -599,8 +602,8 @@ namespace MigApp
                 }
                 if (allow)
                 {
-                    sqlcc.ReqNonRef($"INSERT INTO Favourite ([User], Date, [Table], Row) VALUES ('{CurrentUser}', '{DateTime.Now}', 'Ноутбуки', '{invnum}')");
-                    FavTable.ItemsSource = sqlcc.DataGridUpdate("Дата, Таблица, Запись", "Fav_View", $"WHERE [User] LIKE '{CurrentUser}'").DefaultView;
+                    sqlcc.ReqNonRef($"INSERT INTO Favourite ([User], Date, [Table], Row, Comment) VALUES ('{CurrentUser}', '{DateTime.Now}', 'Ноутбуки', '{invnum}', '{model}')");
+                    FavTable.ItemsSource = sqlcc.DataGridUpdate("Дата, Таблица, Запись, Подробности", "Fav_View", $"WHERE [User] LIKE '{CurrentUser}'").DefaultView;
                 }
                 else
                     MessageBox.Show("Запись уже находится в избранном", "Внимание", MessageBoxButton.OK, MessageBoxImage.Stop);
@@ -614,7 +617,8 @@ namespace MigApp
             try
             {
                 DataRowView item = TabletsTable.Items[TabletsTable.SelectedIndex] as DataRowView;
-                string invnum = item.Row[0].ToString();
+                string invnum = item.Row["Инвентарынй номер"].ToString();
+                string model = item.Row["Модель"].ToString();
                 bool allow = true;
                 foreach (DataRowView row in FavTable.Items)
                 {
@@ -625,8 +629,8 @@ namespace MigApp
                 }
                 if (allow)
                 {
-                    sqlcc.ReqNonRef($"INSERT INTO Favourite ([User], Date, [Table], Row) VALUES ('{CurrentUser}', '{DateTime.Now}', 'Планшеты', '{invnum}')");
-                    FavTable.ItemsSource = sqlcc.DataGridUpdate("Дата, Таблица, Запись", "Fav_View", $"WHERE [User] LIKE '{CurrentUser}'").DefaultView;
+                    sqlcc.ReqNonRef($"INSERT INTO Favourite ([User], Date, [Table], Row, Comment) VALUES ('{CurrentUser}', '{DateTime.Now}', 'Планшеты', '{invnum}', '{model}')");
+                    FavTable.ItemsSource = sqlcc.DataGridUpdate("Дата, Таблица, Запись, Подробности", "Fav_View", $"WHERE [User] LIKE '{CurrentUser}'").DefaultView;
                 }
                 else
                     MessageBox.Show("Запись уже находится в избранном", "Внимание", MessageBoxButton.OK, MessageBoxImage.Stop);
@@ -640,7 +644,8 @@ namespace MigApp
             try
             {
                 DataRowView item = PrintersTable.Items[PrintersTable.SelectedIndex] as DataRowView;
-                string invnum = item.Row[0].ToString();
+                string invnum = item.Row["Инвентарный номер"].ToString();
+                string model = item.Row["Модель"].ToString();
                 bool allow = true;
                 foreach (DataRowView row in FavTable.Items)
                 {
@@ -651,8 +656,8 @@ namespace MigApp
                 }
                 if (allow)
                 {
-                    sqlcc.ReqNonRef($"INSERT INTO Favourite ([User], Date, [Table], Row) VALUES ('{CurrentUser}', '{DateTime.Now}', 'Орг.техника', '{invnum}')");
-                    FavTable.ItemsSource = sqlcc.DataGridUpdate("Дата, Таблица, Запись", "Fav_View", $"WHERE [User] LIKE '{CurrentUser}'").DefaultView;
+                    sqlcc.ReqNonRef($"INSERT INTO Favourite ([User], Date, [Table], Row, Comment) VALUES ('{CurrentUser}', '{DateTime.Now}', 'Орг.техника', '{invnum}', '{model}')");
+                    FavTable.ItemsSource = sqlcc.DataGridUpdate("Дата, Таблица, Запись, Подробности", "Fav_View", $"WHERE [User] LIKE '{CurrentUser}'").DefaultView;
                 }
                 else
                     MessageBox.Show("Запись уже находится в избранном", "Внимание", MessageBoxButton.OK, MessageBoxImage.Stop);
@@ -666,7 +671,8 @@ namespace MigApp
             try
             {
                 DataRowView item = MonitorsTable.Items[MonitorsTable.SelectedIndex] as DataRowView;
-                string invnum = item.Row[0].ToString();
+                string invnum = item.Row["Инвентарный номер"].ToString();
+                string model = item.Row["Модель"].ToString();
                 bool allow = true;
                 foreach (DataRowView row in FavTable.Items)
                 {
@@ -677,8 +683,8 @@ namespace MigApp
                 }
                 if (allow)
                 {
-                    sqlcc.ReqNonRef($"INSERT INTO Favourite ([User], Date, [Table], Row) VALUES ('{CurrentUser}', '{DateTime.Now}', 'Мониторы', '{invnum}')");
-                    FavTable.ItemsSource = sqlcc.DataGridUpdate("Дата, Таблица, Запись", "Fav_View", $"WHERE [User] LIKE '{CurrentUser}'").DefaultView;
+                    sqlcc.ReqNonRef($"INSERT INTO Favourite ([User], Date, [Table], Row, Comment) VALUES ('{CurrentUser}', '{DateTime.Now}', 'Мониторы', '{invnum}', '{model}')");
+                    FavTable.ItemsSource = sqlcc.DataGridUpdate("Дата, Таблица, Запись, Подробности", "Fav_View", $"WHERE [User] LIKE '{CurrentUser}'").DefaultView;
                 }
                 else
                     MessageBox.Show("Запись уже находится в избранном", "Внимание", MessageBoxButton.OK, MessageBoxImage.Stop);
@@ -693,7 +699,7 @@ namespace MigApp
             {
                 DataRowView item = FavTable.Items[FavTable.SelectedIndex] as DataRowView;
                 sqlcc.ReqNonRef($"DELETE FROM Favourite WHERE [User] LIKE '{CurrentUser}' AND [Table] LIKE '{item.Row["Таблица"].ToString()}' AND Row LIKE '{item.Row["Запись"].ToString()}'");
-                FavTable.ItemsSource = sqlcc.DataGridUpdate("Дата, Таблица, Запись", "Fav_View", $"WHERE [User] LIKE '{CurrentUser}'").DefaultView;
+                FavTable.ItemsSource = sqlcc.DataGridUpdate("Дата, Таблица, Запись, Подробности", "Fav_View", $"WHERE [User] LIKE '{CurrentUser}'").DefaultView;
             }
             catch { }
         }
@@ -1517,8 +1523,12 @@ namespace MigApp
             PCWindow win = new PCWindow(mode, invnum, deleted);
             if (!deleted)
             {
-                BlindfallSwitch();
-                win.ShowDialog();
+                try
+                {
+                    BlindfallSwitch();
+                    win.ShowDialog();
+                }
+                catch { }
                 if (win.DialogResult == true) UpdateAllTables();
                 BlindfallSwitch();
             }
@@ -1656,6 +1666,7 @@ namespace MigApp
         #endregion
 
         #region Запрет сотритровки даты
+
         // Логи
         private void LogsSorting(object sender, DataGridSortingEventArgs e)
         {
@@ -1664,12 +1675,13 @@ namespace MigApp
                 e.Handled = true;
         }
 
-
-
-
-
-
-
+        // Избранное
+        private void FavSorting(object sender, DataGridSortingEventArgs e)
+        {
+            DataGridColumn column = e.Column;
+            if (column.Header.ToString() == "Дата")
+                e.Handled = true;
+        }
 
         #endregion
 
@@ -1784,6 +1796,14 @@ namespace MigApp
         private void Manual_Open(object sender, RoutedEventArgs e)
         {
             Process.Start(@"https://vanilla76e2.github.io/MigApp_Manual/");
+        }
+
+        private async void ReloadTables(object sender, RoutedEventArgs e)
+        {
+            UpdateAllTables();
+            ReloadButton.IsEnabled = false;
+            await Task.Delay(5000);
+            ReloadButton.IsEnabled = true;
         }
     }
 }

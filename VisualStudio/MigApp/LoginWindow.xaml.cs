@@ -1,18 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.Remoting.Channels;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MigApp
 {
@@ -21,7 +9,7 @@ namespace MigApp
     /// </summary>
     public partial class LoginWindow : Window
     {
-        SQLConnectionClass sqlcc = new SQLConnectionClass();
+        SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
         MiscClass mc = new MiscClass();
         Encrypter encrypt = new Encrypter();
 
@@ -43,71 +31,83 @@ namespace MigApp
                 UserPassword1.Visibility = Visibility.Visible;
                 Enter1.Visibility = Visibility.Visible;
             }
-
-            //Проверка на подключение к БД
-            if (!sqlcc.SQLtest())
-            {
-                Enter1.IsEnabled = false;
-                Enter2.IsEnabled = false;
-                Refresh.Visibility = Visibility.Visible;
-                MessageBox.Show("База данных не найдена!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
         }
 
         //Если пароль не был сохранён
         private void LoginClick_1(object sender, RoutedEventArgs e)
         {
-            if (sqlcc.ReqRef($"Select Password From Users Where Login = '{UserLogin.Text}'") == encrypt.HashPassword(UserPassword1.Password))
-            {
-                if (RemPass.IsChecked == true)
+            if (UserLogin.Text.Length > 0 && UserPassword1.Password.Length > 0)
+                if(sqlcc.ReqRef($"Select Login From Users Where Login = '{UserLogin.Text}'") != "")
                 {
-                    MigApp.Properties.Settings.Default.RemPass = true;
-                    MigApp.Properties.Settings.Default.UserPassword = UserPassword1.Password;
-                    MigApp.Properties.Settings.Default.Save();
+                    if (sqlcc.ReqRef($"Select Password From Users Where Login = '{UserLogin.Text}'") == encrypt.HashPassword(UserPassword1.Password))
+                    {
+                        if (RemPass.IsChecked == true)
+                        {
+                            MigApp.Properties.Settings.Default.RemPass = true;
+                            MigApp.Properties.Settings.Default.UserPassword = UserPassword1.Password;
+                            MigApp.Properties.Settings.Default.Save();
+                        }
+                        else
+                        {
+                            MigApp.Properties.Settings.Default.RemPass = false;
+                            MigApp.Properties.Settings.Default.Save();
+                        }
+                        MigApp.Properties.Settings.Default.UserLogin = UserLogin.Text;
+                        MigApp.Properties.Settings.Default.UserRole = sqlcc.ReqRef($"SELECT Role FROM Users WHERE Login = '{UserLogin.Text}'");
+                        MigApp.Properties.Settings.Default.Save();
+                        MainWindow win = new MainWindow();
+                        win.Show(); Close();
+                    }
+                    else if (sqlcc.ReqRef($"Select Password From Users Where Login = '{UserLogin.Text}'") == "")
+                    {
+                        Registration();
+                    }
+                    else MessageBox.Show("Логин или Пароль введены не верно", "Внимание", MessageBoxButton.OK, MessageBoxImage.Stop);
                 }
                 else
                 {
-                    MigApp.Properties.Settings.Default.RemPass = false;
-                    MigApp.Properties.Settings.Default.Save();
+                    MessageBox.Show($"Пользователя {UserLogin.Text} не существует в базе данных!","Внимание",MessageBoxButton.OK,MessageBoxImage.Stop);
                 }
-                MigApp.Properties.Settings.Default.UserLogin = UserLogin.Text;
-                MigApp.Properties.Settings.Default.UserRole = sqlcc.ReqRef($"SELECT Role FROM Users WHERE Login = '{UserLogin.Text}'");
-                MigApp.Properties.Settings.Default.Save();
-                MainWindow win = new MainWindow();
-                win.Show(); Close();
-            }
-            else if (sqlcc.ReqRef($"Select Password From Users Where Login = '{UserLogin.Text}'") == "")
-            {
-                Registration();
-            }
-            else MessageBox.Show("Логин или Пароль введены не верно", "Внимание", MessageBoxButton.OK, MessageBoxImage.Stop);
-
         }
 
         //Если пароль был сохранён
         private void LoginClick_2(object sender, RoutedEventArgs e)
         {
-            if (sqlcc.ReqRef($"Select Password From Users Where Login = '{UserLogin.Text}'") == encrypt.HashPassword(UserPassword2.Password))
+            if (UserLogin.Text.Length > 0 && UserPassword2.Password.Length > 0)
             {
-                if (RemPass.IsChecked == false)
+                if (sqlcc.ReqRef($"Select Login From Users Where Login = '{UserLogin.Text}'") != "")
                 {
-                    MigApp.Properties.Settings.Default.RemPass = false;
-                    MigApp.Properties.Settings.Default.Save();
-                }
+                    if (sqlcc.ReqRef($"Select Password From Users Where Login = '{UserLogin.Text}'") == encrypt.HashPassword(UserPassword2.Password))
+                    {
+                        if (RemPass.IsChecked == false)
+                        {
+                            MigApp.Properties.Settings.Default.RemPass = false;
+                            MigApp.Properties.Settings.Default.Save();
+                        }
 
-                MigApp.Properties.Settings.Default.UserLogin = UserLogin.Text;
-                MigApp.Properties.Settings.Default.UserRole = sqlcc.ReqRef($"SELECT Role FROM Users WHERE Login = '{UserLogin.Text}'");
-                MigApp.Properties.Settings.Default.Save();
-                MainWindow win = new MainWindow();
-                win.Show();
-                Close();
+                        MigApp.Properties.Settings.Default.UserLogin = UserLogin.Text;
+                        MigApp.Properties.Settings.Default.UserRole = sqlcc.ReqRef($"SELECT Role FROM Users WHERE Login = '{UserLogin.Text}'");
+                        MigApp.Properties.Settings.Default.Save();
+                        MainWindow win = new MainWindow();
+                        win.Show();
+                        Close();
+                    }
+                    else if (sqlcc.ReqRef($"Select Password From Users Where Login = '{UserLogin.Text}'") == "")
+                    {
+                        MessageBox.Show("Ваш пароль был сброшен\nВведите новый пароль", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        PasswordFlip();
+                    }
+                    else MessageBox.Show("Логин или Пароль введены не верно", "Внимание", MessageBoxButton.OK, MessageBoxImage.Stop);
+                }
+                else
+                {
+                    MessageBox.Show($"Пользователя {UserLogin.Text} не существует в базе данных!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Stop);
+                }
             }
-            else if (sqlcc.ReqRef($"Select Password From Users Where Login = '{UserLogin.Text}'") == "")
+            else
             {
-                MessageBox.Show("Ваш пароль был сброшен\nВведите новый пароль", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
-                PasswordFlip();
+                MessageBox.Show("Введите логин и пароль","Внимание",MessageBoxButton.OK,MessageBoxImage.Information);
             }
-            else MessageBox.Show("Логин или Пароль введены не верно", "Внимание", MessageBoxButton.OK, MessageBoxImage.Stop);
         }
 
         //Открытие окна настроек
@@ -190,5 +190,24 @@ namespace MigApp
         {
             Process.Start(@"https://vanilla76e2.github.io/MigApp_Manual/");
         }
+
+        private void Content_Rendered(object sender, System.EventArgs e)
+        {
+            //Проверка на подключение к БД
+            if (!sqlcc.SQLtest())
+            {
+                //Enter1.IsEnabled = false;
+                //Enter2.IsEnabled = false;
+                //Refresh.Visibility = Visibility.Visible;
+                MessageBox.Show("База данных не найдена!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+                SettingsWin win = new SettingsWin();
+                win.ShowDialog();
+                //if (win.DialogResult == true)
+                //{
+
+                //}
+            }
+        }
+
     }
 }
