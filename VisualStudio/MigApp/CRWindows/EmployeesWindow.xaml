@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MigApp.CRWindows"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Сотрудник [режим]" Height="350" Width="550" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/CRWindows/AdminPanel/Icon.png">
+        Title="Сотрудник [режим]" Height="270" Width="550" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/CRWindows/AdminPanel/Icon.png">
     <Grid Background="#323232">
         <StackPanel VerticalAlignment="Top" Margin="0 30 0 0">
 
@@ -44,10 +44,10 @@
                 <TextBox Name="Room" Style="{DynamicResource MaterialDesignTextBox}" FontSize="16" Foreground="White" Width="380" MaxLength="3" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed" PreviewTextInput="NumOnly"/>
             </StackPanel>
             
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock Text="Дата рождения*" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" Width="330" Margin="0 0 10 0"/>
+            <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="Дата рождения" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" Width="330" Margin="0 0 10 0"/>
                 <DatePicker Name="BirthDate" Style="{DynamicResource MaterialDesignDatePicker}" FontSize="16" Foreground="White" Width="150" Language="ru" SelectedDateChanged="DateCheck"/>
-            </StackPanel>
+            </StackPanel>-->
         </StackPanel>
         <Button Click="SaveClick" Name="DoneButton" Content="Сохранить" VerticalAlignment="Bottom" FontSize="18" HorizontalAlignment="Right" Margin="20"/>
         <Button Click="RecoveryClick" Name="RecoveryButton" Content="Восстановить" VerticalAlignment="Bottom" FontSize="18" HorizontalAlignment="Right" Margin="20" Visibility="Collapsed"/>

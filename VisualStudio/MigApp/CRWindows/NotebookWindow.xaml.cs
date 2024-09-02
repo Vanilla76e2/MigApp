@@ -47,18 +47,18 @@ namespace MigApp.CRWindows
             // Проверка заполнения
             if (InvNum.Text.Length > 0 && Model.Text.Length > 0 && SeriaNum.Text.Length > 0 && ScreenDiagonal.Text.Length > 0 && ScreenResolution.Text.Length > 0 && Processor.Text.Length > 0 && RAM.Text.Length > 0 && Drive.Text.Length > 0)
             {
-                if (sqlcc.InvNumChecker(InvNum.Text) || !Mode)
+                if (InvNumChecker(InvNum.Text) || !Mode)
                 {
                     // Если создание
                     if (Mode == true)
                     {
-                        sqlcc.ReqNonRef($"INSERT INTO Notebooks (InvNum, Model, SNum, [User], OS, Diagonal, Resolution, Processor, RAM, Drive, Other) Values ('{InvNum.Text}', '{Model.Text}', '{SeriaNum.Text}', (SELECT ID FROM Employees WHERE FIO LIKE '{User.Text}'), '{OS.Text}', '{ScreenDiagonal.Text}', '{ScreenResolution.Text}', '{Processor.Text}', '{RAM.Text}', '{Drive.Text}', '{Other.Text}')");
+                        sqlcc.ReqNonRef($"INSERT INTO Notebooks (InvNum, Model, SNum, [User], OS, Diagonal, Resolution, Processor, RAM, Drive, Other, Comment) Values ('{InvNum.Text}', '{Model.Text}', '{SeriaNum.Text}', (SELECT ID FROM Employees WHERE FIO LIKE '{User.Text}'), '{OS.Text}', '{ScreenDiagonal.Text}', '{ScreenResolution.Text}', '{Processor.Text}', '{RAM.Text}', '{Drive.Text}', '{Other.Text}', '{Comment.Text}')");
                         sqlcc.Loging(CurrentUser, "Создание", "Ноутбуки", InvNum.Text, "");
                     }
                     // Если редактирование
                     else
                     {
-                        sqlcc.ReqNonRef($"UPDATE Notebooks SET Model = '{Model.Text}', SNum = '{SeriaNum.Text}', [User] = (SELECT ID FROM Employees WHERE FIO LIKE '{User.Text}'), OS = '{OS.Text}', Diagonal = '{ScreenDiagonal.Text}', Resolution = '{ScreenResolution.Text}', Processor = '{Processor.Text}', RAM = '{RAM.Text}', Drive = '{Drive.Text}', Other = '{Other.Text}' Where InvNum LIKE '{InvNum.Text}'");
+                        sqlcc.ReqNonRef($"UPDATE Notebooks SET InvNum = '{InvNum.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', [User] = (SELECT ID FROM Employees WHERE FIO LIKE '{User.Text}'), OS = '{OS.Text}', Diagonal = '{ScreenDiagonal.Text}', Resolution = '{ScreenResolution.Text}', Processor = '{Processor.Text}', RAM = '{RAM.Text}', Drive = '{Drive.Text}', Other = '{Other.Text}', Comment = '{Comment.Text}' Where InvNum LIKE '{InvNum.Text}'");
                         sqlcc.Loging(CurrentUser, "Редактирование", "Ноутбуки", InvNum.Text, "");
                     }
                     DialogResult = true; Close();
@@ -151,7 +151,6 @@ namespace MigApp.CRWindows
             {
                 try
                 {
-                    InvNum.IsReadOnly = true;
                     Title = "Ноутбук (Редактирование)";
                     InvNum.Text = Invnum;
                     table = sqlcc.DataGridUpdate("*", "Notebooks_View", $"WHERE [Инвентарный номер] LIKE '{Invnum}'");
@@ -166,6 +165,7 @@ namespace MigApp.CRWindows
                     RAM.Text = row["ОЗУ"].ToString();
                     Drive.Text = row["Накопители"].ToString();
                     Other.Text = row["Другое"].ToString();
+                    Comment.Text = row["Комментарий"].ToString();
                 }
                 catch
                 {
@@ -177,7 +177,6 @@ namespace MigApp.CRWindows
                 try
                 {
                     LockAll();
-                    InvNum.IsReadOnly = true;
                     Title = "Ноутбук (Архив)";
                     InvNum.Text = Invnum;
                     table = sqlcc.DataGridUpdate("*", "Notebooks_Deleted", $"WHERE [Инвентарный номер] LIKE '{Invnum}'");
@@ -192,6 +191,7 @@ namespace MigApp.CRWindows
                     RAM.Text = row["ОЗУ"].ToString();
                     Drive.Text = row["Накопители"].ToString();
                     Other.Text = row["Другое"].ToString();
+                    Comment.Text = row["Комментарий"].ToString();
                 }
                 catch
                 {
@@ -220,6 +220,7 @@ namespace MigApp.CRWindows
 
         private void LockAll()
         {
+            InvNum.IsReadOnly = true;
             Model.IsReadOnly = true;
             SeriaNum.IsReadOnly = true;
             User.IsEnabled = false;
@@ -229,6 +230,7 @@ namespace MigApp.CRWindows
             RAM.IsReadOnly = true;
             Drive.IsReadOnly = true;
             Other.IsReadOnly = true;
+            Comment.IsReadOnly = true;
         }
 
         private void CreateNewEmployee(object sender, RoutedEventArgs e)
@@ -236,6 +238,13 @@ namespace MigApp.CRWindows
             EmployeesWindow win = new EmployeesWindow(true, null, false);
             win.ShowDialog();
             ListFill();
+        }
+
+        private bool InvNumChecker(string invnum)
+        {
+            if (Convert.ToUInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM Notebooks WHERE InvNum LIKE '{invnum}'")) < 1)
+                return true;
+            else return false;
         }
     }
 }

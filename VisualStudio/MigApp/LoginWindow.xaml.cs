@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 
@@ -12,10 +13,13 @@ namespace MigApp
         SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
         MiscClass mc = new MiscClass();
         Encrypter encrypt = new Encrypter();
+        string curver = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
 
         public LoginWindow()
         {
             InitializeComponent();
+            CustomTitle.Text = "   MigApp v." + curver;
+            Title = "MigApp v." + curver;
             UserLogin.Focus();
             //Проверка на запомнить пароль
             if (MigApp.Properties.Settings.Default.RemPass)
@@ -186,11 +190,6 @@ namespace MigApp
 
         #endregion
 
-        private void User_Manual(object sender, RoutedEventArgs e)
-        {
-            Process.Start(@"https://vanilla76e2.github.io/MigApp_Manual/");
-        }
-
         private void Content_Rendered(object sender, System.EventArgs e)
         {
             //Проверка на подключение к БД
@@ -208,6 +207,5 @@ namespace MigApp
                 //}
             }
         }
-
     }
 }

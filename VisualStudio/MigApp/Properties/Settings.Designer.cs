@@ -514,5 +514,29 @@ namespace MigApp.Properties {
                 this["DBPassword"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string com17 {
+            get {
+                return ((string)(this["com17"]));
+            }
+            set {
+                this["com17"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Params17 {
+            get {
+                return ((string)(this["Params17"]));
+            }
+            set {
+                this["Params17"] = value;
+            }
+        }
     }
 }

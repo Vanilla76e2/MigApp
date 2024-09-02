@@ -22,6 +22,9 @@
             </StackPanel>
         </StackPanel>
         <Button Name="Enter" Content="Подтвердить" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="20" Click="Button_Click_1" IsDefault="True"/>
+        <Button Click="User_Manual" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="15 0 0 20" Style="{DynamicResource MaterialDesignFloatingActionButton}" Width="40" Height="40">
+            <Image Source="images/Manual.png" Height="30" ToolTip="Руководство"/>
+        </Button>
         <Border Name="border1" VerticalAlignment="Top" Background="#292929">
             <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
                 <TextBlock Text="   Настройки" Style="{DynamicResource Title}"/>

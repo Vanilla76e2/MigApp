@@ -48,12 +48,27 @@ namespace MigApp.CRWindows.AdminPanel
                 {
                     if (Mode)
                     {
-                        sqlcc.ReqNonRef($"INSERT INTO Roles (Name, EmpVis, EmpRed, PCVis, PCRed, NoteVis, NoteRed, TabVis, TabRed, OTVis, OTRed, MonVis, MonRed) Values ('{RoleName.Text}', {mc.BoolToString(EmpRead.IsChecked)}, {mc.BoolToString(EmpRedact.IsChecked)}, {mc.BoolToString(PCRead.IsChecked)}, {mc.BoolToString(PCRedact.IsChecked)}, {mc.BoolToString(NotebookRead.IsChecked)}, {mc.BoolToString(NotebookRedact.IsChecked)}, {mc.BoolToString(TabletsRead.IsChecked)}, {mc.BoolToString(TabletsRedact.IsChecked)}, {mc.BoolToString(OrgTechRead.IsChecked)}, {mc.BoolToString(OrgTechRedact.IsChecked)}, {mc.BoolToString(MonitorRead.IsChecked)}, {mc.BoolToString(MonitorRedact.IsChecked)})");
+                        sqlcc.ReqNonRef($"INSERT INTO Roles (Name, EmpVis, EmpRed, PCVis, PCRed, NoteVis, NoteRed, TabVis, TabRed, OTVis, OTRed, MonVis, MonRed, RoutVis, RoutRed, SwitchVis, SwitchRed) Values ('{RoleName.Text}', " +
+                            $"{mc.BoolToString(EmpRead.IsChecked)}, {mc.BoolToString(EmpRedact.IsChecked)}, " +
+                            $"{mc.BoolToString(PCRead.IsChecked)}, {mc.BoolToString(PCRedact.IsChecked)}, " +
+                            $"{mc.BoolToString(NotebookRead.IsChecked)}, {mc.BoolToString(NotebookRedact.IsChecked)}, " +
+                            $"{mc.BoolToString(TabletsRead.IsChecked)}, {mc.BoolToString(TabletsRedact.IsChecked)}, " +
+                            $"{mc.BoolToString(OrgTechRead.IsChecked)}, {mc.BoolToString(OrgTechRedact.IsChecked)}, " +
+                            $"{mc.BoolToString(MonitorRead.IsChecked)}, {mc.BoolToString(MonitorRedact.IsChecked)}, " +
+                            $"{mc.BoolToString(RoutRead.IsChecked)}, {mc.BoolToString(RoutRedact.IsChecked)}, " +
+                            $"{mc.BoolToString(SwitchRead.IsChecked)}, {mc.BoolToString(SwitchRedact.IsChecked)})");
                         sqlcc.Loging(CurrentUser, "Создание", "Роли", RoleName.Text, "");
                     }
                     else
                     {
-                        sqlcc.ReqNonRef($"UPDATE Roles SET Name = '{RoleName.Text}', EmpVis = {mc.BoolToString(EmpRead.IsChecked)}, EmpRed = {mc.BoolToString(EmpRedact.IsChecked)}, PCVis = {mc.BoolToString(PCRead.IsChecked)}, PCRed = {mc.BoolToString(PCRedact.IsChecked)}, NoteVis = {mc.BoolToString(NotebookRead.IsChecked)}, NoteRed = {mc.BoolToString(NotebookRedact.IsChecked)}, TabVis = {mc.BoolToString(TabletsRead.IsChecked)}, TabRed = {mc.BoolToString(TabletsRedact.IsChecked)}, OTVis = {mc.BoolToString(OrgTechRead.IsChecked)}, OTRed = {mc.BoolToString(OrgTechRedact.IsChecked)}, MonVis = {mc.BoolToString(MonitorRead.IsChecked)}, MonRed = {mc.BoolToString(MonitorRedact.IsChecked)}  WHERE ID LIKE {ID}");
+                        sqlcc.ReqNonRef($"UPDATE Roles SET Name = '{RoleName.Text}', EmpVis = {mc.BoolToString(EmpRead.IsChecked)}, EmpRed = {mc.BoolToString(EmpRedact.IsChecked)}, " +
+                            $"PCVis = {mc.BoolToString(PCRead.IsChecked)}, PCRed = {mc.BoolToString(PCRedact.IsChecked)}, " +
+                            $"NoteVis = {mc.BoolToString(NotebookRead.IsChecked)}, NoteRed = {mc.BoolToString(NotebookRedact.IsChecked)}, " +
+                            $"TabVis = {mc.BoolToString(TabletsRead.IsChecked)}, TabRed = {mc.BoolToString(TabletsRedact.IsChecked)}, " +
+                            $"OTVis = {mc.BoolToString(OrgTechRead.IsChecked)}, OTRed = {mc.BoolToString(OrgTechRedact.IsChecked)}, " +
+                            $"MonVis = {mc.BoolToString(MonitorRead.IsChecked)}, MonRed = {mc.BoolToString(MonitorRedact.IsChecked)}, " +
+                            $"RoutVis = {mc.BoolToString(RoutRead.IsChecked)}, RoutRed = {mc.BoolToString(RoutRedact.IsChecked)}, " +
+                            $"SwitchVis = {mc.BoolToString(SwitchRead.IsChecked)}, SwitchRed = {mc.BoolToString(SwitchRedact.IsChecked)} WHERE ID LIKE {ID}");
                         sqlcc.Loging(CurrentUser, "Редактирование", "Роли", RoleName.Text, "");
                     }
                     DialogResult = true; Close();
@@ -125,6 +140,18 @@ namespace MigApp.CRWindows.AdminPanel
             MonitorRead.IsEnabled = false;
         }
 
+        private void RoutRedChecked(object sender, RoutedEventArgs e)
+        {
+            RoutRead.IsChecked = true;
+            RoutRead.IsEnabled = false;
+        }
+
+        private void SwitchRedChecked(object sender, RoutedEventArgs e)
+        {
+            SwitchRead.IsChecked = true;
+            SwitchRead.IsEnabled = false;
+        }
+
         // При отключении редактирования
         private void EmpRedUnhecked(object sender, RoutedEventArgs e)
         {
@@ -156,6 +183,15 @@ namespace MigApp.CRWindows.AdminPanel
             MonitorRead.IsEnabled = true;
         }
 
+        private void RoutRedUnhecked(object sender, RoutedEventArgs e)
+        {
+            RoutRead.IsEnabled = true;
+        }
+
+        private void SwitchRedUnhecked(object sender, RoutedEventArgs e)
+        {
+            SwitchRead.IsEnabled = true;
+        }
         #endregion
 
         // Заполнение полей и изменение названия окна
@@ -183,7 +219,11 @@ namespace MigApp.CRWindows.AdminPanel
                 OrgTechRedact.IsChecked = table.Rows[0].Field<bool>("OTRed");
                 MonitorRead.IsChecked = table.Rows[0].Field<bool>("MonVis");
                 MonitorRedact.IsChecked = table.Rows[0].Field<bool>("MonRed");
+                RoutRead.IsChecked = table.Rows[0].Field<bool>("RoutVis");
+                RoutRedact.IsChecked = table.Rows[0].Field<bool>("RoutRed");
             }
         }
+
+       
     }
 }

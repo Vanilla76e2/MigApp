@@ -25,12 +25,10 @@
         <Button Name="Enter2" Content="Вход" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="20" Click="LoginClick_2" Visibility="Collapsed" IsDefault="True"/>
         <Button Content="⚙️" Click="SettingsClick" VerticalAlignment="Bottom" HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFlatButton}" Margin="10"/>
         <Button Content="↺" Click="RefreshDBConnection" Name="Refresh" VerticalAlignment="Bottom" HorizontalAlignment="Right" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 70 10" FontSize="18" Visibility="Collapsed"/>
-        <Button Click="User_Manual" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="15 0 0 10" Style="{DynamicResource MaterialDesignFloatingActionButton}" Width="40" Height="40">
-            <Image Source="images/Manual.png" Height="30" ToolTip="Руководство"/>
-        </Button>
+       
         <Border Name="border1" VerticalAlignment="Top" Background="#292929">
             <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
-                <TextBlock Text="   MigApp" Style="{DynamicResource Title}"/>
+                <TextBlock Name="CustomTitle"  Text="  MigApp [v.]" Style="{DynamicResource Title}"/>
                 <Button Content="✖" Style="{DynamicResource CloseButton}" VerticalAlignment="Top" HorizontalAlignment="Right" Click="Button_Click"/>
 
             </Grid>

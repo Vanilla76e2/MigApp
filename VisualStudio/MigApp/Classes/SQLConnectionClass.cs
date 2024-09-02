@@ -7,6 +7,8 @@ namespace MigApp
 {
     internal class SQLConnectionClass
     {
+        //SqlConnection sqlConnection = new SqlConnection($@"Data Source = {MigApp.Properties.Settings.Default.Server}; Initial Catalog = {MigApp.Properties.Settings.Default.Database}; Integrated Security = True");
+
         SqlConnection sqlConnection = new SqlConnection($@"Data Source = {MigApp.Properties.Settings.Default.Server}; Initial Catalog = {MigApp.Properties.Settings.Default.Database}; Integrated Security = false; User id = sa; Password = {MigApp.Properties.Settings.Default.DBPassword}");
         DataTable Table = new DataTable("");
 
@@ -30,6 +32,7 @@ namespace MigApp
         public bool SQLtest()
         {
             //SqlConnection sqlConnection = new SqlConnection($@"Data Source = {MigApp.Properties.Settings.Default.Server}; Initial Catalog = {MigApp.Properties.Settings.Default.Database}; Integrated Security = false; User id = sa; Password = {MigApp.Properties.Settings.Default.DBPassword}");
+            //SqlConnection sqlConnection = new SqlConnection($@"Data Source = {MigApp.Properties.Settings.Default.Server}; Initial Catalog = {MigApp.Properties.Settings.Default.Database}; Integrated Security = True");
 
             sqlConnection.ConnectionString = $@"Data Source = {MigApp.Properties.Settings.Default.Server}; Initial Catalog = {MigApp.Properties.Settings.Default.Database}; Integrated Security = false; User id = sa; Password = {MigApp.Properties.Settings.Default.DBPassword}";
             try
@@ -67,18 +70,18 @@ namespace MigApp
         // Запрос без возврата
         public void ReqNonRef (string text)
         {
-            try
-            {
-                sqlConnection.Open();
-                SqlCommand com = new SqlCommand(text, sqlConnection);
-                com.ExecuteNonQuery();
-                sqlConnection.Close();
-            }
-            catch { MessageBox.Show("Error ReqNonRef\nНе удалось выполнить запрос.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); }
-            finally { sqlConnection.Close(); }
+            //    try
+            //    {
+            sqlConnection.Open();
+            SqlCommand com = new SqlCommand(text, sqlConnection);
+            com.ExecuteNonQuery();
+            sqlConnection.Close();
+            //    }
+            //    catch { MessageBox.Show("Error ReqNonRef\nНе удалось выполнить запрос.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); }
+            //    finally { sqlConnection.Close(); }
         }
 
-        // Запрос на удаление
+            // Запрос на удаление
         public void ReqDel (string text)
         {
             try
@@ -117,13 +120,14 @@ namespace MigApp
         // Проверка занятости инвентарного номера
         public bool InvNumChecker (string InvNum)
         {
-            if (Convert.ToUInt32(ReqRef($"SELECT COUNT(*) FROM Computers WHERE InvNum LIKE '{InvNum}'")) < 1 
-                && Convert.ToUInt32(ReqRef($"SELECT COUNT(*) FROM Notebooks WHERE InvNum LIKE '{InvNum}'")) < 1 
-                && Convert.ToUInt32(ReqRef($"SELECT COUNT(*) FROM Tablets WHERE InvNum LIKE '{InvNum}'")) < 1 
-                && Convert.ToUInt32(ReqRef($"SELECT COUNT(*) FROM OrgTech WHERE InvNum LIKE '{InvNum}'")) < 1 
-                && Convert.ToUInt32(ReqRef($"SELECT COUNT(*) FROM Monitor WHERE InvNum LIKE '{InvNum}'")) < 1)
-                return true;
-            else return false;
+            //if (Convert.ToUInt32(ReqRef($"SELECT COUNT(*) FROM Computers WHERE InvNum LIKE '{InvNum}'")) < 1 
+            //    && Convert.ToUInt32(ReqRef($"SELECT COUNT(*) FROM Notebooks WHERE InvNum LIKE '{InvNum}'")) < 1 
+            //    && Convert.ToUInt32(ReqRef($"SELECT COUNT(*) FROM Tablets WHERE InvNum LIKE '{InvNum}'")) < 1 
+            //    && Convert.ToUInt32(ReqRef($"SELECT COUNT(*) FROM OrgTech WHERE InvNum LIKE '{InvNum}'")) < 1 
+            //    && Convert.ToUInt32(ReqRef($"SELECT COUNT(*) FROM Monitor WHERE InvNum LIKE '{InvNum}'")) < 1)
+            //    return true;
+            //else return false;
+            return true;
         }
 
         // Логирование 
@@ -156,6 +160,55 @@ namespace MigApp
             ReqDel($"UPDATE OrgTech SET PC = NULL WHERE PC LIKE '{invnum}' " +
                     $"UPDATE Monitor SET PC = NULL WHERE PC LIKE '{invnum}' " +
                     $"DELETE FROM Computers WHERE InvNum LIKE '{invnum}'");
+        }
+
+        // Отчёт IP
+        public DataTable Report_IP()
+        {
+            DataTable result = new DataTable();
+            result.Columns.Add("IP", typeof(String));
+            result.Columns.Add("Устройство", typeof(String));
+            result.Columns.Add("Инвентарный номер", typeof(String));
+            result.Columns.Add("Имя", typeof(String));
+            result.Columns.Add("Комментарий", typeof(String));
+            for (int i=1; i<255; i++)
+            {
+                DataRow ip = result.NewRow();
+                ip["IP"] = $"192.168.0.{i}";
+                result.Rows.Add(ip);
+            }
+
+            DataTable PC = DataGridUpdate("*", "PC_View", "Where LEN(IP) > 0");
+            foreach (DataRow row in PC.Rows)
+            {
+                foreach (DataRow ip in result.Rows)
+                {
+                    if (row["IP"].ToString() == ip["IP"].ToString())
+                    {
+                        ip["Устройство"] = "Компьютер";
+                        ip["Инвентарный номер"] = row["Инвентарный номер"].ToString();
+                        ip["Имя"] = row["Имя"].ToString();
+                        ip["Комментарий"] = "";
+                    }
+                }
+            }
+
+            DataTable OrgTech = DataGridUpdate("*", "OrgTech_View", "Where LEN(IP) > 0");
+            foreach (DataRow row in OrgTech.Rows)
+            {
+                foreach (DataRow ip in result.Rows)
+                {
+                    if (row["IP"].ToString() == ip["IP"].ToString())
+                    {
+                        ip["Устройство"] = row["Тип"].ToString();
+                        ip["Инвентарный номер"] = row["Инвентарный номер"].ToString();
+                        ip["Имя"] = row["Модель"].ToString();
+                        ip["Комментарий"] = "";
+                    }
+                }
+            }
+
+            return result;
         }
     }
 }

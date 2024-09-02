@@ -26,6 +26,7 @@ namespace MigApp.CRWindows
         DataTable table = new DataTable();
         string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
         string InventoryNum;
+        string ip;
         bool Deleted;
 
         // true - Создание
@@ -48,18 +49,24 @@ namespace MigApp.CRWindows
             // Проверка заполнения
             if (InvNum.Text.Length > 0 && Motherboard.Text.Length > 0 && Processor.Text.Length > 0 && RAM.Text.Length > 0 && Drive.Text.Length > 0)
             {
-                if (sqlcc.InvNumChecker(InvNum.Text) || !Mode)
+                if (InvNumChecker(InvNum.Text) || !Mode)
                 {
                     // Если создание
                     if (Mode == true)
                     {
-                        sqlcc.ReqNonRef($"INSERT INTO Computers (InvNum, Name, IP, [User], Admin_Login, Admin_Password, OS, Motherboard, Processor, RAM, Drive, Other) Values ('{InvNum.Text}', '{PCName.Text}', '{ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text}', (SELECT ID FROM Employees WHERE FIO LIKE '{User.Text}'), '{AdminLogin.Password}', '{AdminPass.Password}', '{OS.Text}', '{Motherboard.Text}', '{Processor.Text}', '{RAM.Text}', '{Drive.Text}', '{Other.Text}')");
+                        if (ip1.Text.Length > 0 && ip2.Text.Length > 0 && ip3.Text.Length > 0 && ip4.Text.Length > 0)
+                            ip = ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text;
+                        else ip = "...";
+                        sqlcc.ReqNonRef($"INSERT INTO Computers (InvNum, Name, IP, [User], Admin_Login, Admin_Password, OS, Motherboard, Processor, RAM, Drive, Other, Comment) Values ('{InvNum.Text}', '{PCName.Text}', '{ip}', (SELECT ID FROM Employees WHERE FIO LIKE '{User.Text}'), '{AdminLogin.Password}', '{AdminPass.Password}', '{OS.Text}', '{Motherboard.Text}', '{Processor.Text}', '{RAM.Text}', '{Drive.Text}', '{Other.Text}', '{Comment.Text}')");
                         sqlcc.Loging(CurrentUser, "Создание", "Компьютеры", InvNum.Text, "");
                     }
                     // Если редактирование
                     else
                     {
-                        sqlcc.ReqNonRef($"UPDATE Computers SET Name = '{PCName.Text}', IP = '{ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text}', [User] = (SELECT ID FROM Employees WHERE FIO LIKE '{User.Text}'), Admin_Login = '{AdminLogin.Password}', Admin_Password = '{AdminPass.Password}', OS = '{OS.Text}', Motherboard = '{Motherboard.Text}', Processor = '{Processor.Text}', RAM = '{RAM.Text}', Drive = '{Drive.Text}', Other = '{Other.Text}' Where InvNum LIKE '{InvNum.Text}'");
+                        if (ip1.Text.Length > 0 && ip2.Text.Length > 0 && ip3.Text.Length > 0 && ip4.Text.Length > 0)
+                            ip = ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text;
+                        else ip = "...";
+                        sqlcc.ReqNonRef($"UPDATE Computers SET InvNum = '{InvNum.Text}', Name = '{PCName.Text}', IP = '{ip}', [User] = (SELECT ID FROM Employees WHERE FIO LIKE '{User.Text}'), Admin_Login = '{AdminLogin.Password}', Admin_Password = '{AdminPass.Password}', OS = '{OS.Text}', Motherboard = '{Motherboard.Text}', Processor = '{Processor.Text}', RAM = '{RAM.Text}', Drive = '{Drive.Text}', Other = '{Other.Text}', Comment = '{Comment.Text}' Where InvNum LIKE '{InvNum.Text}'");
                         sqlcc.Loging(CurrentUser, "Редактирование", "Компьютеры", InvNum.Text, "");
                     }
                     DialogResult = true; Close();
@@ -94,7 +101,7 @@ namespace MigApp.CRWindows
             {
                 if (MessageBox.Show("Вы уверены что хотите удалить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    sqlcc.ReqDel($"UPDATE Computers SET Deleted = 1 WHERE InvNum LIKE '{InventoryNum}'");
+                    sqlcc.ReqDel($"UPDATE Computers SET Deleted = 1, DelDate = '{DateTime.Now}' WHERE InvNum LIKE '{InventoryNum}'");
                     sqlcc.Loging(CurrentUser, "Удаление", "Компьютеры", InvNum.Text, "");
                     DialogResult = true; Close();
                 }
@@ -136,7 +143,7 @@ namespace MigApp.CRWindows
         // Проверка до 255 и переключение на следующий
         private void IPcheck1(object sender, TextChangedEventArgs e)
         {
-            if (ip1.Text.Length == 3)
+            if (ip1.Text.Length == 3 && ip1.Focus())
                 ip2.Focus();
             try
             {
@@ -148,7 +155,7 @@ namespace MigApp.CRWindows
 
         private void IPcheck2(object sender, TextChangedEventArgs e)
         {
-            if (ip2.Text.Length == 3)
+            if (ip2.Text.Length == 3 && ip2.Focus())
                 ip3.Focus();
             try
             {
@@ -284,7 +291,6 @@ namespace MigApp.CRWindows
             {
                 try
                 {
-                    InvNum.IsReadOnly = true;
                     Title = "Компьютер (Редактирование)";
                     InvNum.Text = Invnum;
                     table = sqlcc.DataGridUpdate("*", "PC_View", $"WHERE [Инвентарный номер] Like '{Invnum}'");
@@ -304,6 +310,7 @@ namespace MigApp.CRWindows
                     RAM.Text = row["ОЗУ"].ToString();
                     Drive.Text = row["Накопители"].ToString();
                     Other.Text = row["Другое"].ToString();
+                    Comment.Text = row["Комментарий"].ToString();
                 }
                 catch
                 {
@@ -315,7 +322,6 @@ namespace MigApp.CRWindows
                 try
                 {
                     LockAll();
-                    InvNum.IsReadOnly = true;
                     Title = "Компьютер (Архив)";
                     InvNum.Text = Invnum;
                     table = sqlcc.DataGridUpdate("*", "PC_Deleted", $"WHERE [Инвентарный номер] Like '{Invnum}'");
@@ -335,6 +341,7 @@ namespace MigApp.CRWindows
                     RAM.Text = row["ОЗУ"].ToString();
                     Drive.Text = row["Накопители"].ToString();
                     Other.Text = row["Другое"].ToString();
+                    Comment.Text = row["Комментарий"].ToString();
                 }
                 catch
                 {
@@ -353,6 +360,7 @@ namespace MigApp.CRWindows
 
         private void LockAll()
         {
+            InvNum.IsReadOnly = true;
             PCName.IsReadOnly = true;
             ip1.IsReadOnly = true;
             ip2.IsReadOnly = true;
@@ -374,6 +382,13 @@ namespace MigApp.CRWindows
             EmployeesWindow win = new EmployeesWindow(true, null, false);
             win.ShowDialog();
             ListFill();
+        }
+
+        private bool InvNumChecker(string invnum)
+        {
+            if (Convert.ToUInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM Computers WHERE InvNum LIKE '{invnum}'")) < 1)
+                return true;
+            else return false;
         }
     }
 }
