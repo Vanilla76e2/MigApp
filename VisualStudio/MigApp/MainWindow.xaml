@@ -241,6 +241,71 @@
                                 </DataGrid>
                             </Grid>
                         </TabItem>
+
+                        <!-- Роутеры -->
+                        <TabItem Name="RouterGroup" Header="Роутеры" Height="50" Width="100" Padding="3" Margin="0 10 0 0" Visibility="Collapsed">
+
+                            <Grid Background="#404040">
+                                <Border VerticalAlignment="Top" Background="#404040" Height="100">
+                                    <StackPanel>
+                                        <Grid>
+                                            <Button Click="RoutersCreateClick" Content="➕" HorizontalAlignment="Left" Width="50" Margin="10 0 0 0" Style="{DynamicResource MaterialDesignOutlinedButton}" ToolTip="Создать запись"/>
+                                            <TextBlock Text="Роутеры" Style="{DynamicResource Header}" Margin="70 8 0 8"/>
+                                            <Button Click="SRouters" Content="⌕" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
+                                        </Grid>
+                                        <Border Name="Filter_Routers" Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
+                                            <Grid>
+                                                <TextBlock Name="FilterRoutersText" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
+                                                <Button Click="FilterRoutersClear" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
+                                            </Grid>
+                                        </Border>
+                                    </StackPanel>
+                                </Border>
+
+                                <DataGrid Name="RoutersTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="В избранное" Click="Fav_Routers"/>
+                                            <MenuItem Header="Редактировать" Click="Redact_Routers"/>
+                                            <MenuItem Header="Удалить" Click="Delete_Routers"/>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+
+                        <!-- Свитчи -->
+                        <TabItem Name="SwitchesGroup" Header="Свитчи" Height="50" Width="100" Padding="3" Margin="0 10 0 0" Visibility="Collapsed">
+
+                            <Grid Background="#404040">
+                                <Border VerticalAlignment="Top" Background="#404040" Height="100">
+                                    <StackPanel>
+                                        <Grid>
+                                            <Button Click="SwitchesCreateClick" Content="➕" HorizontalAlignment="Left" Width="50" Margin="10 0 0 0" Style="{DynamicResource MaterialDesignOutlinedButton}" ToolTip="Создать запись"/>
+                                            <TextBlock Text="Свитчи" Style="{DynamicResource Header}" Margin="70 8 0 8"/>
+                                            <Button Click="SSwitches" Content="⌕" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
+                                        </Grid>
+                                        <Border Name="Filter_Switches" Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
+                                            <Grid>
+                                                <TextBlock Name="FilterSwitchesText" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
+                                                <Button Click="FilterSwitchesClear" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
+                                            </Grid>
+                                        </Border>
+                                    </StackPanel>
+                                </Border>
+
+                                <DataGrid Name="SwitchesTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="В избранное" Click="Fav_Switches"/>
+                                            <MenuItem Header="Редактировать" Click="Redact_Switches"/>
+                                            <MenuItem Header="Удалить" Click="Delete_Switches"/>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+                        
                     </TabControl>
                 </Grid>
             </TabItem>
@@ -253,7 +318,8 @@
 
                 <Grid Background="#404040">
                     <TabControl TabStripPlacement="Left">
-
+                        
+                        <!--Компьютеры-->
                         <TabItem Header="Компьютеры" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
                             <Grid>
                                 <Border VerticalAlignment="Top" Background="#404040" Height="100">
@@ -279,6 +345,7 @@
                             </Grid>
                         </TabItem>
 
+                        <!--Ноутбуки-->
                         <TabItem Header="Ноутбуки" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
                             <Grid>
                                 <Border VerticalAlignment="Top" Background="#404040" Height="100">
@@ -304,6 +371,7 @@
                             </Grid>
                         </TabItem>
 
+                        <!--Планшеты-->
                         <TabItem Header="Планшеты" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
                             <Grid>
                                 <Border VerticalAlignment="Top" Background="#404040" Height="100">
@@ -325,6 +393,32 @@
                                 </Border>
 
                                 <DataGrid Name="Report3" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True"/>
+
+                            </Grid>
+                        </TabItem>
+
+                        <!--IP-->
+                        <TabItem Header="IP" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
+                            <Grid>
+                                <Border VerticalAlignment="Top" Background="#404040" Height="100">
+                                    <StackPanel>
+                                        <Grid>
+                                            <TextBlock Text="Отчёт: IP" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
+                                            <Button Click="ExportReport4" Width="50" Height="30" HorizontalAlignment="Right" Margin="0 1 60 0">
+                                                <Image Source="images/Exel.png" Width="20" ToolTip="Экспорт"/>
+                                            </Button>
+                                            <Button Click="SReport4" Content="⌕" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
+                                        </Grid>
+                                        <Border Name="Filter_Report4" Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
+                                            <Grid>
+                                                <TextBlock Name="FilterReport4Text" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
+                                                <Button Click="FilterReport4Clear" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
+                                            </Grid>
+                                        </Border>
+                                    </StackPanel>
+                                </Border>
+
+                                <DataGrid Name="Report4" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True" Sorting="IPSorting"/>
 
                             </Grid>
                         </TabItem>
@@ -604,6 +698,36 @@
                                             <MenuItem Header="Открыть" Click="Open_DeletedMonitor"/>
                                             <MenuItem Header="Восстановить" Click="Recovery_Monitor"/>
                                             <MenuItem Header="Удалить" Click="Delete_DeletedMonitor"/>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+
+                        <!-- Роутеры Архив -->
+                        <TabItem Header="Роутеры">
+                            <Grid>
+                                <Border VerticalAlignment="Top" Background="#404040" Height="100">
+                                    <StackPanel>
+                                        <Grid>
+                                            <TextBlock Text="Архив: Роутеры" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
+                                            <Button Content="⌕" Click="SRouters_Del" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
+                                        </Grid>
+                                        <Border Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
+                                            <Grid>
+                                                <TextBlock Name="FilterRoutersText_Del" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
+                                                <Button Click="FilterRoutersClear_Del" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
+                                            </Grid>
+                                        </Border>
+                                    </StackPanel>
+                                </Border>
+
+                                <DataGrid Name="RoutersDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Открыть" Click="Open_DeletedRouters"/>
+                                            <MenuItem Header="Восстановить" Click="Recovery_Routers"/>
+                                            <MenuItem Header="Удалить" Click="Delete_DeletedRouters"/>
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>

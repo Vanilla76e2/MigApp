@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,6 +13,8 @@ namespace MigApp
 {
     class MiscClass
     {
+        string curver = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
+
         public string Splitter(string txt)
         {
             string result = "";
@@ -44,6 +48,19 @@ namespace MigApp
             }
         }
 
+        public string[] DHCPSplitter(string ip4)
+        {
+            try
+            {
+                string[] mass = ip4.Split('-');
+                return mass;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public string ReverceStr(string str)
         {
             char[] chars = str.ToCharArray();
@@ -66,6 +83,27 @@ namespace MigApp
             else result += "%.";
             if (ip4.Length > 0)
                 result += ip4;
+            else result += "%";
+            return result;
+        }
+
+        public string DHCPSearcher(string dhcp1, string dhcp2, string dhcp3, string dhcp4, string dhcp5)
+        {
+            string result = "";
+            if (dhcp1.Length > 0)
+                result = dhcp1 + ".";
+            else result = "%.";
+            if (dhcp2.Length > 0)
+                result += dhcp2 + ".";
+            else result += "%.";
+            if (dhcp3.Length > 0)
+                result += dhcp3 + ".";
+            else result += "%.";
+            if (dhcp4.Length > 0)
+                result += dhcp4 + "-";
+            else result += "%-";
+            if (dhcp5.Length > 0)
+                result += dhcp5;
             else result += "%";
             return result;
         }
@@ -123,5 +161,31 @@ namespace MigApp
             catch
             { MessageBox.Show("На устройстве отсутствует Excel.\nУстановите Excel и попробуйте ещё раз.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
+
+        public static bool InternetChecker()
+        {
+            try
+            {
+                Dns.GetHostEntry("dotnet.beget.tech");
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public void CheckVersion()
+        {
+            if (InternetChecker())
+            {
+                //string readver = WebClient.DownloadString("");
+            }
+            else
+            {
+                MessageBox.Show("Нет доступа к сети", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+            
     }
 }

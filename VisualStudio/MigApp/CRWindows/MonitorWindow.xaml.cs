@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MigApp.CRWindows
 {
@@ -48,19 +41,19 @@ namespace MigApp.CRWindows
             // Проверка заполнения
             if (InvNum.Text.Length > 0 && Firm.Text.Length > 0 && Model.Text.Length > 0 && SeriaNum.Text.Length > 0 && ScreenDiagonal.Text.Length > 0 && ScreenResolution.Text.Length > 0 && ScreenType.Text.Length > 0)
             {
-                if (sqlcc.InvNumChecker(InvNum.Text) || !Mode)
+                if (InvNumChecker(InvNum.Text) || !Mode)
                 {
                     string pc = $"SELECT InvNum From Computers Where Name Like '{PC.Text}'";
                     // Если создание
                     if (Mode == true)
                     {
-                        sqlcc.ReqNonRef($"INSERT INTO Monitor (InvNum, Firm, Model, SNum, Diagonal, Resolution, Screen, PC) Values ('{InvNum.Text}', '{Firm.Text}', '{Model.Text}', '{SeriaNum.Text}', '{ScreenDiagonal.Text}', '{ScreenResolution.Text}', '{ScreenType.Text}', ({pc}))");
+                        sqlcc.ReqNonRef($"INSERT INTO Monitor (InvNum, Firm, Model, SNum, Diagonal, Resolution, Screen, PC, Comment) Values ('{InvNum.Text}', '{Firm.Text}', '{Model.Text}', '{SeriaNum.Text}', '{ScreenDiagonal.Text}', '{ScreenResolution.Text}', '{ScreenType.Text}', ({pc}), '{Comment.Text}'");
                         sqlcc.Loging(CurrentUser, "Создание", "Мониторы", InvNum.Text, "");
                     }
                     // Если редактирование
                     else
                     {
-                        sqlcc.ReqNonRef($"UPDATE Monitor SET Firm = '{Firm.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', Diagonal = '{ScreenDiagonal.Text}', Resolution = '{ScreenResolution.Text}', Screen = '{ScreenType.Text}', PC = ({pc}) Where InvNum LIKE '{InvNum.Text}'");
+                        sqlcc.ReqNonRef($"UPDATE Monitor SET InvNum = '{InvNum.Text}', Firm = '{Firm.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', Diagonal = '{ScreenDiagonal.Text}', Resolution = '{ScreenResolution.Text}', Screen = '{ScreenType.Text}', PC = ({pc}), Comment = '{Comment.Text}' Where InvNum LIKE '{InvNum.Text}'");
                         sqlcc.Loging(CurrentUser, "Редактирование", "Мониторы", InvNum.Text, "");
                     }
                     DialogResult = true; Close();
@@ -176,7 +169,6 @@ namespace MigApp.CRWindows
             {
                 try
                 {
-                    InvNum.IsReadOnly = true;
                     Title = "Монитор (Редактирование)";
                     InvNum.Text = Invnum;
                     table = sqlcc.DataGridUpdate("*", "Monitors_View", $"WHERE [Инвентарный номер] Like '{Invnum}'");
@@ -198,6 +190,7 @@ namespace MigApp.CRWindows
                     {
                         PC.SelectedValue = pc;
                     }
+                    Comment.Text = row["Комментарий"].ToString();
                 }
                 catch
                 {
@@ -209,7 +202,6 @@ namespace MigApp.CRWindows
                 try
                 {
                     LockAll();
-                    InvNum.IsReadOnly = true;
                     Title = "Монитор (Редактирование)";
                     InvNum.Text = Invnum;
                     table = sqlcc.DataGridUpdate("*", "Monitors_Deleted", $"WHERE [Инвентарный номер] Like '{Invnum}'");
@@ -230,6 +222,7 @@ namespace MigApp.CRWindows
                     {
                         PC.SelectedValue = pc;
                     }
+                    Comment.Text = row["Комментарий"].ToString();
                 }
                 catch
                 {
@@ -258,6 +251,7 @@ namespace MigApp.CRWindows
 
         private void LockAll()
         {
+            InvNum.IsReadOnly = true;
             Firm.IsReadOnly = true;
             Model.IsReadOnly = true;
             SeriaNum.IsReadOnly = true;
@@ -266,6 +260,7 @@ namespace MigApp.CRWindows
             ScreenType.IsReadOnly = true;
             User.IsEnabled = false;
             PC.IsEnabled = false;
+            Comment.IsReadOnly = true;
         }
 
         private void CreateNewEmployee(object sender, RoutedEventArgs e)
@@ -284,6 +279,13 @@ namespace MigApp.CRWindows
             {
                 PC.IsEnabled = false;
             }
+        }
+
+        private bool InvNumChecker(string invnum)
+        {
+            if (Convert.ToUInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM Monitor WHERE InvNum LIKE '{invnum}'")) < 1)
+                return true;
+            else return false;
         }
     }
 }

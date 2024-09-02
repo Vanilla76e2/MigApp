@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigApp", "MigApp\MigApp.csproj", "{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup1", "Setup1\Setup1.vdproj", "{0B1E7867-C75E-4634-827E-6CBE81FE7BF2}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MigAppInstaller", "MigAppInstaller\MigAppInstaller.vdproj", "{68F4CD99-4AFB-4F62-A22C-1AB5BE65611F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,8 +17,8 @@ Global
 		{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0B1E7867-C75E-4634-827E-6CBE81FE7BF2}.Debug|Any CPU.ActiveCfg = Debug
-		{0B1E7867-C75E-4634-827E-6CBE81FE7BF2}.Release|Any CPU.ActiveCfg = Release
+		{68F4CD99-4AFB-4F62-A22C-1AB5BE65611F}.Debug|Any CPU.ActiveCfg = Debug
+		{68F4CD99-4AFB-4F62-A22C-1AB5BE65611F}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

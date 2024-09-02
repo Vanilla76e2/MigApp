@@ -40,18 +40,20 @@ namespace MigApp.CRWindows
         // Нажатие кнопки "Сохранить"
         private void SaveClick(object sender, RoutedEventArgs e)
         {
-            if (FIO.Text.Length > 0 && Group.Text.Length > 0 && Room.Text.Length > 0 && BirthDate.Text.Length > 0)
+            if (FIO.Text.Length > 0 && Group.Text.Length > 0 && Room.Text.Length > 0)
             {
                 if (Convert.ToInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM Employees Where FIO LIKE '{FIO.Text}'")) < 1 || !Mode)
                 {
                     if (Mode)
                     {
-                        sqlcc.ReqNonRef($"INSERT INTO Employees (FIO, [Group], Room, Birthdate) Values ('{FIO.Text}', '{Group.Text}', '{Room.Text}', '{BirthDate.Text}')");
+                        //sqlcc.ReqNonRef($"INSERT INTO Employees (FIO, [Group], Room, Birthdate) Values ('{FIO.Text}', '{Group.Text}', '{Room.Text}', '{BirthDate.Text}')");                        
+                        sqlcc.ReqNonRef($"INSERT INTO Employees (FIO, [Group], Room) Values ('{FIO.Text}', '{Group.Text}', '{Room.Text}')");
                         sqlcc.Loging(CurrentUser, "Создание", "Сотрудники", FIO.Text, "");
                     }
                     else
                     {
-                        sqlcc.ReqNonRef($"UPDATE Employees SET FIO = '{FIO.Text}', [Group] = '{Group.Text}', Room = '{Room.Text}', Birthdate = '{BirthDate.Text}' WHERE ID LIKE {ID}");
+                        //sqlcc.ReqNonRef($"UPDATE Employees SET FIO = '{FIO.Text}', [Group] = '{Group.Text}', Room = '{Room.Text}', Birthdate = '{BirthDate.Text}' WHERE ID LIKE {ID}");
+                        sqlcc.ReqNonRef($"UPDATE Employees SET FIO = '{FIO.Text}', [Group] = '{Group.Text}', Room = '{Room.Text}' WHERE ID LIKE {ID}");
                         sqlcc.Loging(CurrentUser, "Редактирование", "Сотрудники", FIO.Text, "");
                     }
                     DialogResult = true; Close();
@@ -107,11 +109,11 @@ namespace MigApp.CRWindows
         // Проверка даты
         private void DateCheck(object sender, SelectionChangedEventArgs e)
         {
-            if (BirthDate.SelectedDate > DateTime.Now.AddYears(-14))
-            {
-                MessageBox.Show("Сотрудник не может быть младше 14 лет", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
-                BirthDate.SelectedDate = null;
-            }
+            //if (BirthDate.SelectedDate > DateTime.Now.AddYears(-14))
+            //{
+            //    MessageBox.Show("Сотрудник не может быть младше 14 лет", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+            //    BirthDate.SelectedDate = null;
+            //}
         }
 
         // Заполнение полей и изменение названия окна
@@ -132,7 +134,7 @@ namespace MigApp.CRWindows
                     FIO.Text = row["ФИО"].ToString();
                     Group.Text = row["Отдел"].ToString();
                     Room.Text = row["Кабинет"].ToString();
-                    BirthDate.Text = row["Дата рождения"].ToString();
+                    //BirthDate.Text = row["Дата рождения"].ToString();
                 }
                 catch
                 { MessageBox.Show("Запись не найдена", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); }
@@ -148,7 +150,7 @@ namespace MigApp.CRWindows
                     FIO.Text = row["ФИО"].ToString();
                     Group.Text = row["Отдел"].ToString();
                     Room.Text = row["Кабинет"].ToString();
-                    BirthDate.Text = row["Дата рождения"].ToString();
+                    //BirthDate.Text = row["Дата рождения"].ToString();
                 }
                 catch
                 { MessageBox.Show("Запись не найдена", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); }
@@ -168,7 +170,7 @@ namespace MigApp.CRWindows
             FIO.IsReadOnly = true;
             Group.IsEnabled = false;
             Room.IsReadOnly = true;
-            BirthDate.IsEnabled = false;
+            //BirthDate.IsEnabled = false;
         }
     }
 }

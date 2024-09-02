@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,7 +48,7 @@ namespace MigApp
             }
             else
             {
-                MessageBox.Show("Не удалось подключиться к серверу,\nпроверьте корректность введённых данных.","Внимание",MessageBoxButton.OK,MessageBoxImage.Warning);
+                MessageBox.Show("Не удалось подключиться к серверу,\nпроверьте корректность введённых данных.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -55,6 +56,11 @@ namespace MigApp
         {
             if (e.ChangedButton == MouseButton.Left)
                 DragMove();
+        }
+
+        private void User_Manual(object sender, RoutedEventArgs e)
+        {
+            Process.Start(@"https://vanilla76e2.github.io/MigApp_Manual/");
         }
     }
 }

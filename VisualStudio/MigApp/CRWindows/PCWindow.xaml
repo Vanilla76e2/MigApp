@@ -15,7 +15,7 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 20" Width="640">
                 <TextBlock Text="Инвентарный номер*" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Center" Width="270" Margin="0 0 20 0"/>
-                <TextBox Name="InvNum" Style="{DynamicResource MaterialDesignTextBox}" FontSize="18" Foreground="White" Width="350" MaxLength="12" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed" PreviewTextInput="NumOnly"/>
+                <TextBox Name="InvNum" Style="{DynamicResource MaterialDesignTextBox}" FontSize="18" Foreground="White" Width="350" MaxLength="15" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed" PreviewTextInput="NumOnly"/>
             </StackPanel>
             
             
@@ -23,82 +23,99 @@
                 <TabControl Margin="0 0 0 0">
 
                     <TabItem Header="Основное">
-                        <Grid>
-                            <StackPanel>
+                        <ScrollViewer>
+                            <Grid>
+                                <StackPanel>
 
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 30 0 30" Width="620">
-                                    <TextBlock Text="Имя компьютера" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" Width="270" Margin="0 0 20 0"/>
-                                    <TextBox Name="PCName" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" MinWidth="330" FontSize="16" MaxLength="50" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
-                                </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 30 0 30" Width="620">
+                                        <TextBlock Text="Имя компьютера" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" Width="270" Margin="0 0 20 0"/>
+                                        <TextBox Name="PCName" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" MinWidth="330" FontSize="16" MaxLength="50" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
+                                    </StackPanel>
 
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 30" Width="620">
-                                    <TextBlock Text="IP" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" MinWidth="270" Margin="0 0 20 0"/>
-                                    <Border Name="IPBorder" Width="330">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBox Name="ip1" Width="75" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck1" GotFocus="IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="NextIP1"/>
-                                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                                            <TextBox Name="ip2" Width="75" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck2" GotFocus="IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="NextIP2"/>
-                                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                                            <TextBox Name="ip3" Width="75" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck3" GotFocus="IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="NextIP3"/>
-                                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                                            <TextBox Name="ip4" Width="75" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck4" GotFocus="IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="NextIP4"/>
-                                        </StackPanel>
-                                    </Border>
-                                </StackPanel>
-                                
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 30" Width="620">
-                                    <TextBlock Text="ФИО пользователя" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" Width="270" Margin="0 0 20 0"/>
-                                    <ComboBox Name="User" Style="{DynamicResource MaterialDesignComboBox}" Foreground="White" FontSize="16" Width="260" IsEditable="True" MaxDropDownHeight="200" IsTextSearchEnabled="False" TextBoxBase.TextChanged="UserChanged"/>
-                                    <Button Click="CreateNewEmployee" Content="+" Margin="28 0 0 0" ToolTip="Созать сотрудника"/>
-                                </StackPanel>
-                                
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 30" Width="620">
-                                    <TextBlock Text="Логин локального админ-а" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" MinWidth="270" Margin="0 0 20 0"/>
-                                    <PasswordBox Name="AdminLogin" Style="{DynamicResource MaterialDesignRevealPasswordBox}" FontSize="16" Foreground="White" Width="330" MaxLength="25" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
-                                </StackPanel>
-                                
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 30" Width="620">
-                                    <TextBlock Text="Пароль локального админ-а" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" Width="270" Margin="0 0 20 0"/>
-                                    <PasswordBox Name="AdminPass" Style="{DynamicResource MaterialDesignRevealPasswordBox}" FontSize="16" Foreground="White" Width="330" MaxLength="25" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
-                                </StackPanel>
-                                
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 30" Width="620">
-                                    <TextBlock Text="ОС" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" MinWidth="270" Margin="0 0 20 0"/>
-                                    <TextBox Name="OS" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16" Width="330" MaxLength="15" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
-                                </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 30" Width="620">
+                                        <TextBlock Text="IP" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" MinWidth="270" Margin="0 0 20 0"/>
+                                        <Border Name="IPBorder" Width="330">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Name="ip1" Text="192" Width="75" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck1" GotFocus="IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="NextIP1"/>
+                                                <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
+                                                <TextBox Name="ip2" Text="168" Width="75" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck2" GotFocus="IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="NextIP2"/>
+                                                <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
+                                                <TextBox Name="ip3" Width="75" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck3" GotFocus="IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="NextIP3"/>
+                                                <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
+                                                <TextBox Name="ip4" Width="75" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck4" GotFocus="IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="NextIP4"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </StackPanel>
 
-                            </StackPanel>
-                        </Grid>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 30" Width="620">
+                                        <TextBlock Text="ФИО пользователя" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" Width="270" Margin="0 0 20 0"/>
+                                        <ComboBox Name="User" Style="{DynamicResource MaterialDesignComboBox}" Foreground="White" FontSize="16" Width="260" IsEditable="True" MaxDropDownHeight="200" IsTextSearchEnabled="False" TextBoxBase.TextChanged="UserChanged"/>
+                                        <Button Click="CreateNewEmployee" Content="+" Margin="28 0 0 0" ToolTip="Созать сотрудника"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 30" Width="620">
+                                        <TextBlock Text="Логин локального админ-а" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" MinWidth="270" Margin="0 0 20 0"/>
+                                        <PasswordBox Name="AdminLogin" Style="{DynamicResource MaterialDesignRevealPasswordBox}" FontSize="16" Foreground="White" Width="330" MaxLength="25" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 30" Width="620">
+                                        <TextBlock Text="Пароль локального админ-а" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" Width="270" Margin="0 0 20 0"/>
+                                        <PasswordBox Name="AdminPass" Style="{DynamicResource MaterialDesignRevealPasswordBox}" FontSize="16" Foreground="White" Width="330" MaxLength="25" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 30" Width="620">
+                                        <TextBlock Text="ОС" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" MinWidth="270" Margin="0 0 20 0"/>
+                                        <TextBox Name="OS" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16" Width="330" MaxLength="15" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 10" Width="620">
+                                        <TextBlock Text="Комментарий" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" Width="620" Margin="0 0 5 0"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20" Width="620">
+                                        <TextBox Name="Comment" Style="{DynamicResource MaterialDesignOutlinedTextBox}" FontSize="16" Foreground="White" Width="620" TextWrapping="Wrap" MaxLength="250" VerticalScrollBarVisibility="Visible" Height="100" AcceptsReturn="True"/>
+                                    </StackPanel>
+
+                                </StackPanel>
+                            </Grid>
+                        </ScrollViewer>
                     </TabItem>
 
                     <TabItem Header="Комплектующие">
                         <Grid>
                             <ScrollViewer>
                                 <StackPanel>
+                                    
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 10" Width="620">
                                         <TextBlock Text="Материнская плата*" Style="{DynamicResource TextBlock_20}" MinWidth="200" Margin="0 0 10 0"/>
                                         <TextBox Name="Motherboard" Style="{DynamicResource MaterialDesignTextBox}" FontSize="16" Foreground="White" Width="410" TextWrapping="Wrap" MaxLength="150" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
                                     </StackPanel>
+                                    
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 10" Width="620">
                                         <TextBlock Text="Процессор*" Style="{DynamicResource TextBlock_20}" MinWidth="200" Margin="0 0 10 0"/>
                                         <TextBox Name="Processor" Style="{DynamicResource MaterialDesignTextBox}" FontSize="16" Foreground="White" Width="410" TextWrapping="Wrap" MaxLength="150" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
                                     </StackPanel>
+                                    
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 10" Width="620">
                                         <TextBlock Text="ОЗУ*" Style="{DynamicResource TextBlock_20}" MinWidth="200" Margin="0 0 10 0"/>
                                         <TextBox Name="RAM" Style="{DynamicResource MaterialDesignTextBox}" FontSize="16" Foreground="White" Width="410" TextWrapping="Wrap" MaxLength="150" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
                                     </StackPanel>
+                                    
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 5" Width="620">
                                         <TextBlock Text="Накопители*" Style="{DynamicResource TextBlock_20}" Width="460" Margin="0 0 10 0"/>
                                     </StackPanel>
+                                    
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 10" Width="620">
                                         <TextBox Name="Drive" Style="{DynamicResource MaterialDesignOutlinedTextBox}" FontSize="16" Foreground="White" Width="620" TextWrapping="Wrap" MaxLength="250" VerticalScrollBarVisibility="Visible" Height="100" AcceptsReturn="True"/>
                                     </StackPanel>
+                                    
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 10" Width="620">
                                         <TextBlock Text="Иное" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" Width="620" Margin="0 0 5 0"/>
                                     </StackPanel>
+                                    
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20" Width="620">
                                         <TextBox Name="Other" Style="{DynamicResource MaterialDesignOutlinedTextBox}" FontSize="16" Foreground="White" Width="620" TextWrapping="Wrap" MaxLength="250" VerticalScrollBarVisibility="Visible" Height="100" AcceptsReturn="True"/>
                                     </StackPanel>
+                                    
                                 </StackPanel>
                             </ScrollViewer>
                         </Grid>

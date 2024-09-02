@@ -38,7 +38,7 @@ namespace MigApp
             // Сотрудники
             if (mode == 0) 
             { 
-                SearchPanel_0.Visibility = Visibility.Visible;
+                SearchPanel_Emp.Visibility = Visibility.Visible;
                 this.Height = 330;
                 this.Width = 550;
                 if (MigApp.Properties.Settings.Default.Params0 != null)
@@ -55,7 +55,7 @@ namespace MigApp
             // ПК
             else if (mode == 1)
             {
-                SearchPanel_1.Visibility = Visibility.Visible;
+                SearchPanel_PC.Visibility = Visibility.Visible;
                 this.Height = 500;
                 if (MigApp.Properties.Settings.Default.Params1 != null)
                 {
@@ -88,7 +88,7 @@ namespace MigApp
             // Ноутбуки
             else if (mode == 2)
             {
-                SearchPanel_2.Visibility = Visibility.Visible;
+                SearchPanel_NB.Visibility = Visibility.Visible;
                 this.Height = 550;
                 if (MigApp.Properties.Settings.Default.Params2 != null)
                 {
@@ -110,7 +110,7 @@ namespace MigApp
             // Планшеты
             else if (mode == 3)
             {
-                SearchPanel_3.Visibility = Visibility.Visible;
+                SearchPanel_Tab.Visibility = Visibility.Visible;
                 this.Height = 450;
                 if (MigApp.Properties.Settings.Default.Params3 != null)
                 {
@@ -130,7 +130,7 @@ namespace MigApp
             // Орг.техника
             else if (mode == 4)
             {
-                SearchPanel_4.Visibility = Visibility.Visible;
+                SearchPanel_OT.Visibility = Visibility.Visible;
                 this.Height = 420;
                 Type_OT.Text = "Не выбрано";
                 if (MigApp.Properties.Settings.Default.Params4 != null)
@@ -164,7 +164,7 @@ namespace MigApp
             // Мониторы
             else if (mode == 5)
             {
-                SearchPanel_5.Visibility = Visibility.Visible;
+                SearchPanel_Mon.Visibility = Visibility.Visible;
                 this.Height = 400;
                 if (MigApp.Properties.Settings.Default.Params5 != null)
                 {
@@ -179,13 +179,57 @@ namespace MigApp
                     User_Mon.Text = Parametrs[7];
                 }
             }
+
+            // Роутеры
+            else if (mode == 17)
+            {
+                SearchPanel_Rout.Visibility = Visibility.Visible;
+                this.Height = 320;
+                if (MigApp.Properties.Settings.Default.Params17 != null)
+                {
+                    string[] Parametrs = MigApp.Properties.Settings.Default.Params17.Split('|');
+                    InvNum_Rout.Text = Parametrs[0];
+                    Name_Rout.Text = Parametrs[1];
+                    Model_Rout.Text = Parametrs[2];
+                    WiFiName_Rout.Text = Parametrs[3];
+                    try
+                    {
+                        string[] ip = Parametrs[4].Split('.');
+                        if (ip[0] != "%")
+                            ip1_Rout.Text = ip[0];
+                        if (ip[1] != "%")
+                            ip2_Rout.Text = ip[1];
+                        if (ip[2] != "%")
+                            ip3_Rout.Text = ip[2];
+                        if (ip[3] != "%")
+                            ip4_Rout.Text = ip[3];
+                    }
+                    catch { }
+                    try
+                    {
+                        string[] dhcp = Parametrs[5].Split('.');
+                        if (dhcp[0] != "%")
+                            dhcp1_Rout.Text = dhcp[0];
+                        if (dhcp[1] != "%")
+                            dhcp2_Rout.Text = dhcp[1];
+                        if (dhcp[2] != "%")
+                            dhcp3_Rout.Text = dhcp[2];
+                        string[] dhcp45 = dhcp[3].Split('-');
+                        if (dhcp[3] != "%")
+                            dhcp4_Rout.Text = dhcp45[0];
+                        if (dhcp[4] != "%")
+                            dhcp5_Rout.Text = dhcp45[1];
+                    }
+                    catch { }
+                }
+            }
             #endregion
 
             #region Админпанель
             // Пользователи
             else if (mode == 6)
             {
-                SearchPanel_6.Visibility = Visibility.Visible;
+                SearchPanel_Users.Visibility = Visibility.Visible;
                 this.Height = 350;
                 if (MigApp.Properties.Settings.Default.Params6 != null)
                 {
@@ -206,7 +250,7 @@ namespace MigApp
             // Логи
             else if (mode == 7)
             {
-                SearchPanel_7.Visibility = Visibility.Visible;
+                SearchPanel_Logs.Visibility = Visibility.Visible;
                 this.Height = 500;
                 if (MigApp.Properties.Settings.Default.Params7 != null)
                 {
@@ -234,7 +278,7 @@ namespace MigApp
             // Сотрудники
             if (mode == 8)
             {
-                SearchPanel_8.Visibility = Visibility.Visible;
+                SearchPanel_EmpDel.Visibility = Visibility.Visible;
                 this.Height = 330;
                 this.Width = 550;
                 if (MigApp.Properties.Settings.Default.Params8 != null)
@@ -251,7 +295,7 @@ namespace MigApp
             // ПК
             else if (mode == 9)
             {
-                SearchPanel_9.Visibility = Visibility.Visible;
+                SearchPanel_PCDel.Visibility = Visibility.Visible;
                 this.Height = 500;
                 if (MigApp.Properties.Settings.Default.Params9 != null)
                 {
@@ -284,7 +328,7 @@ namespace MigApp
             // Ноутбуки
             else if (mode == 10)
             {
-                SearchPanel_10.Visibility = Visibility.Visible;
+                SearchPanel_NBDel.Visibility = Visibility.Visible;
                 this.Height = 550;
                 if (MigApp.Properties.Settings.Default.Params10 != null)
                 {
@@ -306,7 +350,7 @@ namespace MigApp
             // Планшеты
             else if (mode == 11)
             {
-                SearchPanel_11.Visibility = Visibility.Visible;
+                SearchPanel_TabDel.Visibility = Visibility.Visible;
                 this.Height = 450;
                 if (MigApp.Properties.Settings.Default.Params11 != null)
                 {
@@ -326,7 +370,7 @@ namespace MigApp
             // Орг.техника
             else if (mode == 12)
             {
-                SearchPanel_12.Visibility = Visibility.Visible;
+                SearchPanel_OTDel.Visibility = Visibility.Visible;
                 this.Height = 400;
                 Type_OT_Del.Text = "Не выбрано";
                 if (MigApp.Properties.Settings.Default.Params12 != null)
@@ -360,7 +404,7 @@ namespace MigApp
             // Мониторы
             else if (mode == 13)
             {
-                SearchPanel_13.Visibility = Visibility.Visible;
+                SearchPanel_MonDel.Visibility = Visibility.Visible;
                 this.Height = 400;
                 if (MigApp.Properties.Settings.Default.Params13 != null)
                 {
@@ -381,7 +425,7 @@ namespace MigApp
             // ПК
             else if (Mode == 14)
             {
-                SearchPanel_14.Visibility = Visibility.Visible;
+                SearchPanel_PCRep.Visibility = Visibility.Visible;
                 this.Height = 500;
                 OTType_Report1.Text = "Не выбрано";
                 if (MigApp.Properties.Settings.Default.Params14 != null)
@@ -409,7 +453,7 @@ namespace MigApp
             // Ноутбуки
             else if (Mode == 15)
             {
-                SearchPanel_15.Visibility = Visibility.Visible;
+                SearchPanel_NBRep.Visibility = Visibility.Visible;
                 this.Height = 300;
                 if (MigApp.Properties.Settings.Default.Params15 != null)
                 {
@@ -429,7 +473,7 @@ namespace MigApp
             // Планшеты
             else if (Mode == 16)
             {
-                SearchPanel_16.Visibility = Visibility.Visible;
+                SearchPanel_TabRep.Visibility = Visibility.Visible;
                 this.Height = 300;
                 if (MigApp.Properties.Settings.Default.Params16 != null)
                 {
@@ -657,6 +701,39 @@ namespace MigApp
                     Param += $"|{ScreenType_Mon.Text}|{User_Mon.Text}";
                     MigApp.Properties.Settings.Default.Params5 = Param;
                     MigApp.Properties.Settings.Default.com5 = command;
+                    MigApp.Properties.Settings.Default.Save();
+                    DialogResult = true;
+                }
+                this.Close();
+            }
+
+            // Роутеры
+            else if (Mode == 17)
+            {
+                if (InvNum_Rout.Text.Length > 0)
+                    command += $"[Инвентарный номер] LIKE '{InvNum_Rout.Text}' AND ";
+                if (Name_Rout.Text.Length > 0)
+                    command += $"Имя LIKE '{Name_Rout.Text}' AND ";
+                if (Model_Rout.Text.Length > 0)
+                    command += $"Модель LIKE '{Model_Rout.Text}' AND ";
+                if (WiFiName_Rout.Text.Length > 0)
+                    command += $"[Имя сети] LIKE '{WiFiName_Rout.Text}' AND ";
+                if (ip1_Rout.Text.Length > 0 || ip2_Rout.Text.Length > 0 || ip3_Rout.Text.Length > 0 || ip4_Rout.Text.Length > 0)
+                    command += $"IP Like '{mc.IPSearcher(ip1_Rout.Text, ip2_Rout.Text, ip3_Rout.Text, ip4_Rout.Text)}' AND ";
+                if (dhcp1_Rout.Text.Length > 0 || dhcp2_Rout.Text.Length > 0 || dhcp3_Rout.Text.Length > 0 || dhcp4_Rout.Text.Length > 0 || dhcp5_Rout.Text.Length > 0)
+                    command += $"DHCP Like '{mc.DHCPSearcher(dhcp1_Rout.Text, dhcp2_Rout.Text, dhcp3_Rout.Text, dhcp4_Rout.Text, dhcp5_Rout.Text)}' AND ";
+                command += "[Инвентарный номер] NOT Like 'Placeholder'";
+                if (command != "Where [Инвентарный номер] NOT Like 'Placeholder'")
+                {
+                    string Param = $"{InvNum_Rout.Text}|{Name_Rout.Text}|{Model_Rout.Text}|{WiFiName_Rout.Text}|";
+                    if (ip1_Rout.Text.Length > 0 || ip2_Rout.Text.Length > 0 || ip3_Rout.Text.Length > 0 || ip4_Rout.Text.Length > 0)
+                        Param += $"{mc.IPSearcher(ip1_Rout.Text, ip2_Rout.Text, ip3_Rout.Text, ip4_Rout.Text)}|";
+                    else Param += "|";
+                    if (dhcp1_Rout.Text.Length > 0 || dhcp2_Rout.Text.Length > 0 || dhcp3_Rout.Text.Length > 0 || dhcp4_Rout.Text.Length > 0 || dhcp5_Rout.Text.Length > 0)
+                        Param += $"{mc.DHCPSearcher(dhcp1_Rout.Text, dhcp2_Rout.Text, dhcp3_Rout.Text, dhcp4_Rout.Text, dhcp5_Rout.Text)}";
+
+                    MigApp.Properties.Settings.Default.Params17 = Param;
+                    MigApp.Properties.Settings.Default.com17 = command;
                     MigApp.Properties.Settings.Default.Save();
                     DialogResult = true;
                 }
@@ -1502,6 +1579,484 @@ namespace MigApp
                 ip3_OT_Del.Focus();
             }
         }
+        #endregion
+
+        #endregion
+
+        #region IP Box для Роутера
+
+        #region Основной
+        // Проверка до 255 и переключение на следующий
+        private void Rout_IPcheck1(object sender, TextChangedEventArgs e)
+        {
+            if (ip1_Rout.Text.Length == 3)
+                ip2_Rout.Focus();
+            try
+            {
+                if (Convert.ToInt32(ip1_Rout.Text) > 255)
+                    ip1_Rout.Text = "255";
+            }
+            catch { }
+        }
+
+        private void Rout_IPcheck2(object sender, TextChangedEventArgs e)
+        {
+            if (ip2_Rout.Text.Length == 3)
+                ip3_Rout.Focus();
+            try
+            {
+                if (Convert.ToInt32(ip2_Rout.Text) > 255)
+                    ip2_Rout.Text = "255";
+            }
+            catch { }
+        }
+
+        private void Rout_IPcheck3(object sender, TextChangedEventArgs e)
+        {
+            if (ip3_Rout.Text.Length == 3)
+                ip4_Rout.Focus();
+            try
+            {
+                if (Convert.ToInt32(ip3_Rout.Text) > 255)
+                    ip3_Rout.Text = "255";
+            }
+            catch { }
+        }
+
+        private void Rout_IPcheck4(object sender, TextChangedEventArgs e)
+        {
+            if (ip4_Rout.Text.Length == 3)
+                e.Handled = false;
+            try
+            {
+                if (Convert.ToInt32(ip4_Rout.Text) > 255)
+                    ip4_Rout.Text = "255";
+            }
+            catch { }
+        }
+
+        private void Rout_IPfocus(object sender, RoutedEventArgs e)
+        {
+            var textBox = e.OriginalSource as TextBox;
+            e.Handled = true;
+            if (textBox != null)
+                textBox.SelectAll();
+        }
+
+        // Запрет на пробелы
+        private void Rout_NextIP1(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+                ip2_Rout.Focus();
+            }
+        }
+
+        private void Rout_NextIP2(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+                ip3_Rout.Focus();
+            }
+            if (e.Key == Key.Back && ip2_Rout.Text.Length == 0)
+            {
+                e.Handled = true;
+                ip1_Rout.Focus();
+            }
+
+        }
+
+        private void Rout_NextIP3(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+                ip4_Rout.Focus();
+            }
+            if (e.Key == Key.Back && ip3_Rout.Text.Length == 0)
+            {
+                e.Handled = true;
+                ip2_Rout.Focus();
+            }
+        }
+
+        private void Rout_NextIP4(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
+            if (e.Key == Key.Back && ip4_Rout.Text.Length == 0)
+            {
+                e.Handled = true;
+                ip3_Rout.Focus();
+            }
+        }
+        #endregion
+
+        #region Архив
+        // Проверка до 255 и переключение на следующий
+        //private void IPcheck5_Del(object sender, TextChangedEventArgs e)
+        //{
+        //    if (ip1_OT_Del.Text.Length == 3)
+        //        ip2_OT_Del.Focus();
+        //    try
+        //    {
+        //        if (Convert.ToInt32(ip1_OT_Del.Text) > 255)
+        //            ip1_OT_Del.Text = "255";
+        //    }
+        //    catch { }
+        //}
+
+        //private void IPcheck6_Del(object sender, TextChangedEventArgs e)
+        //{
+        //    if (ip2_OT_Del.Text.Length == 3)
+        //        ip3_OT_Del.Focus();
+        //    try
+        //    {
+        //        if (Convert.ToInt32(ip2_OT_Del.Text) > 255)
+        //            ip2_OT_Del.Text = "255";
+        //    }
+        //    catch { }
+        //}
+
+        //private void IPcheck7_Del(object sender, TextChangedEventArgs e)
+        //{
+        //    if (ip3_OT_Del.Text.Length == 3)
+        //        ip4_OT_Del.Focus();
+        //    try
+        //    {
+        //        if (Convert.ToInt32(ip3_OT_Del.Text) > 255)
+        //            ip3_OT_Del.Text = "255";
+        //    }
+        //    catch { }
+        //}
+
+        //private void IPcheck8_Del(object sender, TextChangedEventArgs e)
+        //{
+        //    if (ip4_OT_Del.Text.Length == 3)
+        //        e.Handled = false;
+        //    try
+        //    {
+        //        if (Convert.ToInt32(ip4_OT_Del.Text) > 255)
+        //            ip4_OT_Del.Text = "255";
+        //    }
+        //    catch { }
+        //}
+
+        //private void IPfocus1_Del(object sender, RoutedEventArgs e)
+        //{
+        //    var textBox = e.OriginalSource as TextBox;
+        //    e.Handled = true;
+        //    if (textBox != null)
+        //        textBox.SelectAll();
+        //}
+
+        // Запрет на пробелы
+        //private void NextIP5_Del(object sender, KeyEventArgs e)
+        //{
+        //    if (e.Key == Key.Space)
+        //    {
+        //        e.Handled = true;
+        //        ip2_OT_Del.Focus();
+        //    }
+        //}
+
+        //private void NextIP6_Del(object sender, KeyEventArgs e)
+        //{
+        //    if (e.Key == Key.Space)
+        //    {
+        //        e.Handled = true;
+        //        ip3_OT_Del.Focus();
+        //    }
+        //    if (e.Key == Key.Back && ip2_OT_Del.Text.Length == 0)
+        //    {
+        //        e.Handled = true;
+        //        ip1_OT_Del.Focus();
+        //    }
+
+        //}
+
+        //private void NextIP7_Del(object sender, KeyEventArgs e)
+        //{
+        //    if (e.Key == Key.Space)
+        //    {
+        //        e.Handled = true;
+        //        ip4_OT_Del.Focus();
+        //    }
+        //    if (e.Key == Key.Back && ip3_OT_Del.Text.Length == 0)
+        //    {
+        //        e.Handled = true;
+        //        ip2_OT_Del.Focus();
+        //    }
+        //}
+
+        //private void NextIP8_Del(object sender, KeyEventArgs e)
+        //{
+        //    if (e.Key == Key.Space)
+        //    {
+        //        e.Handled = true;
+        //    }
+        //    if (e.Key == Key.Back && ip4_OT_Del.Text.Length == 0)
+        //    {
+        //        e.Handled = true;
+        //        ip3_OT_Del.Focus();
+        //    }
+        //}
+        #endregion
+
+        #endregion
+
+        #region DHCP Box для Роутера
+
+        #region Основной
+        // Проверка до 255 и переключение на следующий
+        private void Rout_DHCPcheck1(object sender, TextChangedEventArgs e)
+        {
+            if (dhcp1_Rout.Text.Length == 3)
+                dhcp2_Rout.Focus();
+            try
+            {
+                if (Convert.ToInt32(dhcp1_Rout.Text) > 255)
+                    dhcp1_Rout.Text = "255";
+            }
+            catch { }
+        }
+
+        private void Rout_DHCPcheck2(object sender, TextChangedEventArgs e)
+        {
+            if (dhcp2_Rout.Text.Length == 3)
+                dhcp3_Rout.Focus();
+            try
+            {
+                if (Convert.ToInt32(dhcp2_Rout.Text) > 255)
+                    dhcp2_Rout.Text = "255";
+            }
+            catch { }
+        }
+
+        private void Rout_DHCPcheck3(object sender, TextChangedEventArgs e)
+        {
+            if (dhcp3_Rout.Text.Length == 3)
+                dhcp4_Rout.Focus();
+            try
+            {
+                if (Convert.ToInt32(dhcp3_Rout.Text) > 255)
+                    dhcp3_Rout.Text = "255";
+            }
+            catch { }
+        }
+
+        private void Rout_DHCPcheck4(object sender, TextChangedEventArgs e)
+        {
+            if (dhcp4_Rout.Text.Length == 3)
+                dhcp4_Rout.Focus();
+            try
+            {
+                if (Convert.ToInt32(dhcp4_Rout.Text) > 255)
+                    dhcp4_Rout.Text = "255";
+            }
+            catch { }
+        }
+
+        private void Rout_DHCPcheck5(object sender, TextChangedEventArgs e)
+        {
+            if (dhcp5_Rout.Text.Length == 3)
+                e.Handled = false;
+            try
+            {
+                if (Convert.ToInt32(dhcp5_Rout.Text) > 255)
+                    dhcp5_Rout.Text = "255";
+            }
+            catch { }
+        }
+
+        private void Rout_DHCPfocus(object sender, RoutedEventArgs e)
+        {
+            var textBox = e.OriginalSource as TextBox;
+            e.Handled = true;
+            if (textBox != null)
+                textBox.SelectAll();
+        }
+
+        // Запрет на пробелы
+        private void Rout_NextDHCP1(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+                dhcp2_Rout.Focus();
+            }
+        }
+
+        private void Rout_NextDHCP2(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+                dhcp3_Rout.Focus();
+            }
+            if (e.Key == Key.Back && dhcp2_Rout.Text.Length == 0)
+            {
+                e.Handled = true;
+                dhcp1_Rout.Focus();
+            }
+
+        }
+
+        private void Rout_NextDHCP3(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+                dhcp4_Rout.Focus();
+            }
+            if (e.Key == Key.Back && dhcp3_Rout.Text.Length == 0)
+            {
+                e.Handled = true;
+                dhcp2_Rout.Focus();
+            }
+        }
+
+        private void Rout_NextDHCP4(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+                dhcp5_Rout.Focus();
+            }
+            if (e.Key == Key.Back && dhcp4_Rout.Text.Length == 0)
+            {
+                e.Handled = true;
+                dhcp3_Rout.Focus();
+            }
+        }
+
+        private void Rout_NextDHCP5(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
+            if (e.Key == Key.Back && dhcp5_Rout.Text.Length == 0)
+            {
+                e.Handled = true;
+                dhcp4_Rout.Focus();
+            }
+        }
+        #endregion
+
+        #region Архив
+        // Проверка до 255 и переключение на следующий
+        //private void IPcheck5_Del(object sender, TextChangedEventArgs e)
+        //{
+        //    if (ip1_OT_Del.Text.Length == 3)
+        //        ip2_OT_Del.Focus();
+        //    try
+        //    {
+        //        if (Convert.ToInt32(ip1_OT_Del.Text) > 255)
+        //            ip1_OT_Del.Text = "255";
+        //    }
+        //    catch { }
+        //}
+
+        //private void IPcheck6_Del(object sender, TextChangedEventArgs e)
+        //{
+        //    if (ip2_OT_Del.Text.Length == 3)
+        //        ip3_OT_Del.Focus();
+        //    try
+        //    {
+        //        if (Convert.ToInt32(ip2_OT_Del.Text) > 255)
+        //            ip2_OT_Del.Text = "255";
+        //    }
+        //    catch { }
+        //}
+
+        //private void IPcheck7_Del(object sender, TextChangedEventArgs e)
+        //{
+        //    if (ip3_OT_Del.Text.Length == 3)
+        //        ip4_OT_Del.Focus();
+        //    try
+        //    {
+        //        if (Convert.ToInt32(ip3_OT_Del.Text) > 255)
+        //            ip3_OT_Del.Text = "255";
+        //    }
+        //    catch { }
+        //}
+
+        //private void IPcheck8_Del(object sender, TextChangedEventArgs e)
+        //{
+        //    if (ip4_OT_Del.Text.Length == 3)
+        //        e.Handled = false;
+        //    try
+        //    {
+        //        if (Convert.ToInt32(ip4_OT_Del.Text) > 255)
+        //            ip4_OT_Del.Text = "255";
+        //    }
+        //    catch { }
+        //}
+
+        //private void IPfocus1_Del(object sender, RoutedEventArgs e)
+        //{
+        //    var textBox = e.OriginalSource as TextBox;
+        //    e.Handled = true;
+        //    if (textBox != null)
+        //        textBox.SelectAll();
+        //}
+
+        // Запрет на пробелы
+        //private void NextIP5_Del(object sender, KeyEventArgs e)
+        //{
+        //    if (e.Key == Key.Space)
+        //    {
+        //        e.Handled = true;
+        //        ip2_OT_Del.Focus();
+        //    }
+        //}
+
+        //private void NextIP6_Del(object sender, KeyEventArgs e)
+        //{
+        //    if (e.Key == Key.Space)
+        //    {
+        //        e.Handled = true;
+        //        ip3_OT_Del.Focus();
+        //    }
+        //    if (e.Key == Key.Back && ip2_OT_Del.Text.Length == 0)
+        //    {
+        //        e.Handled = true;
+        //        ip1_OT_Del.Focus();
+        //    }
+
+        //}
+
+        //private void NextIP7_Del(object sender, KeyEventArgs e)
+        //{
+        //    if (e.Key == Key.Space)
+        //    {
+        //        e.Handled = true;
+        //        ip4_OT_Del.Focus();
+        //    }
+        //    if (e.Key == Key.Back && ip3_OT_Del.Text.Length == 0)
+        //    {
+        //        e.Handled = true;
+        //        ip2_OT_Del.Focus();
+        //    }
+        //}
+
+        //private void NextIP8_Del(object sender, KeyEventArgs e)
+        //{
+        //    if (e.Key == Key.Space)
+        //    {
+        //        e.Handled = true;
+        //    }
+        //    if (e.Key == Key.Back && ip4_OT_Del.Text.Length == 0)
+        //    {
+        //        e.Handled = true;
+        //        ip3_OT_Del.Focus();
+        //    }
+        //}
         #endregion
 
         #endregion

@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MigApp.CRWindows
 {
@@ -173,19 +166,19 @@ namespace MigApp.CRWindows
             // Проверка заполнения
             if (InvNum.Text.Length > 0 && Type.Text.Length > 0 && Model.Text.Length > 0 && SeriaNum.Text.Length > 0 && Cartrige.Text.Length > 0)
             {
-                if (sqlcc.InvNumChecker(InvNum.Text) || !Mode)
+                if (InvNumChecker(InvNum.Text) || !Mode)
                 {
                     string pc = $"SELECT InvNum From Computers Where Name Like '{PC.Text}'";
                     // Если создание
                     if (Mode == true)
                     {
-                        sqlcc.ReqNonRef($"INSERT INTO OrgTech (InvNum, Type, Model, SNum, Name, IP, Login, Password, Сartridge_Model, PC) Values ('{InvNum.Text}', '{Type.Text}', '{Model.Text}', '{SeriaNum.Text}', '{OTName.Text}', '{ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text}', '{Login.Password}', '{Password.Password}', '{Cartrige.Text}', ({pc}))");
+                        sqlcc.ReqNonRef($"INSERT INTO OrgTech (InvNum, Type, Model, SNum, Name, IP, Login, Password, Сartridge_Model, PC, Comment) Values ('{InvNum.Text}', '{Type.Text}', '{Model.Text}', '{SeriaNum.Text}', '{OTName.Text}', '{ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text}', '{Login.Password}', '{Password.Password}', '{Cartrige.Text}', ({pc}), Comment = '{Comment.Text}')");
                         sqlcc.Loging(CurrentUser, "Создание", "Орг.техника", InvNum.Text, "");
                     }
                     // Если редактирование
                     else
                     {
-                        sqlcc.ReqNonRef($"UPDATE OrgTech SET Type = '{Type.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', Name = '{OTName.Text}', IP = '{ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text}', Login = '{Login.Password}', Password = '{Password.Password}', Сartridge_Model = '{Cartrige.Text}', PC = ({pc}) Where InvNum LIKE '{InvNum.Text}'");
+                        sqlcc.ReqNonRef($"UPDATE OrgTech SET InvNum = '{InvNum.Text}', Type = '{Type.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', Name = '{OTName.Text}', IP = '{ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text}', Login = '{Login.Password}', Password = '{Password.Password}', Сartridge_Model = '{Cartrige.Text}', PC = ({pc}), Comment = '{Comment.Text}' Where InvNum LIKE '{InvNum.Text}'");
                         sqlcc.Loging(CurrentUser, "Редактирование", "Орг.техника", InvNum.Text, "");
                     }
                     DialogResult = true; Close();
@@ -299,7 +292,6 @@ namespace MigApp.CRWindows
             {
                 try
                 {
-                    InvNum.IsReadOnly = true;
                     Title = "Оргтехника (Редактирование)";
                     InvNum.Text = Invnum;
                     table = sqlcc.DataGridUpdate("*", "OrgTech_View", $"WHERE [Инвентарный номер] Like '{Invnum}'");
@@ -327,6 +319,7 @@ namespace MigApp.CRWindows
                     {
                         PC.SelectedValue = pc;
                     }
+                    Comment.Text = row["Комментарий"].ToString();
                 }
                 catch
                 {
@@ -338,7 +331,6 @@ namespace MigApp.CRWindows
                 try
                 {
                     LockAll();
-                    InvNum.IsReadOnly = true;
                     Title = "Оргтехника (Архив)";
                     InvNum.Text = Invnum;
                     table = sqlcc.DataGridUpdate("*", "OrgTech_Deleted", $"WHERE [Инвентарный номер] Like '{Invnum}'");
@@ -366,6 +358,7 @@ namespace MigApp.CRWindows
                     {
                         PC.SelectedValue = pc;
                     }
+                    Comment.Text = row["Комментарий"].ToString() ;
                 }
                 catch
                 {
@@ -384,6 +377,7 @@ namespace MigApp.CRWindows
 
         private void LockAll()
         {
+            InvNum.IsReadOnly = true;
             Type.IsEnabled = false;
             Model.IsReadOnly = true;
             SeriaNum.IsReadOnly = true;
@@ -397,6 +391,7 @@ namespace MigApp.CRWindows
             Cartrige.IsReadOnly = true;
             User.IsEnabled = false; 
             PC.IsEnabled = false;
+            Comment.IsReadOnly = true;
         }
 
         private void CreateNewEmployee(object sender, RoutedEventArgs e)
@@ -415,6 +410,13 @@ namespace MigApp.CRWindows
             {
                 PC.IsEnabled = false;
             }
+        }
+
+        private bool InvNumChecker(string invnum)
+        {
+            if (Convert.ToUInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM OrgTech WHERE InvNum LIKE '{invnum}'")) < 1)
+                return true;
+            else return false;
         }
     }
 }
