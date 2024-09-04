@@ -188,7 +188,7 @@ namespace MigApp
                         ip["Устройство"] = "Компьютер";
                         ip["Инвентарный номер"] = row["Инвентарный номер"].ToString();
                         ip["Имя"] = row["Имя"].ToString();
-                        ip["Комментарий"] = "";
+                        ip["Комментарий"] = row["Комментарий"];
                     }
                 }
             }
@@ -203,7 +203,37 @@ namespace MigApp
                         ip["Устройство"] = row["Тип"].ToString();
                         ip["Инвентарный номер"] = row["Инвентарный номер"].ToString();
                         ip["Имя"] = row["Модель"].ToString();
-                        ip["Комментарий"] = "";
+                        ip["Комментарий"] = row["Комментарий"];
+                    }
+                }
+            }
+
+            DataTable Routers = DataGridUpdate("*", "Routers_View", "Where LEN(IP) > 0");
+            foreach (DataRow row in Routers.Rows)
+            {
+                foreach (DataRow ip in result.Rows)
+                {
+                    if (row["IP"].ToString() == ip["IP"].ToString())
+                    {
+                        ip["Устройство"] = "Роутер";
+                        ip["Инвентарный номер"] = row["Инвентарный номер"].ToString();
+                        ip["Имя"] = row["Модель"].ToString();
+                        ip["Комментарий"] = row["Комментарий"];
+                    }
+                }
+            }
+
+            DataTable Switches = DataGridUpdate("*", "Switches_View", "Where LEN(IP) > 0");
+            foreach (DataRow row in Switches.Rows)
+            {
+                foreach (DataRow ip in result.Rows)
+                {
+                    if (row["IP"].ToString() == ip["IP"].ToString())
+                    {
+                        ip["Устройство"] = "Свитч";
+                        ip["Инвентарный номер"] = row["Инвентарный номер"].ToString();
+                        ip["Имя"] = row["Модель"].ToString();
+                        ip["Комментарий"] = row["Комментарий"];
                     }
                 }
             }

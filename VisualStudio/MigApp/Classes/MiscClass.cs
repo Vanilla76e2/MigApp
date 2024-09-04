@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Reflection;
+using System.Runtime.ConstrainedExecution;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,7 +18,10 @@ namespace MigApp
 {
     class MiscClass
     {
+        HttpClient hc = new HttpClient();
+        WebClient wc = new WebClient();
         string curver = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
+        string ver, prerel, url = null;
 
         public string Splitter(string txt)
         {
@@ -175,17 +183,76 @@ namespace MigApp
             }
         }
 
-        public void CheckVersion()
+        public async void CheckVersion()
         {
             if (InternetChecker())
             {
-                //string readver = WebClient.DownloadString("");
+                // Получение API
+                hc.BaseAddress = new Uri("https://api.github.com/repos/Vanilla76e2/MigApp/releases");
+                hc.DefaultRequestHeaders.Add("User-Agent", "MigApp");
+                HttpResponseMessage response = await hc.GetAsync("https://api.github.com/repos/Vanilla76e2/MigApp/releases");
+                string json = await response.Content.ReadAsStringAsync();
+
+                try
+                {
+                    // Парсинг
+                    string[] strings = json.Split(',');
+                    foreach (string s in strings)
+                    {
+                        if (s.IndexOf("tag_name") != -1)
+                        {
+                            string[] temp = s.Split(':');
+                            ver = temp[1].Substring(2, 5);
+                        }
+                        else if (s.IndexOf("prerelease") != -1)
+                        {
+                            string[] temp = s.Split(':');
+                            prerel = temp[1].Trim();
+                        }
+                        else if (s.IndexOf("browser_download_url") != -1 && prerel == "false")
+                        {
+                            string[] temp = s.Split(':');
+                            string temp2 = temp[1] + ":" + temp[2];
+                            url = temp2.Substring(temp2.IndexOf("https"), temp2.IndexOf(".msi") + 3);
+                        }
+                        if (ver != null && prerel != null && url != null)
+                            break;
+                    }
+                    ver = ver.Replace(".","");
+                    curver = curver.Replace(".", "");
+                    if (Convert.ToUInt32(curver) < Convert.ToInt32(ver))
+                    {
+                        if (MessageBox.Show("Доступна новая версия. Обновить?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                        {
+                            string tmp = Path.GetTempPath() + "MigAppInstaller.msi";
+                            Uri uri = new Uri(url);
+                            wc.DownloadFile(uri, tmp);
+                            Installer(tmp);
+                        }
+                    }
+                }
+                catch 
+                {
+                    Console.WriteLine(ver);
+                    Console.WriteLine(prerel);
+                    Console.WriteLine(url);
+                    MessageBox.Show("Ошибка при попытке обновления", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             else
             {
                 MessageBox.Show("Нет доступа к сети", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-            
+
+        private void Installer(string filepath)
+        {
+            Process p = new Process();
+            p.StartInfo.FileName = "msiexec";
+            p.StartInfo.Arguments = $"/i {filepath}";
+            p.Start();
+            Application.Current.Shutdown();
+        }
+
     }
 }

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\MigApp\MigApp\obj\Release\
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Release\
 MigApp
 none
 false
 TRACE
-D:\MigApp\MigApp\App.xaml
-14-1974772731
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\App.xaml
+151297146157
 
-20-704967660
-2392804764
-CRWindows\AdminPanel\RoleWindow.xaml;CRWindows\AdminPanel\UsersWindow.xaml;CRWindows\EmployeesWindow.xaml;CRWindows\MonitorWindow.xaml;CRWindows\NotebookWindow.xaml;CRWindows\OrgTechWindow.xaml;CRWindows\PCWindow.xaml;CRWindows\RoutersWindow.xaml;CRWindows\TabletsWindow.xaml;LoginWindow.xaml;MainWindow.xaml;Resources\Them1.xaml;SearchWindow.xaml;SettingsWin.xaml;
+21-1759398940
+23295183704
+CRWindows\AdminPanel\RoleWindow.xaml;CRWindows\AdminPanel\UsersWindow.xaml;CRWindows\EmployeesWindow.xaml;CRWindows\MonitorWindow.xaml;CRWindows\NotebookWindow.xaml;CRWindows\OrgTechWindow.xaml;CRWindows\PCWindow.xaml;CRWindows\RoutersWindow.xaml;CRWindows\SwitchesWindow.xaml;CRWindows\TabletsWindow.xaml;LoginWindow.xaml;MainWindow.xaml;Resources\Them1.xaml;SearchWindow.xaml;SettingsWin.xaml;
 
 False
 

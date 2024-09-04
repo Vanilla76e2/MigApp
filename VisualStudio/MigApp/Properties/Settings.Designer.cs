@@ -12,7 +12,7 @@ namespace MigApp.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.11.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -50,144 +50,144 @@ namespace MigApp.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Params0 {
+        public string ParamsEmp {
             get {
-                return ((string)(this["Params0"]));
+                return ((string)(this["ParamsEmp"]));
             }
             set {
-                this["Params0"] = value;
+                this["ParamsEmp"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Params1 {
+        public string ParamsPC {
             get {
-                return ((string)(this["Params1"]));
+                return ((string)(this["ParamsPC"]));
             }
             set {
-                this["Params1"] = value;
+                this["ParamsPC"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Params2 {
+        public string ParamsNB {
             get {
-                return ((string)(this["Params2"]));
+                return ((string)(this["ParamsNB"]));
             }
             set {
-                this["Params2"] = value;
+                this["ParamsNB"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Params3 {
+        public string ParamsTab {
             get {
-                return ((string)(this["Params3"]));
+                return ((string)(this["ParamsTab"]));
             }
             set {
-                this["Params3"] = value;
+                this["ParamsTab"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Params4 {
+        public string ParamsOT {
             get {
-                return ((string)(this["Params4"]));
+                return ((string)(this["ParamsOT"]));
             }
             set {
-                this["Params4"] = value;
+                this["ParamsOT"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Params5 {
+        public string ParamsMon {
             get {
-                return ((string)(this["Params5"]));
+                return ((string)(this["ParamsMon"]));
             }
             set {
-                this["Params5"] = value;
+                this["ParamsMon"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string com0 {
+        public string comEmp {
             get {
-                return ((string)(this["com0"]));
+                return ((string)(this["comEmp"]));
             }
             set {
-                this["com0"] = value;
+                this["comEmp"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string com1 {
+        public string comPC {
             get {
-                return ((string)(this["com1"]));
+                return ((string)(this["comPC"]));
             }
             set {
-                this["com1"] = value;
+                this["comPC"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string com2 {
+        public string comNB {
             get {
-                return ((string)(this["com2"]));
+                return ((string)(this["comNB"]));
             }
             set {
-                this["com2"] = value;
+                this["comNB"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string com3 {
+        public string comTab {
             get {
-                return ((string)(this["com3"]));
+                return ((string)(this["comTab"]));
             }
             set {
-                this["com3"] = value;
+                this["comTab"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string com4 {
+        public string comOT {
             get {
-                return ((string)(this["com4"]));
+                return ((string)(this["comOT"]));
             }
             set {
-                this["com4"] = value;
+                this["comOT"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string com5 {
+        public string comMon {
             get {
-                return ((string)(this["com5"]));
+                return ((string)(this["comMon"]));
             }
             set {
-                this["com5"] = value;
+                this["comMon"] = value;
             }
         }
         
@@ -230,264 +230,264 @@ namespace MigApp.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Params6 {
+        public string ParamsUsers {
             get {
-                return ((string)(this["Params6"]));
+                return ((string)(this["ParamsUsers"]));
             }
             set {
-                this["Params6"] = value;
+                this["ParamsUsers"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Params7 {
+        public string ParamsLogs {
             get {
-                return ((string)(this["Params7"]));
+                return ((string)(this["ParamsLogs"]));
             }
             set {
-                this["Params7"] = value;
+                this["ParamsLogs"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string com6 {
+        public string comUsers {
             get {
-                return ((string)(this["com6"]));
+                return ((string)(this["comUsers"]));
             }
             set {
-                this["com6"] = value;
+                this["comUsers"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string com7 {
+        public string comLogs {
             get {
-                return ((string)(this["com7"]));
+                return ((string)(this["comLogs"]));
             }
             set {
-                this["com7"] = value;
+                this["comLogs"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Params8 {
+        public string ParamsEmpDel {
             get {
-                return ((string)(this["Params8"]));
+                return ((string)(this["ParamsEmpDel"]));
             }
             set {
-                this["Params8"] = value;
+                this["ParamsEmpDel"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Params9 {
+        public string ParamsPCDel {
             get {
-                return ((string)(this["Params9"]));
+                return ((string)(this["ParamsPCDel"]));
             }
             set {
-                this["Params9"] = value;
+                this["ParamsPCDel"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Params10 {
+        public string ParamsNBDel {
             get {
-                return ((string)(this["Params10"]));
+                return ((string)(this["ParamsNBDel"]));
             }
             set {
-                this["Params10"] = value;
+                this["ParamsNBDel"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Params11 {
+        public string ParamsTabDel {
             get {
-                return ((string)(this["Params11"]));
+                return ((string)(this["ParamsTabDel"]));
             }
             set {
-                this["Params11"] = value;
+                this["ParamsTabDel"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Params12 {
+        public string ParamsOTDel {
             get {
-                return ((string)(this["Params12"]));
+                return ((string)(this["ParamsOTDel"]));
             }
             set {
-                this["Params12"] = value;
+                this["ParamsOTDel"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Params13 {
+        public string ParamsMonDel {
             get {
-                return ((string)(this["Params13"]));
+                return ((string)(this["ParamsMonDel"]));
             }
             set {
-                this["Params13"] = value;
+                this["ParamsMonDel"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string com8 {
+        public string comEmpDel {
             get {
-                return ((string)(this["com8"]));
+                return ((string)(this["comEmpDel"]));
             }
             set {
-                this["com8"] = value;
+                this["comEmpDel"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string com9 {
+        public string comPCDel {
             get {
-                return ((string)(this["com9"]));
+                return ((string)(this["comPCDel"]));
             }
             set {
-                this["com9"] = value;
+                this["comPCDel"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string com10 {
+        public string comNBDel {
             get {
-                return ((string)(this["com10"]));
+                return ((string)(this["comNBDel"]));
             }
             set {
-                this["com10"] = value;
+                this["comNBDel"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string com11 {
+        public string comTabDel {
             get {
-                return ((string)(this["com11"]));
+                return ((string)(this["comTabDel"]));
             }
             set {
-                this["com11"] = value;
+                this["comTabDel"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string com12 {
+        public string comOTDel {
             get {
-                return ((string)(this["com12"]));
+                return ((string)(this["comOTDel"]));
             }
             set {
-                this["com12"] = value;
+                this["comOTDel"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string com13 {
+        public string comMonDel {
             get {
-                return ((string)(this["com13"]));
+                return ((string)(this["comMonDel"]));
             }
             set {
-                this["com13"] = value;
+                this["comMonDel"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Params14 {
+        public string ParamsPCRep {
             get {
-                return ((string)(this["Params14"]));
+                return ((string)(this["ParamsPCRep"]));
             }
             set {
-                this["Params14"] = value;
+                this["ParamsPCRep"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Params15 {
+        public string ParamsNBRep {
             get {
-                return ((string)(this["Params15"]));
+                return ((string)(this["ParamsNBRep"]));
             }
             set {
-                this["Params15"] = value;
+                this["ParamsNBRep"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Params16 {
+        public string ParamsTabRep {
             get {
-                return ((string)(this["Params16"]));
+                return ((string)(this["ParamsTabRep"]));
             }
             set {
-                this["Params16"] = value;
+                this["ParamsTabRep"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string com14 {
+        public string comPCRep {
             get {
-                return ((string)(this["com14"]));
+                return ((string)(this["comPCRep"]));
             }
             set {
-                this["com14"] = value;
+                this["comPCRep"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string com15 {
+        public string comNBRep {
             get {
-                return ((string)(this["com15"]));
+                return ((string)(this["comNBRep"]));
             }
             set {
-                this["com15"] = value;
+                this["comNBRep"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string com16 {
+        public string comTabRep {
             get {
-                return ((string)(this["com16"]));
+                return ((string)(this["comTabRep"]));
             }
             set {
-                this["com16"] = value;
+                this["comTabRep"] = value;
             }
         }
         
@@ -518,24 +518,96 @@ namespace MigApp.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string com17 {
+        public string comRout {
             get {
-                return ((string)(this["com17"]));
+                return ((string)(this["comRout"]));
             }
             set {
-                this["com17"] = value;
+                this["comRout"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Params17 {
+        public string ParamsRout {
             get {
-                return ((string)(this["Params17"]));
+                return ((string)(this["ParamsRout"]));
             }
             set {
-                this["Params17"] = value;
+                this["ParamsRout"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string comRoutDel {
+            get {
+                return ((string)(this["comRoutDel"]));
+            }
+            set {
+                this["comRoutDel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ParamsRoutDel {
+            get {
+                return ((string)(this["ParamsRoutDel"]));
+            }
+            set {
+                this["ParamsRoutDel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string comSwitch {
+            get {
+                return ((string)(this["comSwitch"]));
+            }
+            set {
+                this["comSwitch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ParamsSwitch {
+            get {
+                return ((string)(this["ParamsSwitch"]));
+            }
+            set {
+                this["ParamsSwitch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string comSwitchDel {
+            get {
+                return ((string)(this["comSwitchDel"]));
+            }
+            set {
+                this["comSwitchDel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ParamsSwitchDel {
+            get {
+                return ((string)(this["ParamsSwitchDel"]));
+            }
+            set {
+                this["ParamsSwitchDel"] = value;
             }
         }
     }

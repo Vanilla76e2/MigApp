@@ -48,11 +48,7 @@
                     <TextBlock Text="Кабинет" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 0 0" FontSize="18"/>
                     <TextBox Name="Room_Emp" Width="380" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" MaxLength="3" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed" PreviewTextInput="NumOnly" FontSize="16"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                    <TextBlock Text="Дата рождения" Style="{DynamicResource TextBlock_14}" Width="130" Margin="0 0 150 0" FontSize="18"/>
-                    <DatePicker Name="Birthdate_Emp" Width="200" Foreground="White" Language="ru" FontSize="16"/>
-                </StackPanel>
-                
+
             </StackPanel>
             
             <!--ПК-->
@@ -334,6 +330,36 @@
                 </StackPanel>
             </StackPanel>
 
+            <!--Свитчи-->
+            <StackPanel x:Name="SearchPanel_Switch" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <TextBlock Text="Инвентарный номер" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
+                    <TextBox Name="InvNum_Switch" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16" PreviewTextInput="NumOnly"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <TextBlock Text="Имя" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
+                    <TextBox Name="Name_Switch" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <TextBlock Text="Модель" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
+                    <TextBox Name="Model_Switch" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <TextBlock Text="IP" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
+                    <Border Name="IPBorder_Switch" Width="200">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Name="ip1_Switch" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="Rout_IPcheck1" GotFocus="Rout_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="Rout_NextIP1"/>
+                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
+                            <TextBox Name="ip2_Switch" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="Rout_IPcheck2" GotFocus="Rout_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="Rout_NextIP2"/>
+                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
+                            <TextBox Name="ip3_Switch" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="Rout_IPcheck3" GotFocus="Rout_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="Rout_NextIP3"/>
+                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
+                            <TextBox Name="ip4_Switch" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="Rout_IPcheck4" GotFocus="Rout_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="Rout_NextIP4"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+
             <!--Пользователи-->
             <StackPanel x:Name="SearchPanel_Users" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
@@ -445,10 +471,6 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
                     <TextBlock Text="Кабинет" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 0 0" FontSize="18"/>
                     <TextBox Name="Room_Emp_Del" Width="380" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" MaxLength="3" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed" PreviewTextInput="NumOnly" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                    <TextBlock Text="Дата рождения" Style="{DynamicResource TextBlock_14}" Width="130" Margin="0 0 150 0" FontSize="18"/>
-                    <DatePicker Name="Birthdate_Emp_Del" Width="200" Foreground="White" Language="ru" FontSize="16"/>
                 </StackPanel>
 
             </StackPanel>
@@ -683,7 +705,85 @@
             </StackPanel>
             
             <!--Роутеры Архив-->
-            
+            <StackPanel x:Name="SearchPanel_RoutDel" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <TextBlock Text="Инвентарный номер" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
+                    <TextBox Name="InvNum_RoutDel" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16" PreviewTextInput="NumOnly"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <TextBlock Text="Имя" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
+                    <TextBox Name="Name_RoutDel" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <TextBlock Text="Модель" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
+                    <TextBox Name="Model_RoutDel" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <TextBlock Text="Имя сети" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
+                    <TextBox Name="WiFiName_RoutDel" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <TextBlock Text="IP" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
+                    <Border Name="IPBorder_RoutDel" Width="200">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Name="ip1_RoutDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="RoutDel_IPcheck1" GotFocus="RoutDel_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="RoutDel_NextIP1"/>
+                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
+                            <TextBox Name="ip2_RoutDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="RoutDel_IPcheck2" GotFocus="RoutDel_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="RoutDel_NextIP2"/>
+                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
+                            <TextBox Name="ip3_RoutDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="RoutDel_IPcheck3" GotFocus="RoutDel_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="RoutDel_NextIP3"/>
+                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
+                            <TextBox Name="ip4_RoutDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="RoutDel_IPcheck4" GotFocus="RoutDel_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="RoutDel_NextIP4"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <TextBlock Text="DHCP" Style="{DynamicResource TextBlock_14}" Width="150" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
+                    <Border Name="DHCPBorder_RoutDel" Width="250">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Name="dhcp1_RoutDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="RoutDel_DHCPcheck1" GotFocus="RoutDel_DHCPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="RoutDel_NextDHCP1"/>
+                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
+                            <TextBox Name="dhcp2_RoutDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="RoutDel_DHCPcheck2" GotFocus="RoutDel_DHCPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="RoutDel_NextDHCP2"/>
+                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
+                            <TextBox Name="dhcp3_RoutDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="RoutDel_DHCPcheck3" GotFocus="RoutDel_DHCPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="RoutDel_NextDHCP3"/>
+                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
+                            <TextBox Name="dhcp4_RoutDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="RoutDel_DHCPcheck4" GotFocus="RoutDel_DHCPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="RoutDel_NextDHCP4"/>
+                            <TextBlock Width="10" Height="20" Text="—" Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
+                            <TextBox Name="dhcp5_RoutDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="RoutDel_DHCPcheck5" GotFocus="RoutDel_DHCPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="RoutDel_NextDHCP5"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+
+            <!--Свитчи Архив-->
+            <StackPanel x:Name="SearchPanel_SwitchDel" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <TextBlock Text="Инвентарный номер" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
+                    <TextBox Name="InvNum_SwitchDel" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16" PreviewTextInput="NumOnly"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <TextBlock Text="Имя" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
+                    <TextBox Name="Name_SwitchDel" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <TextBlock Text="Модель" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
+                    <TextBox Name="Model_SwitchDel" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <TextBlock Text="IP" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
+                    <Border Name="IPBorder_SwitchDel" Width="200">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Name="ip1_SwitchDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="Rout_IPcheck1" GotFocus="Rout_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="Rout_NextIP1"/>
+                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
+                            <TextBox Name="ip2_SwitchDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="Rout_IPcheck2" GotFocus="Rout_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="Rout_NextIP2"/>
+                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
+                            <TextBox Name="ip3_SwitchDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="Rout_IPcheck3" GotFocus="Rout_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="Rout_NextIP3"/>
+                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
+                            <TextBox Name="ip4_SwitchDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="Rout_IPcheck4" GotFocus="Rout_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="Rout_NextIP4"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+
             <!--Отчёт ПК-->
             <StackPanel x:Name="SearchPanel_PCRep" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
@@ -780,9 +880,7 @@
                     <TextBox Name="TabletName_Report3" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
                 </StackPanel>
             </StackPanel>
-            
-            <!--Отчёт IP-->
-            
+
             <Button Content="Принять" Click="AcceptClick" Margin="20" VerticalAlignment="Bottom" IsDefault="True"/>
         </Grid>
     </Border>

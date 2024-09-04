@@ -53,7 +53,7 @@ namespace MigApp.CRWindows
                     // Если редактирование
                     else
                     {
-                        sqlcc.ReqNonRef($"UPDATE Monitor SET InvNum = '{InvNum.Text}', Firm = '{Firm.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', Diagonal = '{ScreenDiagonal.Text}', Resolution = '{ScreenResolution.Text}', Screen = '{ScreenType.Text}', PC = ({pc}), Comment = '{Comment.Text}' Where InvNum LIKE '{InvNum.Text}'");
+                        sqlcc.ReqNonRef($"UPDATE Monitor SET InvNum = '{InvNum.Text}', Firm = '{Firm.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', Diagonal = '{ScreenDiagonal.Text}', Resolution = '{ScreenResolution.Text}', Screen = '{ScreenType.Text}', PC = ({pc}), Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
                         sqlcc.Loging(CurrentUser, "Редактирование", "Мониторы", InvNum.Text, "");
                     }
                     DialogResult = true; Close();
