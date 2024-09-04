@@ -66,7 +66,7 @@ namespace MigApp.CRWindows
                         if (ip1.Text.Length > 0 && ip2.Text.Length > 0 && ip3.Text.Length > 0 && ip4.Text.Length > 0)
                             ip = ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text;
                         else ip = "...";
-                        sqlcc.ReqNonRef($"UPDATE Computers SET InvNum = '{InvNum.Text}', Name = '{PCName.Text}', IP = '{ip}', [User] = (SELECT ID FROM Employees WHERE FIO LIKE '{User.Text}'), Admin_Login = '{AdminLogin.Password}', Admin_Password = '{AdminPass.Password}', OS = '{OS.Text}', Motherboard = '{Motherboard.Text}', Processor = '{Processor.Text}', RAM = '{RAM.Text}', Drive = '{Drive.Text}', Other = '{Other.Text}', Comment = '{Comment.Text}' Where InvNum LIKE '{InvNum.Text}'");
+                        sqlcc.ReqNonRef($"UPDATE Computers SET InvNum = '{InvNum.Text}', Name = '{PCName.Text}', IP = '{ip}', [User] = (SELECT ID FROM Employees WHERE FIO LIKE '{User.Text}'), Admin_Login = '{AdminLogin.Password}', Admin_Password = '{AdminPass.Password}', OS = '{OS.Text}', Motherboard = '{Motherboard.Text}', Processor = '{Processor.Text}', RAM = '{RAM.Text}', Drive = '{Drive.Text}', Other = '{Other.Text}', Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
                         sqlcc.Loging(CurrentUser, "Редактирование", "Компьютеры", InvNum.Text, "");
                     }
                     DialogResult = true; Close();

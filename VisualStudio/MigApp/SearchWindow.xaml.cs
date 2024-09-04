@@ -22,9 +22,9 @@ namespace MigApp
     {
         SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
         MiscClass mc = new MiscClass();
-        int Mode;
+        string Mode;
 
-        public SearchWindow(int mode)
+        public SearchWindow(string mode)
         {
             InitializeComponent();
             Mode = mode;
@@ -32,34 +32,33 @@ namespace MigApp
         }
 
         // Преднастройка окна поиска
-        private void Setup(int mode)
+        private void Setup(string mode)
         {
             #region Пользовательские таблицы
             // Сотрудники
-            if (mode == 0) 
+            if (mode == "Emp") 
             { 
                 SearchPanel_Emp.Visibility = Visibility.Visible;
                 this.Height = 330;
                 this.Width = 550;
-                if (MigApp.Properties.Settings.Default.Params0 != null)
+                if (MigApp.Properties.Settings.Default.ParamsEmp != null)
                 {
-                    string[] Parametrs = MigApp.Properties.Settings.Default.Params0.Split('|');
+                    string[] Parametrs = MigApp.Properties.Settings.Default.ParamsEmp.Split('|');
                     ID_Emp.Text = Parametrs[0];
                     FIO_Emp.Text = Parametrs[1];
                     Room_Emp.Text = Parametrs[2];
                     Group_Emp.Text = Parametrs[3];
-                    Birthdate_Emp.Text = Parametrs[4];
                 }
             }
 
             // ПК
-            else if (mode == 1)
+            else if (mode == "PC")
             {
                 SearchPanel_PC.Visibility = Visibility.Visible;
                 this.Height = 500;
-                if (MigApp.Properties.Settings.Default.Params1 != null)
+                if (MigApp.Properties.Settings.Default.ParamsPC != null)
                 {
-                    string[] Parametrs = MigApp.Properties.Settings.Default.Params1.Split('|');
+                    string[] Parametrs = MigApp.Properties.Settings.Default.ParamsPC.Split('|');
                     InvNum_PC.Text = Parametrs[0];
                     Name_PC.Text = Parametrs[1];
                     User_PC.Text = Parametrs[2];
@@ -86,13 +85,13 @@ namespace MigApp
             }
 
             // Ноутбуки
-            else if (mode == 2)
+            else if (mode == "NB")
             {
                 SearchPanel_NB.Visibility = Visibility.Visible;
                 this.Height = 550;
-                if (MigApp.Properties.Settings.Default.Params2 != null)
+                if (MigApp.Properties.Settings.Default.ParamsNB != null)
                 {
-                    string[] Parametrs = MigApp.Properties.Settings.Default.Params2.Split('|');
+                    string[] Parametrs = MigApp.Properties.Settings.Default.ParamsNB.Split('|');
                     InvNum_NB.Text = Parametrs[0];
                     Model_NB.Text = Parametrs[1];
                     SeriaNum_NB.Text = Parametrs[2];
@@ -108,13 +107,13 @@ namespace MigApp
             }
 
             // Планшеты
-            else if (mode == 3)
+            else if (mode == "Tab")
             {
                 SearchPanel_Tab.Visibility = Visibility.Visible;
                 this.Height = 450;
-                if (MigApp.Properties.Settings.Default.Params3 != null)
+                if (MigApp.Properties.Settings.Default.ParamsTab != null)
                 {
-                    string[] Parametrs = MigApp.Properties.Settings.Default.Params3.Split('|');
+                    string[] Parametrs = MigApp.Properties.Settings.Default.ParamsTab.Split('|');
                     InvNum_Tab.Text = Parametrs[0];
                     Model_Tab.Text = Parametrs[1];
                     SeriaNum_Tab.Text = Parametrs[2];
@@ -128,14 +127,14 @@ namespace MigApp
             }
 
             // Орг.техника
-            else if (mode == 4)
+            else if (mode == "OT")
             {
                 SearchPanel_OT.Visibility = Visibility.Visible;
                 this.Height = 420;
                 Type_OT.Text = "Не выбрано";
-                if (MigApp.Properties.Settings.Default.Params4 != null)
+                if (MigApp.Properties.Settings.Default.ParamsOT != null)
                 {
-                    string[] Parametrs = MigApp.Properties.Settings.Default.Params4.Split('|');
+                    string[] Parametrs = MigApp.Properties.Settings.Default.ParamsOT.Split('|');
                     if (Parametrs[0].Length > 0 && Parametrs[0] != "Не выбрано")
                         Type_OT.Text = Parametrs[0];
                     else Type_OT.Text = "Не выбрано";
@@ -162,13 +161,13 @@ namespace MigApp
             }
 
             // Мониторы
-            else if (mode == 5)
+            else if (mode == "Mon")
             {
                 SearchPanel_Mon.Visibility = Visibility.Visible;
                 this.Height = 400;
-                if (MigApp.Properties.Settings.Default.Params5 != null)
+                if (MigApp.Properties.Settings.Default.ParamsMon != null)
                 {
-                    string[] Parametrs = MigApp.Properties.Settings.Default.Params5.Split('|');
+                    string[] Parametrs = MigApp.Properties.Settings.Default.ParamsMon.Split('|');
                     InvNum_Mon.Text = Parametrs[0];
                     Firm_Mon.Text = Parametrs[1];
                     Model_Mon.Text = Parametrs[2];
@@ -181,13 +180,13 @@ namespace MigApp
             }
 
             // Роутеры
-            else if (mode == 17)
+            else if (mode == "Rout")
             {
                 SearchPanel_Rout.Visibility = Visibility.Visible;
                 this.Height = 320;
-                if (MigApp.Properties.Settings.Default.Params17 != null)
+                if (MigApp.Properties.Settings.Default.ParamsRout != null)
                 {
-                    string[] Parametrs = MigApp.Properties.Settings.Default.Params17.Split('|');
+                    string[] Parametrs = MigApp.Properties.Settings.Default.ParamsRout.Split('|');
                     InvNum_Rout.Text = Parametrs[0];
                     Name_Rout.Text = Parametrs[1];
                     Model_Rout.Text = Parametrs[2];
@@ -223,19 +222,46 @@ namespace MigApp
                     catch { }
                 }
             }
+
+            // Свитчи
+            else if (mode == "Switch")
+            {
+                SearchPanel_Switch.Visibility = Visibility.Visible;
+                this.Height = 250;
+                if (MigApp.Properties.Settings.Default.ParamsSwitch != null)
+                {
+                    string[] Parametrs = MigApp.Properties.Settings.Default.ParamsSwitch.Split('|');
+                    InvNum_Switch.Text = Parametrs[0];
+                    Name_Switch.Text = Parametrs[1];
+                    Model_Switch.Text = Parametrs[2];
+                    try
+                    {
+                        string[] ip = Parametrs[4].Split('.');
+                        if (ip[0] != "%")
+                            ip1_Switch.Text = ip[0];
+                        if (ip[1] != "%")
+                            ip2_Switch.Text = ip[1];
+                        if (ip[2] != "%")
+                            ip3_Switch.Text = ip[2];
+                        if (ip[3] != "%")
+                            ip4_Switch.Text = ip[3];
+                    }
+                    catch { }
+                }
+            }
             #endregion
 
             #region Админпанель
             // Пользователи
-            else if (mode == 6)
+            else if (mode == "Users")
             {
                 SearchPanel_Users.Visibility = Visibility.Visible;
                 this.Height = 350;
-                if (MigApp.Properties.Settings.Default.Params6 != null)
+                if (MigApp.Properties.Settings.Default.ParamsUsers != null)
                 {
                     try
                     {
-                        string[] Parametrs = MigApp.Properties.Settings.Default.Params6.Split('|');
+                        string[] Parametrs = MigApp.Properties.Settings.Default.ParamsUsers.Split('|');
                         ID_User.Text = Parametrs[0];
                         Login_User.Text = Parametrs[1];
                         Employee_User.Text = Parametrs[2];
@@ -248,15 +274,15 @@ namespace MigApp
             }
 
             // Логи
-            else if (mode == 7)
+            else if (mode == "Logs")
             {
                 SearchPanel_Logs.Visibility = Visibility.Visible;
                 this.Height = 500;
-                if (MigApp.Properties.Settings.Default.Params7 != null)
+                if (MigApp.Properties.Settings.Default.ParamsLogs != null)
                 {
                     try
                     {
-                        string[] Parametrs = MigApp.Properties.Settings.Default.Params7.Split('|');
+                        string[] Parametrs = MigApp.Properties.Settings.Default.ParamsLogs.Split('|');
                         ID_Logs.Text = Parametrs[0];
                         Date_LogsStart.Text = Parametrs[1];
                         Date_LogsEnd.Text = Parametrs[2];
@@ -276,30 +302,29 @@ namespace MigApp
 
             #region Архив
             // Сотрудники
-            if (mode == 8)
+            else if (mode == "EmpDel")
             {
                 SearchPanel_EmpDel.Visibility = Visibility.Visible;
                 this.Height = 330;
                 this.Width = 550;
-                if (MigApp.Properties.Settings.Default.Params8 != null)
+                if (MigApp.Properties.Settings.Default.ParamsEmpDel != null)
                 {
-                    string[] Parametrs = MigApp.Properties.Settings.Default.Params8.Split('|');
+                    string[] Parametrs = MigApp.Properties.Settings.Default.ParamsEmpDel.Split('|');
                     ID_Emp_Del.Text = Parametrs[0];
                     FIO_Emp_Del.Text = Parametrs[1];
                     Room_Emp_Del.Text = Parametrs[2];
                     Group_Emp_Del.Text = Parametrs[3];
-                    Birthdate_Emp_Del.Text = Parametrs[4];
                 }
             }
 
             // ПК
-            else if (mode == 9)
+            else if (mode == "PCDel")
             {
                 SearchPanel_PCDel.Visibility = Visibility.Visible;
                 this.Height = 500;
-                if (MigApp.Properties.Settings.Default.Params9 != null)
+                if (MigApp.Properties.Settings.Default.ParamsPCDel != null)
                 {
-                    string[] Parametrs = MigApp.Properties.Settings.Default.Params9.Split('|');
+                    string[] Parametrs = MigApp.Properties.Settings.Default.ParamsPCDel.Split('|');
                     InvNum_PC_Del.Text = Parametrs[0];
                     Name_PC_Del.Text = Parametrs[1];
                     User_PC_Del.Text = Parametrs[2];
@@ -326,13 +351,13 @@ namespace MigApp
             }
 
             // Ноутбуки
-            else if (mode == 10)
+            else if (mode == "NBDel")
             {
                 SearchPanel_NBDel.Visibility = Visibility.Visible;
                 this.Height = 550;
-                if (MigApp.Properties.Settings.Default.Params10 != null)
+                if (MigApp.Properties.Settings.Default.ParamsNBDel != null)
                 {
-                    string[] Parametrs = MigApp.Properties.Settings.Default.Params10.Split('|');
+                    string[] Parametrs = MigApp.Properties.Settings.Default.ParamsNBDel.Split('|');
                     InvNum_NB_Del.Text = Parametrs[0];
                     Model_NB_Del.Text = Parametrs[1];
                     SeriaNum_NB_Del.Text = Parametrs[2];
@@ -348,13 +373,13 @@ namespace MigApp
             }
 
             // Планшеты
-            else if (mode == 11)
+            else if (mode == "TabDel")
             {
                 SearchPanel_TabDel.Visibility = Visibility.Visible;
                 this.Height = 450;
-                if (MigApp.Properties.Settings.Default.Params11 != null)
+                if (MigApp.Properties.Settings.Default.ParamsTabDel != null)
                 {
-                    string[] Parametrs = MigApp.Properties.Settings.Default.Params11.Split('|');
+                    string[] Parametrs = MigApp.Properties.Settings.Default.ParamsTabDel.Split('|');
                     InvNum_Tab_Del.Text = Parametrs[0];
                     Model_Tab_Del.Text = Parametrs[1];
                     SeriaNum_Tab_Del.Text = Parametrs[2];
@@ -368,14 +393,14 @@ namespace MigApp
             }
 
             // Орг.техника
-            else if (mode == 12)
+            else if (mode == "OTDel")
             {
                 SearchPanel_OTDel.Visibility = Visibility.Visible;
                 this.Height = 400;
                 Type_OT_Del.Text = "Не выбрано";
-                if (MigApp.Properties.Settings.Default.Params12 != null)
+                if (MigApp.Properties.Settings.Default.ParamsOTDel != null)
                 {
-                    string[] Parametrs = MigApp.Properties.Settings.Default.Params12.Split('|');
+                    string[] Parametrs = MigApp.Properties.Settings.Default.ParamsOTDel.Split('|');
                     if (Parametrs[0].Length > 0 && Parametrs[0] != "Не выбрано")
                         Type_OT_Del.Text = Parametrs[0];
                     else Type_OT_Del.Text = "Не выбрано";
@@ -402,13 +427,13 @@ namespace MigApp
             }
 
             // Мониторы
-            else if (mode == 13)
+            else if (mode == "MonDel")
             {
                 SearchPanel_MonDel.Visibility = Visibility.Visible;
                 this.Height = 400;
-                if (MigApp.Properties.Settings.Default.Params13 != null)
+                if (MigApp.Properties.Settings.Default.ParamsMonDel != null)
                 {
-                    string[] Parametrs = MigApp.Properties.Settings.Default.Params13.Split('|');
+                    string[] Parametrs = MigApp.Properties.Settings.Default.ParamsMonDel.Split('|');
                     InvNum_Mon_Del.Text = Parametrs[0];
                     Firm_Mon_Del.Text = Parametrs[1];
                     Model_Mon_Del.Text = Parametrs[2];
@@ -419,20 +444,91 @@ namespace MigApp
                     User_Mon_Del.Text = Parametrs[7];
                 }
             }
+
+            // Роутеры
+            else if (mode == "RoutDel")
+            {
+                SearchPanel_RoutDel.Visibility = Visibility.Visible;
+                this.Height = 320;
+                if (MigApp.Properties.Settings.Default.ParamsRoutDel != null)
+                {
+                    string[] Parametrs = MigApp.Properties.Settings.Default.ParamsRoutDel.Split('|');
+                    InvNum_RoutDel.Text = Parametrs[0];
+                    Name_RoutDel.Text = Parametrs[1];
+                    Model_RoutDel.Text = Parametrs[2];
+                    WiFiName_RoutDel.Text = Parametrs[3];
+                    try
+                    {
+                        string[] ip = Parametrs[4].Split('.');
+                        if (ip[0] != "%")
+                            ip1_RoutDel.Text = ip[0];
+                        if (ip[1] != "%")
+                            ip2_RoutDel.Text = ip[1];
+                        if (ip[2] != "%")
+                            ip3_RoutDel.Text = ip[2];
+                        if (ip[3] != "%")
+                            ip4_RoutDel.Text = ip[3];
+                    }
+                    catch { }
+                    try
+                    {
+                        string[] dhcp = Parametrs[5].Split('.');
+                        if (dhcp[0] != "%")
+                            dhcp1_RoutDel.Text = dhcp[0];
+                        if (dhcp[1] != "%")
+                            dhcp2_RoutDel.Text = dhcp[1];
+                        if (dhcp[2] != "%")
+                            dhcp3_RoutDel.Text = dhcp[2];
+                        string[] dhcp45 = dhcp[3].Split('-');
+                        if (dhcp[3] != "%")
+                            dhcp4_RoutDel.Text = dhcp45[0];
+                        if (dhcp[4] != "%")
+                            dhcp5_RoutDel.Text = dhcp45[1];
+                    }
+                    catch { }
+                }
+            }
+
+            // Свитчи
+            else if (mode == "SwitchDel")
+            {
+                SearchPanel_SwitchDel.Visibility = Visibility.Visible;
+                this.Height = 250;
+                if (MigApp.Properties.Settings.Default.ParamsSwitchDel != null)
+                {
+                    string[] Parametrs = MigApp.Properties.Settings.Default.ParamsSwitchDel.Split('|');
+                    InvNum_SwitchDel.Text = Parametrs[0];
+                    Name_SwitchDel.Text = Parametrs[1];
+                    Model_SwitchDel.Text = Parametrs[2];
+                    try
+                    {
+                        string[] ip = Parametrs[4].Split('.');
+                        if (ip[0] != "%")
+                            ip1_SwitchDel.Text = ip[0];
+                        if (ip[1] != "%")
+                            ip2_SwitchDel.Text = ip[1];
+                        if (ip[2] != "%")
+                            ip3_SwitchDel.Text = ip[2];
+                        if (ip[3] != "%")
+                            ip4_SwitchDel.Text = ip[3];
+                    }
+                    catch { }
+                }
+            }
             #endregion
 
             #region Отчёты
             // ПК
-            else if (Mode == 14)
+            else if (Mode == "PCRep")
             {
                 SearchPanel_PCRep.Visibility = Visibility.Visible;
                 this.Height = 500;
                 OTType_Report1.Text = "Не выбрано";
-                if (MigApp.Properties.Settings.Default.Params14 != null)
+                if (MigApp.Properties.Settings.Default.ParamsPCRep != null)
                 {
                     try
                     {
-                        string[] Parametrs = MigApp.Properties.Settings.Default.Params14.Split('|');
+                        string[] Parametrs = MigApp.Properties.Settings.Default.ParamsPCRep.Split('|');
                         Employee_Report1.Text = Parametrs[0];
                         Group_Report1.Text = Parametrs[1];
                         Room_Report1.Text = Parametrs[2];
@@ -451,15 +547,15 @@ namespace MigApp
             }
 
             // Ноутбуки
-            else if (Mode == 15)
+            else if (Mode == "NBRep")
             {
                 SearchPanel_NBRep.Visibility = Visibility.Visible;
                 this.Height = 300;
-                if (MigApp.Properties.Settings.Default.Params15 != null)
+                if (MigApp.Properties.Settings.Default.ParamsNBRep != null)
                 {
                     try
                     {
-                        string[] Parametrs = MigApp.Properties.Settings.Default.Params15.Split('|');
+                        string[] Parametrs = MigApp.Properties.Settings.Default.ParamsNBRep.Split('|');
                         Employee_Report2.Text = Parametrs[0];
                         Group_Report2.Text = Parametrs[1];
                         Room_Report2.Text = Parametrs[2];
@@ -471,15 +567,15 @@ namespace MigApp
             }
 
             // Планшеты
-            else if (Mode == 16)
+            else if (Mode == "TabRep")
             {
                 SearchPanel_TabRep.Visibility = Visibility.Visible;
                 this.Height = 300;
-                if (MigApp.Properties.Settings.Default.Params16 != null)
+                if (MigApp.Properties.Settings.Default.ParamsTabRep != null)
                 {
                     try
                     {
-                        string[] Parametrs = MigApp.Properties.Settings.Default.Params16.Split('|');
+                        string[] Parametrs = MigApp.Properties.Settings.Default.ParamsTabRep.Split('|');
                         Employee_Report3.Text = Parametrs[0];
                         Group_Report3.Text = Parametrs[1];
                         Room_Report3.Text = Parametrs[2];
@@ -499,7 +595,7 @@ namespace MigApp
 
             #region Пользовательские таблицы
             // Сотрудники
-            if (Mode == 0)
+            if (Mode == "Emp")
             {
                 if (ID_Emp.Text.Length > 0)
                     command += $"ID Like '{ID_Emp.Text}' AND ";
@@ -509,13 +605,11 @@ namespace MigApp
                     command += $"[Кабинет] Like '{Room_Emp.Text}' AND ";
                 if (Group_Emp.Text.Length > 0)
                     command += $"[Отдел] Like '%{Group_Emp.Text}%' AND ";
-                if (Birthdate_Emp.Text.Length > 0)
-                    command += $"[Дата рождения] Like '%{Birthdate_Emp.Text}%' AND ";
                 command += "ID NOT Like 'NULL'";
                 if (command != "Where ID NOT Like 'NULL'")
                 {
-                    MigApp.Properties.Settings.Default.Params0 = $"{ID_Emp.Text}|{FIO_Emp.Text}|{Room_Emp.Text}|{Group_Emp.Text}|{Birthdate_Emp.Text}";
-                    MigApp.Properties.Settings.Default.com0 = command;
+                    MigApp.Properties.Settings.Default.ParamsEmp = $"{ID_Emp.Text}|{FIO_Emp.Text}|{Room_Emp.Text}|{Group_Emp.Text}";
+                    MigApp.Properties.Settings.Default.comEmp = command;
                     MigApp.Properties.Settings.Default.Save();
                     DialogResult = true;
                 }
@@ -523,7 +617,7 @@ namespace MigApp
             }
 
             //ПК
-            else if (Mode == 1)
+            else if (Mode == "PC")
             {
                 if (InvNum_PC.Text.Length > 0)
                     command += $"[Инвентарный номер] Like '{InvNum_PC.Text}' AND ";
@@ -552,8 +646,8 @@ namespace MigApp
                     if (ip1_PC.Text.Length > 0 || ip2_PC.Text.Length > 0 || ip3_PC.Text.Length > 0 || ip4_PC.Text.Length > 0)
                         Parametrs += $"|{mc.IPSearcher(ip1_PC.Text, ip2_PC.Text, ip3_PC.Text, ip4_PC.Text)}";
                     else Parametrs += "|";
-                    MigApp.Properties.Settings.Default.Params1 = Parametrs;
-                    MigApp.Properties.Settings.Default.com1 = command;
+                    MigApp.Properties.Settings.Default.ParamsPC = Parametrs;
+                    MigApp.Properties.Settings.Default.comPC = command;
                     MigApp.Properties.Settings.Default.Save();
                     DialogResult = true;
                 }
@@ -562,7 +656,7 @@ namespace MigApp
             }
 
             // Ноутбуки
-            else if (Mode == 2)
+            else if (Mode == "NB")
             {
                 if (InvNum_NB.Text.Length > 0)
                     command += $"[Инвентарный номер] Like '{InvNum_NB.Text}' AND ";
@@ -594,8 +688,8 @@ namespace MigApp
                         Param += $"|{ScreenResolution_NB.Text.Replace("_", "")}";
                     else Param += "|";
                     Param += $"|{OS_NB.Text}|{Processor_NB.Text}|{RAM_NB.Text}|{Drive_NB.Text}|{Other_NB.Text}";
-                    MigApp.Properties.Settings.Default.Params2 = Param;
-                    MigApp.Properties.Settings.Default.com2 = command;
+                    MigApp.Properties.Settings.Default.ParamsNB = Param;
+                    MigApp.Properties.Settings.Default.comNB = command;
                     MigApp.Properties.Settings.Default.Save();
                     DialogResult = true;
                 }
@@ -603,7 +697,7 @@ namespace MigApp
             }
 
             // Планшеты
-            else if (Mode == 3)
+            else if (Mode == "Tab")
             {
                 if (InvNum_Tab.Text.Length > 0)
                     command += $"[Инвентарный номер] Like '{InvNum_Tab.Text}' AND ";
@@ -626,8 +720,8 @@ namespace MigApp
                 command += $"[Инвентарный номер] NOT Like 'Placeholder'";
                 if (command != "Where [Инвентарный номер] NOT Like 'Placeholder'")
                 {
-                    MigApp.Properties.Settings.Default.Params3 = $"{InvNum_Tab.Text}|{Model_Tab.Text}|{SeriaNum_Tab.Text}|{User_Tab.Text}|{ScreenDiagonal_Tab.Text}|{Processor_Tab.Text}|{RAM_Tab.Text}|{Drive_Tab.Text}|{Other_Tab.Text}";
-                    MigApp.Properties.Settings.Default.com3 = command;
+                    MigApp.Properties.Settings.Default.ParamsTab = $"{InvNum_Tab.Text}|{Model_Tab.Text}|{SeriaNum_Tab.Text}|{User_Tab.Text}|{ScreenDiagonal_Tab.Text}|{Processor_Tab.Text}|{RAM_Tab.Text}|{Drive_Tab.Text}|{Other_Tab.Text}";
+                    MigApp.Properties.Settings.Default.comTab = command;
                     MigApp.Properties.Settings.Default.Save();
                     DialogResult = true;
                 }
@@ -635,7 +729,7 @@ namespace MigApp
             }
 
             // Орг.техника
-            else if (Mode == 4)
+            else if (Mode == "OT")
             {
                 if (InvNum_OT.Text.Length > 0)
                     command += $"[Инвентарный номер] Like '{InvNum_OT.Text}' AND ";
@@ -664,8 +758,8 @@ namespace MigApp
                     if (ip1_OT.Text.Length > 0 || ip2_OT.Text.Length > 0 || ip3_OT.Text.Length > 0 || ip4_OT.Text.Length > 0)
                         Parametrs += $"|{mc.IPSearcher(ip1_OT.Text, ip2_OT.Text, ip3_OT.Text, ip4_OT.Text)}";
                     else Parametrs += "|";
-                    MigApp.Properties.Settings.Default.Params4 = Parametrs;
-                    MigApp.Properties.Settings.Default.com4 = command;
+                    MigApp.Properties.Settings.Default.ParamsOT = Parametrs;
+                    MigApp.Properties.Settings.Default.comOT = command;
                     MigApp.Properties.Settings.Default.Save();
                     DialogResult = true;
                 }
@@ -673,7 +767,7 @@ namespace MigApp
             }
 
             // Мониторы
-            else if (Mode == 5)
+            else if (Mode == "Mon")
             {
                 if (InvNum_Mon.Text.Length > 0)
                     command += $"[Инвентарный номер] Like '{InvNum_Mon.Text}' AND ";
@@ -699,8 +793,8 @@ namespace MigApp
                         Param += $"|{ScreenResolution_Mon.Text.Replace("_", "%")}";
                     else Param += "|";
                     Param += $"|{ScreenType_Mon.Text}|{User_Mon.Text}";
-                    MigApp.Properties.Settings.Default.Params5 = Param;
-                    MigApp.Properties.Settings.Default.com5 = command;
+                    MigApp.Properties.Settings.Default.ParamsMon = Param;
+                    MigApp.Properties.Settings.Default.comMon = command;
                     MigApp.Properties.Settings.Default.Save();
                     DialogResult = true;
                 }
@@ -708,7 +802,7 @@ namespace MigApp
             }
 
             // Роутеры
-            else if (Mode == 17)
+            else if (Mode == "Rout")
             {
                 if (InvNum_Rout.Text.Length > 0)
                     command += $"[Инвентарный номер] LIKE '{InvNum_Rout.Text}' AND ";
@@ -732,8 +826,34 @@ namespace MigApp
                     if (dhcp1_Rout.Text.Length > 0 || dhcp2_Rout.Text.Length > 0 || dhcp3_Rout.Text.Length > 0 || dhcp4_Rout.Text.Length > 0 || dhcp5_Rout.Text.Length > 0)
                         Param += $"{mc.DHCPSearcher(dhcp1_Rout.Text, dhcp2_Rout.Text, dhcp3_Rout.Text, dhcp4_Rout.Text, dhcp5_Rout.Text)}";
 
-                    MigApp.Properties.Settings.Default.Params17 = Param;
-                    MigApp.Properties.Settings.Default.com17 = command;
+                    MigApp.Properties.Settings.Default.ParamsRout = Param;
+                    MigApp.Properties.Settings.Default.comRout = command;
+                    MigApp.Properties.Settings.Default.Save();
+                    DialogResult = true;
+                }
+                this.Close();
+            }
+
+            // Свитчи
+            else if (Mode == "Switch")
+            {
+                if (InvNum_Switch.Text.Length > 0)
+                    command += $"[Инвентарный номер] LIKE '{InvNum_Switch.Text}' AND ";
+                if (Name_Switch.Text.Length > 0)
+                    command += $"Имя LIKE '{Name_Switch.Text}' AND ";
+                if (Model_Switch.Text.Length > 0)
+                    command += $"Модель LIKE '{Model_Switch.Text}' AND ";
+                if (ip1_Switch.Text.Length > 0 || ip2_Switch.Text.Length > 0 || ip3_Switch.Text.Length > 0 || ip4_Switch.Text.Length > 0)
+                    command += $"IP Like '{mc.IPSearcher(ip1_Switch.Text, ip2_Switch.Text, ip3_Switch.Text, ip4_Switch.Text)}' AND ";
+                command += "[Инвентарный номер] NOT Like 'Placeholder'";
+                if (command != "Where [Инвентарный номер] NOT Like 'Placeholder'")
+                {
+                    string Param = $"{InvNum_Switch.Text}|{Name_Switch.Text}|{Model_Switch.Text}|";
+                    if (ip1_Switch.Text.Length > 0 || ip2_Switch.Text.Length > 0 || ip3_Switch.Text.Length > 0 || ip4_Switch.Text.Length > 0)
+                        Param += $"{mc.IPSearcher(ip1_Switch.Text, ip2_Switch.Text, ip3_Switch.Text, ip4_Switch.Text)}";
+
+                    MigApp.Properties.Settings.Default.ParamsSwitch = Param;
+                    MigApp.Properties.Settings.Default.comSwitch = command;
                     MigApp.Properties.Settings.Default.Save();
                     DialogResult = true;
                 }
@@ -743,7 +863,7 @@ namespace MigApp
 
             #region Админпанель
             // Пользователи
-            else if (Mode == 6)
+            else if (Mode == "Users")
             {
                 if (ID_User.Text.Length > 0)
                     command += $"ID Like '{ID_User.Text}' AND ";
@@ -758,11 +878,11 @@ namespace MigApp
                 command += "ID NOT Like 'NULL'";
                 if (command != "Where ID NOT Like 'NULL'")
                 {
-                    MigApp.Properties.Settings.Default.Params6 = $"{ID_User.Text}|{Login_User.Text}|{Employee_User.Text}|{Role_User.Text}";
+                    MigApp.Properties.Settings.Default.ParamsUsers = $"{ID_User.Text}|{Login_User.Text}|{Employee_User.Text}|{Role_User.Text}";
                     if (NoPassword_User.IsChecked == true)
-                        MigApp.Properties.Settings.Default.Params6 += "|Без пароля";
-                    else MigApp.Properties.Settings.Default.Params6 += "|";
-                    MigApp.Properties.Settings.Default.com6 = command;
+                        MigApp.Properties.Settings.Default.ParamsUsers += "|Без пароля";
+                    else MigApp.Properties.Settings.Default.ParamsUsers += "|";
+                    MigApp.Properties.Settings.Default.comUsers = command;
                     MigApp.Properties.Settings.Default.Save();
                     DialogResult = true;
                 }
@@ -770,7 +890,7 @@ namespace MigApp
             }
 
             // Логи
-            else if (Mode == 7)
+            else if (Mode == "Logs")
             {
                 if (ID_Logs.Text.Length > 0)
                     command += $"ID Like '{ID_Logs.Text}' AND ";
@@ -799,8 +919,8 @@ namespace MigApp
                         param += $"|{Table_Logs.Text}";
                     else param += "|";
                     param += $"|{Row_Logs.Text}";
-                    MigApp.Properties.Settings.Default.Params7 = param;
-                    MigApp.Properties.Settings.Default.com7 = command;
+                    MigApp.Properties.Settings.Default.ParamsLogs = param;
+                    MigApp.Properties.Settings.Default.comLogs = command;
                     MigApp.Properties.Settings.Default.Save();
                     DialogResult = true;
                 }
@@ -809,8 +929,8 @@ namespace MigApp
             #endregion
 
             #region Архив
-            // Сотрудники архив
-            else if (Mode == 8)
+            // Сотрудники Архив
+            else if (Mode == "EmpDel")
             {
                 if (ID_Emp_Del.Text.Length > 0)
                     command += $"ID Like '{ID_Emp_Del.Text}' AND ";
@@ -820,13 +940,11 @@ namespace MigApp
                     command += $"[Кабинет] Like '{Room_Emp_Del.Text}' AND ";
                 if (Group_Emp_Del.Text.Length > 0)
                     command += $"[Отдел] Like '%{Group_Emp_Del.Text}%' AND ";
-                if (Birthdate_Emp_Del.Text.Length > 0)
-                    command += $"[Дата рождения] Like '%{Birthdate_Emp_Del.Text}%' AND ";
                 command += "ID NOT Like 'NULL'";
                 if (command != "Where ID NOT Like 'NULL'")
                 {
-                    MigApp.Properties.Settings.Default.Params8 = $"{ID_Emp_Del.Text}|{FIO_Emp_Del.Text}|{Room_Emp_Del.Text}|{Group_Emp_Del.Text}|{Birthdate_Emp_Del.Text}";
-                    MigApp.Properties.Settings.Default.com8 = command;
+                    MigApp.Properties.Settings.Default.ParamsEmpDel = $"{ID_Emp_Del.Text}|{FIO_Emp_Del.Text}|{Room_Emp_Del.Text}|{Group_Emp_Del.Text}";
+                    MigApp.Properties.Settings.Default.comEmpDel = command;
                     MigApp.Properties.Settings.Default.Save();
                     DialogResult = true;
                 }
@@ -835,7 +953,7 @@ namespace MigApp
             }
                 
             // ПК Архив
-            else if (Mode == 9)
+            else if (Mode == "PCDel")
             {
                 if (InvNum_PC_Del.Text.Length > 0)
                     command += $"[Инвентарный номер] Like '{InvNum_PC_Del.Text}' AND ";
@@ -864,8 +982,8 @@ namespace MigApp
                     if (ip1_PC_Del.Text.Length > 0 || ip2_PC_Del.Text.Length > 0 || ip3_PC_Del.Text.Length > 0 || ip4_PC_Del.Text.Length > 0)
                         Parametrs += $"|{mc.IPSearcher(ip1_PC_Del.Text, ip2_PC_Del.Text, ip3_PC_Del.Text, ip4_PC_Del.Text)}";
                     else command += "|";
-                    MigApp.Properties.Settings.Default.Params9 = Parametrs;
-                    MigApp.Properties.Settings.Default.com9 = command;
+                    MigApp.Properties.Settings.Default.ParamsPCDel = Parametrs;
+                    MigApp.Properties.Settings.Default.comPCDel = command;
                     MigApp.Properties.Settings.Default.Save();
                     DialogResult = true;
                 }
@@ -873,7 +991,7 @@ namespace MigApp
             }
 
             // Ноутбуки Архив
-            else if (Mode == 10)
+            else if (Mode == "NBDel")
             {
                 if (InvNum_NB_Del.Text.Length > 0)
                     command += $"[Инвентарный номер] Like '{InvNum_NB_Del.Text}' AND ";
@@ -905,8 +1023,8 @@ namespace MigApp
                         Param += $"|{ScreenResolution_NB_Del.Text.Replace("_", "%")}";
                     else Param += "|";
                     Param += $"|{OS_NB_Del.Text}|{Processor_NB_Del.Text}|{RAM_NB_Del.Text}|{Drive_NB_Del.Text}|{Other_NB_Del.Text}";
-                    MigApp.Properties.Settings.Default.Params10 = Param;
-                    MigApp.Properties.Settings.Default.com10 = command;
+                    MigApp.Properties.Settings.Default.ParamsNBDel = Param;
+                    MigApp.Properties.Settings.Default.comNBDel = command;
                     MigApp.Properties.Settings.Default.Save();
                     DialogResult = true;
                 }
@@ -914,7 +1032,7 @@ namespace MigApp
             }
 
             // Планшеты Архив
-            else if (Mode == 11)
+            else if (Mode == "TabDel")
             {
                 if (InvNum_Tab_Del.Text.Length > 0)
                     command += $"[Инвентарный номер] Like '{InvNum_Tab_Del.Text}' AND ";
@@ -937,8 +1055,8 @@ namespace MigApp
                 command += $"[Инвентарный номер] NOT Like 'Placeholder'";
                 if (command != "Where [Инвентарный номер] NOT Like 'Placeholder'")
                 {
-                    MigApp.Properties.Settings.Default.Params11 = $"{InvNum_Tab_Del.Text}|{Model_Tab_Del.Text}|{SeriaNum_Tab_Del.Text}|{User_Tab_Del.Text}|{ScreenDiagonal_Tab_Del.Text}|{Processor_Tab_Del.Text}|{RAM_Tab_Del.Text}|{Drive_Tab_Del.Text}|{Other_Tab_Del.Text}";
-                    MigApp.Properties.Settings.Default.com11 = command;
+                    MigApp.Properties.Settings.Default.ParamsTabDel = $"{InvNum_Tab_Del.Text}|{Model_Tab_Del.Text}|{SeriaNum_Tab_Del.Text}|{User_Tab_Del.Text}|{ScreenDiagonal_Tab_Del.Text}|{Processor_Tab_Del.Text}|{RAM_Tab_Del.Text}|{Drive_Tab_Del.Text}|{Other_Tab_Del.Text}";
+                    MigApp.Properties.Settings.Default.comTabDel = command;
                     MigApp.Properties.Settings.Default.Save();
                     DialogResult = true;
                 }
@@ -946,7 +1064,7 @@ namespace MigApp
             }
 
             // Орг.техника Архив
-            else if (Mode == 12)
+            else if (Mode == "OTDel")
             {
                 if (InvNum_OT_Del.Text.Length > 0)
                     command += $"[Инвентарный номер] Like '{InvNum_OT_Del.Text}' AND ";
@@ -975,8 +1093,8 @@ namespace MigApp
                     if (ip1_OT_Del.Text.Length > 0 || ip2_OT_Del.Text.Length > 0 || ip3_OT_Del.Text.Length > 0 || ip4_OT_Del.Text.Length > 0)
                         Params += $"|{mc.IPSearcher(ip1_OT_Del.Text, ip2_OT_Del.Text, ip3_OT_Del.Text, ip4_OT_Del.Text)}";
                     else command += "|";
-                    MigApp.Properties.Settings.Default.Params12 = Params;
-                    MigApp.Properties.Settings.Default.com4 = command;
+                    MigApp.Properties.Settings.Default.ParamsOTDel = Params;
+                    MigApp.Properties.Settings.Default.comOT = command;
                     MigApp.Properties.Settings.Default.Save();
                     DialogResult = true;
                 }
@@ -984,7 +1102,7 @@ namespace MigApp
             }
 
             // Мониторы Архив
-            else if (Mode == 13)
+            else if (Mode == "MonDel")
             {
                 if (InvNum_Mon_Del.Text.Length > 0)
                     command += $"[Инвентарный номер] Like '{InvNum_Mon_Del.Text}' AND ";
@@ -1010,8 +1128,67 @@ namespace MigApp
                         Param += $"{ScreenResolution_Mon_Del.Text.Replace("_", "%")}";
                     else Param += "|";
                     Param += $"|{ScreenType_Mon_Del.Text}|{User_Mon_Del.Text}";
-                    MigApp.Properties.Settings.Default.Params13 = Param;
-                    MigApp.Properties.Settings.Default.com13 = command;
+                    MigApp.Properties.Settings.Default.ParamsMonDel = Param;
+                    MigApp.Properties.Settings.Default.comMonDel = command;
+                    MigApp.Properties.Settings.Default.Save();
+                    DialogResult = true;
+                }
+                this.Close();
+            }
+
+            // Роутеры Архив
+            else if (Mode == "RoutDel")
+            {
+                if (InvNum_RoutDel.Text.Length > 0)
+                    command += $"[Инвентарный номер] LIKE '{InvNum_RoutDel.Text}' AND ";
+                if (Name_RoutDel.Text.Length > 0)
+                    command += $"Имя LIKE '{Name_RoutDel.Text}' AND ";
+                if (Model_RoutDel.Text.Length > 0)
+                    command += $"Модель LIKE '{Model_RoutDel.Text}' AND ";
+                if (WiFiName_RoutDel.Text.Length > 0)
+                    command += $"[Имя сети] LIKE '{WiFiName_RoutDel.Text}' AND ";
+                if (ip1_RoutDel.Text.Length > 0 || ip2_RoutDel.Text.Length > 0 || ip3_RoutDel.Text.Length > 0 || ip4_RoutDel.Text.Length > 0)
+                    command += $"IP Like '{mc.IPSearcher(ip1_RoutDel.Text, ip2_RoutDel.Text, ip3_RoutDel.Text, ip4_RoutDel.Text)}' AND ";
+                if (dhcp1_RoutDel.Text.Length > 0 || dhcp2_RoutDel.Text.Length > 0 || dhcp3_RoutDel.Text.Length > 0 || dhcp4_RoutDel.Text.Length > 0 || dhcp5_RoutDel.Text.Length > 0)
+                    command += $"DHCP Like '{mc.DHCPSearcher(dhcp1_RoutDel.Text, dhcp2_RoutDel.Text, dhcp3_RoutDel.Text, dhcp4_RoutDel.Text, dhcp5_RoutDel.Text)}' AND ";
+                command += "[Инвентарный номер] NOT Like 'Placeholder'";
+                if (command != "Where [Инвентарный номер] NOT Like 'Placeholder'")
+                {
+                    string Param = $"{InvNum_RoutDel.Text}|{Name_RoutDel.Text}|{Model_RoutDel.Text}|{WiFiName_RoutDel.Text}|";
+                    if (ip1_RoutDel.Text.Length > 0 || ip2_RoutDel.Text.Length > 0 || ip3_RoutDel.Text.Length > 0 || ip4_RoutDel.Text.Length > 0)
+                        Param += $"{mc.IPSearcher(ip1_RoutDel.Text, ip2_RoutDel.Text, ip3_RoutDel.Text, ip4_RoutDel.Text)}|";
+                    else Param += "|";
+                    if (dhcp1_RoutDel.Text.Length > 0 || dhcp2_RoutDel.Text.Length > 0 || dhcp3_RoutDel.Text.Length > 0 || dhcp4_RoutDel.Text.Length > 0 || dhcp5_RoutDel.Text.Length > 0)
+                        Param += $"{mc.DHCPSearcher(dhcp1_RoutDel.Text, dhcp2_RoutDel.Text, dhcp3_RoutDel.Text, dhcp4_RoutDel.Text, dhcp5_RoutDel.Text)}";
+
+                    MigApp.Properties.Settings.Default.ParamsRoutDel = Param;
+                    MigApp.Properties.Settings.Default.comRoutDel = command;
+                    MigApp.Properties.Settings.Default.Save();
+                    DialogResult = true;
+                }
+                this.Close();
+            }
+
+            // Свитчи Архив
+            else if (Mode == "SwitchDel")
+            {
+                if (InvNum_SwitchDel.Text.Length > 0)
+                    command += $"[Инвентарный номер] LIKE '{InvNum_SwitchDel.Text}' AND ";
+                if (Name_SwitchDel.Text.Length > 0)
+                    command += $"Имя LIKE '{Name_SwitchDel.Text}' AND ";
+                if (Model_SwitchDel.Text.Length > 0)
+                    command += $"Модель LIKE '{Model_SwitchDel.Text}' AND ";
+                if (ip1_SwitchDel.Text.Length > 0 || ip2_SwitchDel.Text.Length > 0 || ip3_SwitchDel.Text.Length > 0 || ip4_SwitchDel.Text.Length > 0)
+                    command += $"IP Like '{mc.IPSearcher(ip1_SwitchDel.Text, ip2_SwitchDel.Text, ip3_SwitchDel.Text, ip4_SwitchDel.Text)}' AND ";
+                command += "[Инвентарный номер] NOT Like 'Placeholder'";
+                if (command != "Where [Инвентарный номер] NOT Like 'Placeholder'")
+                {
+                    string Param = $"{InvNum_SwitchDel.Text}|{Name_SwitchDel.Text}|{Model_SwitchDel.Text}|";
+                    if (ip1_SwitchDel.Text.Length > 0 || ip2_SwitchDel.Text.Length > 0 || ip3_SwitchDel.Text.Length > 0 || ip4_SwitchDel.Text.Length > 0)
+                        Param += $"{mc.IPSearcher(ip1_SwitchDel.Text, ip2_SwitchDel.Text, ip3_SwitchDel.Text, ip4_SwitchDel.Text)}";
+
+                    MigApp.Properties.Settings.Default.ParamsSwitchDel = Param;
+                    MigApp.Properties.Settings.Default.comSwitchDel = command;
                     MigApp.Properties.Settings.Default.Save();
                     DialogResult = true;
                 }
@@ -1022,7 +1199,7 @@ namespace MigApp
             #region Отчёты
 
             // Компьютеры
-            else if (Mode == 14)
+            else if (Mode == "PCRep")
             {
                 if (Employee_Report1.Text.Length > 0)
                     command += $"Сотрудник Like '%{Employee_Report1.Text}%' AND ";
@@ -1052,8 +1229,8 @@ namespace MigApp
                         Params += $"|{OTType_Report1.Text}";
                     else Params += "|";
                     Params += $"|{OTModel_Report1.Text}";
-                    MigApp.Properties.Settings.Default.Params14 = Params;
-                    MigApp.Properties.Settings.Default.com14 = command;
+                    MigApp.Properties.Settings.Default.ParamsPCRep = Params;
+                    MigApp.Properties.Settings.Default.comPCRep = command;
                     MigApp.Properties.Settings.Default.Save();
                     DialogResult = true;
                 }
@@ -1061,7 +1238,7 @@ namespace MigApp
             }
 
             // Ноутбуки
-            else if (Mode == 15)
+            else if (Mode == "NBRep")
             {
                 if (Employee_Report2.Text.Length > 0)
                     command += $"Сотрудник Like '%{Employee_Report2.Text}%' AND ";
@@ -1077,8 +1254,8 @@ namespace MigApp
                 if (command != "Where Сотрудник NOT Like 'NULL'")
                 {
                     string Params = $"{Employee_Report2.Text}|{Group_Report2.Text}|{Room_Report2.Text}|{NotebookInvNum_Report2.Text}|{NotebookName_Report2.Text}";
-                    MigApp.Properties.Settings.Default.Params15 = Params;
-                    MigApp.Properties.Settings.Default.com15 = command;
+                    MigApp.Properties.Settings.Default.ParamsNBRep = Params;
+                    MigApp.Properties.Settings.Default.comNBRep = command;
                     MigApp.Properties.Settings.Default.Save();
                     DialogResult = true;
                 }
@@ -1086,7 +1263,7 @@ namespace MigApp
             }
 
             // Планшеты
-            else if (Mode == 16)
+            else if (Mode == "TabRep")
             {
                 if (Employee_Report3.Text.Length > 0)
                     command += $"Сотрудник Like '%{Employee_Report3.Text}%' AND ";
@@ -1102,8 +1279,8 @@ namespace MigApp
                 if (command != "Where Сотрудник NOT Like 'NULL'")
                 {
                     string Params = $"{Employee_Report3.Text}|{Group_Report3.Text}|{Room_Report3.Text}|{TabletInvNum_Report3.Text}|{TabletName_Report3.Text}";
-                    MigApp.Properties.Settings.Default.Params16 = Params;
-                    MigApp.Properties.Settings.Default.com16 = command;
+                    MigApp.Properties.Settings.Default.ParamsTabRep = Params;
+                    MigApp.Properties.Settings.Default.comTabRep = command;
                     MigApp.Properties.Settings.Default.Save();
                     DialogResult = true;
                 }
@@ -1698,113 +1875,113 @@ namespace MigApp
 
         #region Архив
         // Проверка до 255 и переключение на следующий
-        //private void IPcheck5_Del(object sender, TextChangedEventArgs e)
-        //{
-        //    if (ip1_OT_Del.Text.Length == 3)
-        //        ip2_OT_Del.Focus();
-        //    try
-        //    {
-        //        if (Convert.ToInt32(ip1_OT_Del.Text) > 255)
-        //            ip1_OT_Del.Text = "255";
-        //    }
-        //    catch { }
-        //}
+        private void RoutDel_IPcheck1(object sender, TextChangedEventArgs e)
+        {
+            if (ip1_RoutDel.Text.Length == 3)
+                ip2_RoutDel.Focus();
+            try
+            {
+                if (Convert.ToInt32(ip1_RoutDel.Text) > 255)
+                    ip1_RoutDel.Text = "255";
+            }
+            catch { }
+        }
 
-        //private void IPcheck6_Del(object sender, TextChangedEventArgs e)
-        //{
-        //    if (ip2_OT_Del.Text.Length == 3)
-        //        ip3_OT_Del.Focus();
-        //    try
-        //    {
-        //        if (Convert.ToInt32(ip2_OT_Del.Text) > 255)
-        //            ip2_OT_Del.Text = "255";
-        //    }
-        //    catch { }
-        //}
+        private void RoutDel_IPcheck2(object sender, TextChangedEventArgs e)
+        {
+            if (ip2_RoutDel.Text.Length == 3)
+                ip3_RoutDel.Focus();
+            try
+            {
+                if (Convert.ToInt32(ip2_RoutDel.Text) > 255)
+                    ip2_RoutDel.Text = "255";
+            }
+            catch { }
+        }
 
-        //private void IPcheck7_Del(object sender, TextChangedEventArgs e)
-        //{
-        //    if (ip3_OT_Del.Text.Length == 3)
-        //        ip4_OT_Del.Focus();
-        //    try
-        //    {
-        //        if (Convert.ToInt32(ip3_OT_Del.Text) > 255)
-        //            ip3_OT_Del.Text = "255";
-        //    }
-        //    catch { }
-        //}
+        private void RoutDel_IPcheck3(object sender, TextChangedEventArgs e)
+        {
+            if (ip3_RoutDel.Text.Length == 3)
+                ip4_RoutDel.Focus();
+            try
+            {
+                if (Convert.ToInt32(ip3_RoutDel.Text) > 255)
+                    ip3_RoutDel.Text = "255";
+            }
+            catch { }
+        }
 
-        //private void IPcheck8_Del(object sender, TextChangedEventArgs e)
-        //{
-        //    if (ip4_OT_Del.Text.Length == 3)
-        //        e.Handled = false;
-        //    try
-        //    {
-        //        if (Convert.ToInt32(ip4_OT_Del.Text) > 255)
-        //            ip4_OT_Del.Text = "255";
-        //    }
-        //    catch { }
-        //}
+        private void RoutDel_IPcheck4(object sender, TextChangedEventArgs e)
+        {
+            if (ip4_RoutDel.Text.Length == 3)
+                e.Handled = false;
+            try
+            {
+                if (Convert.ToInt32(ip4_RoutDel.Text) > 255)
+                    ip4_RoutDel.Text = "255";
+            }
+            catch { }
+        }
 
-        //private void IPfocus1_Del(object sender, RoutedEventArgs e)
-        //{
-        //    var textBox = e.OriginalSource as TextBox;
-        //    e.Handled = true;
-        //    if (textBox != null)
-        //        textBox.SelectAll();
-        //}
+        private void RoutDel_IPfocus(object sender, RoutedEventArgs e)
+        {
+            var textBox = e.OriginalSource as TextBox;
+            e.Handled = true;
+            if (textBox != null)
+                textBox.SelectAll();
+        }
 
         // Запрет на пробелы
-        //private void NextIP5_Del(object sender, KeyEventArgs e)
-        //{
-        //    if (e.Key == Key.Space)
-        //    {
-        //        e.Handled = true;
-        //        ip2_OT_Del.Focus();
-        //    }
-        //}
+        private void RoutDel_NextIP1(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+                ip2_RoutDel.Focus();
+            }
+        }
 
-        //private void NextIP6_Del(object sender, KeyEventArgs e)
-        //{
-        //    if (e.Key == Key.Space)
-        //    {
-        //        e.Handled = true;
-        //        ip3_OT_Del.Focus();
-        //    }
-        //    if (e.Key == Key.Back && ip2_OT_Del.Text.Length == 0)
-        //    {
-        //        e.Handled = true;
-        //        ip1_OT_Del.Focus();
-        //    }
+        private void RoutDel_NextIP2(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+                ip3_RoutDel.Focus();
+            }
+            if (e.Key == Key.Back && ip2_RoutDel.Text.Length == 0)
+            {
+                e.Handled = true;
+                ip1_RoutDel.Focus();
+            }
 
-        //}
+        }
 
-        //private void NextIP7_Del(object sender, KeyEventArgs e)
-        //{
-        //    if (e.Key == Key.Space)
-        //    {
-        //        e.Handled = true;
-        //        ip4_OT_Del.Focus();
-        //    }
-        //    if (e.Key == Key.Back && ip3_OT_Del.Text.Length == 0)
-        //    {
-        //        e.Handled = true;
-        //        ip2_OT_Del.Focus();
-        //    }
-        //}
+        private void RoutDel_NextIP3(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+                ip4_RoutDel.Focus();
+            }
+            if (e.Key == Key.Back && ip3_RoutDel.Text.Length == 0)
+            {
+                e.Handled = true;
+                ip2_RoutDel.Focus();
+            }
+        }
 
-        //private void NextIP8_Del(object sender, KeyEventArgs e)
-        //{
-        //    if (e.Key == Key.Space)
-        //    {
-        //        e.Handled = true;
-        //    }
-        //    if (e.Key == Key.Back && ip4_OT_Del.Text.Length == 0)
-        //    {
-        //        e.Handled = true;
-        //        ip3_OT_Del.Focus();
-        //    }
-        //}
+        private void RoutDel_NextIP4(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
+            if (e.Key == Key.Back && ip4_RoutDel.Text.Length == 0)
+            {
+                e.Handled = true;
+                ip3_RoutDel.Focus();
+            }
+        }
         #endregion
 
         #endregion
@@ -1950,55 +2127,196 @@ namespace MigApp
 
         #region Архив
         // Проверка до 255 и переключение на следующий
-        //private void IPcheck5_Del(object sender, TextChangedEventArgs e)
+        private void RoutDel_DHCPcheck1(object sender, TextChangedEventArgs e)
+        {
+            if (dhcp1_RoutDel.Text.Length == 3)
+                dhcp2_RoutDel.Focus();
+            try
+            {
+                if (Convert.ToInt32(dhcp1_RoutDel.Text) > 255)
+                    dhcp1_RoutDel.Text = "255";
+            }
+            catch { }
+        }
+
+        private void RoutDel_DHCPcheck2(object sender, TextChangedEventArgs e)
+        {
+            if (dhcp2_RoutDel.Text.Length == 3)
+                dhcp3_RoutDel.Focus();
+            try
+            {
+                if (Convert.ToInt32(dhcp2_RoutDel.Text) > 255)
+                    dhcp2_RoutDel.Text = "255";
+            }
+            catch { }
+        }
+
+        private void RoutDel_DHCPcheck3(object sender, TextChangedEventArgs e)
+        {
+            if (dhcp3_RoutDel.Text.Length == 3)
+                dhcp4_RoutDel.Focus();
+            try
+            {
+                if (Convert.ToInt32(dhcp3_RoutDel.Text) > 255)
+                    dhcp3_RoutDel.Text = "255";
+            }
+            catch { }
+        }
+
+        private void RoutDel_DHCPcheck4(object sender, TextChangedEventArgs e)
+        {
+            if (dhcp4_RoutDel.Text.Length == 3)
+                dhcp4_RoutDel.Focus();
+            try
+            {
+                if (Convert.ToInt32(dhcp4_RoutDel.Text) > 255)
+                    dhcp4_RoutDel.Text = "255";
+            }
+            catch { }
+        }
+
+        private void RoutDel_DHCPcheck5(object sender, TextChangedEventArgs e)
+        {
+            if (dhcp5_RoutDel.Text.Length == 3)
+                e.Handled = false;
+            try
+            {
+                if (Convert.ToInt32(dhcp5_RoutDel.Text) > 255)
+                    dhcp5_RoutDel.Text = "255";
+            }
+            catch { }
+        }
+
+        private void RoutDel_DHCPfocus(object sender, RoutedEventArgs e)
+        {
+            var textBox = e.OriginalSource as TextBox;
+            e.Handled = true;
+            if (textBox != null)
+                textBox.SelectAll();
+        }
+
+        // Запрет на пробелы
+        private void RoutDel_NextDHCP1(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+                dhcp2_RoutDel.Focus();
+            }
+        }
+
+        private void RoutDel_NextDHCP2(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+                dhcp3_RoutDel.Focus();
+            }
+            if (e.Key == Key.Back && dhcp2_RoutDel.Text.Length == 0)
+            {
+                e.Handled = true;
+                dhcp1_RoutDel.Focus();
+            }
+
+        }
+
+        private void RoutDel_NextDHCP3(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+                dhcp4_RoutDel.Focus();
+            }
+            if (e.Key == Key.Back && dhcp3_RoutDel.Text.Length == 0)
+            {
+                e.Handled = true;
+                dhcp2_RoutDel.Focus();
+            }
+        }
+
+        private void RoutDel_NextDHCP4(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+                dhcp5_RoutDel.Focus();
+            }
+            if (e.Key == Key.Back && dhcp4_RoutDel.Text.Length == 0)
+            {
+                e.Handled = true;
+                dhcp3_RoutDel.Focus();
+            }
+        }
+
+        private void RoutDel_NextDHCP5(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
+            if (e.Key == Key.Back && dhcp5_RoutDel.Text.Length == 0)
+            {
+                e.Handled = true;
+                dhcp4_RoutDel.Focus();
+            }
+        }
+        #endregion
+
+        #endregion
+
+        //#region IP Box для Свитча
+
+        //#region Основной
+        //// Проверка до 255 и переключение на следующий
+        //private void Rout_IPcheck1(object sender, TextChangedEventArgs e)
         //{
-        //    if (ip1_OT_Del.Text.Length == 3)
-        //        ip2_OT_Del.Focus();
+        //    if (ip1_Rout.Text.Length == 3)
+        //        ip2_Rout.Focus();
         //    try
         //    {
-        //        if (Convert.ToInt32(ip1_OT_Del.Text) > 255)
-        //            ip1_OT_Del.Text = "255";
+        //        if (Convert.ToInt32(ip1_Rout.Text) > 255)
+        //            ip1_Rout.Text = "255";
         //    }
         //    catch { }
         //}
 
-        //private void IPcheck6_Del(object sender, TextChangedEventArgs e)
+        //private void Rout_IPcheck2(object sender, TextChangedEventArgs e)
         //{
-        //    if (ip2_OT_Del.Text.Length == 3)
-        //        ip3_OT_Del.Focus();
+        //    if (ip2_Rout.Text.Length == 3)
+        //        ip3_Rout.Focus();
         //    try
         //    {
-        //        if (Convert.ToInt32(ip2_OT_Del.Text) > 255)
-        //            ip2_OT_Del.Text = "255";
+        //        if (Convert.ToInt32(ip2_Rout.Text) > 255)
+        //            ip2_Rout.Text = "255";
         //    }
         //    catch { }
         //}
 
-        //private void IPcheck7_Del(object sender, TextChangedEventArgs e)
+        //private void Rout_IPcheck3(object sender, TextChangedEventArgs e)
         //{
-        //    if (ip3_OT_Del.Text.Length == 3)
-        //        ip4_OT_Del.Focus();
+        //    if (ip3_Rout.Text.Length == 3)
+        //        ip4_Rout.Focus();
         //    try
         //    {
-        //        if (Convert.ToInt32(ip3_OT_Del.Text) > 255)
-        //            ip3_OT_Del.Text = "255";
+        //        if (Convert.ToInt32(ip3_Rout.Text) > 255)
+        //            ip3_Rout.Text = "255";
         //    }
         //    catch { }
         //}
 
-        //private void IPcheck8_Del(object sender, TextChangedEventArgs e)
+        //private void Rout_IPcheck4(object sender, TextChangedEventArgs e)
         //{
-        //    if (ip4_OT_Del.Text.Length == 3)
+        //    if (ip4_Rout.Text.Length == 3)
         //        e.Handled = false;
         //    try
         //    {
-        //        if (Convert.ToInt32(ip4_OT_Del.Text) > 255)
-        //            ip4_OT_Del.Text = "255";
+        //        if (Convert.ToInt32(ip4_Rout.Text) > 255)
+        //            ip4_Rout.Text = "255";
         //    }
         //    catch { }
         //}
 
-        //private void IPfocus1_Del(object sender, RoutedEventArgs e)
+        //private void Rout_IPfocus(object sender, RoutedEventArgs e)
         //{
         //    var textBox = e.OriginalSource as TextBox;
         //    e.Handled = true;
@@ -2006,59 +2324,171 @@ namespace MigApp
         //        textBox.SelectAll();
         //}
 
-        // Запрет на пробелы
-        //private void NextIP5_Del(object sender, KeyEventArgs e)
+        //// Запрет на пробелы
+        //private void Rout_NextIP1(object sender, KeyEventArgs e)
         //{
         //    if (e.Key == Key.Space)
         //    {
         //        e.Handled = true;
-        //        ip2_OT_Del.Focus();
+        //        ip2_Rout.Focus();
         //    }
         //}
 
-        //private void NextIP6_Del(object sender, KeyEventArgs e)
+        //private void Rout_NextIP2(object sender, KeyEventArgs e)
         //{
         //    if (e.Key == Key.Space)
         //    {
         //        e.Handled = true;
-        //        ip3_OT_Del.Focus();
+        //        ip3_Rout.Focus();
         //    }
-        //    if (e.Key == Key.Back && ip2_OT_Del.Text.Length == 0)
+        //    if (e.Key == Key.Back && ip2_Rout.Text.Length == 0)
         //    {
         //        e.Handled = true;
-        //        ip1_OT_Del.Focus();
+        //        ip1_Rout.Focus();
         //    }
 
         //}
 
-        //private void NextIP7_Del(object sender, KeyEventArgs e)
+        //private void Rout_NextIP3(object sender, KeyEventArgs e)
         //{
         //    if (e.Key == Key.Space)
         //    {
         //        e.Handled = true;
-        //        ip4_OT_Del.Focus();
+        //        ip4_Rout.Focus();
         //    }
-        //    if (e.Key == Key.Back && ip3_OT_Del.Text.Length == 0)
+        //    if (e.Key == Key.Back && ip3_Rout.Text.Length == 0)
         //    {
         //        e.Handled = true;
-        //        ip2_OT_Del.Focus();
+        //        ip2_Rout.Focus();
         //    }
         //}
 
-        //private void NextIP8_Del(object sender, KeyEventArgs e)
+        //private void Rout_NextIP4(object sender, KeyEventArgs e)
         //{
         //    if (e.Key == Key.Space)
         //    {
         //        e.Handled = true;
         //    }
-        //    if (e.Key == Key.Back && ip4_OT_Del.Text.Length == 0)
+        //    if (e.Key == Key.Back && ip4_Rout.Text.Length == 0)
         //    {
         //        e.Handled = true;
-        //        ip3_OT_Del.Focus();
+        //        ip3_Rout.Focus();
         //    }
         //}
-        #endregion
+        //#endregion
 
-        #endregion
+        //#region Архив
+        //// Проверка до 255 и переключение на следующий
+        ////private void IPcheck5_Del(object sender, TextChangedEventArgs e)
+        ////{
+        ////    if (ip1_OT_Del.Text.Length == 3)
+        ////        ip2_OT_Del.Focus();
+        ////    try
+        ////    {
+        ////        if (Convert.ToInt32(ip1_OT_Del.Text) > 255)
+        ////            ip1_OT_Del.Text = "255";
+        ////    }
+        ////    catch { }
+        ////}
+
+        ////private void IPcheck6_Del(object sender, TextChangedEventArgs e)
+        ////{
+        ////    if (ip2_OT_Del.Text.Length == 3)
+        ////        ip3_OT_Del.Focus();
+        ////    try
+        ////    {
+        ////        if (Convert.ToInt32(ip2_OT_Del.Text) > 255)
+        ////            ip2_OT_Del.Text = "255";
+        ////    }
+        ////    catch { }
+        ////}
+
+        ////private void IPcheck7_Del(object sender, TextChangedEventArgs e)
+        ////{
+        ////    if (ip3_OT_Del.Text.Length == 3)
+        ////        ip4_OT_Del.Focus();
+        ////    try
+        ////    {
+        ////        if (Convert.ToInt32(ip3_OT_Del.Text) > 255)
+        ////            ip3_OT_Del.Text = "255";
+        ////    }
+        ////    catch { }
+        ////}
+
+        ////private void IPcheck8_Del(object sender, TextChangedEventArgs e)
+        ////{
+        ////    if (ip4_OT_Del.Text.Length == 3)
+        ////        e.Handled = false;
+        ////    try
+        ////    {
+        ////        if (Convert.ToInt32(ip4_OT_Del.Text) > 255)
+        ////            ip4_OT_Del.Text = "255";
+        ////    }
+        ////    catch { }
+        ////}
+
+        ////private void IPfocus1_Del(object sender, RoutedEventArgs e)
+        ////{
+        ////    var textBox = e.OriginalSource as TextBox;
+        ////    e.Handled = true;
+        ////    if (textBox != null)
+        ////        textBox.SelectAll();
+        ////}
+
+        //// Запрет на пробелы
+        ////private void NextIP5_Del(object sender, KeyEventArgs e)
+        ////{
+        ////    if (e.Key == Key.Space)
+        ////    {
+        ////        e.Handled = true;
+        ////        ip2_OT_Del.Focus();
+        ////    }
+        ////}
+
+        ////private void NextIP6_Del(object sender, KeyEventArgs e)
+        ////{
+        ////    if (e.Key == Key.Space)
+        ////    {
+        ////        e.Handled = true;
+        ////        ip3_OT_Del.Focus();
+        ////    }
+        ////    if (e.Key == Key.Back && ip2_OT_Del.Text.Length == 0)
+        ////    {
+        ////        e.Handled = true;
+        ////        ip1_OT_Del.Focus();
+        ////    }
+
+        ////}
+
+        ////private void NextIP7_Del(object sender, KeyEventArgs e)
+        ////{
+        ////    if (e.Key == Key.Space)
+        ////    {
+        ////        e.Handled = true;
+        ////        ip4_OT_Del.Focus();
+        ////    }
+        ////    if (e.Key == Key.Back && ip3_OT_Del.Text.Length == 0)
+        ////    {
+        ////        e.Handled = true;
+        ////        ip2_OT_Del.Focus();
+        ////    }
+        ////}
+
+        ////private void NextIP8_Del(object sender, KeyEventArgs e)
+        ////{
+        ////    if (e.Key == Key.Space)
+        ////    {
+        ////        e.Handled = true;
+        ////    }
+        ////    if (e.Key == Key.Back && ip4_OT_Del.Text.Length == 0)
+        ////    {
+        ////        e.Handled = true;
+        ////        ip3_OT_Del.Focus();
+        ////    }
+        ////}
+        //#endregion
+
+        //#endregion
+        
     }
 }

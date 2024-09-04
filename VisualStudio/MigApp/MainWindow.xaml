@@ -64,6 +64,8 @@
                     <DataGrid Name="EmployeeTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
                         <DataGrid.ContextMenu>
                             <ContextMenu>
+                                <MenuItem Header="Копировать ячейку" Command="Copy"/> 
+                                <Separator/>
                                 <MenuItem Header="В избранное" Click="Fav_Employee"/>
                                 <MenuItem Header="Редактировать" Click="Redact_Employee"/>
                                 <MenuItem Header="Удалить" Click="Delete_Employee"/>
@@ -105,6 +107,8 @@
                                 <DataGrid Name="PCTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
+                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <Separator/>
                                             <MenuItem Header="В избранное" Click="Fav_PC"/>
                                             <MenuItem Header="Редактировать" Click="Redact_PC"/>
                                             <MenuItem Header="Удалить" Click="Delete_PC"/>
@@ -137,6 +141,8 @@
                                 <DataGrid Name="NotebookTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
+                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <Separator/>
                                             <MenuItem Header="В избранное" Click="Fav_Notebook"/>
                                             <MenuItem Header="Редактировать" Click="Redact_Notebook"/>
                                             <MenuItem Header="Удалить" Click="Delete_Notebook"/>
@@ -169,6 +175,8 @@
                                 <DataGrid Name="TabletsTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
+                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <Separator/>
                                             <MenuItem Header="В избранное" Click="Fav_Tablets"/>
                                             <MenuItem Header="Редактировать" Click="Redact_Tablet"/>
                                             <MenuItem Header="Удалить" Click="Delete_Tablet"/>
@@ -201,6 +209,8 @@
                                 <DataGrid Name="PrintersTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
+                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <Separator/>
                                             <MenuItem Header="В избранное" Click="Fav_OrgTech"/>
                                             <MenuItem Header="Редактировать" Click="Redact_Printer"/>
                                             <MenuItem Header="Удалить" Click="Delete_Printer"/>
@@ -233,6 +243,8 @@
                                 <DataGrid Name="MonitorsTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
+                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <Separator/>
                                             <MenuItem Header="В избранное" Click="Fav_Monitors"/>
                                             <MenuItem Header="Редактировать" Click="Redact_Monitor"/>
                                             <MenuItem Header="Удалить" Click="Delete_Monitor"/>
@@ -265,6 +277,8 @@
                                 <DataGrid Name="RoutersTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
+                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <Separator/>
                                             <MenuItem Header="В избранное" Click="Fav_Routers"/>
                                             <MenuItem Header="Редактировать" Click="Redact_Routers"/>
                                             <MenuItem Header="Удалить" Click="Delete_Routers"/>
@@ -297,6 +311,8 @@
                                 <DataGrid Name="SwitchesTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
+                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <Separator/>
                                             <MenuItem Header="В избранное" Click="Fav_Switches"/>
                                             <MenuItem Header="Редактировать" Click="Redact_Switches"/>
                                             <MenuItem Header="Удалить" Click="Delete_Switches"/>
@@ -326,21 +342,28 @@
                                     <StackPanel>
                                         <Grid>
                                             <TextBlock Text="Отчёт: Компьютеры" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
-                                            <Button Click="ExportReport1" Width="50" Height="30" HorizontalAlignment="Right" Margin="0 1 60 0">
+                                            <Button Click="ExportReportPC" Width="50" Height="30" HorizontalAlignment="Right" Margin="0 1 60 0">
                                                 <Image Source="images/Exel.png" Width="20" ToolTip="Экспорт"/>
                                             </Button>
-                                            <Button Click="SReport1" Content="⌕" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
+                                            <Button Click="SReportPC" Content="⌕" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
                                         </Grid>
-                                        <Border Name="Filter_Report1" Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
+                                        <Border Name="Filter_ReportPC" Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
                                             <Grid>
-                                                <TextBlock Name="FilterReport1Text" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
-                                                <Button Click="FilterReport1Clear" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
+                                                <TextBlock Name="FilterReportPCText" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
+                                                <Button Click="FilterReportPCClear" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
                                             </Grid>
                                         </Border>
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="Report1" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True"/>
+                                <DataGrid Name="ReportPC" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
+                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                </DataGrid>
 
                             </Grid>
                         </TabItem>
@@ -352,21 +375,28 @@
                                     <StackPanel>
                                         <Grid>
                                             <TextBlock Text="Отчёт: Ноутбуки" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
-                                            <Button Click="ExportReport2" Width="50" Height="30" HorizontalAlignment="Right" Margin="0 1 60 0">
+                                            <Button Click="ExportReportNB" Width="50" Height="30" HorizontalAlignment="Right" Margin="0 1 60 0">
                                                 <Image Source="images/Exel.png" Width="20" ToolTip="Экспорт"/>
                                             </Button>
-                                            <Button Click="SReport2" Content="⌕" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
+                                            <Button Click="SReportNB" Content="⌕" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
                                         </Grid>
-                                        <Border Name="Filter_Report2" Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
+                                        <Border Name="Filter_ReportNB" Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
                                             <Grid>
-                                                <TextBlock Name="FilterReport2Text" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
-                                                <Button Click="FilterReport2Clear" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
+                                                <TextBlock Name="FilterReportNBText" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
+                                                <Button Click="FilterReportNBClear" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
                                             </Grid>
                                         </Border>
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="Report2" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True"/>
+                                <DataGrid Name="ReportNB" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
+                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                </DataGrid>
 
                             </Grid>
                         </TabItem>
@@ -378,21 +408,28 @@
                                     <StackPanel>
                                         <Grid>
                                             <TextBlock Text="Отчёт: Планшеты" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
-                                            <Button Click="ExportReport3" Width="50" Height="30" HorizontalAlignment="Right" Margin="0 1 60 0">
+                                            <Button Click="ExportReportTab" Width="50" Height="30" HorizontalAlignment="Right" Margin="0 1 60 0">
                                                 <Image Source="images/Exel.png" Width="20" ToolTip="Экспорт"/>
                                             </Button>
-                                            <Button Click="SReport3" Content="⌕" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
+                                            <Button Click="SReportTab" Content="⌕" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
                                         </Grid>
-                                        <Border Name="Filter_Report3" Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
+                                        <Border Name="Filter_ReportTab" Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
                                             <Grid>
-                                                <TextBlock Name="FilterReport3Text" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
-                                                <Button Click="FilterReport3Clear" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
+                                                <TextBlock Name="FilterReportTabText" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
+                                                <Button Click="FilterReportTabClear" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
                                             </Grid>
                                         </Border>
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="Report3" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True"/>
+                                <DataGrid Name="ReportTab" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
+                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                </DataGrid>
 
                             </Grid>
                         </TabItem>
@@ -404,21 +441,27 @@
                                     <StackPanel>
                                         <Grid>
                                             <TextBlock Text="Отчёт: IP" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
-                                            <Button Click="ExportReport4" Width="50" Height="30" HorizontalAlignment="Right" Margin="0 1 60 0">
+                                            <Button Click="ExportReportIP" Width="50" Height="30" HorizontalAlignment="Right" Margin="0 1 60 0">
                                                 <Image Source="images/Exel.png" Width="20" ToolTip="Экспорт"/>
                                             </Button>
-                                            <Button Click="SReport4" Content="⌕" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
                                         </Grid>
-                                        <Border Name="Filter_Report4" Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
+                                        <Border Name="Filter_ReportIP" Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
                                             <Grid>
-                                                <TextBlock Name="FilterReport4Text" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
-                                                <Button Click="FilterReport4Clear" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
+                                                <TextBlock Name="FilterReportIPText" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
+                                                <Button Click="FilterReportIPClear" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
                                             </Grid>
                                         </Border>
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="Report4" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True" Sorting="IPSorting"/>
+                                <DataGrid Name="ReportIP" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True" Sorting="IPSorting">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
+                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                </DataGrid>
 
                             </Grid>
                         </TabItem>
@@ -457,7 +500,8 @@
                                 <DataGrid Name="UsersTable" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="В избранное"/>
+                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <Separator/>
                                             <MenuItem Header="Редактировать" Click="Redact_User"/>
                                             <MenuItem Header="Удалить" Click="Delete_User"/>
                                         </ContextMenu>
@@ -481,7 +525,6 @@
                                     <DataGrid Name="RolesTable" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
                                         <DataGrid.ContextMenu>
                                             <ContextMenu>
-                                                <MenuItem Header="В избранное"/>
                                                 <MenuItem Header="Редактировать" Click="Redact_Role"/>
                                                 <MenuItem Header="Удалить" Click="Delete_Role"/>
                                             </ContextMenu>
@@ -508,7 +551,14 @@
                                         </Border>
                                     </StackPanel>
                                 </Border>
-                                <DataGrid Name="LogsTable" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True" Sorting="LogsSorting"/>
+                                <DataGrid Name="LogsTable" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True" Sorting="LogsSorting">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
+                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                </DataGrid>
                             </Grid>
                         </TabItem>
                     </TabControl>
@@ -525,7 +575,7 @@
                     <TabControl TabStripPlacement="Left">
 
                         <!-- Сотрудники Архив -->
-                        <TabItem Header="Сотрудники">
+                        <TabItem Header="Сотрудники" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
                             <Grid>
                                 <Border VerticalAlignment="Top" Background="#404040" Height="100">
                                     <StackPanel>
@@ -545,6 +595,8 @@
                                 <DataGrid Name="EmployeesDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
+                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <Separator/>
                                             <MenuItem Header="Открыть" Click="Open_DeletedEmployee"/>
                                             <MenuItem Header="Восстановить" Click="Recovery_Employee"/>
                                             <MenuItem Header="Удалить" Click="Delete_DeletedEmployee"/>
@@ -555,7 +607,7 @@
                         </TabItem>
 
                         <!-- Компьютеры Архив -->
-                        <TabItem Header="Компьютеры">
+                        <TabItem Header="Компьютеры" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
                             <Grid>
                                 <Border VerticalAlignment="Top" Background="#404040" Height="100">
                                     <StackPanel>
@@ -575,6 +627,8 @@
                                 <DataGrid Name="PCDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
+                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <Separator/>
                                             <MenuItem Header="Открыть" Click="Open_DeletedPC"/>
                                             <MenuItem Header="Восстановить" Click="Recovery_PC"/>
                                             <MenuItem Header="Удалить" Click="Delete_DeletedPC"/>
@@ -585,7 +639,7 @@
                         </TabItem>
 
                         <!-- Ноутбуки Архив -->
-                        <TabItem Header="Ноутбуки">
+                        <TabItem Header="Ноутбуки" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
                             <Grid>
                                 <Border VerticalAlignment="Top" Background="#404040" Height="100">
                                     <StackPanel>
@@ -605,6 +659,8 @@
                                 <DataGrid Name="NotebookDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
+                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <Separator/>
                                             <MenuItem Header="Открыть" Click="Open_DeletedNotebook"/>
                                             <MenuItem Header="Восстановить" Click="Recovery_Notebook"/>
                                             <MenuItem Header="Удалить" Click="Delete_DeletedNotebook"/>
@@ -615,7 +671,7 @@
                         </TabItem>
 
                         <!-- Планшеты Архив -->
-                        <TabItem Header="Планшеты">
+                        <TabItem Header="Планшеты" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
                             <Grid>
                                 <Border VerticalAlignment="Top" Background="#404040" Height="100">
                                     <StackPanel>
@@ -635,6 +691,8 @@
                                 <DataGrid Name="TabletsDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
+                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <Separator/>
                                             <MenuItem Header="Открыть" Click="Open_DeletedTablet"/>
                                             <MenuItem Header="Восстановить" Click="Recovery_Tablet"/>
                                             <MenuItem Header="Удалить" Click="Delete_DeletedTablets"/>
@@ -645,7 +703,7 @@
                         </TabItem>
 
                         <!-- Оргтехника Архив -->
-                        <TabItem Header="Оргтехника">
+                        <TabItem Header="Оргтехника" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
                             <Grid>
                                 <Border VerticalAlignment="Top" Background="#404040" Height="100">
                                     <StackPanel>
@@ -665,6 +723,8 @@
                                 <DataGrid Name="OrgTechDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
+                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <Separator/>
                                             <MenuItem Header="Открыть" Click="Open_DeletedOrgTech"/>
                                             <MenuItem Header="Восстановить" Click="Recovery_OrgTech"/>
                                             <MenuItem Header="Удалить" Click="Delete_DeletedOrgTech"/>
@@ -675,7 +735,7 @@
                         </TabItem>
 
                         <!-- Мониторы Архив -->
-                        <TabItem Header="Мониторы">
+                        <TabItem Header="Мониторы" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
                             <Grid>
                                 <Border VerticalAlignment="Top" Background="#404040" Height="100">
                                     <StackPanel>
@@ -695,6 +755,8 @@
                                 <DataGrid Name="MonitorsDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
+                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <Separator/>
                                             <MenuItem Header="Открыть" Click="Open_DeletedMonitor"/>
                                             <MenuItem Header="Восстановить" Click="Recovery_Monitor"/>
                                             <MenuItem Header="Удалить" Click="Delete_DeletedMonitor"/>
@@ -705,7 +767,7 @@
                         </TabItem>
 
                         <!-- Роутеры Архив -->
-                        <TabItem Header="Роутеры">
+                        <TabItem Header="Роутеры" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
                             <Grid>
                                 <Border VerticalAlignment="Top" Background="#404040" Height="100">
                                     <StackPanel>
@@ -725,6 +787,8 @@
                                 <DataGrid Name="RoutersDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
+                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <Separator/>
                                             <MenuItem Header="Открыть" Click="Open_DeletedRouters"/>
                                             <MenuItem Header="Восстановить" Click="Recovery_Routers"/>
                                             <MenuItem Header="Удалить" Click="Delete_DeletedRouters"/>
@@ -733,6 +797,39 @@
                                 </DataGrid>
                             </Grid>
                         </TabItem>
+
+                        <!-- Свитчи Архив -->
+                        <TabItem Header="Свитчи" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
+                            <Grid>
+                                <Border VerticalAlignment="Top" Background="#404040" Height="100">
+                                    <StackPanel>
+                                        <Grid>
+                                            <TextBlock Text="Архив: Свитчи" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
+                                            <Button Content="⌕" Click="SSwitches_Del" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
+                                        </Grid>
+                                        <Border Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
+                                            <Grid>
+                                                <TextBlock Name="FilterSwitchesText_Del" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
+                                                <Button Click="FilterSwitchesClear_Del" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
+                                            </Grid>
+                                        </Border>
+                                    </StackPanel>
+                                </Border>
+
+                                <DataGrid Name="SwitchesDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <Separator/>
+                                            <MenuItem Header="Открыть" Click="Open_DeletedSwitches"/>
+                                            <MenuItem Header="Восстановить" Click="Recovery_Switches"/>
+                                            <MenuItem Header="Удалить" Click="Delete_DeletedSwitches"/>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                </DataGrid>
+                            </Grid>
+                        </TabItem>
+
                     </TabControl>
                 </Grid>
             </TabItem>

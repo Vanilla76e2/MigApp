@@ -53,58 +53,44 @@ namespace MigApp
             // Таблицы
             FavTable.ItemsSource = sqlcc.DataGridUpdate("Дата, Таблица, Запись, Подробности", "Fav_View",$"WHERE [User] LIKE '{CurrentUser}'").DefaultView;
             if  (EmpRead || Admin)
-                EmployeeTable.ItemsSource = sqlcc.DataGridUpdate("*", "Employees_View", $"{MigApp.Properties.Settings.Default.com0}").DefaultView;
+                EmployeeTable.ItemsSource = sqlcc.DataGridUpdate("*", "Employees_View", $"{MigApp.Properties.Settings.Default.comEmp}").DefaultView;
             if (PCRead || Admin)
-                PCTable.ItemsSource = sqlcc.DataGridUpdate("*", "PC_View", $"{MigApp.Properties.Settings.Default.com1}").DefaultView;
+                PCTable.ItemsSource = sqlcc.DataGridUpdate("*", "PC_View", $"{MigApp.Properties.Settings.Default.comPC}").DefaultView;
             if (NbRead || Admin)
-                NotebookTable.ItemsSource = sqlcc.DataGridUpdate("*", "Notebooks_View", $"{MigApp.Properties.Settings.Default.com2}").DefaultView;
+                NotebookTable.ItemsSource = sqlcc.DataGridUpdate("*", "Notebooks_View", $"{MigApp.Properties.Settings.Default.comNB}").DefaultView;
             if (TabRead || Admin)
-                TabletsTable.ItemsSource = sqlcc.DataGridUpdate("*", "Tablet_View", $"{MigApp.Properties.Settings.Default.com3}").DefaultView;
+                TabletsTable.ItemsSource = sqlcc.DataGridUpdate("*", "Tablet_View", $"{MigApp.Properties.Settings.Default.comTab}").DefaultView;
             if (OTRead || Admin)
-                PrintersTable.ItemsSource = sqlcc.DataGridUpdate("*", "OrgTech_View", $"{MigApp.Properties.Settings.Default.com4}").DefaultView;
+                PrintersTable.ItemsSource = sqlcc.DataGridUpdate("*", "OrgTech_View", $"{MigApp.Properties.Settings.Default.comOT}").DefaultView;
             if (MonRead || Admin)
-                MonitorsTable.ItemsSource = sqlcc.DataGridUpdate("*", "Monitors_View", $"{MigApp.Properties.Settings.Default.com5}").DefaultView;
+                MonitorsTable.ItemsSource = sqlcc.DataGridUpdate("*", "Monitors_View", $"{MigApp.Properties.Settings.Default.comMon}").DefaultView;
             if (RoutRead || Admin)
-                RoutersTable.ItemsSource = sqlcc.DataGridUpdate("*", "Routers_View", $"{MigApp.Properties.Settings.Default.com17}").DefaultView;
+                RoutersTable.ItemsSource = sqlcc.DataGridUpdate("*", "Routers_View", $"{MigApp.Properties.Settings.Default.comRout}").DefaultView;
+            if (SwitchRead || Admin)
+                SwitchesTable.ItemsSource = sqlcc.DataGridUpdate("*", "Switches_View", $"{MigApp.Properties.Settings.Default.comSwitch}").DefaultView;
             if (Admin)
             {
                 // Админпанель
-                UsersTable.ItemsSource = sqlcc.DataGridUpdate("*", "Users_View", $"{MigApp.Properties.Settings.Default.com6}").DefaultView;
+                UsersTable.ItemsSource = sqlcc.DataGridUpdate("*", "Users_View", $"{MigApp.Properties.Settings.Default.comUsers}").DefaultView;
                 RolesTable.ItemsSource = sqlcc.DataGridUpdate("*", "Roles_View", $"Where ID > 0").DefaultView;
-                LogsTable.ItemsSource = sqlcc.DataGridUpdate("ID, Дата, Пользователь, Действие, Таблица, Запись", "Logs_View", $"{MigApp.Properties.Settings.Default.com7}").DefaultView;
+                LogsTable.ItemsSource = sqlcc.DataGridUpdate("ID, Дата, Пользователь, Действие, Таблица, Запись", "Logs_View", $"{MigApp.Properties.Settings.Default.comLogs}").DefaultView;
                 // Архив
-                EmployeesDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Employees_Deleted", $"{MigApp.Properties.Settings.Default.com8}").DefaultView;
-                PCDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "PC_Deleted", $"{MigApp.Properties.Settings.Default.com9}").DefaultView;
-                NotebookDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Notebooks_Deleted", $"{MigApp.Properties.Settings.Default.com10}").DefaultView;
-                TabletsDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Tablet_Deleted", $"{MigApp.Properties.Settings.Default.com11}").DefaultView;
-                OrgTechDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "OrgTech_Deleted", $"{MigApp.Properties.Settings.Default.com12}").DefaultView;
-                MonitorsDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Monitors_Deleted", $"{MigApp.Properties.Settings.Default.com13}").DefaultView;
-                RoutersDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Routers_Deleted", $"").DefaultView;
+                EmployeesDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Employees_Deleted", $"{MigApp.Properties.Settings.Default.comEmpDel}").DefaultView;
+                PCDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "PC_Deleted", $"{MigApp.Properties.Settings.Default.comPCDel}").DefaultView;
+                NotebookDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Notebooks_Deleted", $"{MigApp.Properties.Settings.Default.comNBDel}").DefaultView;
+                TabletsDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Tablet_Deleted", $"{MigApp.Properties.Settings.Default.comTabDel}").DefaultView;
+                OrgTechDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "OrgTech_Deleted", $"{MigApp.Properties.Settings.Default.comOTDel}").DefaultView;
+                MonitorsDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Monitors_Deleted", $"{MigApp.Properties.Settings.Default.comMonDel}").DefaultView;
+                RoutersDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Routers_Deleted", $"{MigApp.Properties.Settings.Default.comRoutDel}").DefaultView;
+                SwitchesDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Switches_Deleted", $"{MigApp.Properties.Settings.Default.comSwitchDel}").DefaultView;
             }
             // Отчёты
-            Report1.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Computers", $"{MigApp.Properties.Settings.Default.com14}").DefaultView;
-            Report2.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Notebooks", $"{MigApp.Properties.Settings.Default.com15}").DefaultView;
-            Report3.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Tablets", $"{MigApp.Properties.Settings.Default.com16}").DefaultView;
-            Report4.ItemsSource = sqlcc.Report_IP().DefaultView;
+            ReportPC.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Computers", $"{MigApp.Properties.Settings.Default.comPCRep}").DefaultView;
+            ReportNB.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Notebooks", $"{MigApp.Properties.Settings.Default.comNBRep}").DefaultView;
+            ReportTab.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Tablets", $"{MigApp.Properties.Settings.Default.comTabRep}").DefaultView;
+            ReportIP.ItemsSource = sqlcc.Report_IP().DefaultView;
         }
         #endregion
-
-        // Затемнить окно
-        private void BlindfallSwitch()
-        {
-            if (Blindfall.Visibility == Visibility.Collapsed)
-                Blindfall.Visibility = Visibility.Visible;
-            else
-                Blindfall.Visibility = Visibility.Collapsed;
-        }
-
-        // Кнопка возврата к окну авторизации
-        private void ExitClick(object sender, RoutedEventArgs e)
-        {
-            LoginWindow win = new LoginWindow();
-            ClearFilters();
-            win.Show(); Close();
-        }
 
         #region Контекстное меню
 
@@ -268,7 +254,23 @@ namespace MigApp
         // Удаление свитчей
         private void Delete_Switches(object sender, RoutedEventArgs e)
         {
-
+            if (SwitchRedPerm || Admin)
+                try
+                {
+                    if (MessageBox.Show("Вы уверены что хотите удалить записи?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        foreach (var items in SwitchesTable.SelectedItems)
+                        {
+                            DataRowView row = (DataRowView)items;
+                            string invnum = row.Row["Инвентарный номер"].ToString();
+                            sqlcc.ReqNonRef($"UPDATE Switches SET Deleted = 1, Deldate = '{DateTime.Now}' WHERE InvNum LIKE '{invnum}'");
+                            sqlcc.ReqNonRef($"DELETE FROM Favourite WHERE [Table] LIKE 'Свитчи' AND Row LIKE '{invnum}'");
+                            sqlcc.Loging(CurrentUser, "Удаление", "Свитчи", invnum, "");
+                        }
+                        UpdateAllTables();
+                    }
+                }
+                catch { }
         }
 
         #endregion
@@ -445,6 +447,20 @@ namespace MigApp
             }
             UpdateAllTables();
         }
+
+        // Удаление свитчей
+        private void Delete_DeletedSwitches(object sender, RoutedEventArgs e)
+        {
+            DataRowView item = SwitchesDeleted.Items[SwitchesDeleted.SelectedIndex] as DataRowView;
+            string invnum = item.Row["Инвентарный номер"].ToString();
+            if (MessageBox.Show("Запись будет безвозвозвратно удалена.\nУдалить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                sqlcc.ReqNonRef($"DELETE FROM Switches WHERE InvNum LIKE '{invnum}'");
+                sqlcc.Loging(CurrentUser, "Стирание", "Свитчи", invnum, "");
+            }
+            UpdateAllTables();
+        }
+
         #endregion
         #endregion
 
@@ -567,7 +583,14 @@ namespace MigApp
         // Редактировать свитчи
         private void Redact_Switches(object sender, RoutedEventArgs e)
         {
-
+            if (SwitchRedPerm || Admin)
+                try
+                {
+                    DataRowView item = SwitchesTable.Items[SwitchesTable.SelectedIndex] as DataRowView;
+                    string invnum = item.Row[0].ToString();
+                    RoutersCROpen(false, invnum, false);
+                }
+                catch { }
         }
 
         // Редактирование из избранного
@@ -590,6 +613,8 @@ namespace MigApp
                 else if (item.Row["Таблица"].ToString() == "Мониторы" && (MonRedPerm || Admin))
                 { MonitorCROpen(false, item.Row["Запись"].ToString(), false); }  
                 else if (item.Row["Таблица"].ToString() == "Роутеры" && (RoutRedPerm || Admin))
+                { RoutersCROpen(false, item.Row["Запись"].ToString(), false); }
+                else if (item.Row["Таблица"].ToString() == "Свитчи" && (RoutRedPerm || Admin))
                 { RoutersCROpen(false, item.Row["Запись"].ToString(), false); }
             }
             catch { }
@@ -789,7 +814,28 @@ namespace MigApp
         // Добавить свитч в избранное
         private void Fav_Switches(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                DataRowView item = RoutersTable.Items[RoutersTable.SelectedIndex] as DataRowView;
+                string invnum = item.Row["Инвентарный номер"].ToString();
+                string model = item.Row["Модель"].ToString();
+                bool allow = true;
+                foreach (DataRowView row in FavTable.Items)
+                {
+                    if (row.Row["Таблица"].ToString() == "Свитчи" && row.Row["Запись"].ToString() == invnum)
+                    {
+                        allow = false;
+                    }
+                }
+                if (allow)
+                {
+                    sqlcc.ReqNonRef($"INSERT INTO Favourite ([User], Date, [Table], Row, Comment) VALUES ('{CurrentUser}', '{DateTime.Now}', 'Свитчи', '{invnum}', '{model}')");
+                    FavTable.ItemsSource = sqlcc.DataGridUpdate("Дата, Таблица, Запись, Подробности", "Fav_View", $"WHERE [User] LIKE '{CurrentUser}'").DefaultView;
+                }
+                else
+                    MessageBox.Show("Запись уже находится в избранном", "Внимание", MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
+            catch { }
         }
 
         // Убрать из избранного
@@ -879,6 +925,7 @@ namespace MigApp
             catch { }
         }
 
+        // Роутеры
         private void Open_DeletedRouters(object sender, RoutedEventArgs e)
         {
             try
@@ -886,6 +933,18 @@ namespace MigApp
                 DataRowView item = RoutersDeleted.Items[RoutersDeleted.SelectedIndex] as DataRowView;
                 string invnum = item.Row["Инвентарный номер"].ToString();
                 RoutersCROpen(false, invnum, true);
+            }
+            catch { }
+        }
+
+        // Свитчи
+        private void Open_DeletedSwitches(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DataRowView item = SwitchesDeleted.Items[SwitchesDeleted.SelectedIndex] as DataRowView;
+                string invnum = item.Row["Инвентарный номер"].ToString();
+                SwitchesCROpen(false, invnum, true);
             }
             catch { }
         }
@@ -1032,6 +1091,27 @@ namespace MigApp
             }
             catch { }
         }
+
+        // Свитчи
+        private void Recovery_Switches(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("Вы уверены что хотите восстановить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    foreach (var items in RoutersDeleted.SelectedItems)
+                    {
+                        DataRowView row = (DataRowView)items;
+                        string invnum = row.Row["Инвентарный номер"].ToString();
+                        sqlcc.Recovery("Switches", "InvNum", invnum);
+                        sqlcc.Loging(CurrentUser, "Восстановление", "Свитчи", invnum, "");
+                    }
+                    UpdateAllTables();
+                }
+            }
+            catch { }
+        }
+
         #endregion
 
         #endregion
@@ -1044,15 +1124,15 @@ namespace MigApp
         // Фильтр сотрудников
         private void SEmployee(object sender, RoutedEventArgs e)
         {
-            SearchWindow win = new SearchWindow(0);
+            SearchWindow win = new SearchWindow("Emp");
             BlindfallSwitch();
             win.Owner = this;
             win.ShowDialog();
             if (win.DialogResult == true)
             {
                 EmployeeTable.Margin = new Thickness(0, 100, 5, 5);
-                EmployeeTable.ItemsSource = sqlcc.DataGridUpdate("*", "Employees_View", $"{MigApp.Properties.Settings.Default.com0}").DefaultView;
-                FilterEmpText.Text = mc.Splitter(MigApp.Properties.Settings.Default.Params0);
+                EmployeeTable.ItemsSource = sqlcc.DataGridUpdate("*", "Employees_View", $"{MigApp.Properties.Settings.Default.comEmp}").DefaultView;
+                FilterEmpText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsEmp);
             }
             BlindfallSwitch();
         }
@@ -1060,15 +1140,15 @@ namespace MigApp
         // Фильтр ПК
         private void SPC(object sender, RoutedEventArgs e)
         {
-            SearchWindow win = new SearchWindow(1);
+            SearchWindow win = new SearchWindow("PC");
             BlindfallSwitch();
             win.Owner = this;
             win.ShowDialog();
             if (win.DialogResult == true)
             {
                 PCTable.Margin = new Thickness(0, 100, 5, 5);
-                PCTable.ItemsSource = sqlcc.DataGridUpdate("*", "PC_View", $"{MigApp.Properties.Settings.Default.com1}").DefaultView;
-                FilterPCText.Text = mc.Splitter(MigApp.Properties.Settings.Default.Params1);
+                PCTable.ItemsSource = sqlcc.DataGridUpdate("*", "PC_View", $"{MigApp.Properties.Settings.Default.comPC}").DefaultView;
+                FilterPCText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsPC);
             }
             BlindfallSwitch();
         }
@@ -1076,15 +1156,15 @@ namespace MigApp
         // Фильтр Ноутбуков
         private void SNotebook(object sender, RoutedEventArgs e)
         {
-            SearchWindow win = new SearchWindow(2);
+            SearchWindow win = new SearchWindow("NB");
             BlindfallSwitch();
             win.Owner = this;
             win.ShowDialog();
             if (win.DialogResult == true)
             {
                 NotebookTable.Margin = new Thickness(0, 100, 5, 5);
-                NotebookTable.ItemsSource = sqlcc.DataGridUpdate("*", " Notebooks_View", $"{MigApp.Properties.Settings.Default.com2}").DefaultView;
-                FilterNotebookText.Text = mc.Splitter(MigApp.Properties.Settings.Default.Params2);
+                NotebookTable.ItemsSource = sqlcc.DataGridUpdate("*", " Notebooks_View", $"{MigApp.Properties.Settings.Default.comNB}").DefaultView;
+                FilterNotebookText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsNB);
             }
             BlindfallSwitch();
         }
@@ -1092,15 +1172,15 @@ namespace MigApp
         // Фильтр Планшетов
         private void STablets(object sender, RoutedEventArgs e)
         {
-            SearchWindow win = new SearchWindow(3);
+            SearchWindow win = new SearchWindow("Tab");
             BlindfallSwitch();
             win.Owner = this;
             win.ShowDialog();
             if(win.DialogResult == true)
             {
                 TabletsTable.Margin = new Thickness(0, 100, 5, 5);
-                TabletsTable.ItemsSource = sqlcc.DataGridUpdate("*", "Tablet_View", $"{MigApp.Properties.Settings.Default.com3}").DefaultView;
-                FilterTabletsText.Text = mc.Splitter(MigApp.Properties.Settings.Default.Params3);
+                TabletsTable.ItemsSource = sqlcc.DataGridUpdate("*", "Tablet_View", $"{MigApp.Properties.Settings.Default.comTab}").DefaultView;
+                FilterTabletsText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsTab);
             }
             BlindfallSwitch();
         }
@@ -1108,15 +1188,15 @@ namespace MigApp
         // Фильтр Орг.Техники
         private void SOrgTech(object sender, RoutedEventArgs e)
         {
-            SearchWindow win = new SearchWindow(4);
+            SearchWindow win = new SearchWindow("OT");
             BlindfallSwitch();
             win.Owner = this;
             win.ShowDialog();
             if (win.DialogResult == true)
             {
                 PrintersTable.Margin = new Thickness(0, 100, 5, 5);
-                PrintersTable.ItemsSource = sqlcc.DataGridUpdate("*", "OrgTech_View", $"{MigApp.Properties.Settings.Default.com4}").DefaultView;
-                FilterOrgTechText.Text = mc.Splitter(MigApp.Properties.Settings.Default.Params4);
+                PrintersTable.ItemsSource = sqlcc.DataGridUpdate("*", "OrgTech_View", $"{MigApp.Properties.Settings.Default.comOT}").DefaultView;
+                FilterOrgTechText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsOT);
             }
             BlindfallSwitch();
         }
@@ -1124,15 +1204,15 @@ namespace MigApp
         // Фильтр Мониторов
         private void SMonitors(object sender, RoutedEventArgs e)
         {
-            SearchWindow win = new SearchWindow(5);
+            SearchWindow win = new SearchWindow("Mon");
             BlindfallSwitch();
             win.Owner = this;
             win.ShowDialog();
             if (win.DialogResult == true)
             {
                 MonitorsTable.Margin = new Thickness(0, 100, 5, 5);
-                MonitorsTable.ItemsSource = sqlcc.DataGridUpdate("*", "Monitors_View", $"{MigApp.Properties.Settings.Default.com5}").DefaultView;
-                FilterMonitorsText.Text = mc.Splitter(MigApp.Properties.Settings.Default.Params5);
+                MonitorsTable.ItemsSource = sqlcc.DataGridUpdate("*", "Monitors_View", $"{MigApp.Properties.Settings.Default.comMon}").DefaultView;
+                FilterMonitorsText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsMon);
             }
             BlindfallSwitch();
         }
@@ -1140,15 +1220,15 @@ namespace MigApp
         // Фильтр роутеров
         private void SRouters(object sender, RoutedEventArgs e)
         {
-            SearchWindow win = new SearchWindow(17);
+            SearchWindow win = new SearchWindow("Rout");
             BlindfallSwitch();
             win.Owner = this;
             win.ShowDialog();
             if (win.DialogResult == true)
             {
                 RoutersTable.Margin = new Thickness(0, 100, 5, 5);
-                RoutersTable.ItemsSource = sqlcc.DataGridUpdate("*", "Routers_View", $"{MigApp.Properties.Settings.Default.com17}").DefaultView;
-                FilterRoutersText.Text = mc.Splitter(MigApp.Properties.Settings.Default.Params17);
+                RoutersTable.ItemsSource = sqlcc.DataGridUpdate("*", "Routers_View", $"{MigApp.Properties.Settings.Default.comRout}").DefaultView;
+                FilterRoutersText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsRout);
             }
             BlindfallSwitch();
         }
@@ -1156,7 +1236,17 @@ namespace MigApp
         // Фильтр свитчей
         private void SSwitches(object sender, RoutedEventArgs e)
         {
-
+            SearchWindow win = new SearchWindow("Switch");
+            BlindfallSwitch();
+            win.Owner = this;
+            win.ShowDialog();
+            if (win.DialogResult == true)
+            {
+                SwitchesTable.Margin = new Thickness(0, 100, 5, 5);
+                SwitchesTable.ItemsSource = sqlcc.DataGridUpdate("*", "Routers_View", $"{MigApp.Properties.Settings.Default.comSwitch}").DefaultView;
+                FilterSwitchesText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsSwitch);
+            }
+            BlindfallSwitch();
         }
         #endregion
 
@@ -1164,15 +1254,15 @@ namespace MigApp
         // Пользователи
         private void SUser(object sender, RoutedEventArgs e)
         {
-            SearchWindow win = new SearchWindow(6);
+            SearchWindow win = new SearchWindow("Users");
             BlindfallSwitch();
             win.Owner = this;
             win.ShowDialog();
             if (win.DialogResult == true)
             {
                 UsersTable.Margin = new Thickness(0, 100, 5, 5);
-                UsersTable.ItemsSource = sqlcc.DataGridUpdate("*", "Users_View", $"{MigApp.Properties.Settings.Default.com6}").DefaultView;
-                FilterUsersText.Text = mc.Splitter(MigApp.Properties.Settings.Default.Params6);
+                UsersTable.ItemsSource = sqlcc.DataGridUpdate("*", "Users_View", $"{MigApp.Properties.Settings.Default.comUsers}").DefaultView;
+                FilterUsersText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsUsers);
             }
             BlindfallSwitch();
         }
@@ -1180,15 +1270,15 @@ namespace MigApp
         // Логи
         private void SLogs(object sender, RoutedEventArgs e)
         {
-            SearchWindow win = new SearchWindow(7);
+            SearchWindow win = new SearchWindow("Logs");
             BlindfallSwitch();
             win.Owner = this;
             win.ShowDialog();
             if (win.DialogResult == true)
             {
                 LogsTable.Margin = new Thickness(0, 100, 5, 5);
-                LogsTable.ItemsSource = sqlcc.DataGridUpdate("ID, Дата, Пользователь, Действие, Таблица, Запись", "Logs_View", $"{MigApp.Properties.Settings.Default.com7}").DefaultView;
-                FilterLogsText.Text = mc.Splitter(MigApp.Properties.Settings.Default.Params7);
+                LogsTable.ItemsSource = sqlcc.DataGridUpdate("ID, Дата, Пользователь, Действие, Таблица, Запись", "Logs_View", $"{MigApp.Properties.Settings.Default.comLogs}").DefaultView;
+                FilterLogsText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsLogs);
             }
             BlindfallSwitch();
         }
@@ -1199,15 +1289,15 @@ namespace MigApp
         // Сотрудники Архив
         private void SEmployee_Del(object sender, RoutedEventArgs e)
         {
-            SearchWindow win = new SearchWindow(8);
+            SearchWindow win = new SearchWindow("EmpDel");
             BlindfallSwitch();
             win.Owner = this;
             win.ShowDialog();
             if (win.DialogResult == true)
             {
                 EmployeesDeleted.Margin = new Thickness(0, 100, 5, 5);
-                EmployeesDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Employees_Deleted", $"{MigApp.Properties.Settings.Default.com8}").DefaultView;
-                FilterEmployeesText_Del.Text = mc.Splitter(MigApp.Properties.Settings.Default.Params8);
+                EmployeesDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Employees_Deleted", $"{MigApp.Properties.Settings.Default.comEmpDel}").DefaultView;
+                FilterEmployeesText_Del.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsEmpDel);
             }
             BlindfallSwitch();
         }
@@ -1215,15 +1305,15 @@ namespace MigApp
         // ПК Архив
         private void SPC_Del(object sender, RoutedEventArgs e)
         {
-            SearchWindow win = new SearchWindow(9);
+            SearchWindow win = new SearchWindow("PCDel");
             BlindfallSwitch();
             win.Owner = this;
             win.ShowDialog();
             if (win.DialogResult == true)
             {
                 PCDeleted.Margin = new Thickness(0, 100, 5, 5);
-                PCDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "PC_Deleted", $"{MigApp.Properties.Settings.Default.com9}").DefaultView;
-                FilterPCText_Del.Text = mc.Splitter(MigApp.Properties.Settings.Default.Params9);
+                PCDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "PC_Deleted", $"{MigApp.Properties.Settings.Default.comPCDel}").DefaultView;
+                FilterPCText_Del.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsPCDel);
             }
             BlindfallSwitch();
         }
@@ -1231,15 +1321,15 @@ namespace MigApp
         // Ноутбуки Архив
         private void SNotebook_Del(object sender, RoutedEventArgs e)
         {
-            SearchWindow win = new SearchWindow(10);
+            SearchWindow win = new SearchWindow("NBDel");
             BlindfallSwitch();
             win.Owner = this;
             win.ShowDialog();
             if (win.DialogResult == true)
             {
                 NotebookDeleted.Margin = new Thickness(0, 100, 5, 5);
-                NotebookDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Notebooks_Deleted", $"{MigApp.Properties.Settings.Default.com10}").DefaultView;
-                FilterNotebooksText_Del.Text = mc.Splitter(MigApp.Properties.Settings.Default.Params10);
+                NotebookDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Notebooks_Deleted", $"{MigApp.Properties.Settings.Default.comNBDel}").DefaultView;
+                FilterNotebooksText_Del.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsNBDel);
             }
             BlindfallSwitch();
         }
@@ -1247,15 +1337,15 @@ namespace MigApp
         // Планшеты Архив
         private void STablets_Del(object sender, RoutedEventArgs e)
         {
-            SearchWindow win = new SearchWindow(11);
+            SearchWindow win = new SearchWindow("TabDel");
             BlindfallSwitch();
             win.Owner = this;
             win.ShowDialog();
             if (win.DialogResult == true)
             {
                 TabletsDeleted.Margin = new Thickness(0, 100, 5, 5);
-                TabletsDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Tablet_Deleted", $"{MigApp.Properties.Settings.Default.com11}").DefaultView;
-                FilterTabletsText_Del.Text = mc.Splitter(MigApp.Properties.Settings.Default.Params11);
+                TabletsDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Tablet_Deleted", $"{MigApp.Properties.Settings.Default.comTabDel}").DefaultView;
+                FilterTabletsText_Del.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsTabDel);
             }
             BlindfallSwitch();
         }
@@ -1263,15 +1353,15 @@ namespace MigApp
         // Орг.техника Архив
         private void SOrgTech_Del(object sender, RoutedEventArgs e)
         {
-            SearchWindow win = new SearchWindow(12);
+            SearchWindow win = new SearchWindow("OTDel");
             BlindfallSwitch();
             win.Owner = this;
             win.ShowDialog();
             if (win.DialogResult == true)
             {
                 OrgTechDeleted.Margin = new Thickness(0, 100, 5, 5);
-                OrgTechDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "OrgTech_Deleted", $"{MigApp.Properties.Settings.Default.com12}").DefaultView;
-                FilterOrgTechText_Del.Text = mc.Splitter(MigApp.Properties.Settings.Default.Params12);
+                OrgTechDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "OrgTech_Deleted", $"{MigApp.Properties.Settings.Default.comOTDel}").DefaultView;
+                FilterOrgTechText_Del.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsOTDel);
             }
             BlindfallSwitch();
         }
@@ -1279,15 +1369,15 @@ namespace MigApp
         // Мониторы Архив
         private void SMonitors_Del(object sender, RoutedEventArgs e)
         {
-            SearchWindow win = new SearchWindow(13);
+            SearchWindow win = new SearchWindow("MonDel");
             BlindfallSwitch();
             win.Owner = this;
             win.ShowDialog();
             if (win.DialogResult == true)
             {
                 MonitorsDeleted.Margin = new Thickness(0, 100, 5, 5);
-                MonitorsDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Monitors_Deleted", $"{MigApp.Properties.Settings.Default.com13}").DefaultView;
-                FilterMonitorsText_Del.Text = mc.Splitter(MigApp.Properties.Settings.Default.Params13);
+                MonitorsDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Monitors_Deleted", $"{MigApp.Properties.Settings.Default.comMonDel}").DefaultView;
+                FilterMonitorsText_Del.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsMonDel);
             }
             BlindfallSwitch();
         }
@@ -1295,61 +1385,88 @@ namespace MigApp
         // Роутеры Архив
         private void SRouters_Del(object sender, RoutedEventArgs e)
         {
-
-        }
-        #endregion
-
-        #region Отчёты
-        // ПК
-        private void SReport1(object sender, RoutedEventArgs e)
-        {
-            SearchWindow win = new SearchWindow(14);
+            SearchWindow win = new SearchWindow("RoutDel");
             BlindfallSwitch();
             win.Owner = this;
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                Report1.Margin = new Thickness(0, 100, 5, 5);
-                Report1.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Computers", $"{MigApp.Properties.Settings.Default.com14}").DefaultView;
-                FilterReport1Text.Text = mc.Splitter(MigApp.Properties.Settings.Default.Params14);
+                RoutersDeleted.Margin = new Thickness(0, 100, 5, 5);
+                RoutersDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Routers_Deleted", $"{MigApp.Properties.Settings.Default.comRoutDel}").DefaultView;
+                FilterRoutersText_Del.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsRoutDel);
+            }
+            BlindfallSwitch();
+        }
+
+        // Свитчи Архив
+        private void SSwitches_Del(object sender, RoutedEventArgs e)
+        {
+            SearchWindow win = new SearchWindow("SwitchDel");
+            BlindfallSwitch();
+            win.Owner = this;
+            win.ShowDialog();
+            if (win.DialogResult == true)
+            {
+                SwitchesDeleted.Margin = new Thickness(0, 100, 5, 5);
+                SwitchesDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Switches_Deleted", $"{MigApp.Properties.Settings.Default.comSwitchDel}").DefaultView;
+                FilterSwitchesText_Del.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsSwitchDel);
+            }
+            BlindfallSwitch();
+        }
+
+        #endregion
+
+        #region Отчёты
+        // ПК
+        private void SReportPC(object sender, RoutedEventArgs e)
+        {
+            SearchWindow win = new SearchWindow("PCRep");
+            BlindfallSwitch();
+            win.Owner = this;
+            win.ShowDialog();
+            if (win.DialogResult == true)
+            {
+                ReportPC.Margin = new Thickness(0, 100, 5, 5);
+                ReportPC.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Computers", $"{MigApp.Properties.Settings.Default.comPCRep}").DefaultView;
+                FilterReportPCText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsPCRep);
             }
             BlindfallSwitch();
         }
 
         // Ноутбуки
-        private void SReport2(object sender, RoutedEventArgs e)
+        private void SReportNB(object sender, RoutedEventArgs e)
         {
-            SearchWindow win = new SearchWindow(15);
+            SearchWindow win = new SearchWindow("NBRep");
             BlindfallSwitch();
             win.Owner = this;
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                Report2.Margin = new Thickness(0, 100, 5, 5);
-                Report2.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Notebooks", $"{MigApp.Properties.Settings.Default.com15}").DefaultView;
-                FilterReport2Text.Text = mc.Splitter(MigApp.Properties.Settings.Default.Params15);
+                ReportNB.Margin = new Thickness(0, 100, 5, 5);
+                ReportNB.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Notebooks", $"{MigApp.Properties.Settings.Default.comNBRep}").DefaultView;
+                FilterReportNBText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsNBRep);
             }
             BlindfallSwitch();
         }
 
         // Планшеты
-        private void SReport3(object sender, RoutedEventArgs e)
+        private void SReportTab(object sender, RoutedEventArgs e)
         {
-            SearchWindow win = new SearchWindow(16);
+            SearchWindow win = new SearchWindow("TabRep");
             BlindfallSwitch();
             win.Owner = this;
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                Report3.Margin = new Thickness(0, 100, 5, 5);
-                Report3.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Tablets", $"{MigApp.Properties.Settings.Default.com16}").DefaultView;
-                FilterReport3Text.Text = mc.Splitter(MigApp.Properties.Settings.Default.Params16);
+                ReportTab.Margin = new Thickness(0, 100, 5, 5);
+                ReportTab.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Tablets", $"{MigApp.Properties.Settings.Default.comTabRep}").DefaultView;
+                FilterReportTabText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsTabRep);
             }
             BlindfallSwitch();
         }
 
         // IP
-        private void SReport4(object sender, RoutedEventArgs e)
+        private void SReportIP(object sender, RoutedEventArgs e)
         {
 
         }
@@ -1363,8 +1480,8 @@ namespace MigApp
         // Очистка фильтра сотрудников
         private void FilterEmpClear(object sender, RoutedEventArgs e)
         {
-            MigApp.Properties.Settings.Default.com0 = null;
-            MigApp.Properties.Settings.Default.Params0 = null;
+            MigApp.Properties.Settings.Default.comEmp = null;
+            MigApp.Properties.Settings.Default.ParamsEmp = null;
             MigApp.Properties.Settings.Default.Save();
             FilterEmpText.Text = "";
             EmployeeTable.Margin = new Thickness(0, 50, 5, 5);
@@ -1374,8 +1491,8 @@ namespace MigApp
         // Очистка фильтра компьютеров
         private void FilterPCClear(object sender, RoutedEventArgs e)
         {
-            MigApp.Properties.Settings.Default.com1 = null;
-            MigApp.Properties.Settings.Default.Params1 = null;
+            MigApp.Properties.Settings.Default.comPC = null;
+            MigApp.Properties.Settings.Default.ParamsPC = null;
             MigApp.Properties.Settings.Default.Save();
             FilterPCText.Text = "";
             PCTable.Margin = new Thickness(0, 50, 5, 5);
@@ -1385,8 +1502,8 @@ namespace MigApp
         // Очистка фильтра ноутбуков
         private void FilterNotebookClear(object sender, RoutedEventArgs e)
         {
-            MigApp.Properties.Settings.Default.com2 = null;
-            MigApp.Properties.Settings.Default.Params2 = null;
+            MigApp.Properties.Settings.Default.comNB = null;
+            MigApp.Properties.Settings.Default.ParamsNB = null;
             MigApp.Properties.Settings.Default.Save();
             FilterNotebookText.Text = "";
             NotebookTable.Margin = new Thickness(0, 50, 5, 5);
@@ -1396,8 +1513,8 @@ namespace MigApp
         // Очистка фильтра планшетов
         private void FilterTabletsClear(object sender, RoutedEventArgs e)
         {
-            MigApp.Properties.Settings.Default.com3 = null;
-            MigApp.Properties.Settings.Default.Params3 = null;
+            MigApp.Properties.Settings.Default.comTab = null;
+            MigApp.Properties.Settings.Default.ParamsTab = null;
             MigApp.Properties.Settings.Default.Save();
             FilterTabletsText.Text = "";
             TabletsTable.Margin = new Thickness(0, 50, 5, 5);
@@ -1407,8 +1524,8 @@ namespace MigApp
         // Очистка фильтра орг.техники
         private void FilterOrgTechClear(object sender, RoutedEventArgs e)
         {
-            MigApp.Properties.Settings.Default.com4 = null;
-            MigApp.Properties.Settings.Default.Params4 = null;
+            MigApp.Properties.Settings.Default.comOT = null;
+            MigApp.Properties.Settings.Default.ParamsOT = null;
             MigApp.Properties.Settings.Default.Save();
             FilterOrgTechText.Text = "";
             PrintersTable.Margin = new Thickness(0, 50, 5, 5);
@@ -1418,8 +1535,8 @@ namespace MigApp
         // Очистка фильтра мониторов
         private void FilterMonitorsClear(object sender, RoutedEventArgs e)
         {
-            MigApp.Properties.Settings.Default.com5 = null;
-            MigApp.Properties.Settings.Default.Params5 = null;
+            MigApp.Properties.Settings.Default.comMon = null;
+            MigApp.Properties.Settings.Default.ParamsMon = null;
             MigApp.Properties.Settings.Default.Save();
             FilterMonitorsText.Text = "";
             MonitorsTable.Margin = new Thickness(0, 50, 5, 5);
@@ -1429,8 +1546,8 @@ namespace MigApp
         // Очистка фильтра роутеров
         private void FilterRoutersClear(object sender, RoutedEventArgs e)
         {
-            MigApp.Properties.Settings.Default.com17 = null;
-            MigApp.Properties.Settings.Default.Params17 = null;
+            MigApp.Properties.Settings.Default.comRout = null;
+            MigApp.Properties.Settings.Default.ParamsRout = null;
             MigApp.Properties.Settings.Default.Save();
             FilterRoutersText.Text = "";
             RoutersTable.Margin = new Thickness(0, 50, 5, 5);
@@ -1440,7 +1557,12 @@ namespace MigApp
         // Очистка фильтра свитчей
         private void FilterSwitchesClear(object sender, RoutedEventArgs e)
         {
-
+            MigApp.Properties.Settings.Default.comSwitch = null;
+            MigApp.Properties.Settings.Default.ParamsSwitch = null;
+            MigApp.Properties.Settings.Default.Save();
+            FilterSwitchesText.Text = "";
+            SwitchesTable.Margin = new Thickness(0, 50, 5, 5);
+            SwitchesTable.ItemsSource = sqlcc.DataGridUpdate("*", "Switches_View", "").DefaultView;
         }
         #endregion
 
@@ -1448,8 +1570,8 @@ namespace MigApp
         // Пользователи
         private void FilterUsersClear(object sender, RoutedEventArgs e)
         {
-            MigApp.Properties.Settings.Default.com6 = null;
-            MigApp.Properties.Settings.Default.Params6 = null;
+            MigApp.Properties.Settings.Default.comUsers = null;
+            MigApp.Properties.Settings.Default.ParamsUsers = null;
             MigApp.Properties.Settings.Default.Save();
             FilterUsersText.Text = "";
             UsersTable.Margin = new Thickness(0, 50, 5, 5);
@@ -1459,8 +1581,8 @@ namespace MigApp
         // Логи
         private void FilterLogsClear(object sender, RoutedEventArgs e)
         {
-            MigApp.Properties.Settings.Default.com7 = null;
-            MigApp.Properties.Settings.Default.Params7 = null;
+            MigApp.Properties.Settings.Default.comLogs = null;
+            MigApp.Properties.Settings.Default.ParamsLogs = null;
             MigApp.Properties.Settings.Default.Save();
             FilterLogsText.Text = "";
             LogsTable.Margin = new Thickness(0, 50, 5, 5);
@@ -1472,8 +1594,8 @@ namespace MigApp
         // Сотрудники Архив
         private void FilterEmployeesClear_Del(object sender, RoutedEventArgs e)
         {
-            MigApp.Properties.Settings.Default.com8 = null;
-            MigApp.Properties.Settings.Default.Params8 = null;
+            MigApp.Properties.Settings.Default.comEmpDel = null;
+            MigApp.Properties.Settings.Default.ParamsEmpDel = null;
             MigApp.Properties.Settings.Default.Save();
             FilterEmployeesText_Del.Text = "";
             EmployeesDeleted.Margin = new Thickness(0, 50, 5, 5);
@@ -1483,8 +1605,8 @@ namespace MigApp
         // Компьютеры Архив
         private void FilterPCClear_Del(object sender, RoutedEventArgs e)
         {
-            MigApp.Properties.Settings.Default.com9 = null;
-            MigApp.Properties.Settings.Default.Params9 = null;
+            MigApp.Properties.Settings.Default.comPCDel = null;
+            MigApp.Properties.Settings.Default.ParamsPCDel = null;
             MigApp.Properties.Settings.Default.Save();
             FilterPCText_Del.Text = "";
             PCDeleted.Margin = new Thickness(0, 50, 5, 5);
@@ -1494,8 +1616,8 @@ namespace MigApp
         // Ноутбуки Архив
         private void FilterNotebooksClear_Del(object sender, RoutedEventArgs e)
         {
-            MigApp.Properties.Settings.Default.com10 = null;
-            MigApp.Properties.Settings.Default.Params10 = null;
+            MigApp.Properties.Settings.Default.comNBDel = null;
+            MigApp.Properties.Settings.Default.ParamsNBDel = null;
             MigApp.Properties.Settings.Default.Save();
             FilterNotebooksText_Del.Text = "";
             NotebookDeleted.Margin = new Thickness(0, 50, 5, 5);
@@ -1505,8 +1627,8 @@ namespace MigApp
         // Планшеты Архив
         private void FilterTabletsClear_Del(object sender, RoutedEventArgs e)
         {
-            MigApp.Properties.Settings.Default.com11 = null;
-            MigApp.Properties.Settings.Default.Params11 = null;
+            MigApp.Properties.Settings.Default.comTabDel = null;
+            MigApp.Properties.Settings.Default.ParamsTabDel = null;
             MigApp.Properties.Settings.Default.Save();
             FilterTabletsText_Del.Text = "";
             TabletsDeleted.Margin = new Thickness(0, 50, 5, 5);
@@ -1516,8 +1638,8 @@ namespace MigApp
         // Орг.техника Архив
         private void FilterOrgTechClear_Del(object sender, RoutedEventArgs e)
         {
-            MigApp.Properties.Settings.Default.com12 = null;
-            MigApp.Properties.Settings.Default.Params12 = null;
+            MigApp.Properties.Settings.Default.comOTDel = null;
+            MigApp.Properties.Settings.Default.ParamsOTDel = null;
             MigApp.Properties.Settings.Default.Save();
             FilterOrgTechText_Del.Text = "";
             OrgTechDeleted.Margin = new Thickness(0, 50, 5, 5);
@@ -1527,8 +1649,8 @@ namespace MigApp
         // Мониторы Архив
         private void FilterMonitorsClear_Del(object sender, RoutedEventArgs e)
         {
-            MigApp.Properties.Settings.Default.com13 = null;
-            MigApp.Properties.Settings.Default.Params13 = null;
+            MigApp.Properties.Settings.Default.comMonDel = null;
+            MigApp.Properties.Settings.Default.ParamsMonDel = null;
             MigApp.Properties.Settings.Default.Save();
             FilterMonitorsText_Del.Text = "";
             MonitorsDeleted.Margin = new Thickness(0, 50, 5, 5);
@@ -1538,47 +1660,63 @@ namespace MigApp
         // Роутеры Архив
         private void FilterRoutersClear_Del(object sender, RoutedEventArgs e)
         {
+            MigApp.Properties.Settings.Default.comRoutDel = null;
+            MigApp.Properties.Settings.Default.ParamsRoutDel = null;
+            MigApp.Properties.Settings.Default.Save();
+            FilterRoutersText_Del.Text = "";
+            RoutersDeleted.Margin = new Thickness(0, 50, 5, 5);
+            RoutersDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Routers_Deleted", "").DefaultView;
+        }
 
+        // Свитчи Архив
+        private void FilterSwitchesClear_Del(object sender, RoutedEventArgs e)
+        {
+            MigApp.Properties.Settings.Default.comSwitchDel = null;
+            MigApp.Properties.Settings.Default.ParamsSwitchDel = null;
+            MigApp.Properties.Settings.Default.Save();
+            FilterSwitchesText_Del.Text = "";
+            SwitchesDeleted.Margin = new Thickness(0, 50, 5, 5);
+            SwitchesDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Switches_Deleted", "").DefaultView;
         }
         #endregion
 
         #region Отчёты
 
         // ПК
-        private void FilterReport1Clear(object sender, RoutedEventArgs e)
+        private void FilterReportPCClear(object sender, RoutedEventArgs e)
         {
-            MigApp.Properties.Settings.Default.Params14 = null;
-            MigApp.Properties.Settings.Default.com14 = null;
+            MigApp.Properties.Settings.Default.ParamsPCRep = null;
+            MigApp.Properties.Settings.Default.comPCRep = null;
             MigApp.Properties.Settings.Default.Save();
-            FilterReport1Text.Text = "";
-            Report1.Margin = new Thickness(0, 50, 5, 5);
-            Report1.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Computers", "").DefaultView;
+            FilterReportPCText.Text = "";
+            ReportPC.Margin = new Thickness(0, 50, 5, 5);
+            ReportPC.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Computers", "").DefaultView;
         }
 
         // Ноутбуки
-        private void FilterReport2Clear(object sender, RoutedEventArgs e)
+        private void FilterReportNBClear(object sender, RoutedEventArgs e)
         {
-            MigApp.Properties.Settings.Default.Params15 = null;
-            MigApp.Properties.Settings.Default.com15 = null;
+            MigApp.Properties.Settings.Default.ParamsNBRep = null;
+            MigApp.Properties.Settings.Default.comNBRep = null;
             MigApp.Properties.Settings.Default.Save();
-            FilterReport2Text.Text = "";
-            Report2.Margin = new Thickness(0, 50, 5, 5);
-            Report2.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Notebooks", "").DefaultView;
+            FilterReportNBText.Text = "";
+            ReportNB.Margin = new Thickness(0, 50, 5, 5);
+            ReportNB.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Notebooks", "").DefaultView;
         }
 
         // Планшеты
-        private void FilterReport3Clear(object sender, RoutedEventArgs e)
+        private void FilterReportTabClear(object sender, RoutedEventArgs e)
         {
-            MigApp.Properties.Settings.Default.Params16 = null;
-            MigApp.Properties.Settings.Default.com16 = null;
+            MigApp.Properties.Settings.Default.ParamsTabRep = null;
+            MigApp.Properties.Settings.Default.comTabRep = null;
             MigApp.Properties.Settings.Default.Save();
-            FilterReport3Text.Text = "";
-            Report3.Margin = new Thickness(0, 50, 5, 5);
-            Report3.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Tablets", "").DefaultView;
+            FilterReportTabText.Text = "";
+            ReportTab.Margin = new Thickness(0, 50, 5, 5);
+            ReportTab.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Tablets", "").DefaultView;
         }
 
         // IP
-        private void FilterReport4Clear(object sender, RoutedEventArgs e)
+        private void FilterReportIPClear(object sender, RoutedEventArgs e)
         {
 
         }
@@ -1587,41 +1725,48 @@ namespace MigApp
         // Очистка фильтров при запуске
         private void ClearFilters()
         {
-            MigApp.Properties.Settings.Default.com0 = null;
-            MigApp.Properties.Settings.Default.com1 = null;
-            MigApp.Properties.Settings.Default.com2 = null;
-            MigApp.Properties.Settings.Default.com3 = null;
-            MigApp.Properties.Settings.Default.com4 = null;
-            MigApp.Properties.Settings.Default.com5 = null;
-            MigApp.Properties.Settings.Default.com6 = null;
-            MigApp.Properties.Settings.Default.com7 = null;
-            MigApp.Properties.Settings.Default.com8 = null;
-            MigApp.Properties.Settings.Default.com9 = null;
-            MigApp.Properties.Settings.Default.com10 = null;
-            MigApp.Properties.Settings.Default.com11 = null;
-            MigApp.Properties.Settings.Default.com12 = null;
-            MigApp.Properties.Settings.Default.com13 = null;
-            MigApp.Properties.Settings.Default.com14 = null;
-            MigApp.Properties.Settings.Default.com15 = null;
-            MigApp.Properties.Settings.Default.com16 = null;
-            MigApp.Properties.Settings.Default.Params0 = null;
-            MigApp.Properties.Settings.Default.Params1 = null;
-            MigApp.Properties.Settings.Default.Params2 = null;
-            MigApp.Properties.Settings.Default.Params3 = null;
-            MigApp.Properties.Settings.Default.Params4 = null;
-            MigApp.Properties.Settings.Default.Params5 = null;
-            MigApp.Properties.Settings.Default.Params6 = null;
-            MigApp.Properties.Settings.Default.Params7 = null;
-            MigApp.Properties.Settings.Default.Params8 = null;
-            MigApp.Properties.Settings.Default.Params9 = null;
-            MigApp.Properties.Settings.Default.Params10 = null;
-            MigApp.Properties.Settings.Default.Params11 = null;
-            MigApp.Properties.Settings.Default.Params12 = null;
-            MigApp.Properties.Settings.Default.Params13 = null;
-            MigApp.Properties.Settings.Default.Params14 = null;
-            MigApp.Properties.Settings.Default.Params15 = null;
-            MigApp.Properties.Settings.Default.Params16 = null;
-            MigApp.Properties.Settings.Default.Params17 = null;
+            MigApp.Properties.Settings.Default.comEmp = null;
+            MigApp.Properties.Settings.Default.comPC = null;
+            MigApp.Properties.Settings.Default.comNB = null;
+            MigApp.Properties.Settings.Default.comTab = null;
+            MigApp.Properties.Settings.Default.comOT = null;
+            MigApp.Properties.Settings.Default.comMon = null;
+            MigApp.Properties.Settings.Default.comUsers = null;
+            MigApp.Properties.Settings.Default.comLogs = null;
+            MigApp.Properties.Settings.Default.comEmpDel = null;
+            MigApp.Properties.Settings.Default.comPCDel = null;
+            MigApp.Properties.Settings.Default.comNBDel = null;
+            MigApp.Properties.Settings.Default.comTabDel = null;
+            MigApp.Properties.Settings.Default.comOTDel = null;
+            MigApp.Properties.Settings.Default.comMonDel = null;
+            MigApp.Properties.Settings.Default.comPCRep = null;
+            MigApp.Properties.Settings.Default.comNBRep = null;
+            MigApp.Properties.Settings.Default.comTabRep = null;
+            MigApp.Properties.Settings.Default.comRout = null;
+            MigApp.Properties.Settings.Default.comRoutDel = null;
+            MigApp.Properties.Settings.Default.comSwitch = null;
+            MigApp.Properties.Settings.Default.comSwitchDel = null;
+            MigApp.Properties.Settings.Default.ParamsEmp = null;
+            MigApp.Properties.Settings.Default.ParamsPC = null;
+            MigApp.Properties.Settings.Default.ParamsNB = null;
+            MigApp.Properties.Settings.Default.ParamsTab = null;
+            MigApp.Properties.Settings.Default.ParamsOT = null;
+            MigApp.Properties.Settings.Default.ParamsMon = null;
+            MigApp.Properties.Settings.Default.ParamsUsers = null;
+            MigApp.Properties.Settings.Default.ParamsLogs = null;
+            MigApp.Properties.Settings.Default.ParamsEmpDel = null;
+            MigApp.Properties.Settings.Default.ParamsPCDel = null;
+            MigApp.Properties.Settings.Default.ParamsNBDel = null;
+            MigApp.Properties.Settings.Default.ParamsTabDel = null;
+            MigApp.Properties.Settings.Default.ParamsOTDel = null;
+            MigApp.Properties.Settings.Default.ParamsMonDel = null;
+            MigApp.Properties.Settings.Default.ParamsPCRep = null;
+            MigApp.Properties.Settings.Default.ParamsNBRep = null;
+            MigApp.Properties.Settings.Default.ParamsTabRep = null;
+            MigApp.Properties.Settings.Default.ParamsRout = null;
+            MigApp.Properties.Settings.Default.ParamsRoutDel = null;
+            MigApp.Properties.Settings.Default.ParamsSwitch = null;
+            MigApp.Properties.Settings.Default.ParamsSwitchDel = null;
             MigApp.Properties.Settings.Default.Save();
         }
 
@@ -1634,42 +1779,42 @@ namespace MigApp
         private void EmployeeCreateClick(object sender, RoutedEventArgs e)
         {
             if (EmpRedPerm)
-            EmployeeCROpen(true, null, false);
+                EmployeeCROpen(true, null, false);
         }
 
         // Создать компьютер
         private void PCCreateClick(object sender, RoutedEventArgs e)
         {
             if (PCRedPerm || Admin)
-            PCCROpen(true, null, false);
+                PCCROpen(true, null, false);
         }
 
         // Создать ноутбук
         private void NotebookCreateClick(object sender, RoutedEventArgs e)
         {
             if (NbRedPerm || Admin)
-            NotebookCROpen(true, null, false);
+                NotebookCROpen(true, null, false);
         }
 
         // Создать планшет
         private void TabletsCreateClick(object sender, RoutedEventArgs e)
         {
             if (TabRedPerm || Admin)
-            TabletsCROpen(true, null, false);
+                TabletsCROpen(true, null, false);
         }
 
         // Создать ррг. технику
         private void OrgTechCreateClick(object sender, RoutedEventArgs e)
         {
             if (OTRedPerm || Admin)
-            OrgTechCROpen(true, null, false);
+                OrgTechCROpen(true, null, false);
         }
 
         // Создать монитор
         private void MonitorCreateClick(object sender, RoutedEventArgs e)
         {
             if (MonRedPerm || Admin)
-            MonitorCROpen(true, null, false);
+                MonitorCROpen(true, null, false);
         }
 
         // Создать пользователя
@@ -1688,13 +1833,14 @@ namespace MigApp
         private void RoutersCreateClick(object sender, RoutedEventArgs e)
         {
             if (RoutRedPerm || Admin)
-            RoutersCROpen(true, null, false);
+                RoutersCROpen(true, null, false);
         }
 
         // Создать свитч
         private void SwitchesCreateClick(object sender, RoutedEventArgs e)
         {
-
+            if (SwitchRedPerm || Admin)
+                SwitchesCROpen(true, null, false);
         }
         #endregion
 
@@ -1878,6 +2024,28 @@ namespace MigApp
             }
         }
 
+        // Открыть окно роутеров
+        private void SwitchesCROpen(bool mode, string invnum, bool deleted)
+        {
+            SwitchesWindow win = new SwitchesWindow(mode, invnum, deleted);
+            if (!deleted)
+            {
+                BlindfallSwitch();
+                win.ShowDialog();
+                if (win.DialogResult == true) UpdateAllTables();
+                BlindfallSwitch();
+            }
+            else
+            {
+                BlindfallSwitch();
+                win.DoneButton.Visibility = Visibility.Collapsed;
+                win.RecoveryButton.Visibility = Visibility.Visible;
+                win.ShowDialog();
+                if (win.DialogResult == true) UpdateAllTables();
+                BlindfallSwitch();
+            }
+        }
+
         #endregion
 
         #region Запрет сотритровки
@@ -1916,75 +2084,75 @@ namespace MigApp
             string roleID = MigApp.Properties.Settings.Default.UserRole;
             table = sqlcc.DataGridUpdate("*", "Roles", $"WHERE ID LIKE '{roleID}'");
             DataRow row = table.Rows[0];
-            if (row["EmpVis"].ToString() == "True")
+            if (row["EmpVis"].ToString() == "True" || row["AdminMode"].ToString() == "True")
             {
                 EmployeesGroup.Visibility = Visibility.Visible;
                 EmpRead = true;
             }
-            if (row["EmpRed"].ToString() == "True")
+            if (row["EmpRed"].ToString() == "True" || row["AdminMode"].ToString() == "True")
                 EmpRedPerm = true;
 
-            if (row["PCVis"].ToString() == "True")
+            if (row["PCVis"].ToString() == "True" || row["AdminMode"].ToString() == "True")
             {
                 TechGroup.Visibility = Visibility.Visible;
                 ComputersGroup.Visibility = Visibility.Visible;
                 PCRead = true;
             }
-            if (row["PCRed"].ToString() == "True")
+            if (row["PCRed"].ToString() == "True" || row["AdminMode"].ToString() == "True")
                 PCRedPerm = true;
 
-            if (row["NoteVis"].ToString() == "True")
+            if (row["NoteVis"].ToString() == "True" || row["AdminMode"].ToString() == "True")
             {
                 TechGroup.Visibility = Visibility.Visible;
                 NotebookGroup.Visibility = Visibility.Visible;
                 NbRead = true;
             }
-            if (row["NoteRed"].ToString() == "True")
+            if (row["NoteRed"].ToString() == "True" || row["AdminMode"].ToString() == "True")
                 NbRedPerm = true;
 
-            if (row["TabVis"].ToString() == "True")
+            if (row["TabVis"].ToString() == "True" || row["AdminMode"].ToString() == "True")
             {
                 TechGroup.Visibility = Visibility.Visible;
                 TabletGroup.Visibility = Visibility.Visible;
                 TabRead = true;
             }
-            if (row["TabRed"].ToString() == "True")
+            if (row["TabRed"].ToString() == "True" || row["AdminMode"].ToString() == "True")
                 TabRedPerm = true;
 
-            if (row["OTVis"].ToString() == "True")
+            if (row["OTVis"].ToString() == "True" || row["AdminMode"].ToString() == "True")
             {
                 TechGroup.Visibility = Visibility.Visible;
                 OTGroup.Visibility = Visibility.Visible;
                 OTRead = true;
             }
-            if (row["OTRed"].ToString() == "True")
+            if (row["OTRed"].ToString() == "True" || row["AdminMode"].ToString() == "True")
                 OTRedPerm = true;
 
-            if (row["MonVis"].ToString() == "True")
+            if (row["MonVis"].ToString() == "True" || row["AdminMode"].ToString() == "True")
             {
                 TechGroup.Visibility = Visibility.Visible;
                 MonitorGroup.Visibility = Visibility.Visible;
                 MonRead = true;
             }
-            if (row["MonRed"].ToString() == "True")
+            if (row["MonRed"].ToString() == "True" || row["AdminMode"].ToString() == "True")
                 MonRedPerm = true;
 
-            if (row["RoutVis"].ToString() == "True")
+            if (row["RoutVis"].ToString() == "True" || row["AdminMode"].ToString() == "True")
             {
                 TechGroup.Visibility = Visibility.Visible;
                 RouterGroup.Visibility = Visibility.Visible;
                 RoutRead = true;
             }
-            if (row["RoutRed"].ToString() == "True")
+            if (row["RoutRed"].ToString() == "True" || row["AdminMode"].ToString() == "True")
                 RoutRedPerm = true;
 
-            if (row["SwitchVis"].ToString() == "True")
+            if (row["SwitchVis"].ToString() == "True" || row["AdminMode"].ToString() == "True")
             {
                 TechGroup.Visibility = Visibility.Visible;
                 SwitchesGroup.Visibility = Visibility.Visible;
                 SwitchRead = true;
             }
-            if (row["SwitchRed"].ToString() == "True")
+            if (row["SwitchRed"].ToString() == "True" || row["AdminMode"].ToString() == "True")
                 SwitchRedPerm = true;
 
             if (row["AdminMode"].ToString() == "True")
@@ -1995,37 +2163,52 @@ namespace MigApp
             }
         }
 
-
-
         #endregion
 
         #region Exel Экспорт
 
         // Экспорт отчёта ПК
-        private void ExportReport1(object sender, RoutedEventArgs e)
+        private void ExportReportPC(object sender, RoutedEventArgs e)
         {
-            mc.ExcelExport(Report1);
+            mc.ExcelExport(ReportPC);
         }
 
         // Экспорт отчёта Ноутбуков
-        private void ExportReport2(object sender, RoutedEventArgs e)
+        private void ExportReportNB(object sender, RoutedEventArgs e)
         {
-            mc.ExcelExport(Report2);
+            mc.ExcelExport(ReportNB);
         }
 
         // Экспорт отчёта Планшетов
-        private void ExportReport3(object sender, RoutedEventArgs e)
+        private void ExportReportTab(object sender, RoutedEventArgs e)
         {
-            mc.ExcelExport(Report3);
+            mc.ExcelExport(ReportTab);
         }
 
         // Экспорт отчёта IP
-        private void ExportReport4(object sender, RoutedEventArgs e)
+        private void ExportReportIP(object sender, RoutedEventArgs e)
         {
-            mc.ExcelExport(Report4);
+            mc.ExcelExport(ReportIP);
         }
 
         #endregion
+
+        // Затемнить окно
+        private void BlindfallSwitch()
+        {
+            if (Blindfall.Visibility == Visibility.Collapsed)
+                Blindfall.Visibility = Visibility.Visible;
+            else
+                Blindfall.Visibility = Visibility.Collapsed;
+        }
+
+        // Кнопка возврата к окну авторизации
+        private void ExitClick(object sender, RoutedEventArgs e)
+        {
+            LoginWindow win = new LoginWindow();
+            ClearFilters();
+            win.Show(); Close();
+        }
 
         private void Manual_Open(object sender, RoutedEventArgs e)
         {

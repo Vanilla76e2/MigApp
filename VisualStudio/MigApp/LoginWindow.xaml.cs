@@ -18,8 +18,8 @@ namespace MigApp
         public LoginWindow()
         {
             InitializeComponent();
-            CustomTitle.Text = "   MigApp v." + curver;
-            Title = "MigApp v." + curver;
+            CustomTitle.Text = "   MigApp v" + curver;
+            Title = "MigApp v" + curver;
             UserLogin.Focus();
             //Проверка на запомнить пароль
             if (MigApp.Properties.Settings.Default.RemPass)
@@ -192,6 +192,7 @@ namespace MigApp
 
         private void Content_Rendered(object sender, System.EventArgs e)
         {
+            mc.CheckVersion();
             //Проверка на подключение к БД
             if (!sqlcc.SQLtest())
             {
@@ -202,9 +203,6 @@ namespace MigApp
                 SettingsWin win = new SettingsWin();
                 win.ShowDialog();
                 //if (win.DialogResult == true)
-                //{
-
-                //}
             }
         }
     }

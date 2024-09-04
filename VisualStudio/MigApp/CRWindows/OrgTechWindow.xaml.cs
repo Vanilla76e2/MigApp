@@ -35,131 +35,6 @@ namespace MigApp.CRWindows
             InvNum.Focus();
         }
 
-        #region IP Box
-
-        // Проверка на цифры
-        private void NumOnlyIP(object sender, TextCompositionEventArgs e)
-        {
-            if (!Char.IsDigit(e.Text, 0))
-            {
-                e.Handled = true;
-            }
-        }
-
-        // Проверка до 255 и переключение на следующий
-        private void IPcheck1(object sender, TextChangedEventArgs e)
-        {
-            if (ip1.Text.Length == 3)
-                ip2.Focus();
-            try
-            {
-                if (Convert.ToInt32(ip1.Text) > 255)
-                    ip1.Text = "255";
-            }
-            catch { }
-        }
-
-        private void IPcheck2(object sender, TextChangedEventArgs e)
-        {
-            if (ip2.Text.Length == 3)
-                ip3.Focus();
-            try
-            {
-                if (Convert.ToInt32(ip2.Text) > 255)
-                    ip2.Text = "255";
-            }
-            catch { }
-        }
-
-        private void IPcheck3(object sender, TextChangedEventArgs e)
-        {
-            if (ip3.Text.Length == 3)
-                ip4.Focus();
-            try
-            {
-                if (Convert.ToInt32(ip3.Text) > 255)
-                    ip3.Text = "255";
-            }
-            catch { }
-        }
-
-        private void IPcheck4(object sender, TextChangedEventArgs e)
-        {
-            if (ip4.Text.Length == 3)
-                e.Handled = false;
-            try
-            {
-                if (Convert.ToInt32(ip4.Text) > 255)
-                    ip4.Text = "255";
-            }
-            catch { }
-        }
-
-        private void IPfocus(object sender, RoutedEventArgs e)
-        {
-            var textBox = e.OriginalSource as TextBox;
-            e.Handled = true;
-            if (textBox != null)
-                textBox.SelectAll();
-        }
-
-        // Запрет на пробелы
-        private void NextIP1(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Space)
-            {
-                e.Handled = true;
-                ip2.Focus();
-            }
-            else if (e.Key == Key.Back && ip1.Text.Length == 0)
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void NextIP2(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Space)
-            {
-                e.Handled = true;
-                ip3.Focus();
-            }
-            else if (e.Key == Key.Back && ip2.Text.Length == 0)
-            {
-                e.Handled = true;
-                ip1.Focus();
-            }
-        }
-
-        private void NextIP3(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Space)
-            {
-                e.Handled = true;
-                ip4.Focus();
-            }
-            else if (e.Key == Key.Back && ip3.Text.Length == 0)
-            {
-                e.Handled = true;
-                ip2.Focus();
-            }
-        }
-
-        private void NextIP4(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Space)
-            {
-                e.Handled = true;
-            }
-            else if (e.Key == Key.Back && ip4.Text.Length == 0)
-            {
-                e.Handled = true;
-                ip3.Focus();
-            }
-        }
-
-        #endregion
-
         // Нажатие кнопки "Сохранить"
         private void SaveClick(object sender, RoutedEventArgs e)
         {
@@ -172,13 +47,13 @@ namespace MigApp.CRWindows
                     // Если создание
                     if (Mode == true)
                     {
-                        sqlcc.ReqNonRef($"INSERT INTO OrgTech (InvNum, Type, Model, SNum, Name, IP, Login, Password, Сartridge_Model, PC, Comment) Values ('{InvNum.Text}', '{Type.Text}', '{Model.Text}', '{SeriaNum.Text}', '{OTName.Text}', '{ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text}', '{Login.Password}', '{Password.Password}', '{Cartrige.Text}', ({pc}), Comment = '{Comment.Text}')");
+                        sqlcc.ReqNonRef($"INSERT INTO OrgTech (InvNum, Type, Model, SNum, Name, IP, Login, Password, Сartridge_Model, PC, Comment) Values ('{InvNum.Text}', '{Type.Text}', '{Model.Text}', '{SeriaNum.Text}', '{OTName.Text}', '{ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text}', '{Login.Password}', '{Password.Password}', '{Cartrige.Text}', ({pc}), '{Comment.Text}')");
                         sqlcc.Loging(CurrentUser, "Создание", "Орг.техника", InvNum.Text, "");
                     }
                     // Если редактирование
                     else
                     {
-                        sqlcc.ReqNonRef($"UPDATE OrgTech SET InvNum = '{InvNum.Text}', Type = '{Type.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', Name = '{OTName.Text}', IP = '{ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text}', Login = '{Login.Password}', Password = '{Password.Password}', Сartridge_Model = '{Cartrige.Text}', PC = ({pc}), Comment = '{Comment.Text}' Where InvNum LIKE '{InvNum.Text}'");
+                        sqlcc.ReqNonRef($"UPDATE OrgTech SET InvNum = '{InvNum.Text}', Type = '{Type.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', Name = '{OTName.Text}', IP = '{ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text}', Login = '{Login.Password}', Password = '{Password.Password}', Сartridge_Model = '{Cartrige.Text}', PC = ({pc}), Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
                         sqlcc.Loging(CurrentUser, "Редактирование", "Орг.техника", InvNum.Text, "");
                     }
                     DialogResult = true; Close();
@@ -366,6 +241,128 @@ namespace MigApp.CRWindows
                 }
             }
         }
+
+        #region IP Box
+
+        // Проверка на цифры
+        private void NumOnlyIP(object sender, TextCompositionEventArgs e)
+        {
+            if (!Char.IsDigit(e.Text, 0))
+            {
+                e.Handled = true;
+            }
+        }
+
+        // Проверка до 255 и переключение на следующий
+        private void IPcheck1(object sender, TextChangedEventArgs e)
+        {
+            if (ip1.Text.Length == 3 && ip1.Focus())
+                ip2.Focus();
+            try
+            {
+                if (Convert.ToInt32(ip1.Text) > 255)
+                    ip1.Text = "255";
+            }
+            catch { }
+        }
+
+        private void IPcheck2(object sender, TextChangedEventArgs e)
+        {
+            if (ip2.Text.Length == 3 && ip2.Focus())
+                ip3.Focus();
+            try
+            {
+                if (Convert.ToInt32(ip2.Text) > 255)
+                    ip2.Text = "255";
+            }
+            catch { }
+        }
+
+        private void IPcheck3(object sender, TextChangedEventArgs e)
+        {
+            if (ip3.Text.Length == 3)
+                ip4.Focus();
+            try
+            {
+                if (Convert.ToInt32(ip3.Text) > 255)
+                    ip3.Text = "255";
+            }
+            catch { }
+        }
+
+        private void IPcheck4(object sender, TextChangedEventArgs e)
+        {
+            if (ip4.Text.Length == 3)
+                e.Handled = false;
+            try
+            {
+                if (Convert.ToInt32(ip4.Text) > 255)
+                    ip4.Text = "255";
+            }
+            catch { }
+        }
+
+        private void IPfocus(object sender, RoutedEventArgs e)
+        {
+            var textBox = e.OriginalSource as TextBox;
+            e.Handled = true;
+            if (textBox != null)
+                textBox.SelectAll();
+        }
+
+        // Запрет на пробелы
+        private void NextIP1(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+                ip2.Focus();
+            }
+        }
+
+        private void NextIP2(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+                ip3.Focus();
+            }
+            if (e.Key == Key.Back && ip2.Text.Length == 0)
+            {
+                e.Handled = true;
+                ip1.Focus();
+            }
+
+        }
+
+        private void NextIP3(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+                ip4.Focus();
+            }
+            if (e.Key == Key.Back && ip3.Text.Length == 0)
+            {
+                e.Handled = true;
+                ip2.Focus();
+            }
+        }
+
+        private void NextIP4(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
+            if (e.Key == Key.Back && ip4.Text.Length == 0)
+            {
+                e.Handled = true;
+                ip3.Focus();
+            }
+        }
+
+        #endregion
 
         private void NumOnly(object sender, TextCompositionEventArgs e)
         {

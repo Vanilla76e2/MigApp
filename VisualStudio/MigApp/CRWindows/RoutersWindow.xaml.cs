@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 
 namespace MigApp.CRWindows
@@ -77,7 +68,7 @@ namespace MigApp.CRWindows
                             dhcp = dhcp1.Text + "." + dhcp2.Text + "." + dhcp3.Text + "." + dhcp4.Text + "-" + dhcp5.Text;
                         else dhcp = "...-";
 
-                        sqlcc.ReqNonRef($"UPDATE Routers SET InvNum = '{InvNum.Text}', Name = '{RouterName.Text}', Model = '{RouterModel.Text}', IP = '{ip}', DHCP = '{dhcp}', Login = '{AdminLogin.Password}', Password = '{AdminPass.Password}', WiFi_Name = '{WiFiLogin.Text}', WiFi_Password = '{WiFiPass.Text}', Comment = '{Comment.Text}' Where InvNum LIKE '{InvNum.Text}'");
+                        sqlcc.ReqNonRef($"UPDATE Routers SET InvNum = '{InvNum.Text}', Name = '{RouterName.Text}', Model = '{RouterModel.Text}', IP = '{ip}', DHCP = '{dhcp}', Login = '{AdminLogin.Password}', Password = '{AdminPass.Password}', WiFi_Name = '{WiFiLogin.Text}', WiFi_Password = '{WiFiPass.Text}', Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
                         sqlcc.Loging(CurrentUser, "Редактирование", "Роутеры", InvNum.Text, "");
                     }
                     DialogResult = true; Close();
@@ -497,6 +488,7 @@ namespace MigApp.CRWindows
         {
             InvNum.IsReadOnly = true;
             RouterName.IsReadOnly = true;
+            RouterModel.IsReadOnly = true;
             ip1.IsReadOnly = true;
             ip2.IsReadOnly = true;
             ip3.IsReadOnly = true;

@@ -8,40 +8,40 @@
     <Setting Name="Database" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Params0" Type="System.String" Scope="User">
+    <Setting Name="ParamsEmp" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Params1" Type="System.String" Scope="User">
+    <Setting Name="ParamsPC" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Params2" Type="System.String" Scope="User">
+    <Setting Name="ParamsNB" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Params3" Type="System.String" Scope="User">
+    <Setting Name="ParamsTab" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Params4" Type="System.String" Scope="User">
+    <Setting Name="ParamsOT" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Params5" Type="System.String" Scope="User">
+    <Setting Name="ParamsMon" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="com0" Type="System.String" Scope="User">
+    <Setting Name="comEmp" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="com1" Type="System.String" Scope="User">
+    <Setting Name="comPC" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="com2" Type="System.String" Scope="User">
+    <Setting Name="comNB" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="com3" Type="System.String" Scope="User">
+    <Setting Name="comTab" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="com4" Type="System.String" Scope="User">
+    <Setting Name="comOT" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="com5" Type="System.String" Scope="User">
+    <Setting Name="comMon" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="UserLogin" Type="System.String" Scope="User">
@@ -53,70 +53,70 @@
     <Setting Name="RemPass" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="Params6" Type="System.String" Scope="User">
+    <Setting Name="ParamsUsers" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Params7" Type="System.String" Scope="User">
+    <Setting Name="ParamsLogs" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="com6" Type="System.String" Scope="User">
+    <Setting Name="comUsers" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="com7" Type="System.String" Scope="User">
+    <Setting Name="comLogs" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Params8" Type="System.String" Scope="User">
+    <Setting Name="ParamsEmpDel" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Params9" Type="System.String" Scope="User">
+    <Setting Name="ParamsPCDel" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Params10" Type="System.String" Scope="User">
+    <Setting Name="ParamsNBDel" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Params11" Type="System.String" Scope="User">
+    <Setting Name="ParamsTabDel" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Params12" Type="System.String" Scope="User">
+    <Setting Name="ParamsOTDel" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Params13" Type="System.String" Scope="User">
+    <Setting Name="ParamsMonDel" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="com8" Type="System.String" Scope="User">
+    <Setting Name="comEmpDel" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="com9" Type="System.String" Scope="User">
+    <Setting Name="comPCDel" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="com10" Type="System.String" Scope="User">
+    <Setting Name="comNBDel" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="com11" Type="System.String" Scope="User">
+    <Setting Name="comTabDel" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="com12" Type="System.String" Scope="User">
+    <Setting Name="comOTDel" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="com13" Type="System.String" Scope="User">
+    <Setting Name="comMonDel" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Params14" Type="System.String" Scope="User">
+    <Setting Name="ParamsPCRep" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Params15" Type="System.String" Scope="User">
+    <Setting Name="ParamsNBRep" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Params16" Type="System.String" Scope="User">
+    <Setting Name="ParamsTabRep" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="com14" Type="System.String" Scope="User">
+    <Setting Name="comPCRep" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="com15" Type="System.String" Scope="User">
+    <Setting Name="comNBRep" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="com16" Type="System.String" Scope="User">
+    <Setting Name="comTabRep" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="UserRole" Type="System.String" Scope="User">
@@ -125,10 +125,28 @@
     <Setting Name="DBPassword" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="com17" Type="System.String" Scope="User">
+    <Setting Name="comRout" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Params17" Type="System.String" Scope="User">
+    <Setting Name="ParamsRout" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="comRoutDel" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ParamsRoutDel" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="comSwitch" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ParamsSwitch" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="comSwitchDel" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ParamsSwitchDel" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MigApp.CRWindows"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Оргтехника [режим]" Height="600" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/CRWindows/AdminPanel/Icon.png">
+        Title="Оргтехника [режим]" Height="620" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/CRWindows/AdminPanel/Icon.png">
     <Grid Background="#323232">
 
 
@@ -74,13 +74,13 @@
                                     <TextBlock Text="IP" Style="{DynamicResource TextBlock_20}" MinWidth="210" Margin="0 0 10 0" VerticalAlignment="Center"/>
                                     <Border Name="IPBorder" Width="330">
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBox Name="ip1" Width="75" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck1" PreviewTextInput="NumOnlyIP" KeyDown="NextIP1"/>
+                                            <TextBox Name="ip1" Text="192" Width="75" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck1" GotFocus="IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="NextIP1"/>
                                             <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                                            <TextBox Name="ip2" Width="75" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck2" PreviewTextInput="NumOnlyIP" KeyDown="NextIP2"/>
+                                            <TextBox Name="ip2" Text="168" Width="75" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck2" GotFocus="IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="NextIP2"/>
                                             <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                                            <TextBox Name="ip3" Width="75" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck3" PreviewTextInput="NumOnlyIP" KeyDown="NextIP3"/>
+                                            <TextBox Name="ip3" Width="75" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck3" GotFocus="IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="NextIP3"/>
                                             <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                                            <TextBox Name="ip4" Width="75" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck4" PreviewTextInput="NumOnlyIP" KeyDown="NextIP4"/>
+                                            <TextBox Name="ip4" Width="75" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck4" GotFocus="IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="NextIP4"/>
                                         </StackPanel>
                                     </Border>
                                 </StackPanel>

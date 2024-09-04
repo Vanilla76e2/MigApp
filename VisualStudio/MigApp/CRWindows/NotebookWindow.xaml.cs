@@ -58,7 +58,7 @@ namespace MigApp.CRWindows
                     // Если редактирование
                     else
                     {
-                        sqlcc.ReqNonRef($"UPDATE Notebooks SET InvNum = '{InvNum.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', [User] = (SELECT ID FROM Employees WHERE FIO LIKE '{User.Text}'), OS = '{OS.Text}', Diagonal = '{ScreenDiagonal.Text}', Resolution = '{ScreenResolution.Text}', Processor = '{Processor.Text}', RAM = '{RAM.Text}', Drive = '{Drive.Text}', Other = '{Other.Text}', Comment = '{Comment.Text}' Where InvNum LIKE '{InvNum.Text}'");
+                        sqlcc.ReqNonRef($"UPDATE Notebooks SET InvNum = '{InvNum.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', [User] = (SELECT ID FROM Employees WHERE FIO LIKE '{User.Text}'), OS = '{OS.Text}', Diagonal = '{ScreenDiagonal.Text}', Resolution = '{ScreenResolution.Text}', Processor = '{Processor.Text}', RAM = '{RAM.Text}', Drive = '{Drive.Text}', Other = '{Other.Text}', Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
                         sqlcc.Loging(CurrentUser, "Редактирование", "Ноутбуки", InvNum.Text, "");
                     }
                     DialogResult = true; Close();
