@@ -662,15 +662,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:MigApp"
-        "ProductCode" = "8:{E471CC8F-B037-416E-B5CD-12E4F8C7EE86}"
-        "PackageCode" = "8:{62F4A4A8-3365-4249-BDA2-24E22CEEEC48}"
+        "ProductCode" = "8:{060E1332-4053-4B73-8A5A-C038AD34E2E1}"
+        "PackageCode" = "8:{7ECCA074-1955-49E9-A233-3E0BF245E0A6}"
         "UpgradeCode" = "8:{BFD45CE3-3D6F-47B6-A8D7-A8B0D9B8F03F}"
         "AspNetVersion" = "8:"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.4.0"
+        "ProductVersion" = "8:1.4.1"
         "Manufacturer" = "8:NTIA Mig"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1212,7 +1212,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_929F4CF5256442789F3AACCA738892A5"
             {
-            "SourcePath" = "8:..\\MigApp\\obj\\Debug\\MigApp.exe"
+            "SourcePath" = "8:"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_BA58865A0D4B457EAC40E7E45938390E"

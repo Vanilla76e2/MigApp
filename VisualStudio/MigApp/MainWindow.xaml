@@ -64,7 +64,7 @@
                     <DataGrid Name="EmployeeTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
                         <DataGrid.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Копировать ячейку" Command="Copy"/> 
+                                <MenuItem Header="Копировать" Command="Copy"/> 
                                 <Separator/>
                                 <MenuItem Header="В избранное" Click="Fav_Employee"/>
                                 <MenuItem Header="Редактировать" Click="Redact_Employee"/>
@@ -107,7 +107,7 @@
                                 <DataGrid Name="PCTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
                                             <Separator/>
                                             <MenuItem Header="В избранное" Click="Fav_PC"/>
                                             <MenuItem Header="Редактировать" Click="Redact_PC"/>
@@ -141,7 +141,7 @@
                                 <DataGrid Name="NotebookTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
                                             <Separator/>
                                             <MenuItem Header="В избранное" Click="Fav_Notebook"/>
                                             <MenuItem Header="Редактировать" Click="Redact_Notebook"/>
@@ -175,7 +175,7 @@
                                 <DataGrid Name="TabletsTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
                                             <Separator/>
                                             <MenuItem Header="В избранное" Click="Fav_Tablets"/>
                                             <MenuItem Header="Редактировать" Click="Redact_Tablet"/>
@@ -209,7 +209,7 @@
                                 <DataGrid Name="PrintersTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
                                             <Separator/>
                                             <MenuItem Header="В избранное" Click="Fav_OrgTech"/>
                                             <MenuItem Header="Редактировать" Click="Redact_Printer"/>
@@ -243,7 +243,7 @@
                                 <DataGrid Name="MonitorsTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
                                             <Separator/>
                                             <MenuItem Header="В избранное" Click="Fav_Monitors"/>
                                             <MenuItem Header="Редактировать" Click="Redact_Monitor"/>
@@ -277,7 +277,7 @@
                                 <DataGrid Name="RoutersTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
                                             <Separator/>
                                             <MenuItem Header="В избранное" Click="Fav_Routers"/>
                                             <MenuItem Header="Редактировать" Click="Redact_Routers"/>
@@ -311,7 +311,7 @@
                                 <DataGrid Name="SwitchesTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
                                             <Separator/>
                                             <MenuItem Header="В избранное" Click="Fav_Switches"/>
                                             <MenuItem Header="Редактировать" Click="Redact_Switches"/>
@@ -360,7 +360,7 @@
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" Command="Copy"/>
-                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
@@ -393,7 +393,7 @@
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" Command="Copy"/>
-                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
@@ -426,7 +426,7 @@
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" Command="Copy"/>
-                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
@@ -458,7 +458,7 @@
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" Command="Copy"/>
-                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
@@ -500,7 +500,7 @@
                                 <DataGrid Name="UsersTable" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
                                             <Separator/>
                                             <MenuItem Header="Редактировать" Click="Redact_User"/>
                                             <MenuItem Header="Удалить" Click="Delete_User"/>
@@ -555,7 +555,7 @@
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" Command="Copy"/>
-                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
@@ -595,7 +595,7 @@
                                 <DataGrid Name="EmployeesDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
                                             <Separator/>
                                             <MenuItem Header="Открыть" Click="Open_DeletedEmployee"/>
                                             <MenuItem Header="Восстановить" Click="Recovery_Employee"/>
@@ -627,7 +627,7 @@
                                 <DataGrid Name="PCDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
                                             <Separator/>
                                             <MenuItem Header="Открыть" Click="Open_DeletedPC"/>
                                             <MenuItem Header="Восстановить" Click="Recovery_PC"/>
@@ -659,7 +659,7 @@
                                 <DataGrid Name="NotebookDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
                                             <Separator/>
                                             <MenuItem Header="Открыть" Click="Open_DeletedNotebook"/>
                                             <MenuItem Header="Восстановить" Click="Recovery_Notebook"/>
@@ -691,7 +691,7 @@
                                 <DataGrid Name="TabletsDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
                                             <Separator/>
                                             <MenuItem Header="Открыть" Click="Open_DeletedTablet"/>
                                             <MenuItem Header="Восстановить" Click="Recovery_Tablet"/>
@@ -723,7 +723,7 @@
                                 <DataGrid Name="OrgTechDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
                                             <Separator/>
                                             <MenuItem Header="Открыть" Click="Open_DeletedOrgTech"/>
                                             <MenuItem Header="Восстановить" Click="Recovery_OrgTech"/>
@@ -755,7 +755,7 @@
                                 <DataGrid Name="MonitorsDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
                                             <Separator/>
                                             <MenuItem Header="Открыть" Click="Open_DeletedMonitor"/>
                                             <MenuItem Header="Восстановить" Click="Recovery_Monitor"/>
@@ -787,7 +787,7 @@
                                 <DataGrid Name="RoutersDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
                                             <Separator/>
                                             <MenuItem Header="Открыть" Click="Open_DeletedRouters"/>
                                             <MenuItem Header="Восстановить" Click="Recovery_Routers"/>
@@ -819,7 +819,7 @@
                                 <DataGrid Name="SwitchesDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Копировать ячейку" Command="Copy"/>
+                                            <MenuItem Header="Копировать" Command="Copy"/>
                                             <Separator/>
                                             <MenuItem Header="Открыть" Click="Open_DeletedSwitches"/>
                                             <MenuItem Header="Восстановить" Click="Recovery_Switches"/>
