@@ -249,7 +249,7 @@ namespace MigApp
         {
             Process p = new Process();
             p.StartInfo.FileName = "msiexec";
-            p.StartInfo.Arguments = $"/i {filepath}";
+            p.StartInfo.Arguments = $"/i {filepath} /qr";
             p.Start();
             Application.Current.Shutdown();
         }

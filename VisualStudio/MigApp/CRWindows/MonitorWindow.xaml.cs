@@ -39,7 +39,7 @@ namespace MigApp.CRWindows
         private void SaveClick(object sender, RoutedEventArgs e)
         {
             // Проверка заполнения
-            if (InvNum.Text.Length > 0 && Firm.Text.Length > 0 && Model.Text.Length > 0 && SeriaNum.Text.Length > 0 && ScreenDiagonal.Text.Length > 0 && ScreenResolution.Text.Length > 0 && ScreenType.Text.Length > 0)
+            if (InvNum.Text.Length > 0 && Firm.Text.Length > 0 && Model.Text.Length > 0 && SeriaNum.Text.Length > 0 && ScreenDiagonal.Text.Length > 0 && ScreenResolution.Text.Length > 0)
             {
                 if (InvNumChecker(InvNum.Text) || !Mode)
                 {
@@ -47,7 +47,7 @@ namespace MigApp.CRWindows
                     // Если создание
                     if (Mode == true)
                     {
-                        sqlcc.ReqNonRef($"INSERT INTO Monitor (InvNum, Firm, Model, SNum, Diagonal, Resolution, Screen, PC, Comment) Values ('{InvNum.Text}', '{Firm.Text}', '{Model.Text}', '{SeriaNum.Text}', '{ScreenDiagonal.Text}', '{ScreenResolution.Text}', '{ScreenType.Text}', ({pc}), '{Comment.Text}'");
+                        sqlcc.ReqNonRef($"INSERT INTO Monitor (InvNum, Firm, Model, SNum, Diagonal, Resolution, Screen, PC, Comment) Values ('{InvNum.Text}', '{Firm.Text}', '{Model.Text}', '{SeriaNum.Text}', '{ScreenDiagonal.Text}', '{ScreenResolution.Text}', '{ScreenType.Text}', ({pc}), '{Comment.Text}')");
                         sqlcc.Loging(CurrentUser, "Создание", "Мониторы", InvNum.Text, "");
                     }
                     // Если редактирование
@@ -77,8 +77,6 @@ namespace MigApp.CRWindows
                 else SeriaNum.BorderBrush = Brushes.LightGray;
                 if (ScreenDiagonal.Text.Length < 1) ScreenDiagonal.BorderBrush = Brushes.Red;
                 else ScreenDiagonal.BorderBrush = Brushes.LightGray;
-                if (ScreenType.Text.Length < 1) ScreenDiagonal.BorderBrush = Brushes.Red;
-                else ScreenType.BorderBrush = Brushes.LightGray;
                 MessageBox.Show("Не все обязательные поля заполнены!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

@@ -24,6 +24,7 @@
                     <ComboBoxItem Content="Отдел кадров"/>
                     <ComboBoxItem Content="Отдел маркетинга"/>
                     <ComboBoxItem Content="Отдел монтажа и оформления"/>
+                    <ComboBoxItem Content="Отдел охраны труда"/>
                     <ComboBoxItem Content="Отдел планирования и формирования вещания"/>
                     <ComboBoxItem Content="Отдел по снабжению и содержанию"/>
                     <ComboBoxItem Content="Отдел производства РВ программ"/>
