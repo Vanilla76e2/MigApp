@@ -24,7 +24,7 @@
                         </Grid>
                     </Border>
 
-                    <DataGrid Name="FavTable" Background="#525252" Foreground="White" Margin="0 50 5 5" IsReadOnly="True" Sorting="FavSorting">
+                    <DataGrid Name="FavTable" Background="#525252" Foreground="White" Margin="0 50 5 20" IsReadOnly="True" Sorting="FavSorting" SelectedCellsChanged="SelectedCounter">
                         <DataGrid.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Header="Редактировать" Click="Fav_Redact"/>
@@ -32,6 +32,7 @@
                             </ContextMenu>
                         </DataGrid.ContextMenu>
                     </DataGrid>
+                    <TextBlock Text="Выбрано: 0" Name="FavSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                 </Grid>
             </TabItem>
 
@@ -61,10 +62,10 @@
                         </Grid>
                     </Border>
 
-                    <DataGrid Name="EmployeeTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
+                    <DataGrid Name="EmployeeTable" Margin="0 50 5 20" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
                         <DataGrid.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Копировать" Command="Copy"/> 
+                                <MenuItem Header="Копировать" Command="Copy"/>
                                 <Separator/>
                                 <MenuItem Header="В избранное" Click="Fav_Employee"/>
                                 <MenuItem Header="Редактировать" Click="Redact_Employee"/>
@@ -72,6 +73,7 @@
                             </ContextMenu>
                         </DataGrid.ContextMenu>
                     </DataGrid>
+                    <TextBlock Text="Выбрано: 0" Name="EmpSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                 </Grid>
             </TabItem>
 
@@ -104,7 +106,7 @@
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="PCTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
+                                <DataGrid Name="PCTable" Margin="0 50 5 20" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" Command="Copy"/>
@@ -115,6 +117,7 @@
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
+                                <TextBlock Text="Выбрано: 0" Name="PCSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
 
@@ -138,7 +141,7 @@
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="NotebookTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
+                                <DataGrid Name="NotebookTable" Margin="0 50 5 20" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" Command="Copy"/>
@@ -149,6 +152,7 @@
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
+                                <TextBlock Text="Выбрано: 0" Name="NBSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
 
@@ -172,7 +176,7 @@
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="TabletsTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
+                                <DataGrid Name="TabletsTable" Margin="0 50 5 20" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" Command="Copy"/>
@@ -183,6 +187,7 @@
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
+                                <TextBlock Text="Выбрано: 0" Name="TabSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
 
@@ -206,7 +211,7 @@
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="PrintersTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
+                                <DataGrid Name="PrintersTable" Margin="0 50 5 20" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True"  SelectedCellsChanged="SelectedCounter">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" Command="Copy"/>
@@ -217,6 +222,7 @@
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
+                                <TextBlock Text="Выбрано: 0" Name="OTSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
 
@@ -240,7 +246,7 @@
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="MonitorsTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
+                                <DataGrid Name="MonitorsTable" Margin="0 50 5 20" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" Command="Copy"/>
@@ -251,6 +257,7 @@
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
+                                <TextBlock Text="Выбрано: 0" Name="MonSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
 
@@ -274,7 +281,7 @@
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="RoutersTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
+                                <DataGrid Name="RoutersTable" Margin="0 50 5 20" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" Command="Copy"/>
@@ -285,6 +292,7 @@
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
+                                <TextBlock Text="Выбрано: 0" Name="RoutSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
 
@@ -308,7 +316,7 @@
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="SwitchesTable" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
+                                <DataGrid Name="SwitchesTable" Margin="0 50 5 20" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" Command="Copy"/>
@@ -319,6 +327,7 @@
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
+                                <TextBlock Text="Выбрано: 0" Name="SwitchSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
                         
@@ -356,15 +365,14 @@
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="ReportPC" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
+                                <DataGrid Name="ReportPC" Margin="0 50 5 20" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Копировать" Command="Copy"/>
                                             <MenuItem Header="Копировать" Command="Copy"/>
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
-
+                                <TextBlock Text="Выбрано: 0" Name="PCRepSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
 
@@ -389,15 +397,14 @@
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="ReportNB" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
+                                <DataGrid Name="ReportNB" Margin="0 50 5 20" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Копировать" Command="Copy"/>
                                             <MenuItem Header="Копировать" Command="Copy"/>
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
-
+                                <TextBlock Text="Выбрано: 0" Name="NBRepSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
 
@@ -422,15 +429,14 @@
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="ReportTab" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True">
+                                <DataGrid Name="ReportTab" Margin="0 50 5 20" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Копировать" Command="Copy"/>
                                             <MenuItem Header="Копировать" Command="Copy"/>
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
-
+                                <TextBlock Text="Выбрано: 0" Name="TabRepSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
 
@@ -454,15 +460,14 @@
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="ReportIP" Margin="0 50 5 5" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True" Sorting="IPSorting">
+                                <DataGrid Name="ReportIP" Margin="0 50 5 20" Background="#525252" Foreground="White" CanUserReorderColumns="False" IsReadOnly="True" Sorting="IPSorting" SelectedCellsChanged="SelectedCounter">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Копировать" Command="Copy"/>
                                             <MenuItem Header="Копировать" Command="Copy"/>
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
-
+                                <TextBlock Text="Выбрано: 0" Name="IPRepSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
                     </TabControl>
@@ -497,7 +502,7 @@
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="UsersTable" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
+                                <DataGrid Name="UsersTable" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" Command="Copy"/>
@@ -507,30 +512,30 @@
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
+                                <TextBlock Text="Выбрано: 0" Name="UserSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
 
                         <!-- Роли -->
                         <TabItem Header="Роли">
                             <Grid>
-                                <Grid>
-                                    <Border VerticalAlignment="Top" Background="#404040" Height="50">
-                                        <Grid>
-                                            <Button Click="CreateRoleClick" Content="➕" HorizontalAlignment="Left" Width="50" Margin="10 0 0 0" Style="{DynamicResource MaterialDesignOutlinedButton}" ToolTip="Создать запись"/>
-                                            <TextBlock Text="Роли" Style="{DynamicResource Header}" Margin="70 8 0 8"/>
-                                            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal"/>
-                                        </Grid>
-                                    </Border>
+                                <Border VerticalAlignment="Top" Background="#404040" Height="50">
+                                    <Grid>
+                                        <Button Click="CreateRoleClick" Content="➕" HorizontalAlignment="Left" Width="50" Margin="10 0 0 0" Style="{DynamicResource MaterialDesignOutlinedButton}" ToolTip="Создать запись"/>
+                                        <TextBlock Text="Роли" Style="{DynamicResource Header}" Margin="70 8 0 8"/>
+                                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal"/>
+                                    </Grid>
+                                </Border>
 
-                                    <DataGrid Name="RolesTable" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
-                                        <DataGrid.ContextMenu>
-                                            <ContextMenu>
-                                                <MenuItem Header="Редактировать" Click="Redact_Role"/>
-                                                <MenuItem Header="Удалить" Click="Delete_Role"/>
-                                            </ContextMenu>
-                                        </DataGrid.ContextMenu>
-                                    </DataGrid>
-                                </Grid>
+                                <DataGrid Name="RolesTable" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
+                                    <DataGrid.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Редактировать" Click="Redact_Role"/>
+                                            <MenuItem Header="Удалить" Click="Delete_Role"/>
+                                        </ContextMenu>
+                                    </DataGrid.ContextMenu>
+                                </DataGrid>
+                                <TextBlock Text="Выбрано: 0" Name="RoleSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
 
@@ -551,7 +556,7 @@
                                         </Border>
                                     </StackPanel>
                                 </Border>
-                                <DataGrid Name="LogsTable" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True" Sorting="LogsSorting">
+                                <DataGrid Name="LogsTable" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" Sorting="LogsSorting" SelectedCellsChanged="SelectedCounter">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" Command="Copy"/>
@@ -559,6 +564,7 @@
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
+                                <TextBlock Text="Выбрано: 0" Name="LogSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
                     </TabControl>
@@ -592,7 +598,7 @@
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="EmployeesDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
+                                <DataGrid Name="EmployeesDeleted" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" Command="Copy"/>
@@ -603,6 +609,7 @@
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
+                                <TextBlock Text="Выбрано: 0" Name="EmpDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
 
@@ -624,7 +631,7 @@
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="PCDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
+                                <DataGrid Name="PCDeleted" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" Command="Copy"/>
@@ -635,6 +642,7 @@
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
+                                <TextBlock Text="Выбрано: 0" Name="PCDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
 
@@ -656,7 +664,7 @@
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="NotebookDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
+                                <DataGrid Name="NotebookDeleted" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" Command="Copy"/>
@@ -667,6 +675,7 @@
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
+                                <TextBlock Text="Выбрано: 0" Name="NBDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
 
@@ -688,7 +697,7 @@
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="TabletsDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
+                                <DataGrid Name="TabletsDeleted" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" Command="Copy"/>
@@ -699,6 +708,7 @@
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
+                                <TextBlock Text="Выбрано: 0" Name="TabDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
 
@@ -720,7 +730,7 @@
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="OrgTechDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
+                                <DataGrid Name="OrgTechDeleted" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" Command="Copy"/>
@@ -731,6 +741,7 @@
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
+                                <TextBlock Text="Выбрано: 0" Name="OTDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
 
@@ -752,7 +763,7 @@
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="MonitorsDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
+                                <DataGrid Name="MonitorsDeleted" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" Command="Copy"/>
@@ -763,6 +774,7 @@
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
+                                <TextBlock Text="Выбрано: 0" Name="MonDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
 
@@ -784,7 +796,7 @@
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="RoutersDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
+                                <DataGrid Name="RoutersDeleted" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" Command="Copy"/>
@@ -795,6 +807,7 @@
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
+                                <TextBlock Text="Выбрано: 0" Name="RoutDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
 
@@ -816,7 +829,7 @@
                                     </StackPanel>
                                 </Border>
 
-                                <DataGrid Name="SwitchesDeleted" Margin="0 50 5 5" Background="#525252" Foreground="White" IsReadOnly="True">
+                                <DataGrid Name="SwitchesDeleted" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
                                     <DataGrid.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Копировать" Command="Copy"/>
@@ -827,6 +840,7 @@
                                         </ContextMenu>
                                     </DataGrid.ContextMenu>
                                 </DataGrid>
+                                <TextBlock Text="Выбрано: 0" Name="SwitchDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
 

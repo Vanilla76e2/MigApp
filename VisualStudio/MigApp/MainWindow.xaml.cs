@@ -9,6 +9,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Reflection;
+using System.Windows.Data;
+using System.Net.Cache;
 namespace MigApp
 {
     /// <summary>
@@ -73,7 +75,7 @@ namespace MigApp
                 // Админпанель
                 UsersTable.ItemsSource = sqlcc.DataGridUpdate("*", "Users_View", $"{MigApp.Properties.Settings.Default.comUsers}").DefaultView;
                 RolesTable.ItemsSource = sqlcc.DataGridUpdate("*", "Roles_View", $"Where ID > 0").DefaultView;
-                LogsTable.ItemsSource = sqlcc.DataGridUpdate("ID, Дата, Пользователь, Действие, Таблица, Запись", "Logs_View", $"{MigApp.Properties.Settings.Default.comLogs}").DefaultView;
+                LogsTable.ItemsSource = sqlcc.DataGridUpdate("ID, Дата, Пользователь, Действие, Таблица, Запись", "Logs_View", $"{MigApp.Properties.Settings.Default.comLogs} ORDER BY ID DESC").DefaultView;
                 // Архив
                 EmployeesDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Employees_Deleted", $"{MigApp.Properties.Settings.Default.comEmpDel}").DefaultView;
                 PCDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "PC_Deleted", $"{MigApp.Properties.Settings.Default.comPCDel}").DefaultView;
@@ -85,7 +87,10 @@ namespace MigApp
                 SwitchesDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Switches_Deleted", $"{MigApp.Properties.Settings.Default.comSwitchDel}").DefaultView;
             }
             // Отчёты
-            ReportPC.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Computers", $"{MigApp.Properties.Settings.Default.comPCRep}").DefaultView;
+            //ReportPC.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Computers", $"{MigApp.Properties.Settings.Default.comPCRep}").DefaultView;
+            if (MigApp.Properties.Settings.Default.ParamsPCRep != null)
+                ReportPC.ItemsSource = sqlcc.Report_PC_Filtered().DefaultView;
+            else ReportPC.ItemsSource = sqlcc.Report_PC().DefaultView;
             ReportNB.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Notebooks", $"{MigApp.Properties.Settings.Default.comNBRep}").DefaultView;
             ReportTab.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Tablets", $"{MigApp.Properties.Settings.Default.comTabRep}").DefaultView;
             ReportIP.ItemsSource = sqlcc.Report_IP().DefaultView;
@@ -1427,7 +1432,8 @@ namespace MigApp
             if (win.DialogResult == true)
             {
                 ReportPC.Margin = new Thickness(0, 100, 5, 5);
-                ReportPC.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Computers", $"{MigApp.Properties.Settings.Default.comPCRep}").DefaultView;
+                ReportPC.ItemsSource = null;
+                ReportPC.ItemsSource = sqlcc.Report_PC_Filtered().DefaultView;
                 FilterReportPCText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsPCRep);
             }
             BlindfallSwitch();
@@ -1690,7 +1696,7 @@ namespace MigApp
             MigApp.Properties.Settings.Default.Save();
             FilterReportPCText.Text = "";
             ReportPC.Margin = new Thickness(0, 50, 5, 5);
-            ReportPC.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Computers", "").DefaultView;
+            ReportPC.ItemsSource = sqlcc.Report_PC().DefaultView;
         }
 
         // Ноутбуки
@@ -2166,12 +2172,14 @@ namespace MigApp
         #endregion
 
         #region Exel Экспорт
-
+        
         // Экспорт отчёта ПК
         private void ExportReportPC(object sender, RoutedEventArgs e)
         {
             mc.ExcelExport(ReportPC);
         }
+
+        
 
         // Экспорт отчёта Ноутбуков
         private void ExportReportNB(object sender, RoutedEventArgs e)
@@ -2189,6 +2197,69 @@ namespace MigApp
         private void ExportReportIP(object sender, RoutedEventArgs e)
         {
             mc.ExcelExport(ReportIP);
+        }
+
+        #endregion
+
+        #region Счётчики
+
+        private void SelectedCounter(object sender, SelectedCellsChangedEventArgs e)
+        {
+            // Пользовательские таблицы
+            if (sender.Equals(FavTable))
+                FavSelectedCount.Text = "Выбрано: " + FavTable.SelectedItems.Count.ToString();
+            else if (sender.Equals(EmployeeTable))
+                EmpSelectedCount.Text = "Выбрано: " + EmployeeTable.SelectedItems.Count.ToString();
+            else if (sender.Equals(PCTable))
+                PCSelectedCount.Text = "Выбрано: " + PCTable.SelectedItems.Count.ToString();
+            else if (sender.Equals(NotebookTable))
+                NBSelectedCount.Text = "Выбрано: " + NotebookTable.SelectedItems.Count.ToString();
+            else if (sender.Equals(TabletsTable))
+                TabSelectedCount.Text = "Выбрано: " + TabletsTable.SelectedItems.Count.ToString();
+            else if (sender.Equals(PrintersTable))
+                OTSelectedCount.Text = "Выбрано: " + PrintersTable.SelectedItems.Count.ToString();
+            else if (sender.Equals(MonitorsTable))
+                MonSelectedCount.Text = "Выбрано: " + MonitorsTable.SelectedItems.Count.ToString();
+            else if (sender.Equals(RoutersTable))
+                RoutSelectedCount.Text = "Выбрано: " + RoutersTable.SelectedItems.Count.ToString();
+            else if (sender.Equals(SwitchesTable))
+                SwitchSelectedCount.Text = "Выбрано: " + SwitchesTable.SelectedItems.Count.ToString();
+
+            // Отчёты
+            else if (sender.Equals(ReportPC))
+                PCRepSelectedCount.Text = "Выбрано: " + ReportPC.SelectedItems.Count.ToString();
+            else if (sender.Equals(ReportNB))
+                NBRepSelectedCount.Text = "Выбрано: " + ReportNB.SelectedItems.Count.ToString();
+            else if (sender.Equals(ReportTab))
+                TabRepSelectedCount.Text = "Выбрано: " + ReportTab.SelectedItems.Count.ToString();
+            else if (sender.Equals(ReportIP))
+                IPRepSelectedCount.Text = "Выбрано: " + ReportIP.SelectedItems.Count.ToString();
+
+            // Админпанель
+            else if (sender.Equals(UsersTable))
+                UserSelectedCount.Text = "Выбрано: " + UsersTable.SelectedItems.Count.ToString();
+            else if (sender.Equals(RolesTable))
+                RoleSelectedCount.Text = "Выбрано: " + RolesTable.SelectedItems.Count.ToString();
+            else if (sender.Equals(LogsTable))
+                LogSelectedCount.Text = "Выбрано: " + LogsTable.SelectedItems.Count.ToString();
+
+            // Архив
+            else if (sender.Equals(EmployeesDeleted))
+                EmpDelSelectedCount.Text = "Выбрано: " + EmployeesDeleted.SelectedItems.Count.ToString();
+            else if (sender.Equals(PCDeleted))
+                PCDelSelectedCount.Text = "Выбрано: " + PCDeleted.SelectedItems.Count.ToString();
+            else if (sender.Equals(NotebookDeleted))
+                NBDelSelectedCount.Text = "Выбрано: " + NotebookDeleted.SelectedItems.Count.ToString();
+            else if (sender.Equals(TabletsDeleted))
+                TabDelSelectedCount.Text = "Выбрано: " + TabletsDeleted.SelectedItems.Count.ToString();
+            else if (sender.Equals(OrgTechDeleted))
+                OTDelSelectedCount.Text = "Выбрано: " + OrgTechDeleted.SelectedItems.Count.ToString();
+            else if (sender.Equals(MonitorsDeleted))
+                MonDelSelectedCount.Text = "Выбрано: " + MonitorsDeleted.SelectedItems.Count.ToString();
+            else if (sender.Equals(RoutersDeleted))
+                RoutDelSelectedCount.Text = "Выбрано: " + RoutersDeleted.SelectedItems.Count.ToString();
+            else if (sender.Equals(SwitchesDeleted))
+                SwitchDelSelectedCount.Text = "Выбрано: " + SwitchesDeleted.SelectedItems.Count.ToString();
         }
 
         #endregion
@@ -2221,6 +2292,11 @@ namespace MigApp
             ReloadButton.IsEnabled = false;
             await Task.Delay(5000);
             ReloadButton.IsEnabled = true;
+        }
+
+        private void Filter_PCReport()
+        {
+            
         }
 
     }

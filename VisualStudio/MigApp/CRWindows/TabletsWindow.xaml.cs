@@ -111,7 +111,7 @@ namespace MigApp.CRWindows
         {
             userList.Clear();
             DataTable table = new DataTable();
-            table = sqlcc.DataGridUpdate("FIO", "Employees", "WHERE Deleted = 0");
+            table = sqlcc.DataGridUpdate("FIO", "Employees", "WHERE Deleted = 0 ORDER BY FIO ASC");
             foreach (DataRow row in table.Rows)
             {
                 userList.Add(row["FIO"].ToString());
