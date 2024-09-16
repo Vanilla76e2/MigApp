@@ -18,7 +18,9 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20">
                 <TextBlock Text="Отдел*" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" Width="100" Margin="0 0 10 0"/>
                 <ComboBox Name="Group" Style="{DynamicResource MaterialDesignComboBox}" FontSize="16" Foreground="White" Width="380">
+                    <ComboBoxItem Content="Административный управленческий аппарат"/>
                     <ComboBoxItem Content="Информационно-аналитический отдел"/>
+                    <ComboBoxItem Content="Контрактная служба"/>
                     <ComboBoxItem Content="Отдел бухгалтерского учёта"/>
                     <ComboBoxItem Content="Отдел звукорежессуры"/>
                     <ComboBoxItem Content="Отдел кадров"/>
