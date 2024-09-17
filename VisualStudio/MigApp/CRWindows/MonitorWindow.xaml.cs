@@ -263,6 +263,10 @@ namespace MigApp.CRWindows
 
         private void CreateNewEmployee(object sender, RoutedEventArgs e)
         {
+            User.Text = string.Empty;
+            PC.Text = string.Empty;
+            userList.Clear();
+            PCList.Clear();
             EmployeesWindow win = new EmployeesWindow(true, null, false);
             win.ShowDialog();
             UserListFill();
@@ -270,6 +274,10 @@ namespace MigApp.CRWindows
 
         private void CreateNewPC(object sender, RoutedEventArgs e)
         {
+            User.Text = string.Empty;
+            PC.Text = string.Empty;
+            userList.Clear();
+            PCList.Clear();
             PCWindow win = new PCWindow(true, null, false);
             win.ShowDialog();
             PCListFill(User.Text);

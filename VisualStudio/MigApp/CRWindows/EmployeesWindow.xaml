@@ -17,40 +17,15 @@
             
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20">
                 <TextBlock Text="Отдел*" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" Width="100" Margin="0 0 10 0"/>
-                <ComboBox Name="Group" Style="{DynamicResource MaterialDesignComboBox}" FontSize="16" Foreground="White" Width="380">
-                    <ComboBoxItem Content="Административный управленческий аппарат"/>
-                    <ComboBoxItem Content="Информационно-аналитический отдел"/>
-                    <ComboBoxItem Content="Контрактная служба"/>
-                    <ComboBoxItem Content="Отдел бухгалтерского учёта"/>
-                    <ComboBoxItem Content="Отдел звукорежессуры"/>
-                    <ComboBoxItem Content="Отдел кадров"/>
-                    <ComboBoxItem Content="Отдел маркетинга"/>
-                    <ComboBoxItem Content="Отдел монтажа и оформления"/>
-                    <ComboBoxItem Content="Отдел охраны труда"/>
-                    <ComboBoxItem Content="Отдел планирования и формирования вещания"/>
-                    <ComboBoxItem Content="Отдел по снабжению и содержанию"/>
-                    <ComboBoxItem Content="Отдел производства РВ программ"/>
-                    <ComboBoxItem Content="Отдел производства ТВ программ"/>
-                    <ComboBoxItem Content="Отдел развития и продвижения СМИ"/>
-                    <ComboBoxItem Content="Отдел телеоператоров"/>
-                    <ComboBoxItem Content="Планово-экономический отдел"/>
-                    <ComboBoxItem Content="Производственный отдел"/>
-                    <ComboBoxItem Content="Творческий отдел"/>
-                    <ComboBoxItem Content="Хозяйственный отдел"/>
-                    <ComboBoxItem Content="Художественно-производствнный отдел"/>
-                    <ComboBoxItem Content="Юридический отдел"/>
-                </ComboBox>
+                <ComboBox Name="Group" Style="{DynamicResource MaterialDesignComboBox}" FontSize="16" Foreground="White" Width="330"/>
+                <Button Content="+" Click="CreateNewGroup" Margin="10 0 0 0"/>
             </StackPanel>
-            
+
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20">
                 <TextBlock Text="Кабинет*" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" Width="100" Margin="0 0 10 0"/>
                 <TextBox Name="Room" Style="{DynamicResource MaterialDesignTextBox}" FontSize="16" Foreground="White" Width="380" MaxLength="3" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed" PreviewTextInput="NumOnly"/>
             </StackPanel>
             
-            <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock Text="Дата рождения" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" Width="330" Margin="0 0 10 0"/>
-                <DatePicker Name="BirthDate" Style="{DynamicResource MaterialDesignDatePicker}" FontSize="16" Foreground="White" Width="150" Language="ru" SelectedDateChanged="DateCheck"/>
-            </StackPanel>-->
         </StackPanel>
         <Button Click="SaveClick" Name="DoneButton" Content="Сохранить" VerticalAlignment="Bottom" FontSize="18" HorizontalAlignment="Right" Margin="20"/>
         <Button Click="RecoveryClick" Name="RecoveryButton" Content="Восстановить" VerticalAlignment="Bottom" FontSize="18" HorizontalAlignment="Right" Margin="20" Visibility="Collapsed"/>

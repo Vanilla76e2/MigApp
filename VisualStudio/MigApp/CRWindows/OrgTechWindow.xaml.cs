@@ -20,6 +20,7 @@ namespace MigApp.CRWindows
         string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
         string InventoryNum;
         bool Deleted;
+        string ip = "";
 
         // true - Создание
         // false - Редактирование
@@ -33,6 +34,7 @@ namespace MigApp.CRWindows
             Deleted = deleted;
             Start(invnum);
             InvNum.Focus();
+            Tip.ToolTip = "Ethernet: Введите номер кабинета\nUSB: Выберите пользователя и компьютер к которому подключено устройство";
         }
 
         // Нажатие кнопки "Сохранить"
@@ -47,13 +49,17 @@ namespace MigApp.CRWindows
                     // Если создание
                     if (Mode == true)
                     {
-                        sqlcc.ReqNonRef($"INSERT INTO OrgTech (InvNum, Type, Model, SNum, Name, IP, Login, Password, Сartridge_Model, PC, Comment) Values ('{InvNum.Text}', '{Type.Text}', '{Model.Text}', '{SeriaNum.Text}', '{OTName.Text}', '{ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text}', '{Login.Password}', '{Password.Password}', '{Cartrige.Text}', ({pc}), '{Comment.Text}')");
+                        if (ip1.Text.Length > 0 && ip2.Text.Length > 0 && ip3.Text.Length > 0 && ip4.Text.Length > 0)
+                            ip = ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text;
+                        sqlcc.ReqNonRef($"INSERT INTO OrgTech (InvNum, Type, Model, SNum, Name, IP, Login, Password, Сartridge_Model, PC, Comment) Values ('{InvNum.Text}', '{Type.Text}', '{Model.Text}', '{SeriaNum.Text}', '{OTName.Text}', '{ip}', '{Login.Password}', '{Password.Password}', '{Cartrige.Text}', ({pc}), '{Comment.Text}')");
                         sqlcc.Loging(CurrentUser, "Создание", "Орг.техника", InvNum.Text, "");
                     }
                     // Если редактирование
                     else
                     {
-                        sqlcc.ReqNonRef($"UPDATE OrgTech SET InvNum = '{InvNum.Text}', Type = '{Type.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', Name = '{OTName.Text}', IP = '{ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text}', Login = '{Login.Password}', Password = '{Password.Password}', Сartridge_Model = '{Cartrige.Text}', PC = ({pc}), Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
+                        if (ip1.Text.Length > 0 && ip2.Text.Length > 0 && ip3.Text.Length > 0 && ip4.Text.Length > 0)
+                            ip = ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text;
+                        sqlcc.ReqNonRef($"UPDATE OrgTech SET InvNum = '{InvNum.Text}', Type = '{Type.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', Name = '{OTName.Text}', IP = '{ip}', Login = '{Login.Password}', Password = '{Password.Password}', Сartridge_Model = '{Cartrige.Text}', PC = ({pc}), Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
                         sqlcc.Loging(CurrentUser, "Редактирование", "Орг.техника", InvNum.Text, "");
                     }
                     DialogResult = true; Close();
@@ -162,6 +168,7 @@ namespace MigApp.CRWindows
             {
                 Title = "Оргтехника (Создание)";
                 DeleteButton.Visibility = Visibility.Collapsed;
+                Ethernet.IsChecked = true;
             }
             else if (!Mode && !Deleted)
             {
@@ -414,6 +421,21 @@ namespace MigApp.CRWindows
             if (Convert.ToUInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM OrgTech WHERE InvNum LIKE '{invnum}'")) < 1)
                 return true;
             else return false;
+        }
+
+        private void Switchged(object sender, RoutedEventArgs e)
+        {
+            if (Ethernet.IsChecked == true)
+            {
+                RoomPanel.Visibility = Visibility.Visible;
+                UserPanel.Visibility = Visibility.Collapsed;
+            }
+            else if (USB.IsChecked == true)
+            {
+                RoomPanel.Visibility = Visibility.Collapsed;
+                UserPanel.Visibility = Visibility.Visible;
+            }
+
         }
     }
 }
