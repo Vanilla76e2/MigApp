@@ -1135,7 +1135,7 @@ namespace MigApp
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                EmployeeTable.Margin = new Thickness(0, 100, 5, 5);
+                EmployeeTable.Margin = new Thickness(0, 100, 5, 20);
                 EmployeeTable.ItemsSource = sqlcc.DataGridUpdate("*", "Employees_View", $"{MigApp.Properties.Settings.Default.comEmp}").DefaultView;
                 FilterEmpText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsEmp);
             }
@@ -1151,7 +1151,7 @@ namespace MigApp
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                PCTable.Margin = new Thickness(0, 100, 5, 5);
+                PCTable.Margin = new Thickness(0, 100, 5, 20);
                 PCTable.ItemsSource = sqlcc.DataGridUpdate("*", "PC_View", $"{MigApp.Properties.Settings.Default.comPC}").DefaultView;
                 FilterPCText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsPC);
             }
@@ -1167,7 +1167,7 @@ namespace MigApp
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                NotebookTable.Margin = new Thickness(0, 100, 5, 5);
+                NotebookTable.Margin = new Thickness(0, 100, 5, 20);
                 NotebookTable.ItemsSource = sqlcc.DataGridUpdate("*", " Notebooks_View", $"{MigApp.Properties.Settings.Default.comNB}").DefaultView;
                 FilterNotebookText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsNB);
             }
@@ -1183,7 +1183,7 @@ namespace MigApp
             win.ShowDialog();
             if(win.DialogResult == true)
             {
-                TabletsTable.Margin = new Thickness(0, 100, 5, 5);
+                TabletsTable.Margin = new Thickness(0, 100, 5, 20);
                 TabletsTable.ItemsSource = sqlcc.DataGridUpdate("*", "Tablet_View", $"{MigApp.Properties.Settings.Default.comTab}").DefaultView;
                 FilterTabletsText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsTab);
             }
@@ -1199,7 +1199,7 @@ namespace MigApp
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                PrintersTable.Margin = new Thickness(0, 100, 5, 5);
+                PrintersTable.Margin = new Thickness(0, 100, 5, 20);
                 PrintersTable.ItemsSource = sqlcc.DataGridUpdate("*", "OrgTech_View", $"{MigApp.Properties.Settings.Default.comOT}").DefaultView;
                 FilterOrgTechText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsOT);
             }
@@ -1215,7 +1215,7 @@ namespace MigApp
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                MonitorsTable.Margin = new Thickness(0, 100, 5, 5);
+                MonitorsTable.Margin = new Thickness(0, 100, 5, 20);
                 MonitorsTable.ItemsSource = sqlcc.DataGridUpdate("*", "Monitors_View", $"{MigApp.Properties.Settings.Default.comMon}").DefaultView;
                 FilterMonitorsText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsMon);
             }
@@ -1231,7 +1231,7 @@ namespace MigApp
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                RoutersTable.Margin = new Thickness(0, 100, 5, 5);
+                RoutersTable.Margin = new Thickness(0, 100, 5, 20);
                 RoutersTable.ItemsSource = sqlcc.DataGridUpdate("*", "Routers_View", $"{MigApp.Properties.Settings.Default.comRout}").DefaultView;
                 FilterRoutersText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsRout);
             }
@@ -1247,7 +1247,7 @@ namespace MigApp
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                SwitchesTable.Margin = new Thickness(0, 100, 5, 5);
+                SwitchesTable.Margin = new Thickness(0, 100, 5, 20);
                 SwitchesTable.ItemsSource = sqlcc.DataGridUpdate("*", "Routers_View", $"{MigApp.Properties.Settings.Default.comSwitch}").DefaultView;
                 FilterSwitchesText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsSwitch);
             }
@@ -1265,7 +1265,7 @@ namespace MigApp
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                UsersTable.Margin = new Thickness(0, 100, 5, 5);
+                UsersTable.Margin = new Thickness(0, 100, 5, 20);
                 UsersTable.ItemsSource = sqlcc.DataGridUpdate("*", "Users_View", $"{MigApp.Properties.Settings.Default.comUsers}").DefaultView;
                 FilterUsersText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsUsers);
             }
@@ -1281,7 +1281,7 @@ namespace MigApp
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                LogsTable.Margin = new Thickness(0, 100, 5, 5);
+                LogsTable.Margin = new Thickness(0, 100, 5, 20);
                 LogsTable.ItemsSource = sqlcc.DataGridUpdate("ID, Дата, Пользователь, Действие, Таблица, Запись", "Logs_View", $"{MigApp.Properties.Settings.Default.comLogs}").DefaultView;
                 FilterLogsText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsLogs);
             }
@@ -1300,7 +1300,7 @@ namespace MigApp
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                EmployeesDeleted.Margin = new Thickness(0, 100, 5, 5);
+                EmployeesDeleted.Margin = new Thickness(0, 100, 5, 20);
                 EmployeesDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Employees_Deleted", $"{MigApp.Properties.Settings.Default.comEmpDel}").DefaultView;
                 FilterEmployeesText_Del.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsEmpDel);
             }
@@ -1316,7 +1316,7 @@ namespace MigApp
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                PCDeleted.Margin = new Thickness(0, 100, 5, 5);
+                PCDeleted.Margin = new Thickness(0, 100, 5, 20);
                 PCDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "PC_Deleted", $"{MigApp.Properties.Settings.Default.comPCDel}").DefaultView;
                 FilterPCText_Del.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsPCDel);
             }
@@ -1332,7 +1332,7 @@ namespace MigApp
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                NotebookDeleted.Margin = new Thickness(0, 100, 5, 5);
+                NotebookDeleted.Margin = new Thickness(0, 100, 5, 20);
                 NotebookDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Notebooks_Deleted", $"{MigApp.Properties.Settings.Default.comNBDel}").DefaultView;
                 FilterNotebooksText_Del.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsNBDel);
             }
@@ -1348,7 +1348,7 @@ namespace MigApp
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                TabletsDeleted.Margin = new Thickness(0, 100, 5, 5);
+                TabletsDeleted.Margin = new Thickness(0, 100, 5, 20);
                 TabletsDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Tablet_Deleted", $"{MigApp.Properties.Settings.Default.comTabDel}").DefaultView;
                 FilterTabletsText_Del.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsTabDel);
             }
@@ -1364,7 +1364,7 @@ namespace MigApp
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                OrgTechDeleted.Margin = new Thickness(0, 100, 5, 5);
+                OrgTechDeleted.Margin = new Thickness(0, 100, 5, 20);
                 OrgTechDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "OrgTech_Deleted", $"{MigApp.Properties.Settings.Default.comOTDel}").DefaultView;
                 FilterOrgTechText_Del.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsOTDel);
             }
@@ -1380,7 +1380,7 @@ namespace MigApp
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                MonitorsDeleted.Margin = new Thickness(0, 100, 5, 5);
+                MonitorsDeleted.Margin = new Thickness(0, 100, 5, 20);
                 MonitorsDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Monitors_Deleted", $"{MigApp.Properties.Settings.Default.comMonDel}").DefaultView;
                 FilterMonitorsText_Del.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsMonDel);
             }
@@ -1396,7 +1396,7 @@ namespace MigApp
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                RoutersDeleted.Margin = new Thickness(0, 100, 5, 5);
+                RoutersDeleted.Margin = new Thickness(0, 100, 5, 20);
                 RoutersDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Routers_Deleted", $"{MigApp.Properties.Settings.Default.comRoutDel}").DefaultView;
                 FilterRoutersText_Del.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsRoutDel);
             }
@@ -1412,7 +1412,7 @@ namespace MigApp
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                SwitchesDeleted.Margin = new Thickness(0, 100, 5, 5);
+                SwitchesDeleted.Margin = new Thickness(0, 100, 5, 20);
                 SwitchesDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Switches_Deleted", $"{MigApp.Properties.Settings.Default.comSwitchDel}").DefaultView;
                 FilterSwitchesText_Del.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsSwitchDel);
             }
@@ -1431,7 +1431,7 @@ namespace MigApp
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                ReportPC.Margin = new Thickness(0, 100, 5, 5);
+                ReportPC.Margin = new Thickness(0, 100, 5, 20);
                 ReportPC.ItemsSource = null;
                 ReportPC.ItemsSource = sqlcc.Report_PC_Filtered().DefaultView;
                 FilterReportPCText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsPCRep);
@@ -1448,7 +1448,7 @@ namespace MigApp
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                ReportNB.Margin = new Thickness(0, 100, 5, 5);
+                ReportNB.Margin = new Thickness(0, 100, 5, 20);
                 ReportNB.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Notebooks", $"{MigApp.Properties.Settings.Default.comNBRep}").DefaultView;
                 FilterReportNBText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsNBRep);
             }
@@ -1464,7 +1464,7 @@ namespace MigApp
             win.ShowDialog();
             if (win.DialogResult == true)
             {
-                ReportTab.Margin = new Thickness(0, 100, 5, 5);
+                ReportTab.Margin = new Thickness(0, 100, 5, 20);
                 ReportTab.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Tablets", $"{MigApp.Properties.Settings.Default.comTabRep}").DefaultView;
                 FilterReportTabText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsTabRep);
             }
@@ -1490,7 +1490,7 @@ namespace MigApp
             MigApp.Properties.Settings.Default.ParamsEmp = null;
             MigApp.Properties.Settings.Default.Save();
             FilterEmpText.Text = "";
-            EmployeeTable.Margin = new Thickness(0, 50, 5, 5);
+            EmployeeTable.Margin = new Thickness(0, 50, 5, 20);
             EmployeeTable.ItemsSource = sqlcc.DataGridUpdate("*", "Employees_View", "").DefaultView;
         }
 
@@ -1501,7 +1501,7 @@ namespace MigApp
             MigApp.Properties.Settings.Default.ParamsPC = null;
             MigApp.Properties.Settings.Default.Save();
             FilterPCText.Text = "";
-            PCTable.Margin = new Thickness(0, 50, 5, 5);
+            PCTable.Margin = new Thickness(0, 50, 5, 20);
             PCTable.ItemsSource = sqlcc.DataGridUpdate("*", "PC_View", "").DefaultView;
         }
 
@@ -1512,7 +1512,7 @@ namespace MigApp
             MigApp.Properties.Settings.Default.ParamsNB = null;
             MigApp.Properties.Settings.Default.Save();
             FilterNotebookText.Text = "";
-            NotebookTable.Margin = new Thickness(0, 50, 5, 5);
+            NotebookTable.Margin = new Thickness(0, 50, 5, 20);
             NotebookTable.ItemsSource = sqlcc.DataGridUpdate("*", "Notebooks_View", "").DefaultView;
         }
 
@@ -1523,7 +1523,7 @@ namespace MigApp
             MigApp.Properties.Settings.Default.ParamsTab = null;
             MigApp.Properties.Settings.Default.Save();
             FilterTabletsText.Text = "";
-            TabletsTable.Margin = new Thickness(0, 50, 5, 5);
+            TabletsTable.Margin = new Thickness(0, 50, 5, 20);
             TabletsTable.ItemsSource = sqlcc.DataGridUpdate("*", "Tablet_View", "").DefaultView;
         }
 
@@ -1534,7 +1534,7 @@ namespace MigApp
             MigApp.Properties.Settings.Default.ParamsOT = null;
             MigApp.Properties.Settings.Default.Save();
             FilterOrgTechText.Text = "";
-            PrintersTable.Margin = new Thickness(0, 50, 5, 5);
+            PrintersTable.Margin = new Thickness(0, 50, 5, 20);
             PrintersTable.ItemsSource = sqlcc.DataGridUpdate("*", "OrgTech_View", "").DefaultView;
         }
 
@@ -1545,7 +1545,7 @@ namespace MigApp
             MigApp.Properties.Settings.Default.ParamsMon = null;
             MigApp.Properties.Settings.Default.Save();
             FilterMonitorsText.Text = "";
-            MonitorsTable.Margin = new Thickness(0, 50, 5, 5);
+            MonitorsTable.Margin = new Thickness(0, 50, 5, 20);
             MonitorsTable.ItemsSource = sqlcc.DataGridUpdate("*", "Monitors_View", "").DefaultView;
         }
 
@@ -1556,7 +1556,7 @@ namespace MigApp
             MigApp.Properties.Settings.Default.ParamsRout = null;
             MigApp.Properties.Settings.Default.Save();
             FilterRoutersText.Text = "";
-            RoutersTable.Margin = new Thickness(0, 50, 5, 5);
+            RoutersTable.Margin = new Thickness(0, 50, 5, 20);
             RoutersTable.ItemsSource = sqlcc.DataGridUpdate("*", "Routers_View", "").DefaultView;
         }
 
@@ -1567,7 +1567,7 @@ namespace MigApp
             MigApp.Properties.Settings.Default.ParamsSwitch = null;
             MigApp.Properties.Settings.Default.Save();
             FilterSwitchesText.Text = "";
-            SwitchesTable.Margin = new Thickness(0, 50, 5, 5);
+            SwitchesTable.Margin = new Thickness(0, 50, 5, 20);
             SwitchesTable.ItemsSource = sqlcc.DataGridUpdate("*", "Switches_View", "").DefaultView;
         }
         #endregion
@@ -1580,7 +1580,7 @@ namespace MigApp
             MigApp.Properties.Settings.Default.ParamsUsers = null;
             MigApp.Properties.Settings.Default.Save();
             FilterUsersText.Text = "";
-            UsersTable.Margin = new Thickness(0, 50, 5, 5);
+            UsersTable.Margin = new Thickness(0, 50, 5, 20);
             UsersTable.ItemsSource = sqlcc.DataGridUpdate("*", "Users_View", "").DefaultView;
         }
 
@@ -1591,7 +1591,7 @@ namespace MigApp
             MigApp.Properties.Settings.Default.ParamsLogs = null;
             MigApp.Properties.Settings.Default.Save();
             FilterLogsText.Text = "";
-            LogsTable.Margin = new Thickness(0, 50, 5, 5);
+            LogsTable.Margin = new Thickness(0, 50, 5, 20);
             LogsTable.ItemsSource = sqlcc.DataGridUpdate("*", "Logs_View", "").DefaultView;
         }
         #endregion
@@ -1604,7 +1604,7 @@ namespace MigApp
             MigApp.Properties.Settings.Default.ParamsEmpDel = null;
             MigApp.Properties.Settings.Default.Save();
             FilterEmployeesText_Del.Text = "";
-            EmployeesDeleted.Margin = new Thickness(0, 50, 5, 5);
+            EmployeesDeleted.Margin = new Thickness(0, 50, 5, 20);
             EmployeesDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Employees_Deleted", "").DefaultView;
         }
 
@@ -1615,7 +1615,7 @@ namespace MigApp
             MigApp.Properties.Settings.Default.ParamsPCDel = null;
             MigApp.Properties.Settings.Default.Save();
             FilterPCText_Del.Text = "";
-            PCDeleted.Margin = new Thickness(0, 50, 5, 5);
+            PCDeleted.Margin = new Thickness(0, 50, 5, 20);
             PCDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "PC_Deleted", "").DefaultView;
         }
 
@@ -1626,7 +1626,7 @@ namespace MigApp
             MigApp.Properties.Settings.Default.ParamsNBDel = null;
             MigApp.Properties.Settings.Default.Save();
             FilterNotebooksText_Del.Text = "";
-            NotebookDeleted.Margin = new Thickness(0, 50, 5, 5);
+            NotebookDeleted.Margin = new Thickness(0, 50, 5, 20);
             NotebookDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Notebooks_Deleted", "").DefaultView;
         }
 
@@ -1637,7 +1637,7 @@ namespace MigApp
             MigApp.Properties.Settings.Default.ParamsTabDel = null;
             MigApp.Properties.Settings.Default.Save();
             FilterTabletsText_Del.Text = "";
-            TabletsDeleted.Margin = new Thickness(0, 50, 5, 5);
+            TabletsDeleted.Margin = new Thickness(0, 50, 5, 20);
             TabletsDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Tablets_Deleted", "").DefaultView;
         }
 
@@ -1648,7 +1648,7 @@ namespace MigApp
             MigApp.Properties.Settings.Default.ParamsOTDel = null;
             MigApp.Properties.Settings.Default.Save();
             FilterOrgTechText_Del.Text = "";
-            OrgTechDeleted.Margin = new Thickness(0, 50, 5, 5);
+            OrgTechDeleted.Margin = new Thickness(0, 50, 5, 20);
             OrgTechDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "OrgTech_Deleted", "").DefaultView;
         }
 
@@ -1659,7 +1659,7 @@ namespace MigApp
             MigApp.Properties.Settings.Default.ParamsMonDel = null;
             MigApp.Properties.Settings.Default.Save();
             FilterMonitorsText_Del.Text = "";
-            MonitorsDeleted.Margin = new Thickness(0, 50, 5, 5);
+            MonitorsDeleted.Margin = new Thickness(0, 50, 5, 20);
             MonitorsDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Monitors_Deleted", "").DefaultView;
         }
 
@@ -1670,7 +1670,7 @@ namespace MigApp
             MigApp.Properties.Settings.Default.ParamsRoutDel = null;
             MigApp.Properties.Settings.Default.Save();
             FilterRoutersText_Del.Text = "";
-            RoutersDeleted.Margin = new Thickness(0, 50, 5, 5);
+            RoutersDeleted.Margin = new Thickness(0, 50, 5, 20);
             RoutersDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Routers_Deleted", "").DefaultView;
         }
 
@@ -1681,7 +1681,7 @@ namespace MigApp
             MigApp.Properties.Settings.Default.ParamsSwitchDel = null;
             MigApp.Properties.Settings.Default.Save();
             FilterSwitchesText_Del.Text = "";
-            SwitchesDeleted.Margin = new Thickness(0, 50, 5, 5);
+            SwitchesDeleted.Margin = new Thickness(0, 50, 5, 20);
             SwitchesDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Switches_Deleted", "").DefaultView;
         }
         #endregion
@@ -1695,7 +1695,7 @@ namespace MigApp
             MigApp.Properties.Settings.Default.comPCRep = null;
             MigApp.Properties.Settings.Default.Save();
             FilterReportPCText.Text = "";
-            ReportPC.Margin = new Thickness(0, 50, 5, 5);
+            ReportPC.Margin = new Thickness(0, 50, 5, 20);
             ReportPC.ItemsSource = sqlcc.Report_PC().DefaultView;
         }
 
@@ -1706,7 +1706,7 @@ namespace MigApp
             MigApp.Properties.Settings.Default.comNBRep = null;
             MigApp.Properties.Settings.Default.Save();
             FilterReportNBText.Text = "";
-            ReportNB.Margin = new Thickness(0, 50, 5, 5);
+            ReportNB.Margin = new Thickness(0, 50, 5, 20);
             ReportNB.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Notebooks", "").DefaultView;
         }
 
@@ -1717,7 +1717,7 @@ namespace MigApp
             MigApp.Properties.Settings.Default.comTabRep = null;
             MigApp.Properties.Settings.Default.Save();
             FilterReportTabText.Text = "";
-            ReportTab.Margin = new Thickness(0, 50, 5, 5);
+            ReportTab.Margin = new Thickness(0, 50, 5, 20);
             ReportTab.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Tablets", "").DefaultView;
         }
 

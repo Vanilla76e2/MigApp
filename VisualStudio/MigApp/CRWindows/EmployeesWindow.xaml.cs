@@ -106,15 +106,19 @@ namespace MigApp.CRWindows
             catch { }
         }
 
-        // Проверка даты
-        private void DateCheck(object sender, SelectionChangedEventArgs e)
+        private void ListFill()
         {
-            //if (BirthDate.SelectedDate > DateTime.Now.AddYears(-14))
-            //{
-            //    MessageBox.Show("Сотрудник не может быть младше 14 лет", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
-            //    BirthDate.SelectedDate = null;
-            //}
+            groupList.Clear();
+            DataTable table = new DataTable();
+            table = sqlcc.DataGridUpdate("*", "Group_View","");
+            foreach (DataRow row in table.Rows)
+            {
+                groupList.Add(row["Name"].ToString());
+            }
+            Group.ItemsSource = groupList;
         }
+
+        private List<string> groupList = new List<string>();
 
         // Заполнение полей и изменение названия окна
         private void Start(string ID)
@@ -123,18 +127,19 @@ namespace MigApp.CRWindows
             {
                 Title = "Сотрудники (Создание)";
                 DeleteButton.Visibility = Visibility.Collapsed;
+                ListFill();
             }
             else if (!Mode && !Deleted)
             {
                 try
                 {
                     Title = "Сотрудники (Редактирование)";
+                    ListFill();
                     table = sqlcc.DataGridUpdate("*", "Employees_View", $"WHERE ID LIKE {ID}");
                     DataRow row = table.Rows[0];
                     FIO.Text = row["ФИО"].ToString();
                     Group.Text = row["Отдел"].ToString();
                     Room.Text = row["Кабинет"].ToString();
-                    //BirthDate.Text = row["Дата рождения"].ToString();
                 }
                 catch
                 { MessageBox.Show("Запись не найдена", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); }
@@ -150,7 +155,6 @@ namespace MigApp.CRWindows
                     FIO.Text = row["ФИО"].ToString();
                     Group.Text = row["Отдел"].ToString();
                     Room.Text = row["Кабинет"].ToString();
-                    //BirthDate.Text = row["Дата рождения"].ToString();
                 }
                 catch
                 { MessageBox.Show("Запись не найдена", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); }
@@ -171,6 +175,13 @@ namespace MigApp.CRWindows
             Group.IsEnabled = false;
             Room.IsReadOnly = true;
             //BirthDate.IsEnabled = false;
+        }
+
+        private void CreateNewGroup(object sender, RoutedEventArgs e)
+        {
+            EmpGroupWindow win = new EmpGroupWindow();
+            win.ShowDialog();
+            ListFill();
         }
     }
 }

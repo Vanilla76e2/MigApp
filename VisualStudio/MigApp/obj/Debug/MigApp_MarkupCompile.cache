@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\App.xaml
-151297146157
+16-388036024
 
-21-1759398940
+22-1649786311
 24-406364969
-CRWindows\AdminPanel\RoleWindow.xaml;CRWindows\AdminPanel\UsersWindow.xaml;CRWindows\EmployeesWindow.xaml;CRWindows\MonitorWindow.xaml;CRWindows\NotebookWindow.xaml;CRWindows\OrgTechWindow.xaml;CRWindows\PCWindow.xaml;CRWindows\RoutersWindow.xaml;CRWindows\SwitchesWindow.xaml;CRWindows\TabletsWindow.xaml;LoginWindow.xaml;MainWindow.xaml;Resources\Them1.xaml;SearchWindow.xaml;SettingsWin.xaml;
+CRWindows\AdminPanel\RoleWindow.xaml;CRWindows\AdminPanel\UsersWindow.xaml;CRWindows\EmpGroupWindow.xaml;CRWindows\EmployeesWindow.xaml;CRWindows\MonitorWindow.xaml;CRWindows\NotebookWindow.xaml;CRWindows\OrgTechWindow.xaml;CRWindows\PCWindow.xaml;CRWindows\RoutersWindow.xaml;CRWindows\SwitchesWindow.xaml;CRWindows\TabletsWindow.xaml;LoginWindow.xaml;MainWindow.xaml;Resources\Them1.xaml;SearchWindow.xaml;SettingsWin.xaml;
 
 False
 

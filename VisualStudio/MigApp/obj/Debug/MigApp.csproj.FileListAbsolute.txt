@@ -441,3 +441,5 @@ C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MigApp.exe
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MigApp.pdb
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\SwitchesWindow.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\SwitchesWindow.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\EmpGroupWindow.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\EmpGroupWindow.baml

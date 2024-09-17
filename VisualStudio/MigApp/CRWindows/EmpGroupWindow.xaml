@@ -1,0 +1,23 @@
+﻿<Window x:Class="MigApp.CRWindows.EmpGroupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MigApp.CRWindows"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Отдел [режим]" Height="180" Width="550" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/CRWindows/AdminPanel/Icon.png">
+    <Grid Background="#323232">
+        <StackPanel VerticalAlignment="Top" Margin="0 30 0 0">
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20">
+                <TextBlock Text="Название*" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" MinWidth="100" Margin="0 0 10 0"/>
+                <TextBox Name="Name" Style="{DynamicResource MaterialDesignTextBox}" FontSize="16" Foreground="White" Width="380"/>
+            </StackPanel>
+
+        </StackPanel>
+        <Button Click="SaveClick" Name="DoneButton" Content="Сохранить" VerticalAlignment="Bottom" FontSize="18" HorizontalAlignment="Right" Margin="20"/>
+        <Button Click="RecoveryClick" Name="RecoveryButton" Content="Восстановить" VerticalAlignment="Bottom" FontSize="18" HorizontalAlignment="Right" Margin="20" Visibility="Collapsed"/>
+        <Button Click="DeleteClick" Name="DeleteButton" Content="Удалить" Style="{DynamicResource MaterialDesignOutlinedButton}" FontSize="18" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20"/>
+    </Grid>
+</Window>

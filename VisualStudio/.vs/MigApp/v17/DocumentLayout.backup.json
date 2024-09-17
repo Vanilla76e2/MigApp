@@ -3,37 +3,20 @@
   "WorkspaceRootPath": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|MigApp||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|c:\\myprograms\\github\\migapp\\visualstudio\\migapp\\crwindows\\orgtechwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\crwindows\\orgtechwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|c:\\myprograms\\github\\migapp\\visualstudio\\migapp\\crwindows\\orgtechwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\crwindows\\orgtechwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|c:\\myprograms\\github\\migapp\\visualstudio\\migapp\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\migapp\\classes\\sqlconnectionclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\classes\\sqlconnectionclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Vanilla76e2\\AppData\\Local\\Temp\\.vsdbgsrc\\ae8966a5e5a0ed0b4908c1f90f3546bfb0c9819d5e08d2bae3e77753f4d9a3f4\\ItemContainerGenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\migapp\\crwindows\\employeeswindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\crwindows\\employeeswindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\migapp\\crwindows\\employeeswindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\crwindows\\employeeswindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\migapp\\searchwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\searchwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\migapp\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|c:\\myprograms\\github\\migapp\\visualstudio\\migapp\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|5e9a8ac2-4f34-4521-858f-4c248ba31532"
     }
   ],
   "DocumentGroupContainers": [
@@ -47,7 +30,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 3,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MainWindow.xaml",
               "RelativeDocumentMoniker": "MigApp\\MainWindow.xaml",
@@ -59,13 +42,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "MigApp\\MainWindow.xaml.cs",
               "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MainWindow.xaml.cs",
               "RelativeToolTip": "MigApp\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAmwFwAAABGAAAAAAAAAA==",
+              "ViewState": "AgIAAEsHAAAAAAAAAAAIwFgHAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-29T03:35:38.041Z",
               "IsPinned": true,
@@ -74,77 +57,26 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MigApp",
-              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj",
-              "RelativeDocumentMoniker": "MigApp\\MigApp.csproj",
-              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj",
-              "RelativeToolTip": "MigApp\\MigApp.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-09-16T12:17:26.961Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "SearchWindow.xaml.cs",
-              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\SearchWindow.xaml.cs",
-              "RelativeDocumentMoniker": "MigApp\\SearchWindow.xaml.cs",
-              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\SearchWindow.xaml.cs",
-              "RelativeToolTip": "MigApp\\SearchWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-16T05:22:23.674Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SQLConnectionClass.cs",
-              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\Classes\\SQLConnectionClass.cs",
-              "RelativeDocumentMoniker": "MigApp\\Classes\\SQLConnectionClass.cs",
-              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\Classes\\SQLConnectionClass.cs",
-              "RelativeToolTip": "MigApp\\Classes\\SQLConnectionClass.cs",
-              "ViewState": "AgIAAO8AAAAAAAAAAAAQwCQBAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-16T04:30:55.122Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ItemContainerGenerator.cs",
-              "DocumentMoniker": "C:\\Users\\Vanilla76e2\\AppData\\Local\\Temp\\.vsdbgsrc\\ae8966a5e5a0ed0b4908c1f90f3546bfb0c9819d5e08d2bae3e77753f4d9a3f4\\ItemContainerGenerator.cs",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\Users\\Vanilla76e2\\AppData\\Local\\Temp\\.vsdbgsrc\\ae8966a5e5a0ed0b4908c1f90f3546bfb0c9819d5e08d2bae3e77753f4d9a3f4\\ItemContainerGenerator.cs",
-              "ToolTip": "C:\\Users\\Vanilla76e2\\AppData\\Local\\Temp\\.vsdbgsrc\\ae8966a5e5a0ed0b4908c1f90f3546bfb0c9819d5e08d2bae3e77753f4d9a3f4\\ItemContainerGenerator.cs",
-              "RelativeToolTip": "..\\..\\..\\..\\Users\\Vanilla76e2\\AppData\\Local\\Temp\\.vsdbgsrc\\ae8966a5e5a0ed0b4908c1f90f3546bfb0c9819d5e08d2bae3e77753f4d9a3f4\\ItemContainerGenerator.cs",
-              "ViewState": "AgIAAPMFAAAAAAAAAAApwPAFAABAAAAAAQAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-13T04:13:21.389Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "EmployeesWindow.xaml",
-              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\CRWindows\\EmployeesWindow.xaml",
-              "RelativeDocumentMoniker": "MigApp\\CRWindows\\EmployeesWindow.xaml",
-              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\CRWindows\\EmployeesWindow.xaml",
-              "RelativeToolTip": "MigApp\\CRWindows\\EmployeesWindow.xaml",
+              "Title": "OrgTechWindow.xaml",
+              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\CRWindows\\OrgTechWindow.xaml",
+              "RelativeDocumentMoniker": "MigApp\\CRWindows\\OrgTechWindow.xaml",
+              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\CRWindows\\OrgTechWindow.xaml",
+              "RelativeToolTip": "MigApp\\CRWindows\\OrgTechWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-09-13T04:10:12.533Z",
+              "WhenOpened": "2024-09-17T12:30:37.304Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "EmployeesWindow.xaml.cs",
-              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\CRWindows\\EmployeesWindow.xaml.cs",
-              "RelativeDocumentMoniker": "MigApp\\CRWindows\\EmployeesWindow.xaml.cs",
-              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\CRWindows\\EmployeesWindow.xaml.cs",
-              "RelativeToolTip": "MigApp\\CRWindows\\EmployeesWindow.xaml.cs",
-              "ViewState": "AgIAAFwAAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "OrgTechWindow.xaml.cs",
+              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\CRWindows\\OrgTechWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MigApp\\CRWindows\\OrgTechWindow.xaml.cs",
+              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\CRWindows\\OrgTechWindow.xaml.cs",
+              "RelativeToolTip": "MigApp\\CRWindows\\OrgTechWindow.xaml.cs",
+              "ViewState": "AgIAAHkAAAAAAAAAAAAcwAUAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-13T04:10:11.378Z",
+              "WhenOpened": "2024-09-17T12:30:31.949Z",
               "EditorCaption": ""
             }
           ]
