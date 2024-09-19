@@ -272,3 +272,5 @@ C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Release\MigApp.exe
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Release\MigApp.pdb
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Release\CRWindows\SwitchesWindow.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Release\CRWindows\SwitchesWindow.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Release\CRWindows\EmpGroupWindow.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Release\CRWindows\EmpGroupWindow.baml

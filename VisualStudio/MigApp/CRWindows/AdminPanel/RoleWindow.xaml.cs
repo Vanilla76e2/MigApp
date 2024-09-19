@@ -48,7 +48,8 @@ namespace MigApp.CRWindows.AdminPanel
                 {
                     if (Mode)
                     {
-                        sqlcc.ReqNonRef($"INSERT INTO Roles (Name, EmpVis, EmpRed, PCVis, PCRed, NoteVis, NoteRed, TabVis, TabRed, OTVis, OTRed, MonVis, MonRed, RoutVis, RoutRed, SwitchVis, SwitchRed) Values ('{RoleName.Text}', " +
+                        sqlcc.ReqNonRef($"INSERT INTO Roles (Name, EmpVis, EmpRed, GroupVis, GroupRed, PCVis, PCRed, NoteVis, NoteRed, TabVis, TabRed, OTVis, OTRed, MonVis, MonRed, RoutVis, RoutRed, SwitchVis, SwitchRed) Values ('{RoleName.Text}', " +
+                            $"{mc.BoolToString(GroupRead.IsChecked)}, {mc.BoolToString(GroupRedact.IsChecked)}, " +
                             $"{mc.BoolToString(EmpRead.IsChecked)}, {mc.BoolToString(EmpRedact.IsChecked)}, " +
                             $"{mc.BoolToString(PCRead.IsChecked)}, {mc.BoolToString(PCRedact.IsChecked)}, " +
                             $"{mc.BoolToString(NotebookRead.IsChecked)}, {mc.BoolToString(NotebookRedact.IsChecked)}, " +
@@ -62,6 +63,7 @@ namespace MigApp.CRWindows.AdminPanel
                     else
                     {
                         sqlcc.ReqNonRef($"UPDATE Roles SET Name = '{RoleName.Text}', EmpVis = {mc.BoolToString(EmpRead.IsChecked)}, EmpRed = {mc.BoolToString(EmpRedact.IsChecked)}, " +
+                            $"GroupVis = {mc.BoolToString(GroupRead.IsChecked)}, GroupRed = {mc.BoolToString(GroupRedact.IsChecked)}, " +
                             $"PCVis = {mc.BoolToString(PCRead.IsChecked)}, PCRed = {mc.BoolToString(PCRedact.IsChecked)}, " +
                             $"NoteVis = {mc.BoolToString(NotebookRead.IsChecked)}, NoteRed = {mc.BoolToString(NotebookRedact.IsChecked)}, " +
                             $"TabVis = {mc.BoolToString(TabletsRead.IsChecked)}, TabRed = {mc.BoolToString(TabletsRedact.IsChecked)}, " +
@@ -110,6 +112,12 @@ namespace MigApp.CRWindows.AdminPanel
             EmpRead.IsEnabled = false;
         }
 
+        private void GroupRedChecked(object sender, RoutedEventArgs e)
+        {
+            GroupRead.IsChecked = true;
+            GroupRead.IsEnabled = false;
+        }
+
         private void PCRedChecked(object sender, RoutedEventArgs e)
         {
             PCRead.IsChecked = true;
@@ -156,6 +164,11 @@ namespace MigApp.CRWindows.AdminPanel
         private void EmpRedUnhecked(object sender, RoutedEventArgs e)
         {
             EmpRead.IsEnabled = true;
+        }
+
+        private void GroupRedUnhecked(object sender, RoutedEventArgs e)
+        {
+            GroupRead.IsEnabled = true;
         }
 
         private void PCRedUnhecked(object sender, RoutedEventArgs e)
@@ -209,6 +222,8 @@ namespace MigApp.CRWindows.AdminPanel
                 RoleName.Text = table.Rows[0].Field<string>("Name");
                 EmpRead.IsChecked = table.Rows[0].Field<bool>("EmpVis");
                 EmpRedact.IsChecked = table.Rows[0].Field<bool>("EmpRed");
+                GroupRead.IsChecked = table.Rows[0].Field<bool>("GroupVis");
+                GroupRedact.IsChecked = table.Rows[0].Field<bool>("GroupRed");
                 PCRead.IsChecked = table.Rows[0].Field<bool>("PCVis");
                 PCRedact.IsChecked = table.Rows[0].Field<bool>("PCRed");
                 NotebookRead.IsChecked = table.Rows[0].Field<bool>("NoteVis");
@@ -221,9 +236,9 @@ namespace MigApp.CRWindows.AdminPanel
                 MonitorRedact.IsChecked = table.Rows[0].Field<bool>("MonRed");
                 RoutRead.IsChecked = table.Rows[0].Field<bool>("RoutVis");
                 RoutRedact.IsChecked = table.Rows[0].Field<bool>("RoutRed");
+                SwitchRead.IsChecked = table.Rows[0].Field<bool>("SwitchVis");
+                SwitchRedact.IsChecked = table.Rows[0].Field<bool>("SwitchRed");
             }
         }
-
-       
     }
 }

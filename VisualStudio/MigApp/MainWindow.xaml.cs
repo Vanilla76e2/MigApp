@@ -24,6 +24,7 @@ namespace MigApp
         #region Переменные
         string CurrentUser;
         bool EmpRedPerm, EmpRead = false;
+        bool GrRedPerm, GrRead = false;
         bool PCRedPerm, PCRead = false;
         bool NbRedPerm, NbRead = false;
         bool TabRedPerm, TabRead = false;
@@ -56,6 +57,8 @@ namespace MigApp
             FavTable.ItemsSource = sqlcc.DataGridUpdate("Дата, Таблица, Запись, Подробности", "Fav_View",$"WHERE [User] LIKE '{CurrentUser}'").DefaultView;
             if  (EmpRead || Admin)
                 EmployeeTable.ItemsSource = sqlcc.DataGridUpdate("*", "Employees_View", $"{MigApp.Properties.Settings.Default.comEmp}").DefaultView;
+            if (GrRead || Admin)
+                GroupsTable.ItemsSource = sqlcc.DataGridUpdate("Name as 'Наименование'", "Group_View", "").DefaultView;
             if (PCRead || Admin)
                 PCTable.ItemsSource = sqlcc.DataGridUpdate("*", "PC_View", $"{MigApp.Properties.Settings.Default.comPC}").DefaultView;
             if (NbRead || Admin)
@@ -122,6 +125,28 @@ namespace MigApp
                 }
             }
             catch { }
+        }
+
+        // Удаление групп
+        private void Delete_Group(object sender, RoutedEventArgs e)
+        {
+            if (GrRedPerm || Admin)
+            try
+            {
+                if (MessageBox.Show("Вы уверены что хотите удалить записи?\nЗаписи будут безвозвратно удалены.", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    foreach (var items in GroupsTable.SelectedItems)
+                    {
+                        DataRowView row = (DataRowView)items;
+                        string name = row.Row["Наименование"].ToString();
+                        sqlcc.ReqNonRef($"DELETE FROM [Group] WHERE Name LIKE '{name}'");
+                        sqlcc.Loging(CurrentUser, "Стирание", "Отделы", name, "");
+                    }
+                    UpdateAllTables();
+                }
+            }
+            catch { }
+            
         }
 
         // Удаление компьютеров
@@ -481,6 +506,19 @@ namespace MigApp
                 EmployeeCROpen(false, id, false);
             }
             catch { }
+        }
+
+        // Редактироваить отдел
+        private void Redact_Group(object sender, RoutedEventArgs e)
+        {
+            if (GrRedPerm || Admin)
+                try
+                {
+                    DataRowView item = GroupsTable.Items[GroupsTable.SelectedIndex] as DataRowView;
+                    string name = item.Row[0].ToString();
+                    GroupCROpen(false, name);
+                }
+                catch { }
         }
 
         // Редактировать ПК
@@ -1784,8 +1822,15 @@ namespace MigApp
         // Cоздать сотрудника
         private void EmployeeCreateClick(object sender, RoutedEventArgs e)
         {
-            if (EmpRedPerm)
+            if (EmpRedPerm || Admin)
                 EmployeeCROpen(true, null, false);
+        }
+
+        // Создать отдел
+        private void GroupCreateClick(object sender, RoutedEventArgs e)
+        {
+            if (GrRedPerm || Admin)
+                GroupCROpen(true, null);
         }
 
         // Создать компьютер
@@ -1854,7 +1899,7 @@ namespace MigApp
         // Открыть окно сотрудников
         private void EmployeeCROpen(bool mode, string id, bool deleted)
         {
-            EmployeesWindow win = new EmployeesWindow(mode, id, deleted);
+            EmployeesWindow win = new EmployeesWindow(mode, id, deleted, GrRedPerm);
             if (!deleted)
             {
                 BlindfallSwitch();
@@ -1872,11 +1917,22 @@ namespace MigApp
                 BlindfallSwitch();
             }
         }
-        
+
+        // Открыть окно отделов
+        private void GroupCROpen(bool mode, string name)
+        {
+            EmpGroupWindow win = new EmpGroupWindow(mode, name);
+            
+                BlindfallSwitch();
+                win.ShowDialog();
+                if (win.DialogResult == true) UpdateAllTables();
+                BlindfallSwitch();
+        }
+
         // Открыть окно ПК
         private void PCCROpen(bool mode, string invnum, bool deleted)
         {
-            PCWindow win = new PCWindow(mode, invnum, deleted);
+            PCWindow win = new PCWindow(mode, invnum, deleted, EmpRedPerm, GrRedPerm);
             if (!deleted)
             {
                 try
@@ -1902,7 +1958,7 @@ namespace MigApp
         // Открыть окно ноутбуков
         private void NotebookCROpen(bool mode, string invnum, bool deleted)
         {
-            NotebookWindow win = new NotebookWindow(mode, invnum, deleted);
+            NotebookWindow win = new NotebookWindow(mode, invnum, deleted, EmpRedPerm, GrRedPerm);
             if (!deleted)
             {
                 BlindfallSwitch();
@@ -1925,7 +1981,7 @@ namespace MigApp
          // Открыть окно планшеты
         private void TabletsCROpen(bool mode, string invnum, bool deleted)
         {
-            TabletsWindow win = new TabletsWindow(mode, invnum, deleted);
+            TabletsWindow win = new TabletsWindow(mode, invnum, deleted, EmpRedPerm, GrRedPerm);
             if (!deleted)
             {
                 BlindfallSwitch();
@@ -1947,7 +2003,7 @@ namespace MigApp
         // Открыть окно орг. техники
         private void OrgTechCROpen(bool mode, string invnum, bool deleted)
         {
-            OrgTechWindow win = new OrgTechWindow(mode, invnum, deleted);
+            OrgTechWindow win = new OrgTechWindow(mode, invnum, deleted, EmpRedPerm, PCRedPerm, GrRedPerm);
             if (!deleted)
             {
                 BlindfallSwitch();
@@ -1969,7 +2025,7 @@ namespace MigApp
         // Открыть окно мониторов
         private void MonitorCROpen(bool mode, string invnum, bool deleted)
         {
-            MonitorWindow win = new MonitorWindow(mode, invnum, deleted);
+            MonitorWindow win = new MonitorWindow(mode, invnum, deleted, EmpRedPerm, PCRedPerm, GrRedPerm);
             if (!deleted)
             {
                 BlindfallSwitch();
@@ -2093,10 +2149,20 @@ namespace MigApp
             if (row["EmpVis"].ToString() == "True" || row["AdminMode"].ToString() == "True")
             {
                 EmployeesGroup.Visibility = Visibility.Visible;
+                PersonsGroup.Visibility = Visibility.Visible;
                 EmpRead = true;
             }
             if (row["EmpRed"].ToString() == "True" || row["AdminMode"].ToString() == "True")
                 EmpRedPerm = true;
+
+            if (row["GroupVis"].ToString() == "True" || row["AdminMode"].ToString() == "True")
+            {
+                EmployeesGroup.Visibility = Visibility.Visible;
+                GroupsGroup.Visibility = Visibility.Visible;
+                GrRead = true;
+            }
+            if (row["GroupRed"].ToString() == "True" || row["AdminMode"].ToString() == "True")
+                GrRedPerm = true;
 
             if (row["PCVis"].ToString() == "True" || row["AdminMode"].ToString() == "True")
             {
@@ -2179,8 +2245,6 @@ namespace MigApp
             mc.ExcelExport(ReportPC);
         }
 
-        
-
         // Экспорт отчёта Ноутбуков
         private void ExportReportNB(object sender, RoutedEventArgs e)
         {
@@ -2210,6 +2274,8 @@ namespace MigApp
                 FavSelectedCount.Text = "Выбрано: " + FavTable.SelectedItems.Count.ToString();
             else if (sender.Equals(EmployeeTable))
                 EmpSelectedCount.Text = "Выбрано: " + EmployeeTable.SelectedItems.Count.ToString();
+            else if (sender.Equals(GroupsTable))
+                GrSelectedCount.Text = "Выбрано: " + GroupsTable.SelectedItems.Count.ToString();
             else if (sender.Equals(PCTable))
                 PCSelectedCount.Text = "Выбрано: " + PCTable.SelectedItems.Count.ToString();
             else if (sender.Equals(NotebookTable))
@@ -2293,11 +2359,5 @@ namespace MigApp
             await Task.Delay(5000);
             ReloadButton.IsEnabled = true;
         }
-
-        private void Filter_PCReport()
-        {
-            
-        }
-
     }
 }

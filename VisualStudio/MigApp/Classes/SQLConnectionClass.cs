@@ -2,6 +2,8 @@
 using System.Data.SqlClient;
 using System.Data;
 using System.Windows;
+using System.Windows.Documents;
+using System.Linq;
 
 namespace MigApp
 {
@@ -14,6 +16,7 @@ namespace MigApp
 
         private static SQLConnectionClass instance;
 
+        // Должен быть пустым
         private SQLConnectionClass()
         {
 

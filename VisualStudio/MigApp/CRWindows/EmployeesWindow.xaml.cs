@@ -1,17 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MigApp.CRWindows
 {
@@ -28,13 +19,13 @@ namespace MigApp.CRWindows
         // false - Редактирование
         bool Mode;
 
-        public EmployeesWindow(bool mode, string id, bool deleted)
+        public EmployeesWindow(bool mode, string id, bool deleted, bool emppermission)
         {
             InitializeComponent();
             Mode = mode;
             ID = id;
             Deleted = deleted;
-            Start(id);
+            Start(id, emppermission);
         }
 
         // Нажатие кнопки "Сохранить"
@@ -121,8 +112,14 @@ namespace MigApp.CRWindows
         private List<string> groupList = new List<string>();
 
         // Заполнение полей и изменение названия окна
-        private void Start(string ID)
+        private void Start(string ID, bool perm)
         {
+            if (!perm)
+            {
+                GroupAdd.Visibility = Visibility.Collapsed;
+                Group.Width = 380;
+            }
+
             if (Mode)
             {
                 Title = "Сотрудники (Создание)";
@@ -179,7 +176,7 @@ namespace MigApp.CRWindows
 
         private void CreateNewGroup(object sender, RoutedEventArgs e)
         {
-            EmpGroupWindow win = new EmpGroupWindow();
+            EmpGroupWindow win = new EmpGroupWindow(true, "");
             win.ShowDialog();
             ListFill();
         }
