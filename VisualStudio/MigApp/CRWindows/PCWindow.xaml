@@ -50,7 +50,7 @@
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5 0 5 30" Width="620">
                                         <TextBlock Text="ФИО пользователя" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" Width="270" Margin="0 0 20 0"/>
                                         <ComboBox Name="User" Style="{DynamicResource MaterialDesignComboBox}" Foreground="White" FontSize="16" Width="260" IsEditable="True" MaxDropDownHeight="200" IsTextSearchEnabled="False" TextBoxBase.TextChanged="UserChanged"/>
-                                        <Button Click="CreateNewEmployee" Content="+" Margin="28 0 0 0" ToolTip="Созать сотрудника"/>
+                                        <Button Name="EmployeeAdd" Click="CreateNewEmployee" Content="+" Margin="28 0 0 0" ToolTip="Созать сотрудника"/>
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5 0 5 30" Width="620">

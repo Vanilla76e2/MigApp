@@ -30,6 +30,7 @@
                             <RowDefinition Height="40"/>
                             <RowDefinition Height="40"/>
                             <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
                         </Grid.RowDefinitions>
 
                         <!-- Заголовок -->
@@ -67,6 +68,10 @@
                         <TextBlock Text="Свитчи" Style="{DynamicResource TextBlock_14}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="8" Grid.Column="0" FontSize="18"/>
                         <CheckBox Name="SwitchRead" HorizontalAlignment="Center" Grid.Row="8" Grid.Column="1"/>
                         <CheckBox Name="SwitchRedact" HorizontalAlignment="Center" Grid.Row="8" Grid.Column="2" Checked="SwitchRedChecked" Unchecked="SwitchRedUnhecked"/>
+                        <!-- Отделы -->
+                        <TextBlock Text="Отделы" Style="{DynamicResource TextBlock_14}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="9" Grid.Column="0" FontSize="18"/>
+                        <CheckBox Name="GroupRead" HorizontalAlignment="Center" Grid.Row="9" Grid.Column="1"/>
+                        <CheckBox Name="GroupRedact" HorizontalAlignment="Center" Grid.Row="9" Grid.Column="2" Checked="GroupRedChecked" Unchecked="GroupRedUnhecked"/>
                     </Grid>
                 </ScrollViewer>
             </Border>

@@ -19,20 +19,22 @@ namespace MigApp.CRWindows
         DataTable table = new DataTable();
         string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
         string InventoryNum;
-        bool Deleted;
+        bool Deleted, EmpPerm, GrPerm;
         string ip = "";
 
         // true - Создание
         // false - Редактирование
         bool Mode;
 
-        public OrgTechWindow(bool mode, string invnum, bool deleted)
+        public OrgTechWindow(bool mode, string invnum, bool deleted, bool emppermission, bool pcpermission, bool grouppermission)
         {
             InitializeComponent();
             Mode = mode;
             InventoryNum = invnum;
             Deleted = deleted;
-            Start(invnum);
+            EmpPerm = emppermission;
+            GrPerm = grouppermission;
+            Start(invnum, emppermission, pcpermission);
             InvNum.Focus();
             Tip.ToolTip = "Ethernet: Введите номер кабинета\nUSB: Выберите пользователя и компьютер к которому подключено устройство";
         }
@@ -51,7 +53,11 @@ namespace MigApp.CRWindows
                     {
                         if (ip1.Text.Length > 0 && ip2.Text.Length > 0 && ip3.Text.Length > 0 && ip4.Text.Length > 0)
                             ip = ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text;
-                        sqlcc.ReqNonRef($"INSERT INTO OrgTech (InvNum, Type, Model, SNum, Name, IP, Login, Password, Сartridge_Model, PC, Comment) Values ('{InvNum.Text}', '{Type.Text}', '{Model.Text}', '{SeriaNum.Text}', '{OTName.Text}', '{ip}', '{Login.Password}', '{Password.Password}', '{Cartrige.Text}', ({pc}), '{Comment.Text}')");
+                        else ip = "...";
+                        if (Ethernet.IsChecked == true)
+                            sqlcc.ReqNonRef($"INSERT INTO OrgTech (InvNum, Type, Model, SNum, Name, IP, Login, Password, Сartridge_Model, Room, Comment) Values ('{InvNum.Text}', '{Type.Text}', '{Model.Text}', '{SeriaNum.Text}', '{OTName.Text}', '{ip}', '{Login.Password}', '{Password.Password}', '{Cartrige.Text}', ({Room.Text}), '{Comment.Text}')");
+                        else if (USB.IsChecked == true)
+                            sqlcc.ReqNonRef($"INSERT INTO OrgTech (InvNum, Type, Model, SNum, Name, Login, Password, Сartridge_Model, PC, Comment) Values ('{InvNum.Text}', '{Type.Text}', '{Model.Text}', '{SeriaNum.Text}', '{OTName.Text}', '{Login.Password}', '{Password.Password}', '{Cartrige.Text}', ({pc}), '{Comment.Text}')");
                         sqlcc.Loging(CurrentUser, "Создание", "Орг.техника", InvNum.Text, "");
                     }
                     // Если редактирование
@@ -59,7 +65,11 @@ namespace MigApp.CRWindows
                     {
                         if (ip1.Text.Length > 0 && ip2.Text.Length > 0 && ip3.Text.Length > 0 && ip4.Text.Length > 0)
                             ip = ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text;
-                        sqlcc.ReqNonRef($"UPDATE OrgTech SET InvNum = '{InvNum.Text}', Type = '{Type.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', Name = '{OTName.Text}', IP = '{ip}', Login = '{Login.Password}', Password = '{Password.Password}', Сartridge_Model = '{Cartrige.Text}', PC = ({pc}), Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
+                        else ip = "...";
+                        if (Ethernet.IsChecked == true)
+                            sqlcc.ReqNonRef($"UPDATE OrgTech SET InvNum = '{InvNum.Text}', Type = '{Type.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', Name = '{OTName.Text}', IP = '{ip}', Login = '{Login.Password}', Password = '{Password.Password}', Сartridge_Model = '{Cartrige.Text}', Room = '{Room.Text}', PC = NULL, Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
+                        else if (USB.IsChecked == true)
+                            sqlcc.ReqNonRef($"UPDATE OrgTech SET InvNum = '{InvNum.Text}', Type = '{Type.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', Name = '{OTName.Text}', IP = '{ip}', Login = '{Login.Password}', Password = '{Password.Password}', Сartridge_Model = '{Cartrige.Text}', Room = NULL, PC = ({pc}), Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
                         sqlcc.Loging(CurrentUser, "Редактирование", "Орг.техника", InvNum.Text, "");
                     }
                     DialogResult = true; Close();
@@ -161,8 +171,18 @@ namespace MigApp.CRWindows
         #endregion
 
         // Заполнение полей и изменение названия окна
-        private void Start(string Invnum)
+        private void Start(string Invnum, bool empperm, bool pcperm)
         {
+            if (!empperm)
+            {
+                EmployeeAdd.Visibility = Visibility.Collapsed;
+                User.Width = 320;
+            }
+            if (!pcperm)
+            {
+                PCAdd.Visibility = Visibility.Collapsed;
+                PC.Width = 320;
+            }
             UserListFill();
             if (Mode)
             {
@@ -174,10 +194,20 @@ namespace MigApp.CRWindows
             {
                 try
                 {
+
                     Title = "Оргтехника (Редактирование)";
                     InvNum.Text = Invnum;
                     table = sqlcc.DataGridUpdate("*", "OrgTech_View", $"WHERE [Инвентарный номер] Like '{Invnum}'");
                     DataRow row = table.Rows[0];
+
+                    if (row["Пользователь"].ToString().Length > 0)
+                        USB.IsChecked = true;
+                    else
+                    {
+                        Ethernet.IsChecked = true;
+                        Room.Text = row["Кабинет"].ToString();
+                    }
+
                     Type.Text = row["Тип"].ToString();
                     Model.Text = row["Модель"].ToString();
                     SeriaNum.Text = row["Серийный номер"].ToString();
@@ -217,6 +247,15 @@ namespace MigApp.CRWindows
                     InvNum.Text = Invnum;
                     table = sqlcc.DataGridUpdate("*", "OrgTech_Deleted", $"WHERE [Инвентарный номер] Like '{Invnum}'");
                     DataRow row = table.Rows[0];
+
+                    if (row["Пользователь"].ToString().Length > 0)
+                        USB.IsChecked = true;
+                    else
+                    {
+                        Ethernet.IsChecked = true;
+                        Room.Text = row["Кабинет"].ToString();
+                    }
+
                     Type.Text = row["Тип"].ToString();
                     Model.Text = row["Модель"].ToString();
                     SeriaNum.Text = row["Серийный номер"].ToString();
@@ -400,14 +439,14 @@ namespace MigApp.CRWindows
 
         private void CreateNewEmployee(object sender, RoutedEventArgs e)
         {
-            EmployeesWindow win = new EmployeesWindow(true, null, false);
+            EmployeesWindow win = new EmployeesWindow(true, null, false, GrPerm);
             win.ShowDialog();
             UserListFill();
         }
 
         private void CreateNewPC(object sender, RoutedEventArgs e)
         {
-            PCWindow win = new PCWindow(true, null, false);
+            PCWindow win = new PCWindow(true, null, false, EmpPerm, GrPerm);
             win.ShowDialog();
             PCListFill(User.Text);
             if (PCList.Count() == 0)
@@ -429,11 +468,14 @@ namespace MigApp.CRWindows
             {
                 RoomPanel.Visibility = Visibility.Visible;
                 UserPanel.Visibility = Visibility.Collapsed;
+                User.Text = string.Empty;
+                PC.Text = string.Empty;
             }
             else if (USB.IsChecked == true)
             {
                 RoomPanel.Visibility = Visibility.Collapsed;
                 UserPanel.Visibility = Visibility.Visible;
+                Room.Text = string.Empty;
             }
 
         }

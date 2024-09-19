@@ -239,6 +239,10 @@
                     <TextBox Name="Cartridge_OT" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <TextBlock Text="Кабинет" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
+                    <TextBox Name="Room_OT" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
                     <TextBlock Text="Пользователь" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
                     <TextBox Name="User_OT" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
                 </StackPanel>
@@ -661,6 +665,10 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
                     <TextBlock Text="Картридж" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
                     <TextBox Name="Cartridge_OT_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <TextBlock Text="Кабинет" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
+                    <TextBox Name="Room_OT_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
                     <TextBlock Text="Пользователь" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>

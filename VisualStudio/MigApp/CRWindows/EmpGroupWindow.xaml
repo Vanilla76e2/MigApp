@@ -12,12 +12,11 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20">
                 <TextBlock Text="Название*" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" MinWidth="100" Margin="0 0 10 0"/>
-                <TextBox Name="Name" Style="{DynamicResource MaterialDesignTextBox}" FontSize="16" Foreground="White" Width="380"/>
+                <TextBox Name="GroupName" Style="{DynamicResource MaterialDesignTextBox}" FontSize="16" Foreground="White" Width="380"/>
             </StackPanel>
 
         </StackPanel>
         <Button Click="SaveClick" Name="DoneButton" Content="Сохранить" VerticalAlignment="Bottom" FontSize="18" HorizontalAlignment="Right" Margin="20"/>
-        <Button Click="RecoveryClick" Name="RecoveryButton" Content="Восстановить" VerticalAlignment="Bottom" FontSize="18" HorizontalAlignment="Right" Margin="20" Visibility="Collapsed"/>
         <Button Click="DeleteClick" Name="DeleteButton" Content="Удалить" Style="{DynamicResource MaterialDesignOutlinedButton}" FontSize="18" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20"/>
     </Grid>
 </Window>

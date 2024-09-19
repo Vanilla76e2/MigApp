@@ -19,19 +19,21 @@ namespace MigApp.CRWindows
         DataTable table = new DataTable();
         string InventoryNum;
         string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
-        bool Deleted;
+        bool Deleted, EmpPerm, GrPerm;
 
         // true - Создание
         // false - Редактирование
         bool Mode;
 
-        public MonitorWindow(bool mode, string invnum, bool deleted)
+        public MonitorWindow(bool mode, string invnum, bool deleted, bool emppermission, bool pcpermission, bool grouppermission)
         {
             InitializeComponent();
             Mode = mode;
             InventoryNum = invnum;
             Deleted = deleted;
-            Start(invnum);
+            EmpPerm = emppermission;
+            GrPerm = grouppermission;
+            Start(invnum, emppermission, pcpermission);
             InvNum.Focus();
         }
 
@@ -155,8 +157,18 @@ namespace MigApp.CRWindows
         #endregion
 
         // Заполнение полей и изменение названия окна
-        private void Start(string Invnum)
+        private void Start(string Invnum, bool emppermission, bool pcpermission)
         {
+            if(emppermission)
+            {
+                EmployeeAdd.Visibility = Visibility.Collapsed;
+                User.Width = 330;
+            }
+            if(pcpermission)
+            {
+                PCAdd.Visibility = Visibility.Collapsed;
+                PC.Width = 330;
+            }
             UserListFill();
             if (Mode)
             {
@@ -267,7 +279,7 @@ namespace MigApp.CRWindows
             PC.Text = string.Empty;
             userList.Clear();
             PCList.Clear();
-            EmployeesWindow win = new EmployeesWindow(true, null, false);
+            EmployeesWindow win = new EmployeesWindow(true, null, false, GrPerm);
             win.ShowDialog();
             UserListFill();
         }
@@ -278,7 +290,7 @@ namespace MigApp.CRWindows
             PC.Text = string.Empty;
             userList.Clear();
             PCList.Clear();
-            PCWindow win = new PCWindow(true, null, false);
+            PCWindow win = new PCWindow(true, null, false, EmpPerm, GrPerm);
             win.ShowDialog();
             PCListFill(User.Text);
             if (PCList.Count() == 0)

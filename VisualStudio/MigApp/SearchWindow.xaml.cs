@@ -130,7 +130,7 @@ namespace MigApp
             else if (mode == "OT")
             {
                 SearchPanel_OT.Visibility = Visibility.Visible;
-                this.Height = 420;
+                this.Height = 480;
                 Type_OT.Text = "Не выбрано";
                 if (MigApp.Properties.Settings.Default.ParamsOT != null)
                 {
@@ -144,9 +144,10 @@ namespace MigApp
                     User_OT.Text = Parametrs[4];
                     Name_OT.Text = Parametrs[5];
                     Cartridge_OT.Text = Parametrs[6];
+                    Room_OT.Text = Parametrs[7];
                     try
                     {
-                        string[] ip = Parametrs[7].Split('.');
+                        string[] ip = Parametrs[8].Split('.');
                         if (ip[0] != "%")
                             ip1_OT.Text = ip[0];
                         if (ip[1] != "%")
@@ -396,7 +397,7 @@ namespace MigApp
             else if (mode == "OTDel")
             {
                 SearchPanel_OTDel.Visibility = Visibility.Visible;
-                this.Height = 400;
+                this.Height = 480;
                 Type_OT_Del.Text = "Не выбрано";
                 if (MigApp.Properties.Settings.Default.ParamsOTDel != null)
                 {
@@ -410,9 +411,10 @@ namespace MigApp
                     User_OT_Del.Text = Parametrs[4];
                     Name_OT_Del.Text = Parametrs[5];
                     Cartridge_OT_Del.Text = Parametrs[6];
+                    Room_OT_Del.Text = Parametrs[7];
                     try
                     {
-                        string[] ip = Parametrs[7].Split('.');
+                        string[] ip = Parametrs[8].Split('.');
                         if (ip[0] != "%")
                             ip1_OT_Del.Text = ip[0];
                         if (ip[1] != "%")
@@ -747,6 +749,8 @@ namespace MigApp
                     command += $"Картридж Like '%{Cartridge_OT.Text}%' AND ";
                 if (User_OT.Text.Length > 0)
                     command += $"Пользователь Like '%{User_OT.Text}%' AND ";
+                if (Room_OT.Text.Length > 0)
+                    command += $"Кабинет Like '%{Room_OT.Text}%' AND ";
                 command += $"[Инвентарный номер] NOT Like 'Placeholder'";
                 if (command != "Where [Инвентарный номер] NOT Like 'Placeholder'")
                 {
@@ -754,7 +758,7 @@ namespace MigApp
                     if (Type_OT.Text != "Не выбрано")
                         Parametrs = $"{Type_OT.Text}|";
                     else Parametrs = "|";
-                    Parametrs += $"{InvNum_OT.Text}|{Model_OT.Text}|{SeriaNum_OT.Text}|{User_OT.Text}|{Name_OT.Text}|{Cartridge_OT.Text}";
+                    Parametrs += $"{InvNum_OT.Text}|{Model_OT.Text}|{SeriaNum_OT.Text}|{User_OT.Text}|{Name_OT.Text}|{Cartridge_OT.Text}|{Room_OT.Text}";
                     if (ip1_OT.Text.Length > 0 || ip2_OT.Text.Length > 0 || ip3_OT.Text.Length > 0 || ip4_OT.Text.Length > 0)
                         Parametrs += $"|{mc.IPSearcher(ip1_OT.Text, ip2_OT.Text, ip3_OT.Text, ip4_OT.Text)}";
                     else Parametrs += "|";
@@ -1082,6 +1086,8 @@ namespace MigApp
                     command += $"Картридж Like '%{Cartridge_OT_Del.Text}%' AND ";
                 if (User_OT_Del.Text.Length > 0)
                     command += $"Пользователь Like '%{User_OT_Del.Text}%' AND ";
+                if (Room_OT_Del.Text.Length > 0)
+                    command += $"Кабинет Like '%{Room_OT_Del.Text}%' AND ";
                 command += $"[Инвентарный номер] NOT Like 'Placeholder'";
                 if (command != "Where [Инвентарный номер] NOT Like 'Placeholder'")
                 {
@@ -1089,7 +1095,7 @@ namespace MigApp
                     if (Type_OT_Del.Text.Length > 0 && Type_OT_Del.Text != "Не выбрано")
                         Params = $"{Type_OT_Del.Text}|";
                     else Params = "|";
-                    Params += $"{InvNum_OT_Del.Text}|{Model_OT_Del.Text}|{SeriaNum_OT_Del.Text}|{User_OT_Del.Text}|{Name_OT_Del.Text}|{Cartridge_OT_Del.Text}|{User_OT_Del.Text}";
+                    Params += $"{InvNum_OT_Del.Text}|{Model_OT_Del.Text}|{SeriaNum_OT_Del.Text}|{User_OT_Del.Text}|{Name_OT_Del.Text}|{Cartridge_OT_Del.Text}|{User_OT_Del.Text}|{Room_OT_Del.Text}";
                     if (ip1_OT_Del.Text.Length > 0 || ip2_OT_Del.Text.Length > 0 || ip3_OT_Del.Text.Length > 0 || ip4_OT_Del.Text.Length > 0)
                         Params += $"|{mc.IPSearcher(ip1_OT_Del.Text, ip2_OT_Del.Text, ip3_OT_Del.Text, ip4_OT_Del.Text)}";
                     else command += "|";

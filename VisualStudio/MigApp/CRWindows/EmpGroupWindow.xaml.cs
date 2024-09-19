@@ -1,17 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-
 namespace MigApp.CRWindows
 {
     /// <summary>
@@ -20,25 +8,39 @@ namespace MigApp.CRWindows
     public partial class EmpGroupWindow : Window
     {
         SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
+        string NAME;
         string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
-        public EmpGroupWindow()
+
+        bool Mode = false;
+        public EmpGroupWindow(bool mode, string name)
         {
             InitializeComponent();
+            NAME = name;
+            Mode = mode;
+            Start();
         }
 
         private void SaveClick(object sender, RoutedEventArgs e)
         {
-            if (Name.Text.Length > 0)
+            if (GroupName.Text.Length > 0)
             {
-                if (Convert.ToInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM [Group] Where Name LIKE '{Name.Text}'")) < 1)
-                {                       
-                    sqlcc.ReqNonRef($"INSERT INTO [Group] (Name) Values ('{Name.Text}')");
-                    sqlcc.Loging(CurrentUser, "Создание", "Отделы", Name.Text, "");
-                    Close();
+                if (Convert.ToInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM [Group] Where Name LIKE '{GroupName.Text}'")) < 1)
+                {   
+                    if (Mode)
+                    {
+                        sqlcc.ReqNonRef($"INSERT INTO [Group] (Name) Values ('{GroupName.Text}')");
+                        sqlcc.Loging(CurrentUser, "Создание", "Отделы", GroupName.Text, "");
+                    }
+                    else
+                    {
+                        sqlcc.ReqNonRef($"UPDATE [Group] Name = '{GroupName.Text}'");
+                        sqlcc.Loging(CurrentUser, "Редактирование", "Отделы", GroupName.Text, "");
+                    }
+                    DialogResult = true; Close();
                 }
                 else
                 {
-                    Name.Focus();
+                    GroupName.Focus();
                     MessageBox.Show("Такой отдел уже существует.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
@@ -48,14 +50,25 @@ namespace MigApp.CRWindows
             }
         }
 
-        private void RecoveryClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void DeleteClick(object sender, RoutedEventArgs e)
         {
+            sqlcc.ReqDel($"Delete From [Group] Where Name Like '{NAME}'");
+            sqlcc.Loging(CurrentUser, "Стирание", "Отделы", GroupName.Text, "");
+            DialogResult = true; Close();
+        }
 
+        private void Start()
+        {
+            if (Mode)
+            {
+                Title = "Отдел (Создание)";
+                DeleteButton.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                Title = "Отдел (Редактирование)";
+                GroupName.Text = NAME;
+            }
         }
     }
 }

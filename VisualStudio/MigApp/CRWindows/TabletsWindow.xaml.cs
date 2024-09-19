@@ -19,20 +19,21 @@ namespace MigApp.CRWindows
         DataTable table = new DataTable();
         string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
         string InventoryNum;
-        bool Deleted;
+        bool Deleted, GrPerm;
 
         // true - Создание
         // false - Редактирование
         bool Mode;
 
-        public TabletsWindow(bool mode, string invnum, bool deleted)
+        public TabletsWindow(bool mode, string invnum, bool deleted, bool emppermission, bool grouppermission)
         {
             InitializeComponent();
             Mode = mode;
             InvNum.Focus();
             InventoryNum = invnum;
             Deleted = deleted;
-            Start(invnum);
+            GrPerm = grouppermission;
+            Start(invnum, emppermission);
         }
 
         // Нажатие кнопки "Сохранить"
@@ -133,8 +134,14 @@ namespace MigApp.CRWindows
         #endregion
 
         // Заполнение полей и изменение названия окна
-        private void Start(string Invnum)
+        private void Start(string Invnum, bool perm)
         {
+            if (!perm) 
+            {
+                EmployeeAdd.Visibility = Visibility.Collapsed;
+                User.Width = 330;
+            }
+
             ListFill();
             if (Mode)
             {
@@ -226,7 +233,7 @@ namespace MigApp.CRWindows
 
         private void CreateNewEmployee(object sender, RoutedEventArgs e)
         {
-            EmployeesWindow win = new EmployeesWindow(true, null, false);
+            EmployeesWindow win = new EmployeesWindow(true, null, false, GrPerm);
             win.ShowDialog();
             ListFill();
         }
