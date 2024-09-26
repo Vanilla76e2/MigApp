@@ -61,7 +61,13 @@
                                                     </StackPanel>
                                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20" Width="550">
                                                         <TextBlock Text="Компьютер" Style="{DynamicResource TextBlock_20}" MinWidth="210" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
-                                                        <ComboBox Name="PC" Style="{DynamicResource MaterialDesignComboBox}" Foreground="White" FontSize="16" Width="278" MaxDropDownHeight="200" IsEnabled="False"/>
+                                                        <ComboBox Name="PC" Style="{DynamicResource MaterialDesignComboBox}" Foreground="White" FontSize="16" Width="278" MaxDropDownHeight="200" IsEnabled="False">
+                                                            <ComboBox.ContextMenu>
+                                                                <ContextMenu>
+                                                                    <MenuItem Header="Очистить" Click="ClearPC"/>
+                                                                </ContextMenu>
+                                                            </ComboBox.ContextMenu>
+                                                        </ComboBox>
                                                         <Button Name="PCAdd" Content="+" Click="CreateNewPC" Margin="10 0 0 0"/>
                                                     </StackPanel>
                                                 </StackPanel>
