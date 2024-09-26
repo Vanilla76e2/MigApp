@@ -284,6 +284,12 @@ namespace MigApp.CRWindows
             UserListFill();
         }
 
+        private void ClearPC(object sender, RoutedEventArgs e)
+        {
+            PC.Text = string.Empty;
+            PC.SelectedIndex = -1;
+        }
+
         private void CreateNewPC(object sender, RoutedEventArgs e)
         {
             User.Text = string.Empty;

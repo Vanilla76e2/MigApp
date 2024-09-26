@@ -455,6 +455,12 @@ namespace MigApp.CRWindows
             }
         }
 
+        private void ClearPC(object sender, RoutedEventArgs e)
+        {
+            PC.Text = string.Empty;
+            PC.SelectedIndex = -1;
+        }
+
         private bool InvNumChecker(string invnum)
         {
             if (Convert.ToUInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM OrgTech WHERE InvNum LIKE '{invnum}'")) < 1)
