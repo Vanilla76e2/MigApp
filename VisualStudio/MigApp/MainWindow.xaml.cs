@@ -805,8 +805,10 @@ namespace MigApp
                 { MonitorCROpen(false, item.Row["Запись"].ToString(), false); }  
                 else if (item.Row["Таблица"].ToString() == "Роутеры" && (RoutRedPerm || Admin))
                 { RoutersCROpen(false, item.Row["Запись"].ToString(), false); }
-                else if (item.Row["Таблица"].ToString() == "Свитчи" && (RoutRedPerm || Admin))
-                { RoutersCROpen(false, item.Row["Запись"].ToString(), false); }
+                else if (item.Row["Таблица"].ToString() == "Свитчи" && (SwitchRedPerm || Admin))
+                { SwitchesCROpen(false, item.Row["Запись"].ToString(), false); }
+                else if (item.Row["Таблица"].ToString() == "Мебель" && (FurnRedPerm || Admin))
+                { FurnitureCROpen(false, item.Row["Запись"].ToString(), false); }
             }
             catch { }
         }

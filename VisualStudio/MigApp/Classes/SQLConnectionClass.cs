@@ -73,18 +73,18 @@ namespace MigApp
         // Запрос без возврата
         public void ReqNonRef (string text)
         {
-            try
-            {
-                sqlConnection.Open();
-                SqlCommand com = new SqlCommand(text, sqlConnection);
-                com.ExecuteNonQuery();
-                //sqlConnection.Close();
-            }
-            catch { MessageBox.Show("Error ReqNonRef\nНе удалось выполнить запрос.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); }
-            finally { sqlConnection.Close(); }
+            //try
+            //{
+            sqlConnection.Open();
+            SqlCommand com = new SqlCommand(text, sqlConnection);
+            com.ExecuteNonQuery();
+            sqlConnection.Close();
+            //}
+            //catch { MessageBox.Show("Error ReqNonRef\nНе удалось выполнить запрос.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); }
+            //finally { sqlConnection.Close(); }
         }
 
-            // Запрос на удаление
+        // Запрос на удаление
         public void ReqDel (string text)
         {
             try
@@ -355,5 +355,6 @@ namespace MigApp
             }
             return result;
         }
+
     }
 }

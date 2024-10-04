@@ -1,18 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MigApp.CRWindows.AdminPanel
 {
@@ -48,7 +36,7 @@ namespace MigApp.CRWindows.AdminPanel
                 {
                     if (Mode)
                     {
-                        sqlcc.ReqNonRef($"INSERT INTO Roles (Name, EmpVis, EmpRed, GroupVis, GroupRed, PCVis, PCRed, NoteVis, NoteRed, TabVis, TabRed, OTVis, OTRed, MonVis, MonRed, RoutVis, RoutRed, SwitchVis, SwitchRed) Values ('{RoleName.Text}', " +
+                        sqlcc.ReqNonRef($"INSERT INTO Roles (Name, EmpVis, EmpRed, GroupVis, GroupRed, PCVis, PCRed, NoteVis, NoteRed, TabVis, TabRed, OTVis, OTRed, MonVis, MonRed, RoutVis, RoutRed, SwitchVis, SwitchRed, FurnVis, FurnRed) Values ('{RoleName.Text}', " +
                             $"{mc.BoolToString(GroupRead.IsChecked)}, {mc.BoolToString(GroupRedact.IsChecked)}, " +
                             $"{mc.BoolToString(EmpRead.IsChecked)}, {mc.BoolToString(EmpRedact.IsChecked)}, " +
                             $"{mc.BoolToString(PCRead.IsChecked)}, {mc.BoolToString(PCRedact.IsChecked)}, " +
@@ -57,7 +45,8 @@ namespace MigApp.CRWindows.AdminPanel
                             $"{mc.BoolToString(OrgTechRead.IsChecked)}, {mc.BoolToString(OrgTechRedact.IsChecked)}, " +
                             $"{mc.BoolToString(MonitorRead.IsChecked)}, {mc.BoolToString(MonitorRedact.IsChecked)}, " +
                             $"{mc.BoolToString(RoutRead.IsChecked)}, {mc.BoolToString(RoutRedact.IsChecked)}, " +
-                            $"{mc.BoolToString(SwitchRead.IsChecked)}, {mc.BoolToString(SwitchRedact.IsChecked)})");
+                            $"{mc.BoolToString(SwitchRead.IsChecked)}, {mc.BoolToString(SwitchRedact.IsChecked)}, " +
+                            $"{mc.BoolToString(FurnRead.IsChecked)}, {mc.BoolToString(FurnRedact.IsChecked)})");
                         sqlcc.Loging(CurrentUser, "Создание", "Роли", RoleName.Text, "");
                     }
                     else
@@ -70,7 +59,8 @@ namespace MigApp.CRWindows.AdminPanel
                             $"OTVis = {mc.BoolToString(OrgTechRead.IsChecked)}, OTRed = {mc.BoolToString(OrgTechRedact.IsChecked)}, " +
                             $"MonVis = {mc.BoolToString(MonitorRead.IsChecked)}, MonRed = {mc.BoolToString(MonitorRedact.IsChecked)}, " +
                             $"RoutVis = {mc.BoolToString(RoutRead.IsChecked)}, RoutRed = {mc.BoolToString(RoutRedact.IsChecked)}, " +
-                            $"SwitchVis = {mc.BoolToString(SwitchRead.IsChecked)}, SwitchRed = {mc.BoolToString(SwitchRedact.IsChecked)} WHERE ID LIKE {ID}");
+                            $"SwitchVis = {mc.BoolToString(SwitchRead.IsChecked)}, SwitchRed = {mc.BoolToString(SwitchRedact.IsChecked)}, " +
+                            $"FurnVis = {mc.BoolToString(FurnRead.IsChecked)}, FurnRed = {mc.BoolToString(FurnRedact.IsChecked)} WHERE ID LIKE {ID}");
                         sqlcc.Loging(CurrentUser, "Редактирование", "Роли", RoleName.Text, "");
                     }
                     DialogResult = true; Close();
@@ -160,6 +150,12 @@ namespace MigApp.CRWindows.AdminPanel
             SwitchRead.IsEnabled = false;
         }
 
+        private void FurnRedChecked(object sender, RoutedEventArgs e)
+        {
+            FurnRead.IsChecked = true;
+            FurnRead.IsEnabled = false;
+        }
+
         // При отключении редактирования
         private void EmpRedUnhecked(object sender, RoutedEventArgs e)
         {
@@ -205,6 +201,11 @@ namespace MigApp.CRWindows.AdminPanel
         {
             SwitchRead.IsEnabled = true;
         }
+
+        private void FurnRedUnhecked(object sender, RoutedEventArgs e)
+        {
+            FurnRead.IsEnabled = true;
+        }
         #endregion
 
         // Заполнение полей и изменение названия окна
@@ -238,6 +239,8 @@ namespace MigApp.CRWindows.AdminPanel
                 RoutRedact.IsChecked = table.Rows[0].Field<bool>("RoutRed");
                 SwitchRead.IsChecked = table.Rows[0].Field<bool>("SwitchVis");
                 SwitchRedact.IsChecked = table.Rows[0].Field<bool>("SwitchRed");
+                FurnRead.IsChecked = table.Rows[0].Field<bool>("FurnVis");
+                FurnRedact.IsChecked = table.Rows[0].Field<bool>("FurnRed");
             }
         }
     }
