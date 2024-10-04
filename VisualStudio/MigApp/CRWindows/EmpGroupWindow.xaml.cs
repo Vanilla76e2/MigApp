@@ -8,6 +8,7 @@ namespace MigApp.CRWindows
     public partial class EmpGroupWindow : Window
     {
         SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
+        string sqlTable = "[Group]", logname = "Отделы";
         string NAME;
         string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
 
@@ -24,17 +25,17 @@ namespace MigApp.CRWindows
         {
             if (GroupName.Text.Length > 0)
             {
-                if (Convert.ToInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM [Group] Where Name LIKE '{GroupName.Text}'")) < 1)
+                if (Convert.ToInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM {sqlTable} Where Name LIKE '{GroupName.Text}'")) < 1)
                 {   
                     if (Mode)
                     {
-                        sqlcc.ReqNonRef($"INSERT INTO [Group] (Name) Values ('{GroupName.Text}')");
-                        sqlcc.Loging(CurrentUser, "Создание", "Отделы", GroupName.Text, "");
+                        sqlcc.ReqNonRef($"INSERT INTO {sqlTable} (Name) Values ('{GroupName.Text}')");
+                        sqlcc.Loging(CurrentUser, "Создание", logname, GroupName.Text, "");
                     }
                     else
                     {
-                        sqlcc.ReqNonRef($"UPDATE [Group] Name = '{GroupName.Text}'");
-                        sqlcc.Loging(CurrentUser, "Редактирование", "Отделы", GroupName.Text, "");
+                        sqlcc.ReqNonRef($"UPDATE {sqlTable} SET Name = '{GroupName.Text}' WHERE Name Like '{NAME}'");
+                        sqlcc.Loging(CurrentUser, "Редактирование", logname, GroupName.Text, "");
                     }
                     DialogResult = true; Close();
                 }
@@ -52,8 +53,8 @@ namespace MigApp.CRWindows
 
         private void DeleteClick(object sender, RoutedEventArgs e)
         {
-            sqlcc.ReqDel($"Delete From [Group] Where Name Like '{NAME}'");
-            sqlcc.Loging(CurrentUser, "Стирание", "Отделы", GroupName.Text, "");
+            sqlcc.ReqDel($"Delete From {sqlTable} Where Name Like '{NAME}'");
+            sqlcc.Loging(CurrentUser, "Стирание", logname, GroupName.Text, "");
             DialogResult = true; Close();
         }
 

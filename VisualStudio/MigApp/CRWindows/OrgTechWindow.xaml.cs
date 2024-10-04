@@ -17,6 +17,7 @@ namespace MigApp.CRWindows
         SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
         MiscClass mc = new MiscClass();
         DataTable table = new DataTable();
+        string sqlTable = "OrgTech", logname = "Оргтехника";
         string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
         string InventoryNum;
         bool Deleted, EmpPerm, GrPerm;
@@ -55,10 +56,10 @@ namespace MigApp.CRWindows
                             ip = ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text;
                         else ip = "...";
                         if (Ethernet.IsChecked == true)
-                            sqlcc.ReqNonRef($"INSERT INTO OrgTech (InvNum, Type, Model, SNum, Name, IP, Login, Password, Сartridge_Model, Room, Comment) Values ('{InvNum.Text}', '{Type.Text}', '{Model.Text}', '{SeriaNum.Text}', '{OTName.Text}', '{ip}', '{Login.Password}', '{Password.Password}', '{Cartrige.Text}', ({Room.Text}), '{Comment.Text}')");
+                            sqlcc.ReqNonRef($"INSERT INTO {sqlTable} (InvNum, Type, Model, SNum, Name, IP, Login, Password, Сartridge_Model, Room, Comment) Values ('{InvNum.Text}', '{Type.Text}', '{Model.Text}', '{SeriaNum.Text}', '{OTName.Text}', '{ip}', '{Login.Password}', '{Password.Password}', '{Cartrige.Text}', ({Room.Text}), '{Comment.Text}')");
                         else if (USB.IsChecked == true)
-                            sqlcc.ReqNonRef($"INSERT INTO OrgTech (InvNum, Type, Model, SNum, Name, Login, Password, Сartridge_Model, PC, Comment) Values ('{InvNum.Text}', '{Type.Text}', '{Model.Text}', '{SeriaNum.Text}', '{OTName.Text}', '{Login.Password}', '{Password.Password}', '{Cartrige.Text}', ({pc}), '{Comment.Text}')");
-                        sqlcc.Loging(CurrentUser, "Создание", "Орг.техника", InvNum.Text, "");
+                            sqlcc.ReqNonRef($"INSERT INTO {sqlTable} (InvNum, Type, Model, SNum, Name, Login, Password, Сartridge_Model, PC, Comment) Values ('{InvNum.Text}', '{Type.Text}', '{Model.Text}', '{SeriaNum.Text}', '{OTName.Text}', '{Login.Password}', '{Password.Password}', '{Cartrige.Text}', ({pc}), '{Comment.Text}')");
+                        sqlcc.Loging(CurrentUser, "Создание", logname, InvNum.Text, Type.Text + " " + Model.Text);
                     }
                     // Если редактирование
                     else
@@ -67,10 +68,10 @@ namespace MigApp.CRWindows
                             ip = ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text;
                         else ip = "...";
                         if (Ethernet.IsChecked == true)
-                            sqlcc.ReqNonRef($"UPDATE OrgTech SET InvNum = '{InvNum.Text}', Type = '{Type.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', Name = '{OTName.Text}', IP = '{ip}', Login = '{Login.Password}', Password = '{Password.Password}', Сartridge_Model = '{Cartrige.Text}', Room = '{Room.Text}', PC = NULL, Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
+                            sqlcc.ReqNonRef($"UPDATE {sqlTable} SET InvNum = '{InvNum.Text}', Type = '{Type.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', Name = '{OTName.Text}', IP = '{ip}', Login = '{Login.Password}', Password = '{Password.Password}', Сartridge_Model = '{Cartrige.Text}', Room = '{Room.Text}', PC = NULL, Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
                         else if (USB.IsChecked == true)
-                            sqlcc.ReqNonRef($"UPDATE OrgTech SET InvNum = '{InvNum.Text}', Type = '{Type.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', Name = '{OTName.Text}', IP = '{ip}', Login = '{Login.Password}', Password = '{Password.Password}', Сartridge_Model = '{Cartrige.Text}', Room = NULL, PC = ({pc}), Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
-                        sqlcc.Loging(CurrentUser, "Редактирование", "Орг.техника", InvNum.Text, "");
+                            sqlcc.ReqNonRef($"UPDATE {sqlTable} SET InvNum = '{InvNum.Text}', Type = '{Type.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', Name = '{OTName.Text}', IP = '{ip}', Login = '{Login.Password}', Password = '{Password.Password}', Сartridge_Model = '{Cartrige.Text}', Room = NULL, PC = ({pc}), Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
+                        sqlcc.Loging(CurrentUser, "Редактирование", logname, InvNum.Text, Type.Text + " " + Model.Text);
                     }
                     DialogResult = true; Close();
                 }
@@ -104,14 +105,14 @@ namespace MigApp.CRWindows
             {
                 if (!Deleted)
                 {
-                    sqlcc.ReqDel($"UPDATE OrgTech SET Deleted = 1 WHERE InvNum LIKE '{InventoryNum}'");
-                    sqlcc.Loging(CurrentUser, "Удаление", "Орг.техника", InventoryNum, "");
+                    sqlcc.ReqDel($"UPDATE {sqlTable} SET Deleted = 1 WHERE InvNum LIKE '{InventoryNum}'");
+                    sqlcc.Loging(CurrentUser, "Удаление", logname, InventoryNum, Type.Text + " " + Model.Text);
                     DialogResult = true; Close();
                 }
                 else
                 {
-                    sqlcc.ReqDel($"DELETE FROM OrgTecg WHERE InvNum Like '{InvNum}'");
-                    sqlcc.Loging(CurrentUser, "Стирание", "Орг.техника", InventoryNum, "");
+                    sqlcc.ReqDel($"DELETE FROM {sqlTable} WHERE InvNum Like '{InvNum}'");
+                    sqlcc.Loging(CurrentUser, "Стирание", logname, InventoryNum, Type.Text + " " + Model.Text);
                     DialogResult = true; Close();
                 }
             }
@@ -120,8 +121,8 @@ namespace MigApp.CRWindows
         // Нажатие кнопки "Восстановить"
         private void RecoveryClick(object sender, RoutedEventArgs e)
         {
-            sqlcc.Recovery("OrgTech", "InvNum", InventoryNum);
-            sqlcc.Loging(CurrentUser, "Восстановление", "Орг.техника", InventoryNum, "");
+            sqlcc.Recovery(sqlTable, "InvNum", InventoryNum);
+            sqlcc.Loging(CurrentUser, "Восстановление", logname, InventoryNum, Type.Text + " " + Model.Text);
             DialogResult = true; Close();
         }
 
@@ -463,7 +464,7 @@ namespace MigApp.CRWindows
 
         private bool InvNumChecker(string invnum)
         {
-            if (Convert.ToUInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM OrgTech WHERE InvNum LIKE '{invnum}'")) < 1)
+            if (Convert.ToUInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM {sqlTable} WHERE InvNum LIKE '{invnum}'")) < 1)
                 return true;
             else return false;
         }
@@ -472,16 +473,20 @@ namespace MigApp.CRWindows
         {
             if (Ethernet.IsChecked == true)
             {
-                RoomPanel.Visibility = Visibility.Visible;
-                UserPanel.Visibility = Visibility.Collapsed;
+                EthernetPanel.Visibility = Visibility.Visible;
+                USBPanel.Visibility = Visibility.Collapsed;
                 User.Text = string.Empty;
                 PC.Text = string.Empty;
             }
             else if (USB.IsChecked == true)
             {
-                RoomPanel.Visibility = Visibility.Collapsed;
-                UserPanel.Visibility = Visibility.Visible;
+                EthernetPanel.Visibility = Visibility.Collapsed;
+                USBPanel.Visibility = Visibility.Visible;
                 Room.Text = string.Empty;
+                ip1.Text = string.Empty;
+                ip2.Text = string.Empty;
+                ip3.Text = string.Empty;
+                ip4.Text = string.Empty;
             }
 
         }

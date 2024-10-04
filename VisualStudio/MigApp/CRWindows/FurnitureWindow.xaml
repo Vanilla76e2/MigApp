@@ -1,0 +1,46 @@
+﻿<Window x:Class="MigApp.CRWindows.FurnitureWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    mc:Ignorable="d"
+    Title="Мебель [режим]" Height="550" Width="620" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/images/Icon.png">
+    <Grid Background="#323232">
+
+
+        <StackPanel VerticalAlignment="Top" Margin="0 20 0 0">
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 20">
+                <TextBlock Text="Инвентарный номер*" Style="{DynamicResource TextBlock_20}" MinWidth="270" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
+                <TextBox Name="InvNum" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" Width="270" FontSize="18" MaxLength="15" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed" PreviewTextInput="NumOnly"/>
+            </StackPanel>
+            <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="5" Margin="10 0 10 0">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 20">
+                        <TextBlock Text="Тип мебели*" Style="{DynamicResource TextBlock_20}" Width="200" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
+                        <ComboBox Name="Type" Style="{DynamicResource MaterialDesignComboBox}" Foreground="White" Width="270" FontSize="16"/>
+                        <Button Name="TypeAdd" Click="CreateNewType" Content="+" Margin="28 0 0 0" ToolTip="Созать сотрудника"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 20">
+                        <TextBlock Text="Наименование*" Style="{DynamicResource TextBlock_20}" Width="200" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
+                        <TextBox Name="FurnitureName" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" Width="340" FontSize="18"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 20">
+                        <TextBlock Text="Расположение*" Style="{DynamicResource TextBlock_20}" Width="200" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
+                        <TextBox Name="Room" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" Width="340" FontSize="18"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 10" Width="550">
+                        <TextBlock Text="Комментарий" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" Width="560" Margin="0 0 5 0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20" Width="565">
+                        <TextBox Name="Comment" Style="{DynamicResource MaterialDesignOutlinedTextBox}" FontSize="16" Foreground="White" TextWrapping="Wrap" Width="565" MaxLength="250" VerticalScrollBarVisibility="Visible" Height="100" AcceptsReturn="True"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+        <Button Click="SaveClick" Name="DoneButton" Content="Сохранить" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 20 10"/>
+        <Button Click="RecoveryClick" Name="RecoveryButton" Content="Восстановить" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 20 10" Visibility="Collapsed"/>
+        <Button Click="DeleteClick" Name="DeleteButton" Content="Удалить" Style="{DynamicResource MaterialDesignOutlinedButton}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20 0 0 10"/>
+    </Grid>
+</Window>

@@ -11,6 +11,7 @@ namespace MigApp.CRWindows
         SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
         MiscClass mc = new MiscClass();
         DataTable table = new DataTable();
+        string sqlTable = "Employees", logname = "Сотрудники";
         string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
         string ID;
         bool Deleted;
@@ -33,19 +34,17 @@ namespace MigApp.CRWindows
         {
             if (FIO.Text.Length > 0 && Group.Text.Length > 0 && Room.Text.Length > 0)
             {
-                if (Convert.ToInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM Employees Where FIO LIKE '{FIO.Text}'")) < 1 || !Mode)
+                if (Convert.ToInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM {sqlTable} Where FIO LIKE '{FIO.Text}'")) < 1 || !Mode)
                 {
                     if (Mode)
-                    {
-                        //sqlcc.ReqNonRef($"INSERT INTO Employees (FIO, [Group], Room, Birthdate) Values ('{FIO.Text}', '{Group.Text}', '{Room.Text}', '{BirthDate.Text}')");                        
-                        sqlcc.ReqNonRef($"INSERT INTO Employees (FIO, [Group], Room) Values ('{FIO.Text}', '{Group.Text}', '{Room.Text}')");
-                        sqlcc.Loging(CurrentUser, "Создание", "Сотрудники", FIO.Text, "");
+                    {                      
+                        sqlcc.ReqNonRef($"INSERT INTO {sqlTable} (FIO, [Group], Room) Values ('{FIO.Text}', '{Group.Text}', '{Room.Text}')");
+                        sqlcc.Loging(CurrentUser, "Создание", logname, FIO.Text, "");
                     }
                     else
                     {
-                        //sqlcc.ReqNonRef($"UPDATE Employees SET FIO = '{FIO.Text}', [Group] = '{Group.Text}', Room = '{Room.Text}', Birthdate = '{BirthDate.Text}' WHERE ID LIKE {ID}");
-                        sqlcc.ReqNonRef($"UPDATE Employees SET FIO = '{FIO.Text}', [Group] = '{Group.Text}', Room = '{Room.Text}' WHERE ID LIKE {ID}");
-                        sqlcc.Loging(CurrentUser, "Редактирование", "Сотрудники", FIO.Text, "");
+                        sqlcc.ReqNonRef($"UPDATE {sqlTable} SET FIO = '{FIO.Text}', [Group] = '{Group.Text}', Room = '{Room.Text}' WHERE ID LIKE {ID}");
+                        sqlcc.Loging(CurrentUser, "Редактирование", logname, FIO.Text, "");
                     }
                     DialogResult = true; Close();
                 }
@@ -68,8 +67,8 @@ namespace MigApp.CRWindows
             {
                 if (MessageBox.Show("Вы уверены что хотите удалить запись?","Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    sqlcc.ReqNonRef($"UPDATE Employees SET Deleted = 1, DelDate = '{DateTime.Now}' WHERE ID LIKE {ID}");
-                    sqlcc.Loging(CurrentUser, "Удаление", "Сотрудники", FIO.Text, "");
+                    sqlcc.ReqNonRef($"UPDATE {sqlTable} SET Deleted = 1, DelDate = '{DateTime.Now}' WHERE ID LIKE {ID}");
+                    sqlcc.Loging(CurrentUser, "Удаление", logname, FIO.Text, "");
                     DialogResult = true; Close();
                 }
             }
@@ -78,7 +77,7 @@ namespace MigApp.CRWindows
                 if (MessageBox.Show("Запись будет безвозвратно удалена.\nХотите удалить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
                     sqlcc.Delete_DeletedEmployee(ID);
-                    sqlcc.Loging(CurrentUser, "Стирание", "Сотрудники", FIO.Text, "");
+                    sqlcc.Loging(CurrentUser, "Стирание", logname, FIO.Text, "");
                     DialogResult = true; Close();
                 }
 
@@ -90,8 +89,8 @@ namespace MigApp.CRWindows
         {
             try
             {
-                sqlcc.Recovery("Employees", "ID", ID);
-                sqlcc.Loging(CurrentUser, "Восстановление", "Сотрудники", FIO.Text, "");
+                sqlcc.Recovery(sqlTable, "ID", ID);
+                sqlcc.Loging(CurrentUser, "Восстановление", logname , FIO.Text, "");
                 DialogResult = true; Close();
             }
             catch { }

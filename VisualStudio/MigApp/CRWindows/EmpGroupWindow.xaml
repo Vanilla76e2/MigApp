@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MigApp.CRWindows"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Отдел [режим]" Height="180" Width="550" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/CRWindows/AdminPanel/Icon.png">
+        Title="Отдел [режим]" Height="180" Width="550" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/images/Icon.png">
     <Grid Background="#323232">
         <StackPanel VerticalAlignment="Top" Margin="0 30 0 0">
 

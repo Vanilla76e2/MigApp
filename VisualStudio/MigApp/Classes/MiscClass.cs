@@ -224,10 +224,14 @@ namespace MigApp
                     {
                         if (MessageBox.Show("Доступна новая версия. Обновить?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                         {
-                            string tmp = Path.GetTempPath() + "MigAppInstaller.msi";
+                            string tmpserv = Path.GetTempPath() + "MigAppConnectionParametrs.txt";
+                            StreamWriter sw = File.CreateText(tmpserv);
+                            sw.WriteLine(MigApp.Properties.Settings.Default.Server + "|" + MigApp.Properties.Settings.Default.Database +  "|" + MigApp.Properties.Settings.Default.DBPassword);
+                            sw.Close();
+                            string tmpmsi = Path.GetTempPath() + "MigAppInstaller.msi";
                             Uri uri = new Uri(url);
-                            wc.DownloadFile(uri, tmp);
-                            Installer(tmp);
+                            wc.DownloadFile(uri, tmpmsi);
+                            Installer(tmpmsi);
                         }
                     }
                 }
@@ -254,5 +258,56 @@ namespace MigApp
             Application.Current.Shutdown();
         }
 
+        // Очистка фильтров при запуске
+        public void ClearFilters()
+        {
+            MigApp.Properties.Settings.Default.comEmp = null;
+            MigApp.Properties.Settings.Default.comPC = null;
+            MigApp.Properties.Settings.Default.comNB = null;
+            MigApp.Properties.Settings.Default.comTab = null;
+            MigApp.Properties.Settings.Default.comOT = null;
+            MigApp.Properties.Settings.Default.comMon = null;
+            MigApp.Properties.Settings.Default.comUsers = null;
+            MigApp.Properties.Settings.Default.comLogs = null;
+            MigApp.Properties.Settings.Default.comEmpDel = null;
+            MigApp.Properties.Settings.Default.comPCDel = null;
+            MigApp.Properties.Settings.Default.comNBDel = null;
+            MigApp.Properties.Settings.Default.comTabDel = null;
+            MigApp.Properties.Settings.Default.comOTDel = null;
+            MigApp.Properties.Settings.Default.comMonDel = null;
+            MigApp.Properties.Settings.Default.comPCRep = null;
+            MigApp.Properties.Settings.Default.comNBRep = null;
+            MigApp.Properties.Settings.Default.comTabRep = null;
+            MigApp.Properties.Settings.Default.comRout = null;
+            MigApp.Properties.Settings.Default.comRoutDel = null;
+            MigApp.Properties.Settings.Default.comSwitch = null;
+            MigApp.Properties.Settings.Default.comSwitchDel = null;
+            MigApp.Properties.Settings.Default.comFurn = null;
+            MigApp.Properties.Settings.Default.comFurnDel = null;
+            MigApp.Properties.Settings.Default.ParamsEmp = null;
+            MigApp.Properties.Settings.Default.ParamsPC = null;
+            MigApp.Properties.Settings.Default.ParamsNB = null;
+            MigApp.Properties.Settings.Default.ParamsTab = null;
+            MigApp.Properties.Settings.Default.ParamsOT = null;
+            MigApp.Properties.Settings.Default.ParamsMon = null;
+            MigApp.Properties.Settings.Default.ParamsUsers = null;
+            MigApp.Properties.Settings.Default.ParamsLogs = null;
+            MigApp.Properties.Settings.Default.ParamsEmpDel = null;
+            MigApp.Properties.Settings.Default.ParamsPCDel = null;
+            MigApp.Properties.Settings.Default.ParamsNBDel = null;
+            MigApp.Properties.Settings.Default.ParamsTabDel = null;
+            MigApp.Properties.Settings.Default.ParamsOTDel = null;
+            MigApp.Properties.Settings.Default.ParamsMonDel = null;
+            MigApp.Properties.Settings.Default.ParamsPCRep = null;
+            MigApp.Properties.Settings.Default.ParamsNBRep = null;
+            MigApp.Properties.Settings.Default.ParamsTabRep = null;
+            MigApp.Properties.Settings.Default.ParamsRout = null;
+            MigApp.Properties.Settings.Default.ParamsRoutDel = null;
+            MigApp.Properties.Settings.Default.ParamsSwitch = null;
+            MigApp.Properties.Settings.Default.ParamsSwitchDel = null;
+            MigApp.Properties.Settings.Default.ParamsFurn = null;
+            MigApp.Properties.Settings.Default.ParamsFurnDel = null;
+            MigApp.Properties.Settings.Default.Save();
+        }
     }
 }
