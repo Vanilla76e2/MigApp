@@ -204,9 +204,16 @@ namespace MigApp.CRWindows
 
         private bool InvNumChecker(string invnum)
         {
-            if (Convert.ToUInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM {sqlTable} WHERE InvNum LIKE '{invnum}'")) < 1)
+            if (Convert.ToUInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM {sqlTable} WHERE InvNum LIKE '{invnum}' AND Deleted = 1")) > 0)
+            {
+                sqlcc.ReqNonRef($"DELETE FROM {sqlTable} WHERE InvNum LIKE '{invnum}'");
+                sqlcc.Loging(CurrentUser, "Пересоздание", "Мебель", $"{invnum}", $"{FurnitureName.Text}");
                 return true;
-            else return false;
+            }
+            else if (Convert.ToUInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM {sqlTable} WHERE InvNum LIKE '{invnum}' AND Deleted = 0")) > 0) 
+                return false;
+            else
+                return true;
         }
     }
 }

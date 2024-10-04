@@ -31,6 +31,7 @@
                             <RowDefinition Height="40"/>
                             <RowDefinition Height="40"/>
                             <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
                         </Grid.RowDefinitions>
 
                         <!-- Заголовок -->
@@ -40,38 +41,42 @@
                         <TextBlock Text="Сотрудники" Style="{DynamicResource TextBlock_14}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" FontSize="18"/>
                         <CheckBox Name="EmpRead" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
                         <CheckBox Name="EmpRedact" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2" Checked="EmpRedChecked" Unchecked="EmpRedUnhecked"/>
-                        <!-- Компьютеры -->
-                        <TextBlock Text="Компьютеры" Style="{DynamicResource TextBlock_14}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" FontSize="18"/>
-                        <CheckBox Name="PCRead" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1"/>
-                        <CheckBox Name="PCRedact" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="2" Checked="PCRedChecked" Unchecked="PCRedUnhecked"/>
-                        <!-- Ноутбуки -->
-                        <TextBlock Text="Ноутбуки" Style="{DynamicResource TextBlock_14}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" FontSize="18"/>
-                        <CheckBox Name="NotebookRead" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="1"/>
-                        <CheckBox Name="NotebookRedact" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="2" Checked="NotebookRedChecked" Unchecked="NotebookRedUnhecked"/>
-                        <!-- Планшеты -->
-                        <TextBlock Text="Планшеты" Style="{DynamicResource TextBlock_14}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" FontSize="18"/>
-                        <CheckBox Name="TabletsRead" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1"/>
-                        <CheckBox Name="TabletsRedact" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="2" Checked="TabletsRedChecked" Unchecked="TabletsRedUnhecked"/>
-                        <!-- Оргтехника -->
-                        <TextBlock Text="Оргтехника" Style="{DynamicResource TextBlock_14}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0" FontSize="18"/>
-                        <CheckBox Name="OrgTechRead" HorizontalAlignment="Center" Grid.Row="5" Grid.Column="1"/>
-                        <CheckBox Name="OrgTechRedact" HorizontalAlignment="Center" Grid.Row="5" Grid.Column="2" Checked="OrgTechRedChecked" Unchecked="OrgTechRedUnhecked"/>
-                        <!-- Мониторы -->
-                        <TextBlock Text="Мониторы" Style="{DynamicResource TextBlock_14}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="6" Grid.Column="0" FontSize="18"/>
-                        <CheckBox Name="MonitorRead" HorizontalAlignment="Center" Grid.Row="6" Grid.Column="1"/>
-                        <CheckBox Name="MonitorRedact" HorizontalAlignment="Center" Grid.Row="6" Grid.Column="2" Checked="MonitorRedChecked" Unchecked="MonitorRedUnhecked"/>
-                        <!-- Роутеры -->
-                        <TextBlock Text="Роутеры" Style="{DynamicResource TextBlock_14}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="7" Grid.Column="0" FontSize="18"/>
-                        <CheckBox Name="RoutRead" HorizontalAlignment="Center" Grid.Row="7" Grid.Column="1"/>
-                        <CheckBox Name="RoutRedact" HorizontalAlignment="Center" Grid.Row="7" Grid.Column="2" Checked="RoutRedChecked" Unchecked="RoutRedUnhecked"/>
-                        <!-- Свитчи -->
-                        <TextBlock Text="Свитчи" Style="{DynamicResource TextBlock_14}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="8" Grid.Column="0" FontSize="18"/>
-                        <CheckBox Name="SwitchRead" HorizontalAlignment="Center" Grid.Row="8" Grid.Column="1"/>
-                        <CheckBox Name="SwitchRedact" HorizontalAlignment="Center" Grid.Row="8" Grid.Column="2" Checked="SwitchRedChecked" Unchecked="SwitchRedUnhecked"/>
                         <!-- Отделы -->
-                        <TextBlock Text="Отделы" Style="{DynamicResource TextBlock_14}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="9" Grid.Column="0" FontSize="18"/>
-                        <CheckBox Name="GroupRead" HorizontalAlignment="Center" Grid.Row="9" Grid.Column="1"/>
-                        <CheckBox Name="GroupRedact" HorizontalAlignment="Center" Grid.Row="9" Grid.Column="2" Checked="GroupRedChecked" Unchecked="GroupRedUnhecked"/>
+                        <TextBlock Text="Отделы" Style="{DynamicResource TextBlock_14}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" FontSize="18"/>
+                        <CheckBox Name="GroupRead" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1"/>
+                        <CheckBox Name="GroupRedact" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="2" Checked="GroupRedChecked" Unchecked="GroupRedUnhecked"/>
+                        <!-- Компьютеры -->
+                        <TextBlock Text="Компьютеры" Style="{DynamicResource TextBlock_14}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0" FontSize="18"/>
+                        <CheckBox Name="PCRead" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="1"/>
+                        <CheckBox Name="PCRedact" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="2" Checked="PCRedChecked" Unchecked="PCRedUnhecked"/>
+                        <!-- Ноутбуки -->
+                        <TextBlock Text="Ноутбуки" Style="{DynamicResource TextBlock_14}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0" FontSize="18"/>
+                        <CheckBox Name="NotebookRead" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="1"/>
+                        <CheckBox Name="NotebookRedact" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="2" Checked="NotebookRedChecked" Unchecked="NotebookRedUnhecked"/>
+                        <!-- Планшеты -->
+                        <TextBlock Text="Планшеты" Style="{DynamicResource TextBlock_14}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0" FontSize="18"/>
+                        <CheckBox Name="TabletsRead" HorizontalAlignment="Center" Grid.Row="5" Grid.Column="1"/>
+                        <CheckBox Name="TabletsRedact" HorizontalAlignment="Center" Grid.Row="5" Grid.Column="2" Checked="TabletsRedChecked" Unchecked="TabletsRedUnhecked"/>
+                        <!-- Оргтехника -->
+                        <TextBlock Text="Оргтехника" Style="{DynamicResource TextBlock_14}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="6" Grid.Column="0" FontSize="18"/>
+                        <CheckBox Name="OrgTechRead" HorizontalAlignment="Center" Grid.Row="6" Grid.Column="1"/>
+                        <CheckBox Name="OrgTechRedact" HorizontalAlignment="Center" Grid.Row="6" Grid.Column="2" Checked="OrgTechRedChecked" Unchecked="OrgTechRedUnhecked"/>
+                        <!-- Мониторы -->
+                        <TextBlock Text="Мониторы" Style="{DynamicResource TextBlock_14}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="7" Grid.Column="0" FontSize="18"/>
+                        <CheckBox Name="MonitorRead" HorizontalAlignment="Center" Grid.Row="7" Grid.Column="1"/>
+                        <CheckBox Name="MonitorRedact" HorizontalAlignment="Center" Grid.Row="7" Grid.Column="2" Checked="MonitorRedChecked" Unchecked="MonitorRedUnhecked"/>
+                        <!-- Роутеры -->
+                        <TextBlock Text="Роутеры" Style="{DynamicResource TextBlock_14}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="8" Grid.Column="0" FontSize="18"/>
+                        <CheckBox Name="RoutRead" HorizontalAlignment="Center" Grid.Row="8" Grid.Column="1"/>
+                        <CheckBox Name="RoutRedact" HorizontalAlignment="Center" Grid.Row="8" Grid.Column="2" Checked="RoutRedChecked" Unchecked="RoutRedUnhecked"/>
+                        <!-- Свитчи -->
+                        <TextBlock Text="Свитчи" Style="{DynamicResource TextBlock_14}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="9" Grid.Column="0" FontSize="18"/>
+                        <CheckBox Name="SwitchRead" HorizontalAlignment="Center" Grid.Row="9" Grid.Column="1"/>
+                        <CheckBox Name="SwitchRedact" HorizontalAlignment="Center" Grid.Row="9" Grid.Column="2" Checked="SwitchRedChecked" Unchecked="SwitchRedUnhecked"/>
+                        <!--Мебель-->
+                        <TextBlock Text="Мебель" Style="{DynamicResource TextBlock_14}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="10" Grid.Column="0" FontSize="18"/>
+                        <CheckBox Name="FurnRead" HorizontalAlignment="Center" Grid.Row="10" Grid.Column="1"/>
+                        <CheckBox Name="FurnRedact" HorizontalAlignment="Center" Grid.Row="10" Grid.Column="2" Checked="FurnRedChecked" Unchecked="FurnRedUnhecked"/>
                     </Grid>
                 </ScrollViewer>
             </Border>
