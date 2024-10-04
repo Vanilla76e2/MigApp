@@ -443,3 +443,7 @@ C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\SwitchesWind
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\SwitchesWindow.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\EmpGroupWindow.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\EmpGroupWindow.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\FurnitureTypeWindow.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\FurnitureTypeWindow.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\FurnitureWindow.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\FurnitureWindow.baml

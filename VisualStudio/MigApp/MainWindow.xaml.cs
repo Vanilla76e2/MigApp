@@ -5,12 +5,9 @@ using System.Data;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using System.Reflection;
-using System.Windows.Data;
-using System.Net.Cache;
+using System.Windows.Input;
 namespace MigApp
 {
     /// <summary>
@@ -20,20 +17,25 @@ namespace MigApp
     {
         SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
         MiscClass mc = new MiscClass();
-        string curver = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
+
         #region Переменные
+        string curver = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
         string CurrentUser;
-        bool EmpRedPerm, EmpRead = false;
-        bool GrRedPerm, GrRead = false;
-        bool PCRedPerm, PCRead = false;
-        bool NbRedPerm, NbRead = false;
-        bool TabRedPerm, TabRead = false;
-        bool OTRedPerm, OTRead = false;
-        bool MonRedPerm, MonRead = false;
-        bool RoutRedPerm, RoutRead = false;
-        bool SwitchRedPerm, SwitchRead = false;
+
+        #region Роли
+        bool EmpRedPerm = false, EmpRead = false;
+        bool GrRedPerm = false, GrRead = false;
+        bool PCRedPerm = false, PCRead = false;
+        bool NbRedPerm = false, NbRead = false;
+        bool TabRedPerm = false, TabRead = false;
+        bool OTRedPerm = false, OTRead = false;
+        bool MonRedPerm = false, MonRead = false;
+        bool RoutRedPerm = false, RoutRead = false;
+        bool SwitchRedPerm = false, SwitchRead = false;
+        bool FurnRedPerm = false, FurnRead = false;
         bool Admin = false;
-        
+        #endregion
+
         #endregion
 
         public MainWindow()
@@ -42,7 +44,7 @@ namespace MigApp
             Title = "MigApp v." + curver;
             this.MaxWidth = System.Windows.SystemParameters.PrimaryScreenWidth + 50;
             this.MaxHeight = System.Windows.SystemParameters.PrimaryScreenHeight + 50;
-            ClearFilters();
+            mc.ClearFilters();
             CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
             RoleCheck();
             UpdateAllTables();
@@ -73,12 +75,17 @@ namespace MigApp
                 RoutersTable.ItemsSource = sqlcc.DataGridUpdate("*", "Routers_View", $"{MigApp.Properties.Settings.Default.comRout}").DefaultView;
             if (SwitchRead || Admin)
                 SwitchesTable.ItemsSource = sqlcc.DataGridUpdate("*", "Switches_View", $"{MigApp.Properties.Settings.Default.comSwitch}").DefaultView;
+            if (FurnRead || Admin)
+            {
+                FurnTypeTable.ItemsSource = sqlcc.DataGridUpdate("*", "FurnitureType_View","").DefaultView;
+                FurnTable.ItemsSource = sqlcc.DataGridUpdate("*","Furniture_View",$"").DefaultView;
+            }    
             if (Admin)
             {
                 // Админпанель
                 UsersTable.ItemsSource = sqlcc.DataGridUpdate("*", "Users_View", $"{MigApp.Properties.Settings.Default.comUsers}").DefaultView;
                 RolesTable.ItemsSource = sqlcc.DataGridUpdate("*", "Roles_View", $"Where ID > 0").DefaultView;
-                LogsTable.ItemsSource = sqlcc.DataGridUpdate("ID, Дата, Пользователь, Действие, Таблица, Запись", "Logs_View", $"{MigApp.Properties.Settings.Default.comLogs} ORDER BY ID DESC").DefaultView;
+                LogsTable.ItemsSource = sqlcc.DataGridUpdate("*", "Logs_View", $"{MigApp.Properties.Settings.Default.comLogs} ORDER BY ID DESC").DefaultView;
                 // Архив
                 EmployeesDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Employees_Deleted", $"{MigApp.Properties.Settings.Default.comEmpDel}").DefaultView;
                 PCDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "PC_Deleted", $"{MigApp.Properties.Settings.Default.comPCDel}").DefaultView;
@@ -88,6 +95,7 @@ namespace MigApp
                 MonitorsDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Monitors_Deleted", $"{MigApp.Properties.Settings.Default.comMonDel}").DefaultView;
                 RoutersDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Routers_Deleted", $"{MigApp.Properties.Settings.Default.comRoutDel}").DefaultView;
                 SwitchesDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Switches_Deleted", $"{MigApp.Properties.Settings.Default.comSwitchDel}").DefaultView;
+                FurnDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Furniture_Deleted", $"{MigApp.Properties.Settings.Default.comFurnDel}").DefaultView;
             }
             // Отчёты
             //ReportPC.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Computers", $"{MigApp.Properties.Settings.Default.comPCRep}").DefaultView;
@@ -303,6 +311,48 @@ namespace MigApp
                 catch { }
         }
 
+        // Удаление типов мебели
+        private void Delete_FurnType(object sender, RoutedEventArgs e)
+        {
+            if (FurnRedPerm || Admin)
+                try
+                {
+                    if (MessageBox.Show("Вы уверены что хотите удалить записи?\nЗаписи будут безвозвратно удалены.", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        foreach (var items in FurnTypeTable.SelectedItems)
+                        {
+                            DataRowView row = (DataRowView)items;
+                            string id = row.Row["ID"].ToString();
+                            sqlcc.ReqNonRef($"Delete From FurnitureType Where ID Like '{id}'");
+                        }
+                        UpdateAllTables();
+                    }
+                }
+                catch { }
+        }
+
+        // Удаление мебели
+        private void Delete_Furniture(object sender, RoutedEventArgs e)
+        {
+            if (FurnRedPerm || Admin)
+                try
+                {
+                    if (MessageBox.Show("Вы уверены что хотите удалить записи?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    {
+                        foreach (var items in FurnTable.SelectedItems)
+                        {
+                            DataRowView row = (DataRowView)items;
+                            string invnum = row.Row["Инвентарный номер"].ToString();
+                            sqlcc.ReqNonRef($"UPDATE Furniture SET Deleted = 1, Deldate = '{DateTime.Now}' WHERE InvNum LIKE '{invnum}'");
+                            sqlcc.ReqNonRef($"DELETE FROM Favourite WHERE [Table] LIKE 'Мебель' AND Row LIKE '{invnum}'");
+                            sqlcc.Loging(CurrentUser, "Удаление", "Мебель", invnum, row.Row["Наименование"].ToString());
+                        }
+                        UpdateAllTables();
+                    }
+                }
+                catch { }
+        }
+
         #endregion
 
         #region Админпанель
@@ -388,8 +438,9 @@ namespace MigApp
                     {
                         DataRowView row = (DataRowView)items;
                         string invnum = row.Row["Инвентарный номер"].ToString();
+                        string spec = row.Row["Модель"].ToString();
                         sqlcc.Delete_DeletedPC(invnum);
-                        sqlcc.Loging(CurrentUser, "Стирание", "Компьютеры", invnum, "");
+                        sqlcc.Loging(CurrentUser, "Стирание", "Компьютеры", invnum, spec);
                     }
                     UpdateAllTables();
                 }
@@ -408,8 +459,9 @@ namespace MigApp
                     {
                         DataRowView row = (DataRowView)items;
                         string invnum = row.Row["Инвентарный номер"].ToString();
+                        string spec = row.Row["Модель"].ToString();
                         sqlcc.ReqDel($"Delete from Notebooks Where InvNum Like '{invnum}'");
-                        sqlcc.Loging(CurrentUser, "Стирание", "Ноутбуки", invnum, "");
+                        sqlcc.Loging(CurrentUser, "Стирание", "Ноутбуки", invnum, spec);
                     }
                     UpdateAllTables();
                 }
@@ -428,10 +480,10 @@ namespace MigApp
                     foreach (var items in TabletsDeleted.SelectedItems)
                     {
                         DataRowView row = (DataRowView)items;
-                        string id = row.Row["ID"].ToString();
-                        string name = row.Row["ФИО"].ToString();
-                        sqlcc.ReqDel($"Delete from Tablets Where InvNum Like '{id}'");
-                        sqlcc.Loging(CurrentUser, "Стирание", "Сотрудники", name, "");
+                        string invnum = row.Row["Инвентарный номер"].ToString();
+                        string spec = row.Row["Модель"].ToString();
+                        sqlcc.ReqDel($"Delete from Tablets Where InvNum Like '{invnum}'");
+                        sqlcc.Loging(CurrentUser, "Стирание", "Планшеты", invnum, spec);
                     }
                     UpdateAllTables();
                 }
@@ -442,53 +494,106 @@ namespace MigApp
         // Удаление орг.техники
         private void Delete_DeletedOrgTech(object sender, RoutedEventArgs e)
         {
-            DataRowView item = OrgTechDeleted.Items[OrgTechDeleted.SelectedIndex] as DataRowView;
-            string invnum = item.Row["Инвентарный номер"].ToString();
-            if (MessageBox.Show("Запись будет безвозвозвратно удалена.\nУдалить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            try
             {
-                sqlcc.ReqNonRef($"DELETE FROM OrgTech WHERE InvNum LIKE '{invnum}'");
-                sqlcc.Loging(CurrentUser, "Стирание", "Оргтехника", invnum, "");
+                if (MessageBox.Show("Запись будет безвозвозвратно удалена.\nУдалить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    foreach (var items in OrgTechDeleted.SelectedItems)
+                    {
+                        DataRowView row = (DataRowView)items;
+                        string invnum = row.Row["Инвентарный номер"].ToString();
+                        string spec = row.Row["Модель"].ToString();
+                        sqlcc.ReqDel($"Delete from OrgTech Where InvNum Like '{invnum}'");
+                        sqlcc.Loging(CurrentUser, "Стирание", "Оргтехника", invnum, spec);
+                    }
+                    UpdateAllTables();
+                }
             }
-            UpdateAllTables();
+            catch { }
         }
 
         // Удаление мониторов
         private void Delete_DeletedMonitor(object sender, RoutedEventArgs e)
         {
-            DataRowView item = MonitorsDeleted.Items[MonitorsDeleted.SelectedIndex] as DataRowView;
-            string invnum = item.Row["Инвентарный номер"].ToString();
-            if (MessageBox.Show("Запись будет безвозвозвратно удалена.\nУдалить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            try
             {
-                sqlcc.ReqNonRef($"DELETE FROM Monitor WHERE InvNum LIKE '{invnum}'");
-                sqlcc.Loging(CurrentUser, "Стирание", "Мониторы", invnum, "");
+                if (MessageBox.Show("Запись будет безвозвозвратно удалена.\nУдалить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    foreach (var items in MonitorsDeleted.SelectedItems)
+                    {
+                        DataRowView row = (DataRowView)items;
+                        string invnum = row.Row["Инвентарный номер"].ToString();
+                        string spec = row.Row["Модель"].ToString();
+                        sqlcc.ReqDel($"Delete from Monitor Where InvNum Like '{invnum}'");
+                        sqlcc.Loging(CurrentUser, "Стирание", "Мониторы", invnum, spec);
+                    }
+                    UpdateAllTables();
+                }
             }
-            UpdateAllTables();
+            catch { }
         }
 
         // Удаление роутеров
         private void Delete_DeletedRouters(object sender, RoutedEventArgs e)
         {
-            DataRowView item = RoutersDeleted.Items[RoutersDeleted.SelectedIndex] as DataRowView;
-            string invnum = item.Row["Инвентарный номер"].ToString();
-            if (MessageBox.Show("Запись будет безвозвозвратно удалена.\nУдалить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            try
             {
-                sqlcc.ReqNonRef($"DELETE FROM Routers WHERE InvNum LIKE '{invnum}'");
-                sqlcc.Loging(CurrentUser, "Стирание", "Роутеры", invnum, "");
+                if (MessageBox.Show("Запись будет безвозвозвратно удалена.\nУдалить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    foreach (var items in RoutersDeleted.SelectedItems)
+                    {
+                        DataRowView row = (DataRowView)items;
+                        string invnum = row.Row["Инвентарный номер"].ToString();
+                        string spec = row.Row["Модель"].ToString();
+                        sqlcc.ReqDel($"Delete from Routers Where InvNum Like '{invnum}'");
+                        sqlcc.Loging(CurrentUser, "Стирание", "Роутеры", invnum, spec);
+                    }
+                    UpdateAllTables();
+                }
             }
-            UpdateAllTables();
+            catch { }
         }
 
         // Удаление свитчей
         private void Delete_DeletedSwitches(object sender, RoutedEventArgs e)
         {
-            DataRowView item = SwitchesDeleted.Items[SwitchesDeleted.SelectedIndex] as DataRowView;
-            string invnum = item.Row["Инвентарный номер"].ToString();
-            if (MessageBox.Show("Запись будет безвозвозвратно удалена.\nУдалить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            try
             {
-                sqlcc.ReqNonRef($"DELETE FROM Switches WHERE InvNum LIKE '{invnum}'");
-                sqlcc.Loging(CurrentUser, "Стирание", "Свитчи", invnum, "");
+                if (MessageBox.Show("Запись будет безвозвозвратно удалена.\nУдалить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    foreach (var items in SwitchesDeleted.SelectedItems)
+                    {
+                        DataRowView row = (DataRowView)items;
+                        string invnum = row.Row["Инвентарный номер"].ToString();
+                        string spec = row.Row["Модель"].ToString();
+                        sqlcc.ReqDel($"Delete from Switches Where InvNum Like '{invnum}'");
+                        sqlcc.Loging(CurrentUser, "Стирание", "Свитчи", invnum, spec);
+                    }
+                    UpdateAllTables();
+                }
             }
-            UpdateAllTables();
+            catch { }
+        }
+
+        // Удаление мебели
+        private void Delete_DeletedFurniture(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("Запись будет безвозвозвратно удалена.\nУдалить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    foreach (var items in FurnDeleted.SelectedItems)
+                    {
+                        DataRowView row = (DataRowView)items;
+                        string invnum = row.Row["Инвентарный номер"].ToString();
+                        string spec = row.Row["Наименование"].ToString();
+                        sqlcc.ReqDel($"Delete from Furniture Where InvNum Like '{invnum}'");
+                        sqlcc.Loging(CurrentUser, "Стирание", "Мебель", invnum, spec);
+                    }
+                    UpdateAllTables();
+                }
+            }
+            catch { }
         }
 
         #endregion
@@ -630,16 +735,59 @@ namespace MigApp
                 try
                 {
                     DataRowView item = SwitchesTable.Items[SwitchesTable.SelectedIndex] as DataRowView;
-                    string invnum = item.Row[0].ToString();
-                    RoutersCROpen(false, invnum, false);
+                    string invnum = item.Row["Инвентарный номер"].ToString();
+                    SwitchesCROpen(false, invnum, false);
                 }
                 catch { }
+        }
+
+        // Редактировать тип мебели
+        private void Redact_FurnType(object sender, RoutedEventArgs e)
+        {
+            if (FurnRedPerm || Admin)
+                try
+                {
+                    DataRowView item = FurnTypeTable.Items[FurnTypeTable.SelectedIndex] as DataRowView;
+                    string id = item.Row[0].ToString();
+                    FurnitureTypeCROpen(false, id);
+                }
+                catch { }
+        }
+
+        // Редактировать мебель
+        private void Redact_Furniture(object sender, RoutedEventArgs e)
+        {
+            if (FurnRedPerm || Admin)
+                try
+                {
+                    DataRowView item = FurnTable.Items[FurnTable.SelectedIndex] as DataRowView;
+                    string invnum = item.Row["Инвентарный номер"].ToString();
+                    FurnitureCROpen(false, invnum, false);
+                }
+                catch { }
+        }
+
+        // Редактировать из IP
+        private void Redact_IP(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DataRowView item = ReportIP.Items[ReportIP.SelectedIndex] as DataRowView;
+                if (item.Row["Устройство"].ToString() == "Компьютер" && (PCRedPerm || Admin))
+                    PCCROpen(false, item.Row["Инвентарный номер"].ToString(), false);
+                else if ((item.Row["Устройство"].ToString() == "МФУ" || item.Row["Устройство"].ToString() == "Принтер" || item.Row["Устройство"].ToString() == "Сканер") && (OTRedPerm || Admin))
+                    OrgTechCROpen(false, item.Row["Инвентарный номер"].ToString(), false);
+                else if (item.Row["Устройство"].ToString() == "Роутер" && (RoutRedPerm || Admin))
+                    RoutersCROpen(false, item.Row["Инвентарный номер"].ToString(), false);
+                else if (item.Row["Устройство"].ToString() == "Свитч" && (SwitchRedPerm || Admin))
+                    SwitchesCROpen(false, item.Row["Инвентарный номер"].ToString(), false);
+            }
+            catch {}
         }
 
         // Редактирование из избранного
         private void Fav_Redact(object sender, RoutedEventArgs e)
         {
-            
             try
             {
                 DataRowView item = FavTable.Items[FavTable.SelectedIndex] as DataRowView;
@@ -881,6 +1029,34 @@ namespace MigApp
             catch { }
         }
 
+        // Добавить мебель в избранное
+        private void Fav_Furniture(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DataRowView item = FurnTable.Items[FurnTable.SelectedIndex] as DataRowView;
+                string invnum = item.Row["Инвентарный номер"].ToString();
+                string name = item.Row["Наименование"].ToString();
+                string type = item.Row["Тип"].ToString(); 
+                bool allow = true;
+                foreach (DataRowView row in FavTable.Items)
+                {
+                    if (row.Row["Таблица"].ToString() == "Мебель" && row.Row["Запись"].ToString() == invnum)
+                    {
+                        allow = false;
+                    }
+                }
+                if (allow)
+                {
+                    sqlcc.ReqNonRef($"INSERT INTO Favourite ([User], Date, [Table], Row, Comment) VALUES ('{CurrentUser}', '{DateTime.Now}', 'Свитчи', '{invnum}', '{type + ": " + name}')");
+                    FavTable.ItemsSource = sqlcc.DataGridUpdate("Дата, Таблица, Запись, Подробности", "Fav_View", $"WHERE [User] LIKE '{CurrentUser}'").DefaultView;
+                }
+                else
+                    MessageBox.Show("Запись уже находится в избранном", "Внимание", MessageBoxButton.OK, MessageBoxImage.Stop);
+            }
+            catch { }
+        }
+
         // Убрать из избранного
         private void Fav_Remove(object sender, RoutedEventArgs e)
         {
@@ -991,6 +1167,14 @@ namespace MigApp
             }
             catch { }
         }
+
+        // Мебель
+        private void Open_DeletedFurniture(object sender, RoutedEventArgs e)
+        {
+            DataRowView item = FurnDeleted.Items[FurnDeleted.SelectedIndex] as DataRowView;
+            string invnum = item.Row["Инвентарный номер"].ToString();
+            FurnitureCROpen(false, invnum, true);
+        }
         #endregion
 
         #region Восстановление
@@ -1026,8 +1210,9 @@ namespace MigApp
                     {
                         DataRowView row = (DataRowView)items;
                         string invnum = row.Row["Инвентарный номер"].ToString();
+                        string spec = row.Row["Имя"].ToString();
                         sqlcc.Recovery("Computers", "InvNum", invnum);
-                        sqlcc.Loging(CurrentUser, "Восстановление", "Компьютеры", invnum, "");
+                        sqlcc.Loging(CurrentUser, "Восстановление", "Компьютеры", invnum, spec);
                     }
                     UpdateAllTables();
                 }
@@ -1046,8 +1231,9 @@ namespace MigApp
                     {
                         DataRowView row = (DataRowView)items;
                         string invnum = row.Row["Инвентарный номер"].ToString();
+                        string spec = row.Row["Модель"].ToString();
                         sqlcc.Recovery("Notebooks", "InvNum", invnum);
-                        sqlcc.Loging(CurrentUser, "Восстановление", "Ноутбуки", invnum, "");
+                        sqlcc.Loging(CurrentUser, "Восстановление", "Ноутбуки", invnum, spec);
                     }
                     UpdateAllTables();
                 }
@@ -1066,8 +1252,9 @@ namespace MigApp
                     {
                         DataRowView row = (DataRowView)items;
                         string invnum = row.Row["Инвентарный номер"].ToString();
+                        string spec = row.Row["Модель"].ToString();
                         sqlcc.Recovery("Tablets", "InvNum", invnum);
-                        sqlcc.Loging(CurrentUser, "Восстановление", "Ноутбуки", invnum, "");
+                        sqlcc.Loging(CurrentUser, "Восстановление", "Ноутбуки", invnum, spec);
                     }
                     UpdateAllTables();
                 }
@@ -1086,8 +1273,9 @@ namespace MigApp
                     {
                         DataRowView row = (DataRowView)items;
                         string invnum = row.Row["Инвентарный номер"].ToString();
+                        string spec = row.Row["Модель"].ToString();
                         sqlcc.Recovery("OrgTech", "InvNum", invnum);
-                        sqlcc.Loging(CurrentUser, "Восстановление", "Оргтехника", invnum, "");
+                        sqlcc.Loging(CurrentUser, "Восстановление", "Оргтехника", invnum, spec);
                     }
                     UpdateAllTables();
                 }
@@ -1106,8 +1294,9 @@ namespace MigApp
                     {
                         DataRowView row = (DataRowView)items;
                         string invnum = row.Row["Инвентарный номер"].ToString();
+                        string spec = row.Row["Производитель"].ToString() + " " + row.Row["Модель"].ToString();
                         sqlcc.Recovery("Monitor", "InvNum", invnum);
-                        sqlcc.Loging(CurrentUser, "Восстановление", "Мониторы", invnum, "");
+                        sqlcc.Loging(CurrentUser, "Восстановление", "Мониторы", invnum, spec);
                     }
                     UpdateAllTables();
                 }
@@ -1126,8 +1315,9 @@ namespace MigApp
                     {
                         DataRowView row = (DataRowView)items;
                         string invnum = row.Row["Инвентарный номер"].ToString();
+                        string spec = row.Row["Модель"].ToString();
                         sqlcc.Recovery("Routers", "InvNum", invnum);
-                        sqlcc.Loging(CurrentUser, "Восстановление", "Роутеры", invnum, "");
+                        sqlcc.Loging(CurrentUser, "Восстановление", "Роутеры", invnum, spec);
                     }
                     UpdateAllTables();
                 }
@@ -1142,12 +1332,13 @@ namespace MigApp
             {
                 if (MessageBox.Show("Вы уверены что хотите восстановить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    foreach (var items in RoutersDeleted.SelectedItems)
+                    foreach (var items in SwitchesDeleted.SelectedItems)
                     {
                         DataRowView row = (DataRowView)items;
                         string invnum = row.Row["Инвентарный номер"].ToString();
+                        string spec = row.Row["Модель"].ToString();
                         sqlcc.Recovery("Switches", "InvNum", invnum);
-                        sqlcc.Loging(CurrentUser, "Восстановление", "Свитчи", invnum, "");
+                        sqlcc.Loging(CurrentUser, "Восстановление", "Свитчи", invnum, spec);
                     }
                     UpdateAllTables();
                 }
@@ -1155,6 +1346,26 @@ namespace MigApp
             catch { }
         }
 
+        // Мебель
+        private void Recovery_Furniture(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("Вы уверены что хотите восстановить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    foreach (var items in FurnDeleted.SelectedItems)
+                    {
+                        DataRowView row = (DataRowView)items;
+                        string invnum = row.Row["Инвентарный номер"].ToString();
+                        string spec = row.Row["Наименование"].ToString();
+                        sqlcc.Recovery("Furniture", "InvNum", invnum);
+                        sqlcc.Loging(CurrentUser, "Восстановление", "Мебель", invnum, spec);
+                    }
+                    UpdateAllTables();
+                }
+            }
+            catch { }
+        }
         #endregion
 
         #endregion
@@ -1286,8 +1497,24 @@ namespace MigApp
             if (win.DialogResult == true)
             {
                 SwitchesTable.Margin = new Thickness(0, 100, 5, 20);
-                SwitchesTable.ItemsSource = sqlcc.DataGridUpdate("*", "Routers_View", $"{MigApp.Properties.Settings.Default.comSwitch}").DefaultView;
+                SwitchesTable.ItemsSource = sqlcc.DataGridUpdate("*", "Switches_View", $"{MigApp.Properties.Settings.Default.comSwitch}").DefaultView;
                 FilterSwitchesText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsSwitch);
+            }
+            BlindfallSwitch();
+        }
+
+        // Фильтры мебели
+        private void SFurn(object sender, RoutedEventArgs e)
+        {
+            SearchWindow win = new SearchWindow("Furniture");
+            BlindfallSwitch();
+            win.Owner = this;
+            win.ShowDialog();
+            if (win.DialogResult == true)
+            {
+                FurnTable.Margin = new Thickness(0, 100, 5, 20);
+                SwitchesTable.ItemsSource = sqlcc.DataGridUpdate("*", "Furniture_View", $"{MigApp.Properties.Settings.Default.comFurn}").DefaultView;
+                FilterFurnText.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsFurn);
             }
             BlindfallSwitch();
         }
@@ -1457,6 +1684,22 @@ namespace MigApp
             BlindfallSwitch();
         }
 
+        // Мебель Архив
+        private void SFurn_Del(object sender, RoutedEventArgs e)
+        {
+            SearchWindow win = new SearchWindow("FurnitureDel");
+            BlindfallSwitch();
+            win.Owner = this;
+            win.ShowDialog();
+            if (win.DialogResult == true)
+            {
+                FurnDeleted.Margin = new Thickness(0, 100, 5, 20);
+                FurnDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Furniture_Deleted", $"{MigApp.Properties.Settings.Default.comFurnDel}").DefaultView;
+                FilterSwitchesText_Del.Text = mc.Splitter(MigApp.Properties.Settings.Default.ParamsFurnDel);
+            }
+            BlindfallSwitch();
+        }
+
         #endregion
 
         #region Отчёты
@@ -1608,6 +1851,17 @@ namespace MigApp
             SwitchesTable.Margin = new Thickness(0, 50, 5, 20);
             SwitchesTable.ItemsSource = sqlcc.DataGridUpdate("*", "Switches_View", "").DefaultView;
         }
+
+        // Очистка фильтра мебели
+        private void FilterFurnClear(object sender, RoutedEventArgs e)
+        {
+            MigApp.Properties.Settings.Default.comFurn = null;
+            MigApp.Properties.Settings.Default.ParamsFurn = null;
+            MigApp.Properties.Settings.Default.Save();
+            FilterFurnText.Text = "";
+            FurnTable.Margin = new Thickness(0, 50, 5, 20);
+            FurnTable.ItemsSource = sqlcc.DataGridUpdate("*", "Furniture_View", "").DefaultView;
+        }
         #endregion
 
         #region Фильтр Админпанель
@@ -1630,7 +1884,7 @@ namespace MigApp
             MigApp.Properties.Settings.Default.Save();
             FilterLogsText.Text = "";
             LogsTable.Margin = new Thickness(0, 50, 5, 20);
-            LogsTable.ItemsSource = sqlcc.DataGridUpdate("*", "Logs_View", "").DefaultView;
+            LogsTable.ItemsSource = sqlcc.DataGridUpdate("*", "Logs_View", "ORDER BY ID DESC").DefaultView;
         }
         #endregion
 
@@ -1722,6 +1976,17 @@ namespace MigApp
             SwitchesDeleted.Margin = new Thickness(0, 50, 5, 20);
             SwitchesDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Switches_Deleted", "").DefaultView;
         }
+
+        // Мебель Архив
+        private void FilterFurnClear_Del(object sender, RoutedEventArgs e)
+        {
+            MigApp.Properties.Settings.Default.comFurnDel = null;
+            MigApp.Properties.Settings.Default.ParamsFurnDel = null;
+            MigApp.Properties.Settings.Default.Save();
+            FilterFurnText_Del.Text = "";
+            FurnDeleted.Margin = new Thickness(0, 50, 5, 20);
+            FurnDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Furniture_Deleted", "").DefaultView;
+        }
         #endregion
 
         #region Отчёты
@@ -1765,54 +2030,6 @@ namespace MigApp
 
         }
         #endregion
-
-        // Очистка фильтров при запуске
-        private void ClearFilters()
-        {
-            MigApp.Properties.Settings.Default.comEmp = null;
-            MigApp.Properties.Settings.Default.comPC = null;
-            MigApp.Properties.Settings.Default.comNB = null;
-            MigApp.Properties.Settings.Default.comTab = null;
-            MigApp.Properties.Settings.Default.comOT = null;
-            MigApp.Properties.Settings.Default.comMon = null;
-            MigApp.Properties.Settings.Default.comUsers = null;
-            MigApp.Properties.Settings.Default.comLogs = null;
-            MigApp.Properties.Settings.Default.comEmpDel = null;
-            MigApp.Properties.Settings.Default.comPCDel = null;
-            MigApp.Properties.Settings.Default.comNBDel = null;
-            MigApp.Properties.Settings.Default.comTabDel = null;
-            MigApp.Properties.Settings.Default.comOTDel = null;
-            MigApp.Properties.Settings.Default.comMonDel = null;
-            MigApp.Properties.Settings.Default.comPCRep = null;
-            MigApp.Properties.Settings.Default.comNBRep = null;
-            MigApp.Properties.Settings.Default.comTabRep = null;
-            MigApp.Properties.Settings.Default.comRout = null;
-            MigApp.Properties.Settings.Default.comRoutDel = null;
-            MigApp.Properties.Settings.Default.comSwitch = null;
-            MigApp.Properties.Settings.Default.comSwitchDel = null;
-            MigApp.Properties.Settings.Default.ParamsEmp = null;
-            MigApp.Properties.Settings.Default.ParamsPC = null;
-            MigApp.Properties.Settings.Default.ParamsNB = null;
-            MigApp.Properties.Settings.Default.ParamsTab = null;
-            MigApp.Properties.Settings.Default.ParamsOT = null;
-            MigApp.Properties.Settings.Default.ParamsMon = null;
-            MigApp.Properties.Settings.Default.ParamsUsers = null;
-            MigApp.Properties.Settings.Default.ParamsLogs = null;
-            MigApp.Properties.Settings.Default.ParamsEmpDel = null;
-            MigApp.Properties.Settings.Default.ParamsPCDel = null;
-            MigApp.Properties.Settings.Default.ParamsNBDel = null;
-            MigApp.Properties.Settings.Default.ParamsTabDel = null;
-            MigApp.Properties.Settings.Default.ParamsOTDel = null;
-            MigApp.Properties.Settings.Default.ParamsMonDel = null;
-            MigApp.Properties.Settings.Default.ParamsPCRep = null;
-            MigApp.Properties.Settings.Default.ParamsNBRep = null;
-            MigApp.Properties.Settings.Default.ParamsTabRep = null;
-            MigApp.Properties.Settings.Default.ParamsRout = null;
-            MigApp.Properties.Settings.Default.ParamsRoutDel = null;
-            MigApp.Properties.Settings.Default.ParamsSwitch = null;
-            MigApp.Properties.Settings.Default.ParamsSwitchDel = null;
-            MigApp.Properties.Settings.Default.Save();
-        }
 
         #endregion
         
@@ -1892,6 +2109,20 @@ namespace MigApp
         {
             if (SwitchRedPerm || Admin)
                 SwitchesCROpen(true, null, false);
+        }
+
+        // Создать тип мебели
+        private void FurnTypeCreateClick(object sender, RoutedEventArgs e)
+        {
+            if (FurnRedPerm || Admin)
+                FurnitureTypeCROpen(true, null);
+        }
+
+        // Создать мебель
+        private void FurnCreateClick(object sender, RoutedEventArgs e)
+        {
+            if (FurnRedPerm || Admin)
+                FurnitureCROpen(true, null, false);
         }
         #endregion
 
@@ -2108,6 +2339,38 @@ namespace MigApp
             }
         }
 
+        // Открыть окно типов мебели
+        private void FurnitureTypeCROpen(bool mode, string id)
+        {
+            FurnitureTypeWindow win = new FurnitureTypeWindow(mode, id);
+
+            BlindfallSwitch();
+            win.ShowDialog();
+            if (win.DialogResult == true) UpdateAllTables();
+            BlindfallSwitch();
+        }
+
+        // Открыть окно мебели
+        private void FurnitureCROpen(bool mode, string invnum, bool deleted)
+        {
+            FurnitureWindow win = new FurnitureWindow(mode, invnum, deleted);
+            if (!deleted)
+            {
+                BlindfallSwitch();
+                win.ShowDialog();
+                if (win.DialogResult == true) UpdateAllTables();
+                BlindfallSwitch();
+            }
+            else
+            {
+                BlindfallSwitch();
+                win.DoneButton.Visibility = Visibility.Collapsed;
+                win.RecoveryButton.Visibility = Visibility.Visible;
+                win.ShowDialog();
+                if (win.DialogResult == true) UpdateAllTables();
+                BlindfallSwitch();
+            }
+        }
         #endregion
 
         #region Запрет сотритровки
@@ -2135,7 +2398,6 @@ namespace MigApp
             if (column.Header.ToString() == "IP")
                 e.Handled = true;
         }
-
         #endregion
 
         #region Роли
@@ -2168,6 +2430,9 @@ namespace MigApp
             {
                 TechGroup.Visibility = Visibility.Visible;
                 ComputersGroup.Visibility = Visibility.Visible;
+                PCReport.Visibility = Visibility.Visible;
+                IPReport.Visibility = Visibility.Visible;
+                ReportsGroup.Visibility = Visibility.Visible;
                 PCRead = true;
             }
             if (row["PCRed"].ToString() == "True" || row["AdminMode"].ToString() == "True")
@@ -2177,6 +2442,9 @@ namespace MigApp
             {
                 TechGroup.Visibility = Visibility.Visible;
                 NotebookGroup.Visibility = Visibility.Visible;
+                ReportsGroup.Visibility = Visibility.Visible;
+                NBReport.Visibility = Visibility.Visible;
+                IPReport.Visibility = Visibility.Visible;
                 NbRead = true;
             }
             if (row["NoteRed"].ToString() == "True" || row["AdminMode"].ToString() == "True")
@@ -2186,6 +2454,9 @@ namespace MigApp
             {
                 TechGroup.Visibility = Visibility.Visible;
                 TabletGroup.Visibility = Visibility.Visible;
+                ReportsGroup.Visibility = Visibility.Visible;
+                TabReport.Visibility = Visibility.Visible;
+                IPReport.Visibility = Visibility.Visible;
                 TabRead = true;
             }
             if (row["TabRed"].ToString() == "True" || row["AdminMode"].ToString() == "True")
@@ -2195,6 +2466,9 @@ namespace MigApp
             {
                 TechGroup.Visibility = Visibility.Visible;
                 OTGroup.Visibility = Visibility.Visible;
+                ReportsGroup.Visibility = Visibility.Visible;
+                PCReport.Visibility = Visibility.Visible;
+                IPReport.Visibility = Visibility.Visible;
                 OTRead = true;
             }
             if (row["OTRed"].ToString() == "True" || row["AdminMode"].ToString() == "True")
@@ -2204,6 +2478,8 @@ namespace MigApp
             {
                 TechGroup.Visibility = Visibility.Visible;
                 MonitorGroup.Visibility = Visibility.Visible;
+                ReportsGroup.Visibility = Visibility.Visible;
+                PCReport.Visibility = Visibility.Visible;
                 MonRead = true;
             }
             if (row["MonRed"].ToString() == "True" || row["AdminMode"].ToString() == "True")
@@ -2213,6 +2489,8 @@ namespace MigApp
             {
                 TechGroup.Visibility = Visibility.Visible;
                 RouterGroup.Visibility = Visibility.Visible;
+                ReportsGroup.Visibility = Visibility.Visible;
+                IPReport.Visibility = Visibility.Visible;
                 RoutRead = true;
             }
             if (row["RoutRed"].ToString() == "True" || row["AdminMode"].ToString() == "True")
@@ -2222,10 +2500,20 @@ namespace MigApp
             {
                 TechGroup.Visibility = Visibility.Visible;
                 SwitchesGroup.Visibility = Visibility.Visible;
+                ReportsGroup.Visibility = Visibility.Visible;
+                IPReport.Visibility = Visibility.Visible;
                 SwitchRead = true;
             }
             if (row["SwitchRed"].ToString() == "True" || row["AdminMode"].ToString() == "True")
                 SwitchRedPerm = true;
+
+            if (row["FurnVis"].ToString() == "True" || row["AdminMode"].ToString() == "True")
+            {
+                FurnitureGroup.Visibility = Visibility.Visible;
+                FurnRead = true;
+            }
+            if (row["FurnRed"].ToString() == "True" || row["AdminMode"].ToString() == "True")
+                FurnRedPerm = true;
 
             if (row["AdminMode"].ToString() == "True")
             {
@@ -2238,7 +2526,7 @@ namespace MigApp
         #endregion
 
         #region Exel Экспорт
-        
+
         // Экспорт отчёта ПК
         private void ExportReportPC(object sender, RoutedEventArgs e)
         {
@@ -2290,6 +2578,10 @@ namespace MigApp
                 RoutSelectedCount.Text = "Выбрано: " + RoutersTable.SelectedItems.Count.ToString();
             else if (sender.Equals(SwitchesTable))
                 SwitchSelectedCount.Text = "Выбрано: " + SwitchesTable.SelectedItems.Count.ToString();
+            else if (sender.Equals(FurnTypeTable))
+                FurnTypeSelectedCount.Text = "Выбрано: " + FurnTypeTable.SelectedItems.Count.ToString();
+            else if (sender.Equals(FurnTable))
+                FurnSelectedCount.Text = "Выбрано: " + FurnTable.SelectedItems.Count.ToString();
 
             // Отчёты
             else if (sender.Equals(ReportPC))
@@ -2326,6 +2618,8 @@ namespace MigApp
                 RoutDelSelectedCount.Text = "Выбрано: " + RoutersDeleted.SelectedItems.Count.ToString();
             else if (sender.Equals(SwitchesDeleted))
                 SwitchDelSelectedCount.Text = "Выбрано: " + SwitchesDeleted.SelectedItems.Count.ToString();
+            else if (sender.Equals(FurnDeleted))
+                FurnDelSelectedCount.Text = "Выбрано: " + FurnDeleted.SelectedItems.Count.ToString();
         }
 
         #endregion
@@ -2343,7 +2637,7 @@ namespace MigApp
         private void ExitClick(object sender, RoutedEventArgs e)
         {
             LoginWindow win = new LoginWindow();
-            ClearFilters();
+            mc.ClearFilters();
             win.Show(); Close();
         }
 
@@ -2359,5 +2653,20 @@ namespace MigApp
             await Task.Delay(5000);
             ReloadButton.IsEnabled = true;
         }
+
+        private void HotKeys(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.F1)
+            {
+                e.Handled = true;
+                Process.Start(@"https://vanilla76e2.github.io/MigApp_Manual/");
+            }
+            else if (e.Key == Key.F5)
+            {
+                e.Handled = true;
+                ReloadTables(sender, e);
+            }
+        }
+
     }
 }

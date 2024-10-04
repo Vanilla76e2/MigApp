@@ -274,3 +274,7 @@ C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Release\CRWindows\SwitchesWi
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Release\CRWindows\SwitchesWindow.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Release\CRWindows\EmpGroupWindow.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Release\CRWindows\EmpGroupWindow.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Release\CRWindows\FurnitureTypeWindow.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Release\CRWindows\FurnitureWindow.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Release\CRWindows\FurnitureTypeWindow.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Release\CRWindows\FurnitureWindow.g.cs

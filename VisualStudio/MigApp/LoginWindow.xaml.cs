@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using System.Text;
+using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
@@ -193,16 +195,26 @@ namespace MigApp
         private void Content_Rendered(object sender, System.EventArgs e)
         {
             mc.CheckVersion();
-            //Проверка на подключение к БД
+            // Подключение к бд после обновления
+            try
+            {
+                string tmp = Path.GetTempPath() + "MigAppConnectionParametrs.txt";
+                string constr = File.ReadAllText(tmp, Encoding.UTF8);
+                string[] conparams = constr.Split('|');
+                MigApp.Properties.Settings.Default.Server = conparams[0];
+                MigApp.Properties.Settings.Default.Database = conparams[1];
+                MigApp.Properties.Settings.Default.DBPassword = conparams[2];
+                MigApp.Properties.Settings.Default.Save();
+                File.Delete(tmp);
+            }
+            catch { }
+            // Проверка на подключение к БД
             if (!sqlcc.SQLtest())
             {
-                //Enter1.IsEnabled = false;
-                //Enter2.IsEnabled = false;
-                //Refresh.Visibility = Visibility.Visible;
+
                 MessageBox.Show("База данных не найдена!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
                 SettingsWin win = new SettingsWin();
                 win.ShowDialog();
-                //if (win.DialogResult == true)
             }
         }
     }

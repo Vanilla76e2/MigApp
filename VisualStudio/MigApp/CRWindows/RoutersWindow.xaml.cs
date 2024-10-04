@@ -16,6 +16,7 @@ namespace MigApp.CRWindows
         SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
         MiscClass mc = new MiscClass();
         DataTable table = new DataTable();
+        string sqlTable = "Routers", logname = "Роутеры";
         string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
         string InventoryNum;
         bool Deleted;
@@ -54,8 +55,8 @@ namespace MigApp.CRWindows
                             dhcp = dhcp1.Text + "." + dhcp2.Text + "." + dhcp3.Text + "." + dhcp4.Text + "-" + dhcp5.Text;
                         else dhcp = "...-";
 
-                        sqlcc.ReqNonRef($"INSERT INTO Routers (InvNum, Name, Model, IP, DHCP, Login, Password, WiFi_Name, WiFi_Password, Comment) Values ('{InvNum.Text}', '{RouterName.Text}', '{RouterModel.Text}', '{ip}', '{dhcp}', '{AdminLogin.Password}', '{AdminPass.Password}', '{WiFiLogin.Text}', '{WiFiPass.Text}', '{Comment.Text}')");
-                        sqlcc.Loging(CurrentUser, "Создание", "Роутеры", InvNum.Text, "");
+                        sqlcc.ReqNonRef($"INSERT INTO {sqlTable} (InvNum, Name, Model, IP, DHCP, Login, Password, WiFi_Name, WiFi_Password, Comment) Values ('{InvNum.Text}', '{RouterName.Text}', '{RouterModel.Text}', '{ip}', '{dhcp}', '{AdminLogin.Password}', '{AdminPass.Password}', '{WiFiLogin.Text}', '{WiFiPass.Text}', '{Comment.Text}')");
+                        sqlcc.Loging(CurrentUser, "Создание", logname, InvNum.Text, RouterModel.Text);
                     }
                     // Если редактирование
                     else
@@ -68,8 +69,8 @@ namespace MigApp.CRWindows
                             dhcp = dhcp1.Text + "." + dhcp2.Text + "." + dhcp3.Text + "." + dhcp4.Text + "-" + dhcp5.Text;
                         else dhcp = "...-";
 
-                        sqlcc.ReqNonRef($"UPDATE Routers SET InvNum = '{InvNum.Text}', Name = '{RouterName.Text}', Model = '{RouterModel.Text}', IP = '{ip}', DHCP = '{dhcp}', Login = '{AdminLogin.Password}', Password = '{AdminPass.Password}', WiFi_Name = '{WiFiLogin.Text}', WiFi_Password = '{WiFiPass.Text}', Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
-                        sqlcc.Loging(CurrentUser, "Редактирование", "Роутеры", InvNum.Text, "");
+                        sqlcc.ReqNonRef($"UPDATE {sqlTable} SET InvNum = '{InvNum.Text}', Name = '{RouterName.Text}', Model = '{RouterModel.Text}', IP = '{ip}', DHCP = '{dhcp}', Login = '{AdminLogin.Password}', Password = '{AdminPass.Password}', WiFi_Name = '{WiFiLogin.Text}', WiFi_Password = '{WiFiPass.Text}', Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
+                        sqlcc.Loging(CurrentUser, "Редактирование", logname, InvNum.Text, RouterModel.Text);
                     }
                     DialogResult = true; Close();
                 }
@@ -97,8 +98,8 @@ namespace MigApp.CRWindows
             {
                 if (MessageBox.Show("Вы уверены что хотите удалить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    sqlcc.ReqDel($"UPDATE Routers SET Deleted = 1, DelDate = '{DateTime.Now}' WHERE InvNum LIKE '{InventoryNum}'");
-                    sqlcc.Loging(CurrentUser, "Удаление", "Роутеры", InvNum.Text, "");
+                    sqlcc.ReqDel($"UPDATE {sqlTable} SET Deleted = 1, DelDate = '{DateTime.Now}' WHERE InvNum LIKE '{InventoryNum}'");
+                    sqlcc.Loging(CurrentUser, "Удаление", logname, InvNum.Text, RouterModel.Text);
                     DialogResult = true; Close();
                 }
             }
@@ -106,8 +107,8 @@ namespace MigApp.CRWindows
             {
                 if (MessageBox.Show("Запись будет безвозвратно удалена.\nХотите удалить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    sqlcc.ReqDel($"DELETE FROM Routers WHERE InvNum LIKE '{InventoryNum}'");
-                    sqlcc.Loging(CurrentUser, "Стирание", "Роутеры", InventoryNum, "");
+                    sqlcc.ReqDel($"DELETE FROM {sqlTable} WHERE InvNum LIKE '{InventoryNum}'");
+                    sqlcc.Loging(CurrentUser, "Стирание", logname, InventoryNum, RouterModel.Text);
                     DialogResult = true; Close();
                 }
             }
@@ -119,7 +120,7 @@ namespace MigApp.CRWindows
             try
             {
                 sqlcc.Recovery("Routers", "InvNum", InventoryNum);
-                sqlcc.Loging(CurrentUser, "Восстановление", "Роутеры", InventoryNum, "");
+                sqlcc.Loging(CurrentUser, "Восстановление", logname, InventoryNum, RouterModel.Text);
                 DialogResult = true; Close();
             }
             catch { }
@@ -505,7 +506,7 @@ namespace MigApp.CRWindows
 
         private bool InvNumChecker(string invnum)
         {
-            if (Convert.ToUInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM Routers WHERE InvNum LIKE '{invnum}'")) < 1)
+            if (Convert.ToUInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM {sqlTable} WHERE InvNum LIKE '{invnum}'")) < 1)
                 return true;
             else return false;
         }

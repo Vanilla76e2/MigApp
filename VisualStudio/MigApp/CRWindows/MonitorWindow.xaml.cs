@@ -17,6 +17,7 @@ namespace MigApp.CRWindows
         SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
         MiscClass mc = new MiscClass();
         DataTable table = new DataTable();
+        string sqlTable = "Monitor", logname = "Мониторы";
         string InventoryNum;
         string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
         bool Deleted, EmpPerm, GrPerm;
@@ -49,14 +50,14 @@ namespace MigApp.CRWindows
                     // Если создание
                     if (Mode == true)
                     {
-                        sqlcc.ReqNonRef($"INSERT INTO Monitor (InvNum, Firm, Model, SNum, Diagonal, Resolution, Screen, PC, Comment) Values ('{InvNum.Text}', '{Firm.Text}', '{Model.Text}', '{SeriaNum.Text}', '{ScreenDiagonal.Text}', '{ScreenResolution.Text}', '{ScreenType.Text}', ({pc}), '{Comment.Text}')");
-                        sqlcc.Loging(CurrentUser, "Создание", "Мониторы", InvNum.Text, "");
+                        sqlcc.ReqNonRef($"INSERT INTO {sqlTable} (InvNum, Firm, Model, SNum, Diagonal, Resolution, Screen, PC, Comment) Values ('{InvNum.Text}', '{Firm.Text}', '{Model.Text}', '{SeriaNum.Text}', '{ScreenDiagonal.Text}', '{ScreenResolution.Text}', '{ScreenType.Text}', ({pc}), '{Comment.Text}')");
+                        sqlcc.Loging(CurrentUser, "Создание", logname, InvNum.Text, Firm.Text + " " + Model.Text);
                     }
                     // Если редактирование
                     else
                     {
-                        sqlcc.ReqNonRef($"UPDATE Monitor SET InvNum = '{InvNum.Text}', Firm = '{Firm.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', Diagonal = '{ScreenDiagonal.Text}', Resolution = '{ScreenResolution.Text}', Screen = '{ScreenType.Text}', PC = ({pc}), Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
-                        sqlcc.Loging(CurrentUser, "Редактирование", "Мониторы", InvNum.Text, "");
+                        sqlcc.ReqNonRef($"UPDATE {sqlTable} SET InvNum = '{InvNum.Text}', Firm = '{Firm.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', Diagonal = '{ScreenDiagonal.Text}', Resolution = '{ScreenResolution.Text}', Screen = '{ScreenType.Text}', PC = ({pc}), Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
+                        sqlcc.Loging(CurrentUser, "Редактирование", logname, InvNum.Text, Firm.Text + " " + Model.Text);
                     }
                     DialogResult = true; Close();
                 }
@@ -90,14 +91,14 @@ namespace MigApp.CRWindows
             {
                 if (!Deleted)
                 {
-                    sqlcc.ReqDel($"UPDATE Monitors SET Deleted = 1 WHERE InvNum LIKE '{InventoryNum}'");
-                    sqlcc.Loging(CurrentUser, "Удаление", "Мониторы", InvNum.Text, "");
+                    sqlcc.ReqDel($"UPDATE {sqlTable} SET Deleted = 1 WHERE InvNum LIKE '{InventoryNum}'");
+                    sqlcc.Loging(CurrentUser, "Удаление", logname, InvNum.Text, Firm.Text + " " + Model.Text);
                     DialogResult = true; Close();
                 }
                 else
                 {
-                    sqlcc.ReqDel($"DELETE FROM Monitors WHERE InvNum LIKE '{InventoryNum}'");
-                    sqlcc.Loging(CurrentUser, "Стирание", "Мониторы", InventoryNum, "");
+                    sqlcc.ReqDel($"DELETE FROM {sqlTable} WHERE InvNum LIKE '{InventoryNum}'");
+                    sqlcc.Loging(CurrentUser, "Стирание", logname, InventoryNum, Firm.Text + " " + Model.Text);
                     DialogResult = true; Close();
                 }
             }
@@ -106,8 +107,8 @@ namespace MigApp.CRWindows
         // Нажатие кнопки "Восстановить"
         private void RecoveryClick(object sender, RoutedEventArgs e)
         {
-            sqlcc.Recovery("Monitors", "InvNum", InventoryNum);
-            sqlcc.Loging(CurrentUser, "Восстановление", "Мониторы", InventoryNum, "");
+            sqlcc.Recovery(sqlTable, "InvNum", InventoryNum);
+            sqlcc.Loging(CurrentUser, "Восстановление", logname, InventoryNum, Firm.Text + " " + Model.Text);
             DialogResult = true; Close();
         }
 
@@ -307,7 +308,7 @@ namespace MigApp.CRWindows
 
         private bool InvNumChecker(string invnum)
         {
-            if (Convert.ToUInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM Monitor WHERE InvNum LIKE '{invnum}'")) < 1)
+            if (Convert.ToUInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM {sqlTable} WHERE InvNum LIKE '{invnum}'")) < 1)
                 return true;
             else return false;
         }

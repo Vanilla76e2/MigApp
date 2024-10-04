@@ -2,6 +2,7 @@
 FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\App.xaml;;
 FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\CRWindows\AdminPanel\RoleWindow.xaml;;
 FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\CRWindows\AdminPanel\UsersWindow.xaml;;
+FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\CRWindows\EmpGroupWindow.xaml;;
 FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\CRWindows\EmployeesWindow.xaml;;
 FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\CRWindows\MonitorWindow.xaml;;
 FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\CRWindows\NotebookWindow.xaml;;
@@ -15,5 +16,4 @@ FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\MainWindow.xaml;;
 FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\Resources\Them1.xaml;;
 FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\SearchWindow.xaml;;
 FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\SettingsWin.xaml;;
-FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\CRWindows\EmpGroupWindow.xaml;;
 

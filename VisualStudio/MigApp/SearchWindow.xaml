@@ -7,11 +7,13 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Поиск" Height="1000" Width="450" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterOwner" Icon="images\Icon.png">
+        Title="Поиск" Height="1000" Width="450" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterOwner" Icon="images\Icon.png" KeyDown="HotKeys">
     <Border BorderBrush="Black" BorderThickness="1" Background="#323232">
         <Grid>
             
-            <!--Сотрудники-->
+        <!--#region Пользовательские таблицы-->
+            
+            <!--#region Сотрудники-->
             <StackPanel x:Name="SearchPanel_Emp" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
                     <TextBlock Text="ID" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 0 0" FontSize="18"/>
@@ -23,26 +25,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
                     <TextBlock Text="Отдел" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 0 0" FontSize="18"/>
-                    <ComboBox Name="Group_Emp" Width="380" Style="{DynamicResource MaterialDesignComboBox}" Foreground="White" FontSize="16">
-                        <ComboBoxItem Content="Информационно-аналитический отдел"/>
-                        <ComboBoxItem Content="Отдел бухгалтерского учёта"/>
-                        <ComboBoxItem Content="Отдел звукорежессуры"/>
-                        <ComboBoxItem Content="Отдел кадров"/>
-                        <ComboBoxItem Content="Отдел маркетинга"/>
-                        <ComboBoxItem Content="Отдел монтажа и оформления"/>
-                        <ComboBoxItem Content="Отдел планирования и формирования вещания"/>
-                        <ComboBoxItem Content="Отдел по снабжению и содержанию"/>
-                        <ComboBoxItem Content="Отдел производства РВ программ"/>
-                        <ComboBoxItem Content="Отдел производства ТВ программ"/>
-                        <ComboBoxItem Content="Отдел развития и продвижения СМИ"/>
-                        <ComboBoxItem Content="Отдел телеоператоров"/>
-                        <ComboBoxItem Content="Планово-экономический отдел"/>
-                        <ComboBoxItem Content="Производственный отдел"/>
-                        <ComboBoxItem Content="Творческий отдел"/>
-                        <ComboBoxItem Content="Хозяйственный отдел"/>
-                        <ComboBoxItem Content="Художественно-производствнный отдел"/>
-                        <ComboBoxItem Content="Юридический отдел"/>
-                    </ComboBox>
+                    <ComboBox Name="Group_Emp" Width="380" Style="{DynamicResource MaterialDesignComboBox}" Foreground="White" FontSize="16"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
                     <TextBlock Text="Кабинет" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 0 0" FontSize="18"/>
@@ -50,8 +33,9 @@
                 </StackPanel>
 
             </StackPanel>
-            
-            <!--ПК-->
+            <!--#endregion-->
+
+            <!--#region ПК-->
             <StackPanel x:Name="SearchPanel_PC" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
                     <TextBlock Text="Инвентарный номер" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
@@ -104,8 +88,9 @@
                     <TextBox Name="Other_PC" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
                 </StackPanel>
             </StackPanel>
+            <!--#endregion-->
 
-            <!--Ноутбуки-->
+            <!--#region Ноутбуки-->
             <StackPanel x:Name="SearchPanel_NB" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
                     <TextBlock Text="Инвентарный номер" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
@@ -152,8 +137,9 @@
                     <TextBox Name="Other_NB" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
                 </StackPanel>
             </StackPanel>
+            <!--#endregion-->
 
-            <!--Планшеты-->
+            <!--#region Планшеты-->
             <StackPanel x:Name="SearchPanel_Tab" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
                     <TextBlock Text="Инвентарный номер" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
@@ -192,8 +178,9 @@
                     <TextBox Name="Other_Tab" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
                 </StackPanel>
             </StackPanel>
+            <!--#endregion-->
 
-            <!--Орг.техника-->
+            <!--#region Оргтехника-->
             <StackPanel x:Name="SearchPanel_OT" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
                     <TextBlock Text="Тип техники" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
@@ -247,8 +234,9 @@
                     <TextBox Name="User_OT" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
                 </StackPanel>
             </StackPanel>
-            
-            <!--Мониторы-->
+            <!--#endregion-->
+
+            <!--#region Мониторы-->
             <StackPanel x:Name="SearchPanel_Mon" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
                     <TextBlock Text="Инвентарный номер" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
@@ -283,8 +271,9 @@
                     <TextBox Name="User_Mon" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
                 </StackPanel>
             </StackPanel>
-            
-            <!--Роутеры-->
+            <!--#endregion-->
+
+            <!--#region Роутеры-->
             <StackPanel x:Name="SearchPanel_Rout" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
                     <TextBlock Text="Инвентарный номер" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
@@ -333,8 +322,9 @@
                     </Border>
                 </StackPanel>
             </StackPanel>
+            <!--#endregion-->
 
-            <!--Свитчи-->
+            <!--#region Свитчи-->
             <StackPanel x:Name="SearchPanel_Switch" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
                     <TextBlock Text="Инвентарный номер" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
@@ -352,19 +342,45 @@
                     <TextBlock Text="IP" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
                     <Border Name="IPBorder_Switch" Width="200">
                         <StackPanel Orientation="Horizontal">
-                            <TextBox Name="ip1_Switch" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="Rout_IPcheck1" GotFocus="Rout_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="Rout_NextIP1"/>
+                            <TextBox Name="ip1_Switch" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="Switch_IPcheck1" GotFocus="Switch_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="Switch_NextIP1"/>
                             <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                            <TextBox Name="ip2_Switch" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="Rout_IPcheck2" GotFocus="Rout_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="Rout_NextIP2"/>
+                            <TextBox Name="ip2_Switch" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="Switch_IPcheck2" GotFocus="Switch_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="Switch_NextIP2"/>
                             <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                            <TextBox Name="ip3_Switch" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="Rout_IPcheck3" GotFocus="Rout_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="Rout_NextIP3"/>
+                            <TextBox Name="ip3_Switch" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="Switch_IPcheck3" GotFocus="Switch_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="Switch_NextIP3"/>
                             <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                            <TextBox Name="ip4_Switch" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="Rout_IPcheck4" GotFocus="Rout_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="Rout_NextIP4"/>
+                            <TextBox Name="ip4_Switch" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="Switch_IPcheck4" GotFocus="Switch_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="Switch_NextIP4"/>
                         </StackPanel>
                     </Border>
                 </StackPanel>
             </StackPanel>
+            <!--#endregion-->
 
-            <!--Пользователи-->
+            <!--#region Мебель-->
+            <StackPanel x:Name="SearchPanel_Furniture" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <TextBlock Text="Инвентарный номер" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
+                    <TextBox Name="InvNum_Furniture" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16" PreviewTextInput="NumOnly"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <TextBlock Text="Тип" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
+                    <ComboBox Name="Type_Furniture" Width="200" Style="{DynamicResource MaterialDesignComboBox}" Foreground="White" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <TextBlock Text="Наименование" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
+                    <TextBox Name="Name_Furniture" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                    <TextBlock Text="Расположение" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
+                    <TextBox Name="Room_Furniture" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
+                </StackPanel>
+            </StackPanel>
+            <!--#endregion-->
+            
+        <!--#endregion-->
+            
+        <!--#region Админпанель-->
+
+            <!--#region Пользователи-->
             <StackPanel x:Name="SearchPanel_Users" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
                     <TextBlock Text="ID" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 50 0" FontSize="18"/>
@@ -387,8 +403,9 @@
                     <CheckBox Name="NoPassword_User"  Foreground="White" FontSize="16"/>
                 </StackPanel>
             </StackPanel>
+            <!--#endregion-->
 
-            <!--Логи-->
+            <!--#region Логи-->
             <StackPanel x:Name="SearchPanel_Logs" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
                     <TextBlock Text="ID" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 50 0" FontSize="18" VerticalAlignment="Center"/>
@@ -414,7 +431,11 @@
                         <ComboBoxItem Content="Компьютеры"/>
                         <ComboBoxItem Content="Ноутбуки"/>
                         <ComboBoxItem Content="Планшеты"/>
-                        <ComboBoxItem Content="Орг.техника"/>
+                        <ComboBoxItem Content="Оргтехника"/>
+                        <ComboBoxItem Content="Роутеры"/>
+                        <ComboBoxItem Content="Свитчи"/>
+                        <ComboBoxItem Content="Мебель"/>
+                        <ComboBoxItem Content="Оргтехника"/>
                         <ComboBoxItem Content="Мониторы"/>
                         <ComboBoxItem Content="Пользователи"/>
                         <ComboBoxItem Content="Роли"/>
@@ -436,363 +457,14 @@
                     <TextBlock Text="Запись" Style="{DynamicResource TextBlock_14}" Width="130" Margin="0 0 20 0" FontSize="18" VerticalAlignment="Center"/>
                     <TextBox Name="Row_Logs" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
                 </StackPanel>
-
             </StackPanel>
+            <!--#endregion-->
 
-            <!--Сотрудники архив-->
-            <StackPanel x:Name="SearchPanel_EmpDel" Visibility="Collapsed">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                    <TextBlock Text="ID" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 0 0" FontSize="18"/>
-                    <TextBox Name="ID_Emp_Del" Width="380" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16" PreviewTextInput="NumOnly"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                    <TextBlock Text="ФИО" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 0 0" FontSize="18"/>
-                    <TextBox Name="FIO_Emp_Del" Width="380" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                    <TextBlock Text="Отдел" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 0 0" FontSize="18"/>
-                    <ComboBox Name="Group_Emp_Del" Width="380" Style="{DynamicResource MaterialDesignComboBox}" Foreground="White" FontSize="16">
-                        <ComboBoxItem Content="Информационно-аналитический отдел"/>
-                        <ComboBoxItem Content="Отдел бухгалтерского учёта"/>
-                        <ComboBoxItem Content="Отдел звукорежессуры"/>
-                        <ComboBoxItem Content="Отдел кадров"/>
-                        <ComboBoxItem Content="Отдел маркетинга"/>
-                        <ComboBoxItem Content="Отдел монтажа и оформления"/>
-                        <ComboBoxItem Content="Отдел планирования и формирования вещания"/>
-                        <ComboBoxItem Content="Отдел по снабжению и содержанию"/>
-                        <ComboBoxItem Content="Отдел производства РВ программ"/>
-                        <ComboBoxItem Content="Отдел производства ТВ программ"/>
-                        <ComboBoxItem Content="Отдел развития и продвижения СМИ"/>
-                        <ComboBoxItem Content="Отдел телеоператоров"/>
-                        <ComboBoxItem Content="Планово-экономический отдел"/>
-                        <ComboBoxItem Content="Производственный отдел"/>
-                        <ComboBoxItem Content="Творческий отдел"/>
-                        <ComboBoxItem Content="Хозяйственный отдел"/>
-                        <ComboBoxItem Content="Художественно-производствнный отдел"/>
-                        <ComboBoxItem Content="Юридический отдел"/>
-                    </ComboBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                    <TextBlock Text="Кабинет" Style="{DynamicResource TextBlock_14}" Width="100" Margin="0 0 0 0" FontSize="18"/>
-                    <TextBox Name="Room_Emp_Del" Width="380" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" MaxLength="3" materialDesign:TextFieldAssist.CharacterCounterVisibility="Collapsed" PreviewTextInput="NumOnly" FontSize="16"/>
-                </StackPanel>
-
-            </StackPanel>
-
-            <!--ПК Архив-->
-            <StackPanel x:Name="SearchPanel_PCDel" Visibility="Collapsed">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                    <TextBlock Text="Инвентарный номер" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="InvNum_PC_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16" PreviewTextInput="NumOnly"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Имя" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="Name_PC_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="IP" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <Border Name="IPBorder_Del" Width="200">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox Name="ip1_PC_Del" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck1_Del" GotFocus="IPfocus_Del" PreviewTextInput="NumOnlyIP" PreviewKeyDown="NextIP1_Del"/>
-                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                            <TextBox Name="ip2_PC_Del" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck2_Del" GotFocus="IPfocus_Del" PreviewTextInput="NumOnlyIP" PreviewKeyDown="NextIP2_Del"/>
-                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                            <TextBox Name="ip3_PC_Del" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck3_Del" GotFocus="IPfocus_Del" PreviewTextInput="NumOnlyIP" PreviewKeyDown="NextIP3_Del"/>
-                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                            <TextBox Name="ip4_PC_Del" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck4_Del" GotFocus="IPfocus_Del" PreviewTextInput="NumOnlyIP" PreviewKeyDown="NextIP4_Del"/>
-                        </StackPanel>
-                    </Border>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Пользователь" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="User_PC_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="ОС" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="OS_PC_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Материнская плата" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="Motherboard_PC_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Процессор" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="Processor_PC_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="ОЗУ" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="RAM_PC_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Накопители" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="Drive_PC_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Иное" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="Other_PC_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-            </StackPanel>
-
-            <!--Ноутбуки Архив-->
-            <StackPanel x:Name="SearchPanel_NBDel" Visibility="Collapsed">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                    <TextBlock Text="Инвентарный номер" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="InvNum_NB_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16" PreviewTextInput="NumOnly"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Модель" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="Model_NB_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Серийный номер" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="SeriaNum_NB_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Пользователь" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="User_NB_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Диагональ" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="ScreenDiagonal_NB_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Разрешение" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <xctk:MaskedTextBox Mask="9999x9999" Name="ScreenResolution_NB_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="ОС" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="OS_NB_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Процессор" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="Processor_NB_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="ОЗУ" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="RAM_NB_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Накопители" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="Drive_NB_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Иное" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="Other_NB_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-            </StackPanel>
-
-            <!--Планшеты Архив-->
-            <StackPanel x:Name="SearchPanel_TabDel" Visibility="Collapsed">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                    <TextBlock Text="Инвентарный номер" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="InvNum_Tab_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16" PreviewTextInput="NumOnly"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Модель" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="Model_Tab_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Серийный номер" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="SeriaNum_Tab_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Пользователь" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="User_Tab_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Диагональ" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="ScreenDiagonal_Tab_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Процессор" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="Processor_Tab_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="ОЗУ" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="RAM_Tab_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Накопители" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="Drive_Tab_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Иное" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="Other_Tab_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-            </StackPanel>
-
-            <!--Орг.техника Архив-->
-            <StackPanel x:Name="SearchPanel_OTDel" Visibility="Collapsed">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
-                    <TextBlock Text="Тип техники" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <ComboBox Name="Type_OT_Del" Style="{DynamicResource MaterialDesignComboBox}" Foreground="White" Width="200" FontSize="16" Text="Не выбрано">
-                        <ComboBoxItem Content="Не выбрано"/>
-                        <ComboBoxItem Content="МФУ"/>
-                        <ComboBoxItem Content="Принтер"/>
-                        <ComboBoxItem Content="Сканер"/>
-                    </ComboBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Инвентарный номер" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="InvNum_OT_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16" PreviewTextInput="NumOnly"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Модель" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="Model_OT_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Серийный номер" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="SeriaNum_OT_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Имя" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="Name_OT_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="IP" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <Border Name="IPBorder2_Del" Width="200">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox Name="ip1_OT_Del" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck5_Del" GotFocus="IPfocus1_Del" PreviewTextInput="NumOnlyIP" PreviewKeyDown="NextIP5_Del"/>
-                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                            <TextBox Name="ip2_OT_Del" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck6_Del" GotFocus="IPfocus1_Del" PreviewTextInput="NumOnlyIP" PreviewKeyDown="NextIP6_Del"/>
-                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                            <TextBox Name="ip3_OT_Del" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck7_Del" GotFocus="IPfocus1_Del" PreviewTextInput="NumOnlyIP" PreviewKeyDown="NextIP7_Del"/>
-                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                            <TextBox Name="ip4_OT_Del" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck8_Del" GotFocus="IPfocus1_Del" PreviewTextInput="NumOnlyIP" PreviewKeyDown="NextIP8_Del"/>
-                        </StackPanel>
-                    </Border>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Картридж" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="Cartridge_OT_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Кабинет" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="Room_OT_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Пользователь" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="User_OT_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-            </StackPanel>
-
-            <!--Мониторы Архив-->
-            <StackPanel x:Name="SearchPanel_MonDel" Visibility="Collapsed">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Инвентарный номер" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="InvNum_Mon_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16" PreviewTextInput="NumOnly"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Производитель" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="Firm_Mon_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Модель" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="Model_Mon_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Серийный номер" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="SeriaNum_Mon_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Диагональ экрана" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="ScreenDiagonal_Mon_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Разрешение" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <xctk:MaskedTextBox Mask="9999x9999" Name="ScreenResolution_Mon_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Тип экрана" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="ScreenType_Mon_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Пользователь" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="User_Mon_Del" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-            </StackPanel>
+        <!--#endregion-->
             
-            <!--Роутеры Архив-->
-            <StackPanel x:Name="SearchPanel_RoutDel" Visibility="Collapsed">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Инвентарный номер" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="InvNum_RoutDel" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16" PreviewTextInput="NumOnly"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Имя" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="Name_RoutDel" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Модель" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="Model_RoutDel" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Имя сети" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="WiFiName_RoutDel" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="IP" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <Border Name="IPBorder_RoutDel" Width="200">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox Name="ip1_RoutDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="RoutDel_IPcheck1" GotFocus="RoutDel_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="RoutDel_NextIP1"/>
-                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                            <TextBox Name="ip2_RoutDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="RoutDel_IPcheck2" GotFocus="RoutDel_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="RoutDel_NextIP2"/>
-                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                            <TextBox Name="ip3_RoutDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="RoutDel_IPcheck3" GotFocus="RoutDel_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="RoutDel_NextIP3"/>
-                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                            <TextBox Name="ip4_RoutDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="RoutDel_IPcheck4" GotFocus="RoutDel_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="RoutDel_NextIP4"/>
-                        </StackPanel>
-                    </Border>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="DHCP" Style="{DynamicResource TextBlock_14}" Width="150" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <Border Name="DHCPBorder_RoutDel" Width="250">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox Name="dhcp1_RoutDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="RoutDel_DHCPcheck1" GotFocus="RoutDel_DHCPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="RoutDel_NextDHCP1"/>
-                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                            <TextBox Name="dhcp2_RoutDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="RoutDel_DHCPcheck2" GotFocus="RoutDel_DHCPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="RoutDel_NextDHCP2"/>
-                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                            <TextBox Name="dhcp3_RoutDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="RoutDel_DHCPcheck3" GotFocus="RoutDel_DHCPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="RoutDel_NextDHCP3"/>
-                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                            <TextBox Name="dhcp4_RoutDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="RoutDel_DHCPcheck4" GotFocus="RoutDel_DHCPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="RoutDel_NextDHCP4"/>
-                            <TextBlock Width="10" Height="20" Text="—" Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                            <TextBox Name="dhcp5_RoutDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="RoutDel_DHCPcheck5" GotFocus="RoutDel_DHCPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="RoutDel_NextDHCP5"/>
-                        </StackPanel>
-                    </Border>
-                </StackPanel>
-            </StackPanel>
+        <!--#region Отчёты-->
 
-            <!--Свитчи Архив-->
-            <StackPanel x:Name="SearchPanel_SwitchDel" Visibility="Collapsed">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Инвентарный номер" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="InvNum_SwitchDel" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16" PreviewTextInput="NumOnly"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Имя" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="Name_SwitchDel" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="Модель" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <TextBox Name="Model_SwitchDel" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
-                    <TextBlock Text="IP" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
-                    <Border Name="IPBorder_SwitchDel" Width="200">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox Name="ip1_SwitchDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="Rout_IPcheck1" GotFocus="Rout_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="Rout_NextIP1"/>
-                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                            <TextBox Name="ip2_SwitchDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="Rout_IPcheck2" GotFocus="Rout_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="Rout_NextIP2"/>
-                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                            <TextBox Name="ip3_SwitchDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="Rout_IPcheck3" GotFocus="Rout_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="Rout_NextIP3"/>
-                            <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                            <TextBox Name="ip4_SwitchDel" Width="42" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="Rout_IPcheck4" GotFocus="Rout_IPfocus" PreviewTextInput="NumOnlyIP" PreviewKeyDown="Rout_NextIP4"/>
-                        </StackPanel>
-                    </Border>
-                </StackPanel>
-            </StackPanel>
-
-            <!--Отчёт ПК-->
+            <!--#region Отчёт ПК-->
             <StackPanel x:Name="SearchPanel_PCRep" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
                     <TextBlock Text="Сотрудник" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
@@ -840,8 +512,9 @@
                     <TextBox Name="OTModel_Report1" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
                 </StackPanel>
             </StackPanel>
-            
-            <!--Отчёт Ноутбуки-->
+            <!--#endregion-->
+
+            <!--#region Отчёт Ноутбуки-->
             <StackPanel x:Name="SearchPanel_NBRep" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
                     <TextBlock Text="Сотрудник" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
@@ -864,8 +537,9 @@
                     <TextBox Name="NotebookName_Report2" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
                 </StackPanel>
             </StackPanel>
+            <!--#endregion-->
 
-            <!--Отчёт Планшеты-->
+            <!--#region Отчёт Планшеты-->
             <StackPanel x:Name="SearchPanel_TabRep" Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
                     <TextBlock Text="Сотрудник" Style="{DynamicResource TextBlock_14}" Width="200" Margin="0 0 10 0" FontSize="18" VerticalAlignment="Center"/>
@@ -888,6 +562,9 @@
                     <TextBox Name="TabletName_Report3" Width="200" Style="{DynamicResource MaterialDesignTextBox}" Foreground="White" FontSize="16"/>
                 </StackPanel>
             </StackPanel>
+            <!--#endregion-->
+
+        <!--#endregion-->
 
             <Button Content="Принять" Click="AcceptClick" Margin="20" VerticalAlignment="Bottom" IsDefault="True"/>
         </Grid>

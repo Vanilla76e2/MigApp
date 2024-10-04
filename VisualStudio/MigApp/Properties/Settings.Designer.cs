@@ -610,5 +610,53 @@ namespace MigApp.Properties {
                 this["ParamsSwitchDel"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string comFurn {
+            get {
+                return ((string)(this["comFurn"]));
+            }
+            set {
+                this["comFurn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ParamsFurn {
+            get {
+                return ((string)(this["ParamsFurn"]));
+            }
+            set {
+                this["ParamsFurn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string comFurnDel {
+            get {
+                return ((string)(this["comFurnDel"]));
+            }
+            set {
+                this["comFurnDel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ParamsFurnDel {
+            get {
+                return ((string)(this["ParamsFurnDel"]));
+            }
+            set {
+                this["ParamsFurnDel"] = value;
+            }
+        }
     }
 }

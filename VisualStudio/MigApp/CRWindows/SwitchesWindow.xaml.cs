@@ -23,6 +23,7 @@ namespace MigApp.CRWindows
         SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
         MiscClass mc = new MiscClass();
         DataTable table = new DataTable();
+        string sqlTable = "Switches", logname = "Свитчи";
         string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
         string InventoryNum;
         bool Deleted;
@@ -57,8 +58,8 @@ namespace MigApp.CRWindows
                             ip = ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text;
                         else ip = "...";
 
-                        sqlcc.ReqNonRef($"INSERT INTO Switches (InvNum, Name, Model, IP, Login, Password, Comment) Values ('{InvNum.Text}', '{SwitchName.Text}', '{SwitchModel.Text}', '{ip}', '{AdminLogin.Password}', '{AdminPass.Password}', '{Comment.Text}')");
-                        sqlcc.Loging(CurrentUser, "Создание", "Свитчи", InvNum.Text, "");
+                        sqlcc.ReqNonRef($"INSERT INTO {sqlTable} (InvNum, Name, Model, IP, Login, Password, Comment) Values ('{InvNum.Text}', '{SwitchName.Text}', '{SwitchModel.Text}', '{ip}', '{AdminLogin.Password}', '{AdminPass.Password}', '{Comment.Text}')");
+                        sqlcc.Loging(CurrentUser, "Создание", logname, InvNum.Text, SwitchModel.Text);
                     }
                     // Если редактирование
                     else
@@ -67,8 +68,8 @@ namespace MigApp.CRWindows
                             ip = ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text;
                         else ip = "...";
 
-                        sqlcc.ReqNonRef($"UPDATE Switches SET InvNum = '{InvNum.Text}', Name = '{SwitchName.Text}', Model = '{SwitchModel.Text}', IP = '{ip}', Login = '{AdminLogin.Password}', Password = '{AdminPass.Password}', Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
-                        sqlcc.Loging(CurrentUser, "Редактирование", "Свитчи", InvNum.Text, "");
+                        sqlcc.ReqNonRef($"UPDATE {sqlTable} SET InvNum = '{InvNum.Text}', Name = '{SwitchName.Text}', Model = '{SwitchModel.Text}', IP = '{ip}', Login = '{AdminLogin.Password}', Password = '{AdminPass.Password}', Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
+                        sqlcc.Loging(CurrentUser, "Редактирование", logname, InvNum.Text, SwitchModel.Text);
                     }
                     DialogResult = true; Close();
                 }
@@ -96,8 +97,8 @@ namespace MigApp.CRWindows
             {
                 if (MessageBox.Show("Вы уверены что хотите удалить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    sqlcc.ReqDel($"UPDATE Switches SET Deleted = 1, DelDate = '{DateTime.Now}' WHERE InvNum LIKE '{InventoryNum}'");
-                    sqlcc.Loging(CurrentUser, "Удаление", "Свитчи", InvNum.Text, "");
+                    sqlcc.ReqDel($"UPDATE {sqlTable} SET Deleted = 1, DelDate = '{DateTime.Now}' WHERE InvNum LIKE '{InventoryNum}'");
+                    sqlcc.Loging(CurrentUser, "Удаление", logname, InvNum.Text, SwitchModel.Text);
                     DialogResult = true; Close();
                 }
             }
@@ -105,8 +106,8 @@ namespace MigApp.CRWindows
             {
                 if (MessageBox.Show("Запись будет безвозвратно удалена.\nХотите удалить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    sqlcc.ReqDel($"DELETE FROM Switches WHERE InvNum LIKE '{InventoryNum}'");
-                    sqlcc.Loging(CurrentUser, "Стирание", "Свитчи", InventoryNum, "");
+                    sqlcc.ReqDel($"DELETE FROM {sqlTable} WHERE InvNum LIKE '{InventoryNum}'");
+                    sqlcc.Loging(CurrentUser, "Стирание", logname, InventoryNum, SwitchModel.Text);
                     DialogResult = true; Close();
                 }
             }
@@ -117,8 +118,8 @@ namespace MigApp.CRWindows
         {
             try
             {
-                sqlcc.Recovery("Switches", "InvNum", InventoryNum);
-                sqlcc.Loging(CurrentUser, "Восстановление", "Свитчи", InventoryNum, "");
+                sqlcc.Recovery(sqlTable, "InvNum", InventoryNum);
+                sqlcc.Loging(CurrentUser, "Восстановление", logname, InventoryNum, SwitchModel.Text);
                 DialogResult = true; Close();
             }
             catch { }

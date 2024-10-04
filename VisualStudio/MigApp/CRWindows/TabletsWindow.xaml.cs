@@ -17,6 +17,7 @@ namespace MigApp.CRWindows
         SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
         MiscClass mc = new MiscClass();
         DataTable table = new DataTable();
+        string sqlTable = "Tablets", logname = "Планшеты";
         string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
         string InventoryNum;
         bool Deleted, GrPerm;
@@ -47,14 +48,14 @@ namespace MigApp.CRWindows
                     // Если создание
                     if (Mode == true)
                     {
-                        sqlcc.ReqNonRef($"INSERT INTO Tablets (InvNum, Model, SNum, [User], OS, Diagonal, Processor, RAM, Drive, Other, Comment) Values ('{InvNum.Text}', '{Model.Text}', '{SeriaNum.Text}', (SELECT ID FROM Employees WHERE FIO LIKE '{User.Text}'), '{OS.Text}', '{ScreenDiagonal.Text}', '{Processor.Text}', '{RAM.Text}', '{Drive.Text}', '{Other.Text}', '{Comment.Text}')");
-                        sqlcc.Loging(CurrentUser, "Создание", "Планшеты", InvNum.Text, "");
+                        sqlcc.ReqNonRef($"INSERT INTO {sqlTable} (InvNum, Model, SNum, [User], OS, Diagonal, Processor, RAM, Drive, Other, Comment) Values ('{InvNum.Text}', '{Model.Text}', '{SeriaNum.Text}', (SELECT ID FROM Employees WHERE FIO LIKE '{User.Text}'), '{OS.Text}', '{ScreenDiagonal.Text}', '{Processor.Text}', '{RAM.Text}', '{Drive.Text}', '{Other.Text}', '{Comment.Text}')");
+                        sqlcc.Loging(CurrentUser, "Создание", logname, InvNum.Text, Model.Text);
                     }
                     // Если редактирование
                     else
                     {
-                        sqlcc.ReqNonRef($"UPDATE Tablets SET InvNum = '{InvNum.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', [User] = (SELECT ID FROM Employees WHERE FIO LIKE '{User.Text}'), OS = '{OS.Text}', Diagonal = '{ScreenDiagonal.Text}', Processor = '{Processor.Text}', RAM = '{RAM.Text}', Drive = '{Drive.Text}', Other = '{Other.Text}', Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
-                        sqlcc.Loging(CurrentUser, "Редактирование", "Планшеты", InvNum.Text, "");
+                        sqlcc.ReqNonRef($"UPDATE {sqlTable} SET InvNum = '{InvNum.Text}', Model = '{Model.Text}', SNum = '{SeriaNum.Text}', [User] = (SELECT ID FROM Employees WHERE FIO LIKE '{User.Text}'), OS = '{OS.Text}', Diagonal = '{ScreenDiagonal.Text}', Processor = '{Processor.Text}', RAM = '{RAM.Text}', Drive = '{Drive.Text}', Other = '{Other.Text}', Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
+                        sqlcc.Loging(CurrentUser, "Редактирование", logname, InvNum.Text, Model.Text);
                     }
                     DialogResult = true; Close();
                 }
@@ -85,14 +86,14 @@ namespace MigApp.CRWindows
             {
                 if (!Deleted)
                 {
-                    sqlcc.ReqDel($"UPDATE Tablets SET Deleted = 1 WHERE InvNum LIKE '{InventoryNum}'");
-                    sqlcc.Loging(CurrentUser, "Удаление", "Планшеты", InvNum.Text, "");
+                    sqlcc.ReqDel($"UPDATE {sqlTable} SET Deleted = 1 WHERE InvNum LIKE '{InventoryNum}'");
+                    sqlcc.Loging(CurrentUser, "Удаление", logname, InvNum.Text, Model.Text);
                     DialogResult = true; Close();
                 }
                 else
                 {
-                    sqlcc.ReqDel($"DELETE FROM Tablets WHERE InvNum LIKE '{InventoryNum}'");
-                    sqlcc.Loging(CurrentUser, "Стирание", "Планшеты", InventoryNum, "");
+                    sqlcc.ReqDel($"DELETE FROM {sqlTable} WHERE InvNum LIKE '{InventoryNum}'");
+                    sqlcc.Loging(CurrentUser, "Стирание", logname, InventoryNum, Model.Text);
                     DialogResult = true; Close();
                 }
             }
@@ -101,8 +102,8 @@ namespace MigApp.CRWindows
         // Нажатие кнопки "Восстановить"
         private void RecoveryClick(object sender, RoutedEventArgs e)
         {
-            sqlcc.Recovery("Tablets", "InvNum", InventoryNum);
-            sqlcc.Loging(CurrentUser, "Восстановление", "Планшеты", InventoryNum, "");
+            sqlcc.Recovery(sqlTable, "InvNum", InventoryNum);
+            sqlcc.Loging(CurrentUser, "Восстановление", "Планшеты", InventoryNum, Model.Text);
             DialogResult = true; Close();
         }
 

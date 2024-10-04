@@ -24,6 +24,7 @@ namespace MigApp.CRWindows
         SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
         MiscClass mc = new MiscClass();
         DataTable table = new DataTable();
+        string sqlTable = "Computers", logname = "Компьютеры";
         string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
         string InventoryNum;
         string ip;
@@ -58,8 +59,8 @@ namespace MigApp.CRWindows
                         if (ip1.Text.Length > 0 && ip2.Text.Length > 0 && ip3.Text.Length > 0 && ip4.Text.Length > 0)
                             ip = ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text;
                         else ip = "...";
-                        sqlcc.ReqNonRef($"INSERT INTO Computers (InvNum, Name, IP, [User], Admin_Login, Admin_Password, OS, Motherboard, Processor, RAM, Drive, Other, Comment) Values ('{InvNum.Text}', '{PCName.Text}', '{ip}', (SELECT ID FROM Employees WHERE FIO LIKE '{User.Text}'), '{AdminLogin.Password}', '{AdminPass.Password}', '{OS.Text}', '{Motherboard.Text}', '{Processor.Text}', '{RAM.Text}', '{Drive.Text}', '{Other.Text}', '{Comment.Text}')");
-                        sqlcc.Loging(CurrentUser, "Создание", "Компьютеры", InvNum.Text, "");
+                        sqlcc.ReqNonRef($"INSERT INTO {sqlTable} (InvNum, Name, IP, [User], Admin_Login, Admin_Password, OS, Motherboard, Processor, RAM, Drive, Other, Comment) Values ('{InvNum.Text}', '{PCName.Text}', '{ip}', (SELECT ID FROM Employees WHERE FIO LIKE '{User.Text}'), '{AdminLogin.Password}', '{AdminPass.Password}', '{OS.Text}', '{Motherboard.Text}', '{Processor.Text}', '{RAM.Text}', '{Drive.Text}', '{Other.Text}', '{Comment.Text}')");
+                        sqlcc.Loging(CurrentUser, "Создание", logname, InvNum.Text, PCName.Text);
                     }
                     // Если редактирование
                     else
@@ -67,8 +68,8 @@ namespace MigApp.CRWindows
                         if (ip1.Text.Length > 0 && ip2.Text.Length > 0 && ip3.Text.Length > 0 && ip4.Text.Length > 0)
                             ip = ip1.Text + "." + ip2.Text + "." + ip3.Text + "." + ip4.Text;
                         else ip = "...";
-                        sqlcc.ReqNonRef($"UPDATE Computers SET InvNum = '{InvNum.Text}', Name = '{PCName.Text}', IP = '{ip}', [User] = (SELECT ID FROM Employees WHERE FIO LIKE '{User.Text}'), Admin_Login = '{AdminLogin.Password}', Admin_Password = '{AdminPass.Password}', OS = '{OS.Text}', Motherboard = '{Motherboard.Text}', Processor = '{Processor.Text}', RAM = '{RAM.Text}', Drive = '{Drive.Text}', Other = '{Other.Text}', Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
-                        sqlcc.Loging(CurrentUser, "Редактирование", "Компьютеры", InvNum.Text, "");
+                        sqlcc.ReqNonRef($"UPDATE {sqlTable} SET InvNum = '{InvNum.Text}', Name = '{PCName.Text}', IP = '{ip}', [User] = (SELECT ID FROM Employees WHERE FIO LIKE '{User.Text}'), Admin_Login = '{AdminLogin.Password}', Admin_Password = '{AdminPass.Password}', OS = '{OS.Text}', Motherboard = '{Motherboard.Text}', Processor = '{Processor.Text}', RAM = '{RAM.Text}', Drive = '{Drive.Text}', Other = '{Other.Text}', Comment = '{Comment.Text}' Where InvNum LIKE '{InventoryNum}'");
+                        sqlcc.Loging(CurrentUser, "Редактирование", logname, InvNum.Text, PCName.Text);
                     }
                     DialogResult = true; Close();
                 }
@@ -102,8 +103,8 @@ namespace MigApp.CRWindows
             {
                 if (MessageBox.Show("Вы уверены что хотите удалить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    sqlcc.ReqDel($"UPDATE Computers SET Deleted = 1, DelDate = '{DateTime.Now}' WHERE InvNum LIKE '{InventoryNum}'");
-                    sqlcc.Loging(CurrentUser, "Удаление", "Компьютеры", InvNum.Text, "");
+                    sqlcc.ReqDel($"UPDATE {sqlTable} SET Deleted = 1, DelDate = '{DateTime.Now}' WHERE InvNum LIKE '{InventoryNum}'");
+                    sqlcc.Loging(CurrentUser, "Удаление", logname, InvNum.Text, PCName.Text);
                     DialogResult = true; Close();
                 }
             }
@@ -112,7 +113,7 @@ namespace MigApp.CRWindows
                 if (MessageBox.Show("Запись будет безвозвратно удалена.\nХотите удалить запись?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
                     sqlcc.Delete_DeletedPC(InventoryNum);
-                    sqlcc.Loging(CurrentUser, "Стирание", "Компьютеры", InventoryNum, "");
+                    sqlcc.Loging(CurrentUser, "Стирание", logname, InventoryNum, PCName.Text);
                     DialogResult = true; Close();
                 }
             }
@@ -123,8 +124,8 @@ namespace MigApp.CRWindows
         {
             try
             {
-                sqlcc.Recovery("Computers", "InvNum", InventoryNum);
-                sqlcc.Loging(CurrentUser, "Восстановление", "Компьютеры", InventoryNum, "");
+                sqlcc.Recovery(sqlTable, "InvNum", InventoryNum);
+                sqlcc.Loging(CurrentUser, "Восстановление", logname, InventoryNum, PCName.Text);
                 DialogResult = true; Close();
             }
             catch { }
@@ -392,7 +393,7 @@ namespace MigApp.CRWindows
 
         private bool InvNumChecker(string invnum)
         {
-            if (Convert.ToUInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM Computers WHERE InvNum LIKE '{invnum}'")) < 1)
+            if (Convert.ToUInt32(sqlcc.ReqRef($"SELECT COUNT(*) FROM {sqlTable} WHERE InvNum LIKE '{invnum}'")) < 1)
                 return true;
             else return false;
         }
