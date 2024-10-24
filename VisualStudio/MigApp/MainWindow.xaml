@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:MigApp"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MigApp" MinHeight="650" MinWidth="920" WindowStartupLocation="CenterScreen" ResizeMode="CanResize" AllowsTransparency="True" Icon="images\Icon.png" WindowStyle="None">
+        Title="{Binding Path=WindowTitle}" MinHeight="650" MinWidth="920" MaxHeight="{Binding Path=WindowMaxHeight}" MaxWidth="{Binding Path=WindowMaxWidth}" WindowStartupLocation="CenterScreen" ResizeMode="CanResize" AllowsTransparency="True" Icon="images\Icon.png" WindowStyle="None">
     <WindowChrome.WindowChrome>
         <WindowChrome
             CaptionHeight="50"
             UseAeroCaptionButtons="True"
             CornerRadius="20"
-            ResizeBorderThickness="4"
+            ResizeBorderThickness="10"
             GlassFrameThickness="0"/>
     </WindowChrome.WindowChrome>
     <Grid Background="Transparent">
@@ -113,20 +113,20 @@
                                 <!--Сотрудники-->
                                 <TabItem>
                                     <TabItem.Header>
-                                        <materialDesign:PackIcon Kind="AccountGroup" Margin="-10" Width="40" Height="40" Foreground="#FF9700" ToolTip="Сотрудники"/>
+                                        <materialDesign:PackIcon Kind="AccountGroup" Style="{DynamicResource LeftPanelICons}" ToolTip="Сотрудники"/>
                                     </TabItem.Header>
 
                                     <Grid Background="#404040">
                                         <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                                             <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}" Selected="CustiomUI_SwitchBorder">
                                                 <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
-                                                    <materialDesign:PackIcon Kind="AccountTie" Width="40" Height="40" Margin="10 0 0 0" Foreground="#FF9700"/>
+                                                    <materialDesign:PackIcon Kind="AccountTie" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Сотрудники" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
                                                 </StackPanel>
                                             </ListViewItem>
                                             <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}">
                                                 <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
-                                                    <materialDesign:PackIcon Kind="Work" Width="40" Height="40" Margin="10 0 0 0" Foreground="#FF9700"/>
+                                                    <materialDesign:PackIcon Kind="Work" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Отделы" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
                                                 </StackPanel>
                                             </ListViewItem>
@@ -137,57 +137,64 @@
                                 <!--Техника-->
                                 <TabItem Margin="0 5 0 0">
                                     <TabItem.Header>
-                                        <materialDesign:PackIcon Kind="MonitorCellphone" Width="40" Height="40" Margin="-10" Foreground="#FF9700" ToolTip="Техника"/>
+                                        <materialDesign:PackIcon Kind="MonitorCellphone" Style="{DynamicResource LeftPanelICons}" ToolTip="Техника"/>
                                     </TabItem.Header>
 
                                     <Grid Background="#404040">
                                         <ListView>
                                             <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}">
                                                 <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
-                                                    <materialDesign:PackIcon Kind="DesktopTower" Width="40" Height="40" Foreground="#FF9700" Margin="10 0 0 0"/>
-                                                    <TextBlock Text="Компьютеры" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Center" Margin="30 0 0 0"/>
+                                                    <materialDesign:PackIcon Kind="DesktopTower" Style="{DynamicResource NavigationIcons}"/>
+                                                    <TextBlock Text="Компьютеры" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </ListViewItem>
 
                                             <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}">
                                                 <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
-                                                    <materialDesign:PackIcon Kind="Computer" Width="40" Height="40" Foreground="#FF9700" Margin="10 0 0 0"/>
-                                                    <TextBlock Text="Ноутбуки" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Center" Margin="30 0 0 0"/>
+                                                    <materialDesign:PackIcon Kind="Computer" Style="{DynamicResource NavigationIcons}"/>
+                                                    <TextBlock Text="Ноутбуки" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </ListViewItem>
 
                                             <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}">
                                                 <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
-                                                    <materialDesign:PackIcon Kind="Tablet" Width="40" Height="40" Foreground="#FF9700" Margin="10 0 0 0"/>
-                                                    <TextBlock Text="Планшеты" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Center" Margin="30 0 0 0"/>
+                                                    <materialDesign:PackIcon Kind="Tablet" Style="{DynamicResource NavigationIcons}"/>
+                                                    <TextBlock Text="Планшеты" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </ListViewItem>
 
                                             <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}">
                                                 <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
-                                                    <materialDesign:PackIcon Kind="Printer" Width="40" Height="40" Foreground="#FF9700" Margin="10 0 0 0"/>
-                                                    <TextBlock Text="Оргтехника" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Center" Margin="30 0 0 0"/>
+                                                    <materialDesign:PackIcon Kind="Printer" Style="{DynamicResource NavigationIcons}"/>
+                                                    <TextBlock Text="Оргтехника" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </ListViewItem>
 
                                             <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}">
                                                 <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
-                                                    <materialDesign:PackIcon Kind="Monitor" Width="40" Height="40" Foreground="#FF9700" Margin="10 0 0 0"/>
-                                                    <TextBlock Text="Мониторы" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Center" Margin="30 0 0 0"/>
+                                                    <materialDesign:PackIcon Kind="Monitor" Style="{DynamicResource NavigationIcons}"/>
+                                                    <TextBlock Text="Мониторы" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </ListViewItem>
 
                                             <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}">
                                                 <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
-                                                    <materialDesign:PackIcon Kind="RouterWireless" Width="40" Height="40" Foreground="#FF9700" Margin="10 0 0 0"/>
-                                                    <TextBlock Text="Роутеры" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Center" Margin="30 0 0 0"/>
+                                                    <materialDesign:PackIcon Kind="RouterWireless" Style="{DynamicResource NavigationIcons}"/>
+                                                    <TextBlock Text="Роутеры" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </ListViewItem>
 
                                             <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}">
                                                 <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
-                                                    <materialDesign:PackIcon Kind="RouterNetwork" Width="40" Height="40" Foreground="#FF9700" Margin="10 0 0 0"/>
-                                                    <TextBlock Text="Коммутаторы" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Center" Margin="30 0 0 0"/>
+                                                    <materialDesign:PackIcon Kind="RouterNetwork" Style="{DynamicResource NavigationIcons}"/>
+                                                    <TextBlock Text="Коммутаторы" Style="{DynamicResource NavigationTextBlock}"/>
+                                                </StackPanel>
+                                            </ListViewItem>
+
+                                            <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}">
+                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                    <materialDesign:PackIcon Kind="Cctv" Style="{DynamicResource NavigationIcons}"/>
+                                                    <TextBlock Text="Видеонаблюдение" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </ListViewItem>
                                         </ListView>
@@ -197,22 +204,22 @@
                                 <!--Мебель-->
                                 <TabItem Margin="0 5 0 0">
                                     <TabItem.Header>
-                                        <materialDesign:PackIcon Kind="Wardrobe" Width="40" Height="40" Margin="-10" Foreground="#FF9700" ToolTip="Мебель"/>
+                                        <materialDesign:PackIcon Kind="Wardrobe" Style="{DynamicResource LeftPanelICons}" ToolTip="Мебель"/>
                                     </TabItem.Header>
 
                                     <Grid Background="#404040">
                                         <ListView>
                                             <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}">
                                                 <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
-                                                    <materialDesign:PackIcon Kind="Dresser" Width="40" Height="40" Foreground="#FF9700" Margin="10 0 0 0"/>
-                                                    <TextBlock Text="Мебель" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Center" Margin="30 0 0 0"/>
+                                                    <materialDesign:PackIcon Kind="Dresser" Style="{DynamicResource NavigationIcons}"/>
+                                                    <TextBlock Text="Мебель" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </ListViewItem>
 
                                             <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}">
                                                 <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
-                                                    <materialDesign:PackIcon Kind="TagMultiple" Width="40" Height="40" Foreground="#FF9700" Margin="10 0 0 0"/>
-                                                    <TextBlock Text="Виды мебели" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Center" Margin="30 0 0 0"/>
+                                                    <materialDesign:PackIcon Kind="TagMultiple" Style="{DynamicResource NavigationIcons}"/>
+                                                    <TextBlock Text="Виды мебели" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </ListViewItem>
                                         </ListView>
@@ -488,8 +495,8 @@
                 
                 <!--#region Header -->
                 <Grid Grid.ColumnSpan="3" Grid.Row="0" Background="#252525">
-                    <TextBlock Name="WindowTitle" Text="MigApp [Ver]" Style="{DynamicResource HeaderPanelText}" Margin="15 0"/>
-                    <TextBlock Name="UserLoginText" Text="[Login]" Style="{DynamicResource HeaderPanelText}" HorizontalAlignment="Right" Margin="0 0 130 0"/>
+                    <TextBlock Name="WindowTitle" Text="{Binding Path=WindowTitle}" Style="{DynamicResource HeaderPanelText}" Margin="15 0"/>
+                    <TextBlock Name="UserLoginText" Text="{Binding Path=CurrentUser}" Style="{DynamicResource HeaderPanelText}" HorizontalAlignment="Right" Margin="0 0 130 0"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button Name="Custom_MinimizeButton" Style="{DynamicResource WindowControlButtons}" Click="CustomUI_WindowControl">
                             <StackPanel>

@@ -166,7 +166,24 @@
         <Setter Property="Background" Value="#505050"/>
         <Setter Property="Foreground" Value="White"/>
     </Style>
+    
+    <!--#region Navigation -->
+    <Style x:Key="LeftPanelBottomButtons" TargetType="Button" BasedOn="{StaticResource MaterialDesignFloatingActionButton}">
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Foreground" Value="#FF9700"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Margin" Value="0 0 0 10"/>
+    </Style>
 
+    <Style x:Key="LeftPanelICons" TargetType="materialDesign:PackIcon">
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Foreground" Value="#FF9700"/>
+        <Setter Property="Margin" Value="-10"/>
+    </Style>
+    
     <Style x:Key="NavigationPanel" TargetType="Border">
         <Setter Property="Background" Value="#383838"/>
         <Setter Property="CornerRadius" Value="15 0 0 15"/>
@@ -186,15 +203,19 @@
         <Setter Property="Width" Value="50"/>
     </Style>
 
-    <Style x:Key="LeftPanelBottomButtons" TargetType="Button" BasedOn="{StaticResource MaterialDesignFloatingActionButton}">
+    <Style x:Key="NavigationIcons" TargetType="materialDesign:PackIcon">
         <Setter Property="Width" Value="40"/>
         <Setter Property="Height" Value="40"/>
         <Setter Property="Foreground" Value="#FF9700"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Margin" Value="0 0 0 10"/>
+        <Setter Property="Margin" Value="10 0 0 0"/>
     </Style>
 
+    <Style x:Key="NavigationTextBlock" TargetType="TextBlock" BasedOn="{StaticResource TextBlock_20}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="30 0 0 0"/>
+    </Style>
+    <!--#endregion-->
+    
     <Style x:Key="HeaderPanelText" TargetType="TextBlock">
         <Setter Property="Foreground" Value="Gray"/>
         <Setter Property="FontSize" Value="24"/>
@@ -211,5 +232,5 @@
         <Setter Property="Margin" Value="0 10"/>
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
     </Style>
-
+    
 </ResourceDictionary>

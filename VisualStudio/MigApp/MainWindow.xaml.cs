@@ -1,13 +1,10 @@
-﻿using MigApp.CRWindows;
-using MigApp.CRWindows.AdminPanel;
-using System;
-using System.Data;
-using System.Diagnostics;
+﻿using MigApp.Classes;
 using System.Windows;
 using System.Windows.Controls;
-using System.Threading.Tasks;
 using System.Reflection;
 using System.Windows.Input;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 namespace MigApp
 {
     /// <summary>
@@ -17,36 +14,12 @@ namespace MigApp
     {
         SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
         MiscClass mc = new MiscClass();
-
-        #region Переменные
-        string curver = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
-        string CurrentUser;
-
-        #region Роли
-        bool EmpRedPerm = false, EmpRead = false;
-        bool GrRedPerm = false, GrRead = false;
-        bool PCRedPerm = false, PCRead = false;
-        bool NbRedPerm = false, NbRead = false;
-        bool TabRedPerm = false, TabRead = false;
-        bool OTRedPerm = false, OTRead = false;
-        bool MonRedPerm = false, MonRead = false;
-        bool RoutRedPerm = false, RoutRead = false;
-        bool SwitchRedPerm = false, SwitchRead = false;
-        bool FurnRedPerm = false, FurnRead = false;
-        bool Admin = false;
-        #endregion
-
-        #endregion
+        MainWindowHandler mwh = new MainWindowHandler();
 
         public MainWindow()
         {
             InitializeComponent();
-            Title = "MigApp v." + curver;
-            WindowTitle.Text = "MigApp v." + curver;
-            this.MaxWidth = System.Windows.SystemParameters.PrimaryScreenWidth + 6;
-            this.MaxHeight = System.Windows.SystemParameters.PrimaryScreenHeight - 30;
-            //mc.ClearFilters();
-            //CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
+            DataContext = mwh;
             //RoleCheck();
             //UpdateAllTables();
             //UserLoginText.Text = CurrentUser;
@@ -2674,8 +2647,6 @@ namespace MigApp
         //}
 
         #endregion
-
-
 
         #region CastomUI
 

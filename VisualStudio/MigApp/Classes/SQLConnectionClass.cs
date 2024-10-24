@@ -2,8 +2,6 @@
 using System.Data.SqlClient;
 using System.Data;
 using System.Windows;
-using System.Windows.Documents;
-using System.Linq;
 
 namespace MigApp
 {
@@ -99,7 +97,7 @@ namespace MigApp
         }
 
         // Запрос с возвратом таблицы
-        public DataTable DataGridUpdate(string items, string table, string command)
+        public DataTable GetTable(string items, string table, string command)
         {
             try
             {
@@ -119,6 +117,8 @@ namespace MigApp
             }
             finally { sqlConnection.Close(); }
         }
+
+        public DataTable DataGridUpdate(string items, string table, string command) { DataTable tmp = null;  return tmp; }
 
         // Проверка занятости инвентарного номера
         public bool InvNumChecker (string InvNum)
@@ -181,7 +181,7 @@ namespace MigApp
                 result.Rows.Add(ip);
             }
 
-            DataTable PC = DataGridUpdate("*", "PC_View", "Where LEN(IP) > 0");
+            DataTable PC = GetTable("*", "PC_View", "Where LEN(IP) > 0");
             foreach (DataRow row in PC.Rows)
             {
                 foreach (DataRow ip in result.Rows)
@@ -196,7 +196,7 @@ namespace MigApp
                 }
             }
 
-            DataTable OrgTech = DataGridUpdate("*", "OrgTech_View", "Where LEN(IP) > 0");
+            DataTable OrgTech = GetTable("*", "OrgTech_View", "Where LEN(IP) > 0");
             foreach (DataRow row in OrgTech.Rows)
             {
                 foreach (DataRow ip in result.Rows)
@@ -211,7 +211,7 @@ namespace MigApp
                 }
             }
 
-            DataTable Routers = DataGridUpdate("*", "Routers_View", "Where LEN(IP) > 0");
+            DataTable Routers = GetTable("*", "Routers_View", "Where LEN(IP) > 0");
             foreach (DataRow row in Routers.Rows)
             {
                 foreach (DataRow ip in result.Rows)
@@ -226,7 +226,7 @@ namespace MigApp
                 }
             }
 
-            DataTable Switches = DataGridUpdate("*", "Switches_View", "Where LEN(IP) > 0");
+            DataTable Switches = GetTable("*", "Switches_View", "Where LEN(IP) > 0");
             foreach (DataRow row in Switches.Rows)
             {
                 foreach (DataRow ip in result.Rows)
@@ -247,19 +247,19 @@ namespace MigApp
         // Отчёт ПК
         public DataTable Report_PC()
         {
-            DataTable table = DataGridUpdate("*","Report_PC","");
+            DataTable table = GetTable("*","Report_PC","");
             foreach(DataRow row in table.Rows)
             {
                 string monInvNum = "", monModel = "";
                 string otInvNum = "", otModel = "", otType = "";
-                DataTable mons = DataGridUpdate("*", "Monitor", $"Where PC Like '{row["ИН компьютера"]}'");
+                DataTable mons = GetTable("*", "Monitor", $"Where PC Like '{row["ИН компьютера"]}'");
                 foreach(DataRow mon in mons.Rows)
                 {
                     monInvNum += mon["InvNum"].ToString() + "/";
                     monModel += mon["Firm"].ToString() + " " + mon["Model"].ToString() + "/";
                 }
                 monInvNum = monInvNum.TrimEnd('/'); monModel = monModel.TrimEnd('/');
-                DataTable ots = DataGridUpdate("*", "OrgTech", $"Where PC Like '{row["ИН компьютера"]}'");
+                DataTable ots = GetTable("*", "OrgTech", $"Where PC Like '{row["ИН компьютера"]}'");
                 foreach (DataRow ot in ots.Rows)
                 {
                     otType += ot["Type"].ToString() + "/";
@@ -280,79 +280,79 @@ namespace MigApp
         public DataTable Report_PC_Filtered()
         {
             DataTable result = new DataTable();
-            result.Columns.Add("Сотрудник");
-            result.Columns.Add("Отдел");
-            result.Columns.Add("Кабинет");
-            result.Columns.Add("ИН компьютера");
-            result.Columns.Add("Имя компьютера");
-            result.Columns.Add("ИН монитора");
-            result.Columns.Add("Модель монитора");
-            result.Columns.Add("ИН оргтехники");
-            result.Columns.Add("Тип оргтехники");
-            result.Columns.Add("Модель оргтехники");
-            DataTable table = new DataTable();
-            int i;
-            table = Report_PC();
-            string[] Params = MigApp.Properties.Settings.Default.ParamsPCRep.Split('|');
-            foreach (DataRow row in table.Rows)
-            {
-                i = 0;
-                if (Params[0].Length > 0)
-                    if (row[0].ToString().IndexOf(Params[0]) != -1)
-                        i++;
-                    else i--;
-                if (Params[1].Length > 0)
-                    if (row[1].ToString().IndexOf(Params[1]) != -1)
-                        i++;
-                    else i--;
-                if (Params[2].Length > 0)
-                    if (row[2].ToString() == Params[2])
-                        i++;
-                    else i--;
-                if(Params[3].Length > 0)
-                    if(row[3].ToString() == Params[3])
-                        i++;
-                    else i--;
-                if (Params[4].Length > 0)
-                    if (row[4].ToString().IndexOf(Params[4]) != -1)
-                        i++;
-                    else i--;
-                if (Params[5].Length > 0)
-                    if (row[5].ToString() == Params[5])
-                        i++;
-                    else i--;
-                if (Params[6].Length > 0)
-                    if (row[6].ToString().IndexOf(Params[6]) != -1)
-                        i++;
-                    else i--;
-                if (Params[7].Length > 0)
-                    if (row[7].ToString() == Params[7])
-                        i++;
-                    else i--;
-                if (Params[8].Length > 0)
-                    if (row[8].ToString().IndexOf(Params[8]) != -1)
-                        i++;
-                    else i--;
-                if (Params[9].Length > 0)
-                    if (row[9].ToString().IndexOf(Params[9]) != -1)
-                        i++;
-                    else i--;
-                if (i > 0)
-                {
-                    DataRow dr = result.NewRow();
-                    dr["Сотрудник"] = row["Сотрудник"].ToString();
-                    dr["Отдел"] = row["Отдел"].ToString();
-                    dr["Кабинет"] = row["Кабинет"].ToString();
-                    dr["ИН компьютера"] = row["ИН компьютера"].ToString();
-                    dr["Имя компьютера"] = row["Имя компьютера"].ToString();
-                    dr["ИН монитора"] = row["ИН монитора"].ToString();
-                    dr["Модель монитора"] = row["Модель монитора"].ToString();
-                    dr["ИН оргтехники"] = row["ИН оргтехники"].ToString();
-                    dr["Тип оргтехники"] = row["Тип оргтехники"].ToString();
-                    dr["Модель оргтехники"] = row["Модель оргтехники"].ToString();
-                    result.Rows.Add(dr);
-                }
-            }
+            //result.Columns.Add("Сотрудник");
+            //result.Columns.Add("Отдел");
+            //result.Columns.Add("Кабинет");
+            //result.Columns.Add("ИН компьютера");
+            //result.Columns.Add("Имя компьютера");
+            //result.Columns.Add("ИН монитора");
+            //result.Columns.Add("Модель монитора");
+            //result.Columns.Add("ИН оргтехники");
+            //result.Columns.Add("Тип оргтехники");
+            //result.Columns.Add("Модель оргтехники");
+            //DataTable table = new DataTable();
+            //int i;
+            //table = Report_PC();
+            //string[] Params = MigApp.Properties.Settings.Default.ParamsPCRep.Split('|');
+            //foreach (DataRow row in table.Rows)
+            //{
+            //    i = 0;
+            //    if (Params[0].Length > 0)
+            //        if (row[0].ToString().IndexOf(Params[0]) != -1)
+            //            i++;
+            //        else i--;
+            //    if (Params[1].Length > 0)
+            //        if (row[1].ToString().IndexOf(Params[1]) != -1)
+            //            i++;
+            //        else i--;
+            //    if (Params[2].Length > 0)
+            //        if (row[2].ToString() == Params[2])
+            //            i++;
+            //        else i--;
+            //    if(Params[3].Length > 0)
+            //        if(row[3].ToString() == Params[3])
+            //            i++;
+            //        else i--;
+            //    if (Params[4].Length > 0)
+            //        if (row[4].ToString().IndexOf(Params[4]) != -1)
+            //            i++;
+            //        else i--;
+            //    if (Params[5].Length > 0)
+            //        if (row[5].ToString() == Params[5])
+            //            i++;
+            //        else i--;
+            //    if (Params[6].Length > 0)
+            //        if (row[6].ToString().IndexOf(Params[6]) != -1)
+            //            i++;
+            //        else i--;
+            //    if (Params[7].Length > 0)
+            //        if (row[7].ToString() == Params[7])
+            //            i++;
+            //        else i--;
+            //    if (Params[8].Length > 0)
+            //        if (row[8].ToString().IndexOf(Params[8]) != -1)
+            //            i++;
+            //        else i--;
+            //    if (Params[9].Length > 0)
+            //        if (row[9].ToString().IndexOf(Params[9]) != -1)
+            //            i++;
+            //        else i--;
+            //    if (i > 0)
+            //    {
+            //        DataRow dr = result.NewRow();
+            //        dr["Сотрудник"] = row["Сотрудник"].ToString();
+            //        dr["Отдел"] = row["Отдел"].ToString();
+            //        dr["Кабинет"] = row["Кабинет"].ToString();
+            //        dr["ИН компьютера"] = row["ИН компьютера"].ToString();
+            //        dr["Имя компьютера"] = row["Имя компьютера"].ToString();
+            //        dr["ИН монитора"] = row["ИН монитора"].ToString();
+            //        dr["Модель монитора"] = row["Модель монитора"].ToString();
+            //        dr["ИН оргтехники"] = row["ИН оргтехники"].ToString();
+            //        dr["Тип оргтехники"] = row["Тип оргтехники"].ToString();
+            //        dr["Модель оргтехники"] = row["Модель оргтехники"].ToString();
+            //        result.Rows.Add(dr);
+            //    }
+            //}
             return result;
         }
 

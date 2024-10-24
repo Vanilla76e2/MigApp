@@ -125,6 +125,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\Encrypting.cs" />
+    <Compile Include="Classes\MainWindowHandler.cs" />
     <Compile Include="Classes\MiscClass.cs" />
     <Compile Include="CRWindows\AdminPanel\RoleWindow.xaml.cs">
       <DependentUpon>RoleWindow.xaml</DependentUpon>
