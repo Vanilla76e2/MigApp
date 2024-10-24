@@ -73,15 +73,15 @@ namespace MigApp
         // Запрос без возврата
         public void ReqNonRef (string text)
         {
-            //try
-            //{
-            sqlConnection.Open();
-            SqlCommand com = new SqlCommand(text, sqlConnection);
-            com.ExecuteNonQuery();
-            sqlConnection.Close();
-            //}
-            //catch { MessageBox.Show("Error ReqNonRef\nНе удалось выполнить запрос.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); }
-            //finally { sqlConnection.Close(); }
+            try
+            {
+                sqlConnection.Open();
+                SqlCommand com = new SqlCommand(text, sqlConnection);
+                com.ExecuteNonQuery();
+                //sqlConnection.Close();
+            }
+            catch { MessageBox.Show("Error ReqNonRef\nНе удалось выполнить запрос.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); }
+            finally { sqlConnection.Close(); }
         }
 
         // Запрос на удаление
@@ -354,6 +354,19 @@ namespace MigApp
                 }
             }
             return result;
+        }
+
+        // Провести изменения в избранное
+        public void FavoriteUpdate(string oldRow, string oldSpec, string newRow, string newSpec, string CurUser, bool Delete)
+        {
+            if ((oldRow != newRow || oldSpec != newSpec) && !Delete)
+            {
+                ReqNonRef($"UPDATE Favourite SET Row = '{oldRow}', Comment = {newSpec} WHERE Row LIKE '{newRow}' AND Comment LIKE '{oldSpec}'");
+            }
+            else if (Delete)
+            {
+                ReqNonRef($"DELETE FROM Favourite WHERE Row LIKE '{oldRow}' AND Comment LIKE '{oldSpec}'");
+            }
         }
 
     }

@@ -833,7 +833,7 @@ namespace MigApp
                 }
                 if (allow)
                 {
-                    sqlcc.ReqNonRef($"INSERT INTO Favourite ([User], Date, [Table], Row) VALUES ('{CurrentUser}', '{DateTime.Now.Date}', 'Сотрудники', '{FIO}')");
+                    sqlcc.ReqNonRef($"INSERT INTO Favourite ([User], Date, [Table], Row, Comment) VALUES ('{CurrentUser}', '{DateTime.Now.Date}', 'Сотрудники', '{FIO}', '')");
                     FavTable.ItemsSource = sqlcc.DataGridUpdate("Дата, Таблица, Запись, Подробности", "Fav_View", $"WHERE [User] LIKE '{CurrentUser}'").DefaultView;
                 }
                 else
@@ -1050,7 +1050,7 @@ namespace MigApp
                 }
                 if (allow)
                 {
-                    sqlcc.ReqNonRef($"INSERT INTO Favourite ([User], Date, [Table], Row, Comment) VALUES ('{CurrentUser}', '{DateTime.Now}', 'Свитчи', '{invnum}', '{type + ": " + name}')");
+                    sqlcc.ReqNonRef($"INSERT INTO Favourite ([User], Date, [Table], Row, Comment) VALUES ('{CurrentUser}', '{DateTime.Now}', 'Мебель', '{invnum}', '{type + ": " + name}')");
                     FavTable.ItemsSource = sqlcc.DataGridUpdate("Дата, Таблица, Запись, Подробности", "Fav_View", $"WHERE [User] LIKE '{CurrentUser}'").DefaultView;
                 }
                 else

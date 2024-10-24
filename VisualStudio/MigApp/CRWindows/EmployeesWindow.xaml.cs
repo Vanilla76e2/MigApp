@@ -14,6 +14,7 @@ namespace MigApp.CRWindows
         string sqlTable = "Employees", logname = "Сотрудники";
         string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
         string ID;
+        string oldfavrow;
         bool Deleted;
 
         // true - Создание
@@ -44,6 +45,7 @@ namespace MigApp.CRWindows
                     else
                     {
                         sqlcc.ReqNonRef($"UPDATE {sqlTable} SET FIO = '{FIO.Text}', [Group] = '{Group.Text}', Room = '{Room.Text}' WHERE ID LIKE {ID}");
+                        sqlcc.FavoriteUpdate(oldfavrow, "", FIO.Text, "", CurrentUser, false);
                         sqlcc.Loging(CurrentUser, "Редактирование", logname, FIO.Text, "");
                     }
                     DialogResult = true; Close();
@@ -68,6 +70,7 @@ namespace MigApp.CRWindows
                 if (MessageBox.Show("Вы уверены что хотите удалить запись?","Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
                     sqlcc.ReqNonRef($"UPDATE {sqlTable} SET Deleted = 1, DelDate = '{DateTime.Now}' WHERE ID LIKE {ID}");
+                    sqlcc.FavoriteUpdate(oldfavrow, "", oldfavrow, "", CurrentUser, true);
                     sqlcc.Loging(CurrentUser, "Удаление", logname, FIO.Text, "");
                     DialogResult = true; Close();
                 }
@@ -105,6 +108,7 @@ namespace MigApp.CRWindows
             {
                 groupList.Add(row["Name"].ToString());
             }
+            Group.ItemsSource = null;
             Group.ItemsSource = groupList;
         }
 
@@ -133,7 +137,8 @@ namespace MigApp.CRWindows
                     ListFill();
                     table = sqlcc.DataGridUpdate("*", "Employees_View", $"WHERE ID LIKE {ID}");
                     DataRow row = table.Rows[0];
-                    FIO.Text = row["ФИО"].ToString();
+                    FIO.Text = row["ФИО"].ToString(); 
+                    oldfavrow = row["ФИО"].ToString();
                     Group.Text = row["Отдел"].ToString();
                     Room.Text = row["Кабинет"].ToString();
                 }
@@ -159,10 +164,14 @@ namespace MigApp.CRWindows
 
         private void NumOnly(object sender, TextCompositionEventArgs e)
         {
-            if (!Char.IsDigit(e.Text, 0))
+            try
             {
-                e.Handled = true;
+                if (!Char.IsDigit(e.Text, 0))
+                {
+                    e.Handled = true;
+                }
             }
+            catch { }
         }
 
         private void LockAll()

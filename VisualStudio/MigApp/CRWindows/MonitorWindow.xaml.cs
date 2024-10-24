@@ -160,12 +160,12 @@ namespace MigApp.CRWindows
         // Заполнение полей и изменение названия окна
         private void Start(string Invnum, bool emppermission, bool pcpermission)
         {
-            if(emppermission)
+            if(!emppermission)
             {
                 EmployeeAdd.Visibility = Visibility.Collapsed;
                 User.Width = 330;
             }
-            if(pcpermission)
+            if(!pcpermission)
             {
                 PCAdd.Visibility = Visibility.Collapsed;
                 PC.Width = 330;
@@ -244,20 +244,28 @@ namespace MigApp.CRWindows
 
         private void NumOnly(object sender, TextCompositionEventArgs e)
         {
-            if (!Char.IsDigit(e.Text, 0))
+            try
             {
-                e.Handled = true;
+                if (!Char.IsDigit(e.Text, 0))
+                {
+                    e.Handled = true;
+                }
             }
+            catch { }
         }
 
         private void DotNumOnly(object sender, TextCompositionEventArgs e)
         {
-            if (!(Char.IsDigit(e.Text, 0) || (e.Text == ".")
-               && (!ScreenDiagonal.Text.Contains(".")
-               && ScreenDiagonal.Text.Length != 0)))
+            try
             {
-                e.Handled = true;
+                if (!(Char.IsDigit(e.Text, 0) || (e.Text == ".")
+                   && (!ScreenDiagonal.Text.Contains(".")
+                   && ScreenDiagonal.Text.Length != 0)))
+                {
+                    e.Handled = true;
+                }
             }
+            catch { }
         }
 
         private void LockAll()

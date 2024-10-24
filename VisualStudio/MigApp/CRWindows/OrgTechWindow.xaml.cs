@@ -58,7 +58,7 @@ namespace MigApp.CRWindows
                         if (Ethernet.IsChecked == true)
                             sqlcc.ReqNonRef($"INSERT INTO {sqlTable} (InvNum, Type, Model, SNum, Name, IP, Login, Password, Сartridge_Model, Room, Comment) Values ('{InvNum.Text}', '{Type.Text}', '{Model.Text}', '{SeriaNum.Text}', '{OTName.Text}', '{ip}', '{Login.Password}', '{Password.Password}', '{Cartrige.Text}', ({Room.Text}), '{Comment.Text}')");
                         else if (USB.IsChecked == true)
-                            sqlcc.ReqNonRef($"INSERT INTO {sqlTable} (InvNum, Type, Model, SNum, Name, Login, Password, Сartridge_Model, PC, Comment) Values ('{InvNum.Text}', '{Type.Text}', '{Model.Text}', '{SeriaNum.Text}', '{OTName.Text}', '{Login.Password}', '{Password.Password}', '{Cartrige.Text}', ({pc}), '{Comment.Text}')");
+                            sqlcc.ReqNonRef($"INSERT INTO {sqlTable} (InvNum, Type, Model, SNum, Name, Login, Password, Сartridge_Model, PC, Comment, IP) Values ('{InvNum.Text}', '{Type.Text}', '{Model.Text}', '{SeriaNum.Text}', '{OTName.Text}', '{Login.Password}', '{Password.Password}', '{Cartrige.Text}', ({pc}), '{Comment.Text}', '...')");
                         sqlcc.Loging(CurrentUser, "Создание", logname, InvNum.Text, Type.Text + " " + Model.Text);
                     }
                     // Если редактирование
@@ -294,10 +294,14 @@ namespace MigApp.CRWindows
         // Проверка на цифры
         private void NumOnlyIP(object sender, TextCompositionEventArgs e)
         {
-            if (!Char.IsDigit(e.Text, 0))
+            try
             {
-                e.Handled = true;
+                if (!Char.IsDigit(e.Text, 0))
+                {
+                    e.Handled = true;
+                }
             }
+            catch { }
         }
 
         // Проверка до 255 и переключение на следующий
@@ -413,10 +417,14 @@ namespace MigApp.CRWindows
 
         private void NumOnly(object sender, TextCompositionEventArgs e)
         {
-            if (!Char.IsDigit(e.Text, 0))
+            try
             {
-                e.Handled = true;
+                if (!Char.IsDigit(e.Text, 0))
+                {
+                    e.Handled = true;
+                }
             }
+            catch { }
         }
 
         private void LockAll()

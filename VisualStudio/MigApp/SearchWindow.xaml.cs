@@ -874,7 +874,7 @@ namespace MigApp
                     command += $"Таблица Like '{Table_Logs.Text}' AND ";
                 if (Row_Logs.Text.Length > 0)
                     command += $"Запись Like '%{Row_Logs.Text}%' AND ";
-                command += $"ID NOT LIKE 'NULL'";
+                command += $"ID NOT LIKE 'NULL' ORDER BY ID DESC";
                 if (command != "Where ID NOT LIKE 'NULL'")
                 {
                     string param = $"{ID_Logs.Text}|{Date_LogsStart.Text}|{Date_LogsEnd.Text}|{User_Logs.Text}";
@@ -990,10 +990,14 @@ namespace MigApp
         // Проверка на цифры
         private void NumOnly(object sender, TextCompositionEventArgs e)
         {
-            if (!Char.IsDigit(e.Text, 0))
+            try
             {
-                e.Handled = true;
+                if (!Char.IsDigit(e.Text, 0))
+                {
+                    e.Handled = true;
+                }
             }
+            catch { }
         }
 
         #region IP Box для компьтера
@@ -1001,10 +1005,14 @@ namespace MigApp
         // Проверка на цифры
         private void NumOnlyIP(object sender, TextCompositionEventArgs e)
         {
-            if (!Char.IsDigit(e.Text, 0))
+            try
             {
-                e.Handled = true;
+                if (!Char.IsDigit(e.Text, 0))
+                {
+                    e.Handled = true;
+                }
             }
+            catch { }
         }
 
         // Проверка до 255 и переключение на следующий

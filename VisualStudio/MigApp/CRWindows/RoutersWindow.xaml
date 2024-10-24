@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MigApp.CRWindows"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Роутер [режим]" Height="670" Width="670" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/images/Icon.png">
+        Title="Роутер [режим]" Height="670" Width="670" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/images/Icon.png" KeyDown="HotKeys">
     <Grid Background="#323232">
 
 
@@ -55,15 +55,15 @@
                                         <TextBlock Text="DHCP" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Bottom" MinWidth="270" Margin="0 0 10 0"/>
                                         <Border Name="DHCPBorder" Width="330">
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBox Name="dhcp1" Text="192" Width="57" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck1" GotFocus="DHCPfocus" PreviewTextInput="NumOnlyDHCP" PreviewKeyDown="NextIP1"/>
+                                                <TextBox Name="dhcp1" Text="192" Width="57" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="DHCPcheck1" GotFocus="DHCPfocus" PreviewTextInput="NumOnlyDHCP" PreviewKeyDown="NextDHCP1"/>
                                                 <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                                                <TextBox Name="dhcp2" Text="168" Width="57" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck2" GotFocus="DHCPfocus" PreviewTextInput="NumOnlyDHCP" PreviewKeyDown="NextIP2"/>
+                                                <TextBox Name="dhcp2" Text="168" Width="57" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="DHCPcheck2" GotFocus="DHCPfocus" PreviewTextInput="NumOnlyDHCP" PreviewKeyDown="NextDHCP2"/>
                                                 <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                                                <TextBox Name="dhcp3" Width="57" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck3" GotFocus="DHCPfocus" PreviewTextInput="NumOnlyDHCP" PreviewKeyDown="NextIP3"/>
+                                                <TextBox Name="dhcp3" Width="57" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="DHCPcheck3" GotFocus="DHCPfocus" PreviewTextInput="NumOnlyDHCP" PreviewKeyDown="NextDHCP3"/>
                                                 <TextBlock Width="10" Text="." Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                                                <TextBox Name="dhcp4" Width="57" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck4" GotFocus="DHCPfocus" PreviewTextInput="NumOnlyDHCP" PreviewKeyDown="NextIP4"/>
+                                                <TextBox Name="dhcp4" Width="57" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="DHCPcheck4" GotFocus="DHCPfocus" PreviewTextInput="NumOnlyDHCP" PreviewKeyDown="NextDHCP4"/>
                                                 <TextBlock Width="15" Height="25" Text="—" Foreground="White" VerticalAlignment="Bottom" TextAlignment="Center"/>
-                                                <TextBox Name="dhcp5" Width="57" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="IPcheck4" GotFocus="DHCPfocus" PreviewTextInput="NumOnlyDHCP" PreviewKeyDown="NextIP4"/>
+                                                <TextBox Name="dhcp5" Width="57" Foreground="White" Background="Transparent" VerticalAlignment="Bottom" FontSize="16" TextAlignment="Center" TextChanged="DHCPcheck4" GotFocus="DHCPfocus" PreviewTextInput="NumOnlyDHCP" PreviewKeyDown="NextDHCP5"/>
                                             </StackPanel>
                                         </Border>
                                     </StackPanel>

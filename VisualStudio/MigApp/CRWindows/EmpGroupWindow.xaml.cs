@@ -8,6 +8,7 @@ namespace MigApp.CRWindows
     public partial class EmpGroupWindow : Window
     {
         SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
+        MiscClass mc = new MiscClass();
         string sqlTable = "[Group]", logname = "Отделы";
         string NAME;
         string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
@@ -56,6 +57,11 @@ namespace MigApp.CRWindows
             sqlcc.ReqDel($"Delete From {sqlTable} Where Name Like '{NAME}'");
             sqlcc.Loging(CurrentUser, "Стирание", logname, GroupName.Text, "");
             DialogResult = true; Close();
+        }
+
+        private void HotKeys(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            mc.HotKeys(sender, e);
         }
 
         private void Start()
