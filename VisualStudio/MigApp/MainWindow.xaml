@@ -6,12 +6,523 @@
         xmlns:local="clr-namespace:MigApp"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MigApp" MinHeight="650" MinWidth="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResize" Icon="images\Icon.png" KeyDown="HotKeys">
-    <Grid Background="#323232">
+        Title="MigApp" MinHeight="650" MinWidth="920" WindowStartupLocation="CenterScreen" ResizeMode="CanResize" AllowsTransparency="True" Icon="images\Icon.png" WindowStyle="None">
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+            CaptionHeight="50"
+            UseAeroCaptionButtons="True"
+            CornerRadius="20"
+            ResizeBorderThickness="4"
+            GlassFrameThickness="0"/>
+    </WindowChrome.WindowChrome>
+    <Grid Background="Transparent">
+        <Border>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="15"/>
+                </Grid.RowDefinitions>
 
-        <TabControl TabStripPlacement="Left">
+                <!--#region Main Panel-->
+                <Grid Name="MainGrid" Grid.Column="1" Grid.Row="1" Background="#252525" MouseDown="CustomUI_CloseMenu">
 
-            <!--#region Избранное -->
+                    <Border Name="ComputersBorder" Style="{StaticResource MainPanelBorder}">
+                        <Grid>
+                            
+                            <!--Шапка-->
+                            <Grid Style="{StaticResource MainPanelHeader}">
+                                <Button Name="ComputerAddButton" Style="{DynamicResource AddButton}"/>
+                                <StackPanel Style="{StaticResource MainPanelHeaderButtons}">
+                                    <Button Name="ServiceJournal_Computers" Style="{DynamicResource ServiceJournalButton}"/>
+                                    <Button Name="Report_Computers" Style="{DynamicResource ReportButton}"/>
+                                </StackPanel>
+                                
+                                <TextBlock Text="Компьютеры" Style="{DynamicResource Header}"/>
+                            </Grid>
+                            
+                            <!--Таблица-->
+                            <DataGrid Name="ComputersTable" Style="{DynamicResource MainDataGrid}">
+                            <DataGrid.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Star}" Header="В избарнное"/>
+                                    <Separator/>
+                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Pencil}" Header="Редактировать"/>
+                                    <MenuItem Icon="{materialDesign:PackIcon Kind=ContentCopy}" Header="Копировать" InputGestureText="Ctrl+C"/>
+                                    <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}" Header="Удалить" InputGestureText="Del"/>
+                                    <Separator/>
+                                    <MenuItem Icon="{materialDesign:PackIcon Kind=File}" Header="Отчёт"/>
+                                </ContextMenu>
+                            </DataGrid.ContextMenu>
+                            </DataGrid>
+                            
+                            <!--Фильтр-->
+                            <Grid Name="FilterPanel_Computers" HorizontalAlignment="Right" Width="70">
+                                <Border Style="{DynamicResource FilterBody}">
+                                    <Grid>
+                                        
+                                    </Grid>
+                                </Border>
+                                <Border Style="{DynamicResource FilterLatch}">
+                                    <ToggleButton Name="Filter_Computers" Style="{DynamicResource FilterButton}">
+                                        <ToggleButton.Triggers>
+                                            <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                        Storyboard.TargetName="FilterPanel_Computers"
+                                                        Storyboard.TargetProperty="(Width)"
+                                                        From="70" To="600"
+                                                        Duration="0:0:0.2"
+                                                        AutoReverse="False"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                        Storyboard.TargetName="FilterPanel_Computers"
+                                                        Storyboard.TargetProperty="(Width)"
+                                                        From="600" To="70"
+                                                        Duration="0:0:0.2"
+                                                        AutoReverse="False"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </ToggleButton.Triggers>
+                                    </ToggleButton>
+                                </Border>
+                            </Grid>
+                            
+                        </Grid>
+                    </Border>
+                </Grid>
+                <!--#endregion-->
+
+                <!--#region Navigation Panel -->
+                <Grid Name="NavigationPanel" Background="Transparent" Width="0" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">
+                    
+                    <Grid Name="MainMenu" Width="0" HorizontalAlignment="Left">
+                        <Border Style="{DynamicResource NavigationPanel}">
+                            <TabControl TabStripPlacement="Left">
+                                <!--Сотрудники-->
+                                <TabItem>
+                                    <TabItem.Header>
+                                        <materialDesign:PackIcon Kind="AccountGroup" Margin="-10" Width="40" Height="40" Foreground="#FF9700" ToolTip="Сотрудники"/>
+                                    </TabItem.Header>
+
+                                    <Grid Background="#404040">
+                                        <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                            <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}" Selected="CustiomUI_SwitchBorder">
+                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                    <materialDesign:PackIcon Kind="AccountTie" Width="40" Height="40" Margin="10 0 0 0" Foreground="#FF9700"/>
+                                                    <TextBlock Text="Сотрудники" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </ListViewItem>
+                                            <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}">
+                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                    <materialDesign:PackIcon Kind="Work" Width="40" Height="40" Margin="10 0 0 0" Foreground="#FF9700"/>
+                                                    <TextBlock Text="Отделы" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </ListViewItem>
+                                        </ListView>
+                                    </Grid>
+                                </TabItem>
+
+                                <!--Техника-->
+                                <TabItem Margin="0 5 0 0">
+                                    <TabItem.Header>
+                                        <materialDesign:PackIcon Kind="MonitorCellphone" Width="40" Height="40" Margin="-10" Foreground="#FF9700" ToolTip="Техника"/>
+                                    </TabItem.Header>
+
+                                    <Grid Background="#404040">
+                                        <ListView>
+                                            <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}">
+                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                    <materialDesign:PackIcon Kind="DesktopTower" Width="40" Height="40" Foreground="#FF9700" Margin="10 0 0 0"/>
+                                                    <TextBlock Text="Компьютеры" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Center" Margin="30 0 0 0"/>
+                                                </StackPanel>
+                                            </ListViewItem>
+
+                                            <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}">
+                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                    <materialDesign:PackIcon Kind="Computer" Width="40" Height="40" Foreground="#FF9700" Margin="10 0 0 0"/>
+                                                    <TextBlock Text="Ноутбуки" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Center" Margin="30 0 0 0"/>
+                                                </StackPanel>
+                                            </ListViewItem>
+
+                                            <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}">
+                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                    <materialDesign:PackIcon Kind="Tablet" Width="40" Height="40" Foreground="#FF9700" Margin="10 0 0 0"/>
+                                                    <TextBlock Text="Планшеты" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Center" Margin="30 0 0 0"/>
+                                                </StackPanel>
+                                            </ListViewItem>
+
+                                            <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}">
+                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                    <materialDesign:PackIcon Kind="Printer" Width="40" Height="40" Foreground="#FF9700" Margin="10 0 0 0"/>
+                                                    <TextBlock Text="Оргтехника" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Center" Margin="30 0 0 0"/>
+                                                </StackPanel>
+                                            </ListViewItem>
+
+                                            <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}">
+                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                    <materialDesign:PackIcon Kind="Monitor" Width="40" Height="40" Foreground="#FF9700" Margin="10 0 0 0"/>
+                                                    <TextBlock Text="Мониторы" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Center" Margin="30 0 0 0"/>
+                                                </StackPanel>
+                                            </ListViewItem>
+
+                                            <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}">
+                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                    <materialDesign:PackIcon Kind="RouterWireless" Width="40" Height="40" Foreground="#FF9700" Margin="10 0 0 0"/>
+                                                    <TextBlock Text="Роутеры" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Center" Margin="30 0 0 0"/>
+                                                </StackPanel>
+                                            </ListViewItem>
+
+                                            <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}">
+                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                    <materialDesign:PackIcon Kind="RouterNetwork" Width="40" Height="40" Foreground="#FF9700" Margin="10 0 0 0"/>
+                                                    <TextBlock Text="Коммутаторы" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Center" Margin="30 0 0 0"/>
+                                                </StackPanel>
+                                            </ListViewItem>
+                                        </ListView>
+                                    </Grid>
+                                </TabItem>
+
+                                <!--Мебель-->
+                                <TabItem Margin="0 5 0 0">
+                                    <TabItem.Header>
+                                        <materialDesign:PackIcon Kind="Wardrobe" Width="40" Height="40" Margin="-10" Foreground="#FF9700" ToolTip="Мебель"/>
+                                    </TabItem.Header>
+
+                                    <Grid Background="#404040">
+                                        <ListView>
+                                            <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}">
+                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                    <materialDesign:PackIcon Kind="Dresser" Width="40" Height="40" Foreground="#FF9700" Margin="10 0 0 0"/>
+                                                    <TextBlock Text="Мебель" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Center" Margin="30 0 0 0"/>
+                                                </StackPanel>
+                                            </ListViewItem>
+
+                                            <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}">
+                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                    <materialDesign:PackIcon Kind="TagMultiple" Width="40" Height="40" Foreground="#FF9700" Margin="10 0 0 0"/>
+                                                    <TextBlock Text="Виды мебели" Style="{DynamicResource TextBlock_20}" VerticalAlignment="Center" Margin="30 0 0 0"/>
+                                                </StackPanel>
+                                            </ListViewItem>
+                                        </ListView>
+                                    </Grid>
+                                </TabItem>
+                            </TabControl>
+                        </Border>
+                    </Grid>
+                    
+                    <Grid Name="AdminMenu" Width="0" HorizontalAlignment="Left">
+                        <Border Style="{DynamicResource NavigationPanel}">
+                            <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}" Margin="5 5 5 0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="AccountEdit" Width="40" Height="40" Margin="10 0 0 0" Foreground="#FF9700"/>
+                                        <TextBlock Text="Пользователи" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </ListViewItem>
+                                <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}" Margin="5 5 5 0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="AccountWrench" Margin="10 0 0 0" Width="40" Height="40" Foreground="#FF9700"/>
+                                        <TextBlock Text="Роли" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </ListViewItem>
+                                <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}" Margin="5 5 5 0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="History" Margin="10 0 0 0" Height="40" Width="40" Foreground="#FF9700"/>
+                                        <TextBlock Text="Журнал событий" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </ListViewItem>
+                                <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}" Margin="5 5 5 0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="IpNetwork" Margin="10 0 0 0" Height="40" Width="40" Foreground="#FF9700"/>
+                                        <TextBlock Text="IP" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </ListViewItem>
+                            </ListView>
+                        </Border>
+                    </Grid>
+                    
+                    <Grid Name="ArchiveMenu" Width="0" HorizontalAlignment="Left">
+                        <Border Style="{DynamicResource NavigationPanel}">
+                            <TabControl TabStripPlacement="Left">
+                                <!--Сотрудники-->
+                                <TabItem Margin="0 0 0 0">
+                                    <TabItem.Header>
+                                        <Image Source="images\Employees.png" Margin="-10" Height="40"/>
+                                    </TabItem.Header>
+
+                                    <Grid Background="#404040">
+
+                                    </Grid>
+                                </TabItem>
+
+                                <!--Техника-->
+                                <TabItem Margin="0 5 0 0">
+                                    <TabItem.Header>
+                                        <Image Source="images\PC.png" Margin="-10" Height="35"/>
+                                    </TabItem.Header>
+
+                                    <Grid Background="#404040">
+
+                                    </Grid>
+                                </TabItem>
+
+                                <!--Мебель-->
+                                <TabItem Margin="0 5 0 0">
+                                    <TabItem.Header>
+                                        <Image Source="images\Furniture.png" Margin="-10" Height="35"/>
+                                    </TabItem.Header>
+
+                                    <Grid Background="#404040">
+
+                                    </Grid>
+                                </TabItem>
+                            </TabControl>
+                        </Border>
+                    </Grid>
+                </Grid>
+                <!--#endregion-->
+
+                <!--#region Left Panel-->
+                <Grid Name="LeftPanel" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Background="#252525">
+
+                    <StackPanel Name="LeftPanel_TopButtons" VerticalAlignment="Top" HorizontalAlignment="Center">
+
+                        <ToggleButton Name="MenuButton" Style="{DynamicResource NavigationButton}" ToolTip="Меню" Checked="CustomUI_MenuSwitch">
+                            <StackPanel>
+                                <materialDesign:PackIcon Kind="Menu" Height="35" Width="35" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <ToggleButton.Triggers>
+                                <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="NavigationPanel"
+                                            Storyboard.TargetProperty="(Grid.Width)"
+                                            From="0" To="500"
+                                            Duration="0:0:0.2"
+                                            AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="MainMenu"
+                                            Storyboard.TargetProperty="(Grid.Width)"
+                                            From="0" To="500"
+                                            Duration="0:0:0.2"
+                                            AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="NavigationPanel"
+                                            Storyboard.TargetProperty="(Grid.Width)"
+                                            From="500" To="0"
+                                            Duration="0:0:0.2"
+                                            AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="MainMenu"
+                                            Storyboard.TargetProperty="(Grid.Width)"
+                                            From="500" To="0"
+                                            Duration="0:0:0.2"
+                                            AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </ToggleButton.Triggers>
+                        </ToggleButton>
+
+                        <Button Name="FavouriteButton" Style="{DynamicResource MaterialDesignFloatingActionButton}" BorderBrush="Transparent" Background="Transparent" Foreground="#FF9700" Height="50" Width="50" ToolTip="Избранное">
+                            <StackPanel>
+                                <materialDesign:PackIcon Kind="Star" Height="45" Width="45"/>
+                            </StackPanel>
+                        </Button>
+
+                        <ToggleButton Name="AdminButton" Style="{DynamicResource NavigationButton}" ToolTip="Администрирование" Checked="CustomUI_MenuSwitch">
+                            <StackPanel>
+                                <materialDesign:PackIcon Kind="Administrator" Height="35" Width="35" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <ToggleButton.Triggers>
+                                <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="NavigationPanel"
+                                            Storyboard.TargetProperty="(Grid.Width)"
+                                            From="0" To="500"
+                                            Duration="0:0:0.2"
+                                            AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="AdminMenu"
+                                            Storyboard.TargetProperty="(Grid.Width)"
+                                            From="0" To="500"
+                                            Duration="0:0:0.2"
+                                            AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="NavigationPanel"
+                                            Storyboard.TargetProperty="(Grid.Width)"
+                                            From="500" To="0"
+                                            Duration="0:0:0.2"
+                                            AutoReverse="False"/>       
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="AdminMenu"
+                                            Storyboard.TargetProperty="(Grid.Width)"
+                                            From="500" To="0"
+                                            Duration="0:0:0.2"
+                                            AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </ToggleButton.Triggers>
+                        </ToggleButton>
+
+                        <ToggleButton Name="ArchiveButton" Style="{DynamicResource NavigationButton}" ToolTip="Архив" Checked="CustomUI_MenuSwitch">
+                            <StackPanel>
+                                <materialDesign:PackIcon Kind="TrashCan" Height="35" Width="35" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <ToggleButton.Triggers>
+                                <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="NavigationPanel"
+                                            Storyboard.TargetProperty="(Grid.Width)"
+                                            From="0" To="500"
+                                            Duration="0:0:0.2"
+                                            AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="ArchiveMenu"
+                                            Storyboard.TargetProperty="(Grid.Width)"
+                                            From="0" To="500"
+                                            Duration="0:0:0.2"
+                                            AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="NavigationPanel"
+                                            Storyboard.TargetProperty="(Grid.Width)"
+                                            From="500" To="0"
+                                            Duration="0:0:0.2"
+                                            AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="ArchiveMenu"
+                                            Storyboard.TargetProperty="(Grid.Width)"
+                                            From="500" To="0"
+                                            Duration="0:0:0.2"
+                                            AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </ToggleButton.Triggers>
+                        </ToggleButton>
+                        
+                    </StackPanel>
+
+                    <StackPanel Name="LeftPanel_BottomButtons" VerticalAlignment="Bottom" Margin="0 0 0 15">
+                        
+                        <Button HorizontalAlignment="Center" Style="{DynamicResource LeftPanelBottomButtons}" ToolTip="Руководство | F1">
+                            <StackPanel>
+                                <materialDesign:PackIcon Kind="AboutOutline" Height="40" Width="40"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button HorizontalAlignment="Center" Style="{DynamicResource LeftPanelBottomButtons}" ToolTip="Обновить таблицы | F5">
+                            <StackPanel>
+                                <materialDesign:PackIcon Kind="Reload" Height="40" Width="40"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button HorizontalAlignment="Center" Style="{DynamicResource LeftPanelBottomButtons}" ToolTip="Выход">
+                            <materialDesign:PackIcon Kind="Logout" Width="40" Height="40"/>
+                        </Button>
+                        
+                    </StackPanel>
+                    
+                </Grid>
+                <!--#endregion-->
+                
+                <!--#region Header -->
+                <Grid Grid.ColumnSpan="3" Grid.Row="0" Background="#252525">
+                    <TextBlock Name="WindowTitle" Text="MigApp [Ver]" Style="{DynamicResource HeaderPanelText}" Margin="15 0"/>
+                    <TextBlock Name="UserLoginText" Text="[Login]" Style="{DynamicResource HeaderPanelText}" HorizontalAlignment="Right" Margin="0 0 130 0"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Name="Custom_MinimizeButton" Style="{DynamicResource WindowControlButtons}" Click="CustomUI_WindowControl">
+                            <StackPanel>
+                                <materialDesign:PackIcon Kind="Minimize" Margin="-5 0"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Name="Custom_MaximizeButton" Style="{DynamicResource WindowControlButtons}" Click="CustomUI_WindowControl">
+                            <StackPanel>
+                                <materialDesign:PackIcon Kind="Maximize" Margin="-5 0"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Name="Custom_CloseButton" Style="{DynamicResource WindowControlButtons}" Click="CustomUI_WindowControl">
+                            <StackPanel>
+                                <materialDesign:PackIcon Kind="Close" Margin="-5 0"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+                <!--#endregion-->
+                
+                <!--#region Footer-->
+                <Grid Grid.ColumnSpan="3" Grid.Row="2" Background="#252525">
+                    
+                </Grid>
+                <!--#endregion-->
+
+            </Grid>
+        </Border>
+        
+        <!--#region OLD -->
+        <!--<TabControl TabStripPlacement="Left" Visibility="Collapsed">
+
+            --><!--#region Избранное --><!--
             <TabItem Height="50" Width="100" Padding="3" Margin="0 10 0 0">
                 <TabItem.Header>
                     <Image Source="images/FavImage.png"/>
@@ -35,10 +546,10 @@
                     <TextBlock Text="Выбрано: 0" Name="FavSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                 </Grid>
             </TabItem>
-            <!--#endregion-->
+            --><!--#endregion-->
 
-            <!--#region Сотрудники-->
-            <TabItem Name="EmployeesGroup" Height="50" Width="100" Padding="3" Margin="0 10 0 0" Visibility="Collapsed">
+            <!--#region Сотрудники--><!--
+            <TabItem Height="50" Width="100" Padding="3" Margin="0 10 0 0" Visibility="Collapsed">
                 <TabItem.Header>
                     <Image Source="images/Employees.png"/>
                 </TabItem.Header>
@@ -47,7 +558,7 @@
                 <Grid Background="#404040">
                     <TabControl TabStripPlacement="Left">
                         
-                        <!--#region Сотрудники-->
+                        --><!--#region Сотрудники--><!--
                         <TabItem Name="PersonsGroup" Header="Сотрудники" Height="50" Width="100" Padding="3" Margin="0 10 0 0" Visibility="Visible">
                             <Grid Background="#404040">
                                 <Border VerticalAlignment="Top" Background="#404040" Height="100">
@@ -82,14 +593,14 @@
                                 <TextBlock Text="Выбрано: 0" Name="EmpSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
-                        <!--#endregion-->
+                        --><!--#endregion-->
                         
-                        <!--#region Отделы-->
+                        <!--#region Отделы--><!--
                         <TabItem Name="GroupsGroup" Header="Отделы" Height="50" Width="100" Padding="3" Margin="0 10 0 0" Visibility="Collapsed">
                             <Grid Background="#404040">
                                 <Border VerticalAlignment="Top" Background="#404040" Height="100">
                                     <Grid>
-                                        <!--Шапка-->
+                                        --><!--Шапка--><!--
                                         <StackPanel>
                                             <Grid>
                                                 <Button Click="GroupCreateClick" Content="➕" HorizontalAlignment="Left" Width="50" Margin="10 0 0 0" Style="{DynamicResource MaterialDesignOutlinedButton}" ToolTip="Создать запись"/>
@@ -112,14 +623,14 @@
                                 <TextBlock Text="Выбрано: 0" Name="GrSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
-                        <!--#endregion-->
+                        --><!--#endregion--><!--
                         
                     </TabControl>
                 </Grid>
             </TabItem>
-            <!--#endregion-->
+            --><!--#endregion-->
 
-            <!--#region Техника -->
+            <!--#region Техника --><!--
             <TabItem Name="TechGroup"  Height="50" Width="100" Padding="5" Margin="0 10 0 0" Visibility="Collapsed">
                 <TabItem.Header>
                     <Image Source="images/PC.png"/>
@@ -128,7 +639,7 @@
                 <Grid Background="#404040">
                     <TabControl TabStripPlacement="Left">
 
-                        <!--#region ПК-->
+                        --><!--#region ПК--><!--
                         <TabItem Name="ComputersGroup" Header="Компьютеры" Height="50" Width="100" Padding="3" Margin="0 10 0 0" Visibility="Collapsed">
 
                             <Grid Background="#404040">
@@ -162,9 +673,9 @@
                                 <TextBlock Text="Выбрано: 0" Name="PCSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
-                        <!--#endregion-->
+                        --><!--#endregion-->
 
-                        <!--#region Ноутбуки-->
+                        <!--#region Ноутбуки--><!--
                         <TabItem Name="NotebookGroup" Header="Ноутбуки" Height="50" Width="100" Padding="3" Margin="0 10 0 0" Visibility="Collapsed">
 
                             <Grid Background="#404040">
@@ -198,9 +709,9 @@
                                 <TextBlock Text="Выбрано: 0" Name="NBSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
-                        <!--#endregion-->
+                        --><!--#endregion-->
 
-                        <!--#region Планшеты -->
+                        <!--#region Планшеты --><!--
                         <TabItem Name="TabletGroup" Header="Планшеты" Height="50" Width="100" Padding="0" Margin="0 10 0 0" Visibility="Collapsed">
 
                             <Grid Background="#404040">
@@ -234,9 +745,9 @@
                                 <TextBlock Text="Выбрано: 0" Name="TabSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
-                        <!--#endregion-->
+                        --><!--#endregion-->
 
-                        <!--#region Оргтехника -->
+                        <!--#region Оргтехника --><!--
                         <TabItem Name="OTGroup" Header="Оргтехника" Height="50" Width="100" Padding="3" Margin="0 10 0 0" Visibility="Collapsed">
 
                             <Grid Background="#404040">
@@ -270,9 +781,9 @@
                                 <TextBlock Text="Выбрано: 0" Name="OTSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
-                        <!--#endregion-->
+                        --><!--#endregion-->
 
-                        <!--#region Мониторы -->
+                        <!--#region Мониторы --><!--
                         <TabItem Name="MonitorGroup" Header="Мониторы" Height="50" Width="100" Padding="3" Margin="0 10 0 0" Visibility="Collapsed">
 
                             <Grid Background="#404040">
@@ -306,9 +817,9 @@
                                 <TextBlock Text="Выбрано: 0" Name="MonSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
-                        <!--#endregion-->
+                        --><!--#endregion-->
 
-                        <!--#region Роутеры -->
+                        <!--#region Роутеры --><!--
                         <TabItem Name="RouterGroup" Header="Роутеры" Height="50" Width="100" Padding="3" Margin="0 10 0 0" Visibility="Collapsed">
 
                             <Grid Background="#404040">
@@ -342,9 +853,9 @@
                                 <TextBlock Text="Выбрано: 0" Name="RoutSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
-                        <!--#endregion-->
+                        --><!--#endregion-->
 
-                        <!--#region Свитчи -->
+                        <!--#region Свитчи --><!--
                         <TabItem Name="SwitchesGroup" Header="Свитчи" Height="50" Width="100" Padding="3" Margin="0 10 0 0" Visibility="Collapsed">
 
                             <Grid Background="#404040">
@@ -378,14 +889,16 @@
                                 <TextBlock Text="Выбрано: 0" Name="SwitchSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
-                        <!--#endregion-->
+                        --><!--#endregion--><!--
+
                         
+
                     </TabControl>
                 </Grid>
             </TabItem>
-            <!--#endregion-->
+            --><!--#endregion-->
 
-            <!--#region Мебель-->
+            <!--#region Мебель--><!--
             <TabItem Name="FurnitureGroup" Height="50" Width="100" Padding="5" Margin="0 10 0 0" Visibility="Collapsed">
                 <TabItem.Header>
                     <Image Source="images/Furniture.png"/>
@@ -394,7 +907,7 @@
                 <Grid Background="#404040">
                     <TabControl TabStripPlacement="Left">
                         
-                        <!--#region Мебель-->
+                        --><!--#region Мебель--><!--
                         <TabItem Header="Мебель" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
                             <Grid Background="#404040">
                                 <Border VerticalAlignment="Top" Background="#404040" Height="100">
@@ -427,9 +940,9 @@
                                 <TextBlock Text="Выбрано: 0" Name="FurnSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
-                        <!--#endregion-->
+                        --><!--#endregion-->
 
-                        <!--#region Типы мебели-->
+                        <!--#region Типы мебели--><!--
                         <TabItem Header="Типы мебели" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
                             <Grid>
                                 <Border VerticalAlignment="Top" Background="#404040" Height="100">
@@ -454,14 +967,14 @@
                                 <TextBlock Text="Выбрано: 0" Name="FurnTypeSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
-                        <!--#endregion-->
+                        --><!--#endregion--><!--
 
                     </TabControl>
                 </Grid>
             </TabItem>
-            <!--#endregion-->
+            --><!--#endregion-->
 
-            <!--#region Отчёты -->
+            <!--#region Отчёты --><!--
             <TabItem Name="ReportsGroup" Height="50" Width="100" Padding="5" Margin="0 10 0 0" Visibility="Collapsed">
                 <TabItem.Header>
                     <Image Source="images/Document.png"/>
@@ -470,7 +983,7 @@
                 <Grid Background="#404040">
                     <TabControl TabStripPlacement="Left">
                         
-                        <!--#region Компьютеры-->
+                        --><!--#region Компьютеры--><!--
                         <TabItem Name="PCReport" Header="Компьютеры" Height="50" Width="100" Padding="3" Margin="0 10 0 0" Visibility="Collapsed">
                             <Grid>
                                 <Border VerticalAlignment="Top" Background="#404040" Height="100">
@@ -501,9 +1014,9 @@
                                 <TextBlock Text="Выбрано: 0" Name="PCRepSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
-                        <!--#endregion-->
+                        --><!--#endregion-->
 
-                        <!--#region Ноутбуки-->
+                        <!--#region Ноутбуки--><!--
                         <TabItem Name="NBReport" Header="Ноутбуки" Height="50" Width="100" Padding="3" Margin="0 10 0 0" Visibility="Collapsed">
                             <Grid>
                                 <Border VerticalAlignment="Top" Background="#404040" Height="100">
@@ -534,9 +1047,9 @@
                                 <TextBlock Text="Выбрано: 0" Name="NBRepSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
-                        <!--#endregion-->
+                        --><!--#endregion-->
 
-                        <!--#region Планшеты-->
+                        <!--#region Планшеты--><!--
                         <TabItem Name="TabReport" Header="Планшеты" Height="50" Width="100" Padding="3" Margin="0 10 0 0" Visibility="Collapsed">
                             <Grid>
                                 <Border VerticalAlignment="Top" Background="#404040" Height="100">
@@ -567,9 +1080,9 @@
                                 <TextBlock Text="Выбрано: 0" Name="TabRepSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
-                        <!--#endregion-->
+                        --><!--#endregion-->
 
-                        <!--#region IP-->
+                        <!--#region IP--><!--
                         <TabItem Name="IPReport" Header="IP" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
                             <Grid>
                                 <Border VerticalAlignment="Top" Background="#404040" Height="100">
@@ -601,14 +1114,14 @@
                                 <TextBlock Text="Выбрано: 0" Name="IPRepSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
-                        <!--#endregion-->
+                        --><!--#endregion--><!--
                         
                     </TabControl>
                 </Grid>
             </TabItem>
-            <!--#endregion-->
+            --><!--#endregion-->
 
-            <!--#region Админпанель -->
+            <!--#region Админпанель --><!--
             <TabItem Name="AdminGroup" Height="50" Width="100" Padding="5" Margin="0 10 0 0" Visibility="Collapsed">
                 <TabItem.Header>
                     <Image Source="images/Users.png"/>
@@ -617,7 +1130,7 @@
                 <Grid Background="#404040">
                     <TabControl TabStripPlacement="Left">
 
-                        <!--#region Пользователи -->
+                        --><!--#region Пользователи --><!--
                         <TabItem Header="Пользователи">
                             <Grid>
                                 <Border VerticalAlignment="Top" Background="#404040" Height="100">
@@ -649,9 +1162,9 @@
                                 <TextBlock Text="Выбрано: 0" Name="UserSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
-                        <!--#endregion-->
+                        --><!--#endregion-->
 
-                        <!--#region Роли -->
+                        <!--#region Роли --><!--
                         <TabItem Header="Роли">
                             <Grid>
                                 <Border VerticalAlignment="Top" Background="#404040" Height="50">
@@ -673,9 +1186,9 @@
                                 <TextBlock Text="Выбрано: 0" Name="RoleSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
-                        <!--#endregion-->
+                        --><!--#endregion-->
 
-                        <!--#region Логи -->
+                        <!--#region Логи --><!--
                         <TabItem Header="Журнал">
                             <Grid>
                                 <Border VerticalAlignment="Top" Background="#404040" Height="100">
@@ -703,14 +1216,14 @@
                                 <TextBlock Text="Выбрано: 0" Name="LogSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
-                        <!--#endregion-->
+                        --><!--#endregion--><!--
                         
                     </TabControl>
                 </Grid>
             </TabItem>
-            <!--#endregion-->
+            --><!--#endregion-->
 
-            <!--#region Архив -->
+            <!--#region Архив --><!--
             <TabItem Name="DeletedGroup" Height="50" Width="100" Padding="5" Margin="0 10 0 0" Visibility="Collapsed">
                 <TabItem.Header>
                     <Image Source="images/TrashBin.png"/>
@@ -719,7 +1232,7 @@
                 <Grid Background="#404040">
                     <TabControl TabStripPlacement="Left" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
 
-                        <!--#region Сотрудники Архив -->
+                        --><!--#region Сотрудники Архив --><!--
                         <TabItem Header="Сотрудники" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
                             <Grid>
                                 <Border VerticalAlignment="Top" Background="#404040" Height="100">
@@ -751,247 +1264,252 @@
                                 <TextBlock Text="Выбрано: 0" Name="EmpDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
-                        <!--#endregion-->
+                        --><!--#endregion--><!--
 
-                        <!--#region Компьютеры Архив -->
-                        <TabItem Header="Компьютеры" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
-                            <Grid>
-                                <Border VerticalAlignment="Top" Background="#404040" Height="100">
-                                    <StackPanel>
-                                        <Grid>
-                                            <TextBlock Text="Архив: Компьютеры" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
-                                            <Button Content="⌕" Click="SPC_Del" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
-                                        </Grid>
-                                        <Border Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
-                                            <Grid>
-                                                <TextBlock Name="FilterPCText_Del" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
-                                                <Button Click="FilterPCClear_Del" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
-                                            </Grid>
+                        <TabItem Header="Техника">
+
+                            <TabControl TabStripPlacement="Left">
+                                --><!--#region Компьютеры Архив --><!--
+                                <TabItem Header="Компьютеры" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
+                                    <Grid>
+                                        <Border VerticalAlignment="Top" Background="#404040" Height="100">
+                                            <StackPanel>
+                                                <Grid>
+                                                    <TextBlock Text="Архив: Компьютеры" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
+                                                    <Button Content="⌕" Click="SPC_Del" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
+                                                </Grid>
+                                                <Border Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
+                                                    <Grid>
+                                                        <TextBlock Name="FilterPCText_Del" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
+                                                        <Button Click="FilterPCClear_Del" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
+                                                    </Grid>
+                                                </Border>
+                                            </StackPanel>
                                         </Border>
-                                    </StackPanel>
-                                </Border>
 
-                                <DataGrid Name="PCDeleted" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
-                                    <DataGrid.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="Копировать" Command="Copy"/>
-                                            <Separator/>
-                                            <MenuItem Header="Открыть" Click="Open_DeletedPC"/>
-                                            <MenuItem Header="Восстановить" Click="Recovery_PC"/>
-                                            <MenuItem Header="Удалить" Click="Delete_DeletedPC"/>
-                                        </ContextMenu>
-                                    </DataGrid.ContextMenu>
-                                </DataGrid>
-                                <TextBlock Text="Выбрано: 0" Name="PCDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
-                            </Grid>
-                        </TabItem>
-                        <!--#endregion-->
+                                        <DataGrid Name="PCDeleted" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
+                                            <DataGrid.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Копировать" Command="Copy"/>
+                                                    <Separator/>
+                                                    <MenuItem Header="Открыть" Click="Open_DeletedPC"/>
+                                                    <MenuItem Header="Восстановить" Click="Recovery_PC"/>
+                                                    <MenuItem Header="Удалить" Click="Delete_DeletedPC"/>
+                                                </ContextMenu>
+                                            </DataGrid.ContextMenu>
+                                        </DataGrid>
+                                        <TextBlock Text="Выбрано: 0" Name="PCDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
+                                    </Grid>
+                                </TabItem>
+                                --><!--#endregion-->
 
-                        <!--#region Ноутбуки Архив -->
-                        <TabItem Header="Ноутбуки" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
-                            <Grid>
-                                <Border VerticalAlignment="Top" Background="#404040" Height="100">
-                                    <StackPanel>
-                                        <Grid>
-                                            <TextBlock Text="Архив: Ноутбуки" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
-                                            <Button Content="⌕" Click="SNotebook_Del" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
-                                        </Grid>
-                                        <Border Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
-                                            <Grid>
-                                                <TextBlock Name="FilterNotebooksText_Del" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
-                                                <Button Click="FilterNotebooksClear_Del" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
-                                            </Grid>
+                                <!--#region Ноутбуки Архив --><!--
+                                <TabItem Header="Ноутбуки" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
+                                    <Grid>
+                                        <Border VerticalAlignment="Top" Background="#404040" Height="100">
+                                            <StackPanel>
+                                                <Grid>
+                                                    <TextBlock Text="Архив: Ноутбуки" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
+                                                    <Button Content="⌕" Click="SNotebook_Del" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
+                                                </Grid>
+                                                <Border Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
+                                                    <Grid>
+                                                        <TextBlock Name="FilterNotebooksText_Del" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
+                                                        <Button Click="FilterNotebooksClear_Del" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
+                                                    </Grid>
+                                                </Border>
+                                            </StackPanel>
                                         </Border>
-                                    </StackPanel>
-                                </Border>
 
-                                <DataGrid Name="NotebookDeleted" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
-                                    <DataGrid.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="Копировать" Command="Copy"/>
-                                            <Separator/>
-                                            <MenuItem Header="Открыть" Click="Open_DeletedNotebook"/>
-                                            <MenuItem Header="Восстановить" Click="Recovery_Notebook"/>
-                                            <MenuItem Header="Удалить" Click="Delete_DeletedNotebook"/>
-                                        </ContextMenu>
-                                    </DataGrid.ContextMenu>
-                                </DataGrid>
-                                <TextBlock Text="Выбрано: 0" Name="NBDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
-                            </Grid>
-                        </TabItem>
-                        <!--#endregion-->
+                                        <DataGrid Name="NotebookDeleted" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
+                                            <DataGrid.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Копировать" Command="Copy"/>
+                                                    <Separator/>
+                                                    <MenuItem Header="Открыть" Click="Open_DeletedNotebook"/>
+                                                    <MenuItem Header="Восстановить" Click="Recovery_Notebook"/>
+                                                    <MenuItem Header="Удалить" Click="Delete_DeletedNotebook"/>
+                                                </ContextMenu>
+                                            </DataGrid.ContextMenu>
+                                        </DataGrid>
+                                        <TextBlock Text="Выбрано: 0" Name="NBDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
+                                    </Grid>
+                                </TabItem>
+                                --><!--#endregion-->
 
-                        <!--#region Планшеты Архив -->
-                        <TabItem Header="Планшеты" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
-                            <Grid>
-                                <Border VerticalAlignment="Top" Background="#404040" Height="100">
-                                    <StackPanel>
-                                        <Grid>
-                                            <TextBlock Text="Архив: Планшеты" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
-                                            <Button Content="⌕" Click="STablets_Del" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
-                                        </Grid>
-                                        <Border Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
-                                            <Grid>
-                                                <TextBlock Name="FilterTabletsText_Del" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
-                                                <Button Click="FilterTabletsClear_Del" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
-                                            </Grid>
+                                <!--#region Планшеты Архив --><!--
+                                <TabItem Header="Планшеты" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
+                                    <Grid>
+                                        <Border VerticalAlignment="Top" Background="#404040" Height="100">
+                                            <StackPanel>
+                                                <Grid>
+                                                    <TextBlock Text="Архив: Планшеты" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
+                                                    <Button Content="⌕" Click="STablets_Del" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
+                                                </Grid>
+                                                <Border Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
+                                                    <Grid>
+                                                        <TextBlock Name="FilterTabletsText_Del" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
+                                                        <Button Click="FilterTabletsClear_Del" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
+                                                    </Grid>
+                                                </Border>
+                                            </StackPanel>
                                         </Border>
-                                    </StackPanel>
-                                </Border>
 
-                                <DataGrid Name="TabletsDeleted" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
-                                    <DataGrid.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="Копировать" Command="Copy"/>
-                                            <Separator/>
-                                            <MenuItem Header="Открыть" Click="Open_DeletedTablet"/>
-                                            <MenuItem Header="Восстановить" Click="Recovery_Tablet"/>
-                                            <MenuItem Header="Удалить" Click="Delete_DeletedTablets"/>
-                                        </ContextMenu>
-                                    </DataGrid.ContextMenu>
-                                </DataGrid>
-                                <TextBlock Text="Выбрано: 0" Name="TabDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
-                            </Grid>
-                        </TabItem>
-                        <!--#endregion-->
+                                        <DataGrid Name="TabletsDeleted" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
+                                            <DataGrid.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Копировать" Command="Copy"/>
+                                                    <Separator/>
+                                                    <MenuItem Header="Открыть" Click="Open_DeletedTablet"/>
+                                                    <MenuItem Header="Восстановить" Click="Recovery_Tablet"/>
+                                                    <MenuItem Header="Удалить" Click="Delete_DeletedTablets"/>
+                                                </ContextMenu>
+                                            </DataGrid.ContextMenu>
+                                        </DataGrid>
+                                        <TextBlock Text="Выбрано: 0" Name="TabDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
+                                    </Grid>
+                                </TabItem>
+                                --><!--#endregion-->
 
-                        <!--#region Оргтехника Архив -->
-                        <TabItem Header="Оргтехника" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
-                            <Grid>
-                                <Border VerticalAlignment="Top" Background="#404040" Height="100">
-                                    <StackPanel>
-                                        <Grid>
-                                            <TextBlock Text="Архив: Оргтехника" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
-                                            <Button Content="⌕" Click="SOrgTech_Del" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
-                                        </Grid>
-                                        <Border Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
-                                            <Grid>
-                                                <TextBlock Name="FilterOrgTechText_Del" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
-                                                <Button Click="FilterOrgTechClear_Del" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
-                                            </Grid>
+                                <!--#region Оргтехника Архив --><!--
+                                <TabItem Header="Оргтехника" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
+                                    <Grid>
+                                        <Border VerticalAlignment="Top" Background="#404040" Height="100">
+                                            <StackPanel>
+                                                <Grid>
+                                                    <TextBlock Text="Архив: Оргтехника" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
+                                                    <Button Content="⌕" Click="SOrgTech_Del" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
+                                                </Grid>
+                                                <Border Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
+                                                    <Grid>
+                                                        <TextBlock Name="FilterOrgTechText_Del" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
+                                                        <Button Click="FilterOrgTechClear_Del" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
+                                                    </Grid>
+                                                </Border>
+                                            </StackPanel>
                                         </Border>
-                                    </StackPanel>
-                                </Border>
 
-                                <DataGrid Name="OrgTechDeleted" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
-                                    <DataGrid.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="Копировать" Command="Copy"/>
-                                            <Separator/>
-                                            <MenuItem Header="Открыть" Click="Open_DeletedOrgTech"/>
-                                            <MenuItem Header="Восстановить" Click="Recovery_OrgTech"/>
-                                            <MenuItem Header="Удалить" Click="Delete_DeletedOrgTech"/>
-                                        </ContextMenu>
-                                    </DataGrid.ContextMenu>
-                                </DataGrid>
-                                <TextBlock Text="Выбрано: 0" Name="OTDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
-                            </Grid>
-                        </TabItem>
-                        <!--#endregion-->
+                                        <DataGrid Name="OrgTechDeleted" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
+                                            <DataGrid.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Копировать" Command="Copy"/>
+                                                    <Separator/>
+                                                    <MenuItem Header="Открыть" Click="Open_DeletedOrgTech"/>
+                                                    <MenuItem Header="Восстановить" Click="Recovery_OrgTech"/>
+                                                    <MenuItem Header="Удалить" Click="Delete_DeletedOrgTech"/>
+                                                </ContextMenu>
+                                            </DataGrid.ContextMenu>
+                                        </DataGrid>
+                                        <TextBlock Text="Выбрано: 0" Name="OTDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
+                                    </Grid>
+                                </TabItem>
+                                --><!--#endregion-->
 
-                        <!--#region Мониторы Архив -->
-                        <TabItem Header="Мониторы" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
-                            <Grid>
-                                <Border VerticalAlignment="Top" Background="#404040" Height="100">
-                                    <StackPanel>
-                                        <Grid>
-                                            <TextBlock Text="Архив: Мониторы" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
-                                            <Button Content="⌕" Click="SMonitors_Del" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
-                                        </Grid>
-                                        <Border Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
-                                            <Grid>
-                                                <TextBlock Name="FilterMonitorsText_Del" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
-                                                <Button Click="FilterMonitorsClear_Del" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
-                                            </Grid>
+                                <!--#region Мониторы Архив --><!--
+                                <TabItem Header="Мониторы" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
+                                    <Grid>
+                                        <Border VerticalAlignment="Top" Background="#404040" Height="100">
+                                            <StackPanel>
+                                                <Grid>
+                                                    <TextBlock Text="Архив: Мониторы" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
+                                                    <Button Content="⌕" Click="SMonitors_Del" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
+                                                </Grid>
+                                                <Border Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
+                                                    <Grid>
+                                                        <TextBlock Name="FilterMonitorsText_Del" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
+                                                        <Button Click="FilterMonitorsClear_Del" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
+                                                    </Grid>
+                                                </Border>
+                                            </StackPanel>
                                         </Border>
-                                    </StackPanel>
-                                </Border>
 
-                                <DataGrid Name="MonitorsDeleted" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
-                                    <DataGrid.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="Копировать" Command="Copy"/>
-                                            <Separator/>
-                                            <MenuItem Header="Открыть" Click="Open_DeletedMonitor"/>
-                                            <MenuItem Header="Восстановить" Click="Recovery_Monitor"/>
-                                            <MenuItem Header="Удалить" Click="Delete_DeletedMonitor"/>
-                                        </ContextMenu>
-                                    </DataGrid.ContextMenu>
-                                </DataGrid>
-                                <TextBlock Text="Выбрано: 0" Name="MonDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
-                            </Grid>
-                        </TabItem>
-                        <!--#endregion-->
+                                        <DataGrid Name="MonitorsDeleted" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
+                                            <DataGrid.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Копировать" Command="Copy"/>
+                                                    <Separator/>
+                                                    <MenuItem Header="Открыть" Click="Open_DeletedMonitor"/>
+                                                    <MenuItem Header="Восстановить" Click="Recovery_Monitor"/>
+                                                    <MenuItem Header="Удалить" Click="Delete_DeletedMonitor"/>
+                                                </ContextMenu>
+                                            </DataGrid.ContextMenu>
+                                        </DataGrid>
+                                        <TextBlock Text="Выбрано: 0" Name="MonDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
+                                    </Grid>
+                                </TabItem>
+                                --><!--#endregion-->
 
-                        <!--#region Роутеры Архив -->
-                        <TabItem Header="Роутеры" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
-                            <Grid>
-                                <Border VerticalAlignment="Top" Background="#404040" Height="100">
-                                    <StackPanel>
-                                        <Grid>
-                                            <TextBlock Text="Архив: Роутеры" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
-                                            <Button Content="⌕" Click="SRouters_Del" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
-                                        </Grid>
-                                        <Border Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
-                                            <Grid>
-                                                <TextBlock Name="FilterRoutersText_Del" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
-                                                <Button Click="FilterRoutersClear_Del" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
-                                            </Grid>
+                                <!--#region Роутеры Архив --><!--
+                                <TabItem Header="Роутеры" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
+                                    <Grid>
+                                        <Border VerticalAlignment="Top" Background="#404040" Height="100">
+                                            <StackPanel>
+                                                <Grid>
+                                                    <TextBlock Text="Архив: Роутеры" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
+                                                    <Button Content="⌕" Click="SRouters_Del" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
+                                                </Grid>
+                                                <Border Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
+                                                    <Grid>
+                                                        <TextBlock Name="FilterRoutersText_Del" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
+                                                        <Button Click="FilterRoutersClear_Del" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
+                                                    </Grid>
+                                                </Border>
+                                            </StackPanel>
                                         </Border>
-                                    </StackPanel>
-                                </Border>
 
-                                <DataGrid Name="RoutersDeleted" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
-                                    <DataGrid.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="Копировать" Command="Copy"/>
-                                            <Separator/>
-                                            <MenuItem Header="Открыть" Click="Open_DeletedRouters"/>
-                                            <MenuItem Header="Восстановить" Click="Recovery_Routers"/>
-                                            <MenuItem Header="Удалить" Click="Delete_DeletedRouters"/>
-                                        </ContextMenu>
-                                    </DataGrid.ContextMenu>
-                                </DataGrid>
-                                <TextBlock Text="Выбрано: 0" Name="RoutDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
-                            </Grid>
-                        </TabItem>
-                        <!--#endregion-->
+                                        <DataGrid Name="RoutersDeleted" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
+                                            <DataGrid.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Копировать" Command="Copy"/>
+                                                    <Separator/>
+                                                    <MenuItem Header="Открыть" Click="Open_DeletedRouters"/>
+                                                    <MenuItem Header="Восстановить" Click="Recovery_Routers"/>
+                                                    <MenuItem Header="Удалить" Click="Delete_DeletedRouters"/>
+                                                </ContextMenu>
+                                            </DataGrid.ContextMenu>
+                                        </DataGrid>
+                                        <TextBlock Text="Выбрано: 0" Name="RoutDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
+                                    </Grid>
+                                </TabItem>
+                                --><!--#endregion-->
 
-                        <!--#region Свитчи Архив -->
-                        <TabItem Header="Свитчи" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
-                            <Grid>
-                                <Border VerticalAlignment="Top" Background="#404040" Height="100">
-                                    <StackPanel>
-                                        <Grid>
-                                            <TextBlock Text="Архив: Свитчи" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
-                                            <Button Content="⌕" Click="SSwitches_Del" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
-                                        </Grid>
-                                        <Border Name="Filter_Switch_Del" Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
-                                            <Grid>
-                                                <TextBlock Name="FilterSwitchesText_Del" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
-                                                <Button Click="FilterSwitchesClear_Del" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
-                                            </Grid>
+                                <!--#region Свитчи Архив --><!--
+                                <TabItem Header="Свитчи" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
+                                    <Grid>
+                                        <Border VerticalAlignment="Top" Background="#404040" Height="100">
+                                            <StackPanel>
+                                                <Grid>
+                                                    <TextBlock Text="Архив: Свитчи" Style="{DynamicResource Header}" Margin="10 8 0 8"/>
+                                                    <Button Content="⌕" Click="SSwitches_Del" FontSize="20" Style="{DynamicResource MaterialDesignFlatButton}" Margin="0 0 5 0" HorizontalAlignment="Right" ToolTip="Поиск"/>
+                                                </Grid>
+                                                <Border Name="Filter_Switch_Del" Margin="10 5 10 5" BorderThickness="1" BorderBrush="Orange" CornerRadius="3">
+                                                    <Grid>
+                                                        <TextBlock Name="FilterSwitchesText_Del" FontSize="18" VerticalAlignment="Center" Foreground="White" Margin="5 0 55 0"/>
+                                                        <Button Click="FilterSwitchesClear_Del" Content="✖" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Right" ToolTip="Сбросить фильтр"/>
+                                                    </Grid>
+                                                </Border>
+                                            </StackPanel>
                                         </Border>
-                                    </StackPanel>
-                                </Border>
 
-                                <DataGrid Name="SwitchesDeleted" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
-                                    <DataGrid.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="Копировать" Command="Copy"/>
-                                            <Separator/>
-                                            <MenuItem Header="Открыть" Click="Open_DeletedSwitches"/>
-                                            <MenuItem Header="Восстановить" Click="Recovery_Switches"/>
-                                            <MenuItem Header="Удалить" Click="Delete_DeletedSwitches"/>
-                                        </ContextMenu>
-                                    </DataGrid.ContextMenu>
-                                </DataGrid>
-                                <TextBlock Text="Выбрано: 0" Name="SwitchDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
-                            </Grid>
+                                        <DataGrid Name="SwitchesDeleted" Margin="0 50 5 20" Background="#525252" Foreground="White" IsReadOnly="True" SelectedCellsChanged="SelectedCounter">
+                                            <DataGrid.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Копировать" Command="Copy"/>
+                                                    <Separator/>
+                                                    <MenuItem Header="Открыть" Click="Open_DeletedSwitches"/>
+                                                    <MenuItem Header="Восстановить" Click="Recovery_Switches"/>
+                                                    <MenuItem Header="Удалить" Click="Delete_DeletedSwitches"/>
+                                                </ContextMenu>
+                                            </DataGrid.ContextMenu>
+                                        </DataGrid>
+                                        <TextBlock Text="Выбрано: 0" Name="SwitchDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
+                                    </Grid>
+                                </TabItem>
+                                --><!--#endregion--><!--
+                            </TabControl>
                         </TabItem>
-                        <!--#endregion-->
-                        
-                        <!--#region Мебель Архив-->
+
+                        --><!--#region Мебель Архив--><!--
                         <TabItem Header="Мебель" Height="50" Width="100" Padding="3" Margin="0 10 0 0">
                             <Grid Background="#404040">
                                 <Border VerticalAlignment="Top" Background="#404040" Height="100">
@@ -1023,28 +1541,17 @@
                                 <TextBlock Text="Выбрано: 0" Name="FurnDelSelectedCount" VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="LightGray" Margin="0 0 50 3"/>
                             </Grid>
                         </TabItem>
-                        <!--#endregion-->
+                        --><!--#endregion--><!--
 
                     </TabControl>
                 </Grid>
             </TabItem>
-            <!--#endregion-->
+            --><!--#endregion--><!--
 
-        </TabControl>
-        
-        <!--#region UI-->
-        <Button Click="Manual_Open" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="30 0 0 65" Style="{DynamicResource MaterialDesignFloatingActionButton}" Width="40" Height="40">
-            <Image Source="images/Manual.png" Height="30" ToolTip="Руководство | F1"/>
-        </Button>
-        <Button Click="ExitClick" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="30 0 0 10" Style="{DynamicResource MaterialDesignFloatingActionButton}" Width="40" Height="40">
-            <Image Source="images/Exit.png" Height="30" ToolTip="Выход"/>
-        </Button>
-        <Button Click="ReloadTables" Name="ReloadButton" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="30 0 0 120" Style="{DynamicResource MaterialDesignFloatingActionButton}" Width="40" Height="40">
-            <Image Source="images/Reload.png" Height="30" ToolTip="Обновить таблицы | F5"/>
-        </Button>
-        <Border x:Name="Blindfall" Background="Black" Opacity="0.35" Visibility="Collapsed"/>
-        <TextBlock Name="UserLoginText" Text="[Login]" FontSize="24" FontWeight="SemiBold" Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 5 130 0"/>
+        </TabControl>-->
         <!--#endregion-->
+        
+        <Border Name="Blindfall" Background="Black" Opacity="0.35" Visibility="Collapsed"/>
         
     </Grid>
 </Window>

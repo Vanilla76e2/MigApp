@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace MigApp
 {
@@ -308,6 +309,15 @@ namespace MigApp
             MigApp.Properties.Settings.Default.ParamsFurn = null;
             MigApp.Properties.Settings.Default.ParamsFurnDel = null;
             MigApp.Properties.Settings.Default.Save();
+        }
+
+        // Горячие клавиши
+        public void HotKeys(object sender, KeyEventArgs e)
+        {
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Control && e.Key == Key.B)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

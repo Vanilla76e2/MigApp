@@ -136,10 +136,14 @@ namespace MigApp.CRWindows
         // Проверка на цифры
         private void NumOnlyIP(object sender, TextCompositionEventArgs e)
         {
-            if (!Char.IsDigit(e.Text, 0))
+            try
             {
-                e.Handled = true;
+                if (!Char.IsDigit(e.Text, 0))
+                {
+                    e.Handled = true;
+                }
             }
+            catch {}
         }
 
         // Проверка до 255 и переключение на следующий
@@ -359,10 +363,14 @@ namespace MigApp.CRWindows
 
         private void NumOnly(object sender, TextCompositionEventArgs e)
         {
-            if (!Char.IsDigit(e.Text, 0))
+            try
             {
-                e.Handled = true;
+                if (!Char.IsDigit(e.Text, 0))
+                {
+                    e.Handled = true;
+                }
             }
+            catch { }
         }
 
         private void LockAll()
