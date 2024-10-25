@@ -30,10 +30,195 @@
 
                 <!--#region Main Panel-->
                 <Grid Name="MainGrid" Grid.Column="1" Grid.Row="1" Background="#252525" MouseDown="CustomUI_CloseMenu">
-
-                    <Border Name="ComputersBorder" Style="{StaticResource MainPanelBorder}">
+                    
+                    <Border Name="FavouriteBorder" Style="{StaticResource MainPanelBorder}">
                         <Grid>
-                            
+                            <!--Шапка-->
+                            <Grid Style="{StaticResource MainPanelHeader}">
+                                <TextBlock Text="Избранное" Style="{DynamicResource Header}"/>
+                            </Grid>
+
+                            <!--Таблица-->
+                            <DataGrid Name="FavouriteTable" Style="{DynamicResource MainDataGrid}" ItemsSource="{Binding Path=FavouriteTable}">
+                                <DataGrid.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Icon="{materialDesign:PackIcon Kind=Pencil}" Header="Редактировать"/>
+                                        <MenuItem Icon="{materialDesign:PackIcon Kind=ContentCopy}" Header="Копировать" InputGestureText="Ctrl+C"/>
+                                        <MenuItem Icon="{materialDesign:PackIcon Kind=StarRemove}" Header="Убрать из избранного" InputGestureText="Del"/>
+                                    </ContextMenu>
+                                </DataGrid.ContextMenu>
+                            </DataGrid>
+
+                            <!--Фильтр-->
+                            <Grid Name="FilterPanel_Favourite" HorizontalAlignment="Right" Width="70">
+                                <Border Style="{DynamicResource FilterBody}">
+                                    <Grid>
+
+                                    </Grid>
+                                </Border>
+                                <Border Style="{DynamicResource FilterLatch}">
+                                    <ToggleButton Name="Filter_Favourite" Style="{DynamicResource FilterButton}">
+                                        <ToggleButton.Triggers>
+                                            <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                        Storyboard.TargetName="FilterPanel_Favourite"
+                                                        Storyboard.TargetProperty="(Width)"
+                                                        From="70" To="600"
+                                                        Duration="0:0:0.2"
+                                                        AutoReverse="False"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                        Storyboard.TargetName="FilterPanel_Favourite"
+                                                        Storyboard.TargetProperty="(Width)"
+                                                        From="600" To="70"
+                                                        Duration="0:0:0.2"
+                                                        AutoReverse="False"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </ToggleButton.Triggers>
+                                    </ToggleButton>
+                                </Border>
+                            </Grid>
+
+                        </Grid>
+                    </Border>
+
+                    <Border Name="EmployeesBorder" Style="{StaticResource MainPanelBorder}" Visibility="Collapsed">
+                        <Grid>
+                            <!--Шапка-->
+                            <Grid Style="{StaticResource MainPanelHeader}">
+                                <Button Name="EmployeesAddButton" Style="{DynamicResource AddButton}"/>
+
+                                <TextBlock Text="Сотрудники" Style="{DynamicResource HeaderWithAddButton}"/>
+                            </Grid>
+
+                            <!--Таблица-->
+                            <DataGrid Name="EmployeesTable" Style="{DynamicResource MainDataGrid}" ItemsSource="{Binding Path=EmployeesTable}">
+                                <DataGrid.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Icon="{materialDesign:PackIcon Kind=Star}" Header="В избарнное"/>
+                                        <Separator/>
+                                        <MenuItem Icon="{materialDesign:PackIcon Kind=Pencil}" Header="Редактировать"/>
+                                        <MenuItem Icon="{materialDesign:PackIcon Kind=ContentCopy}" Header="Копировать" InputGestureText="Ctrl+C"/>
+                                        <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}" Header="Удалить" InputGestureText="Del"/>
+                                        <Separator/>
+                                        <MenuItem Icon="{materialDesign:PackIcon Kind=File}" Header="Отчёт"/>
+                                    </ContextMenu>
+                                </DataGrid.ContextMenu>
+                            </DataGrid>
+
+                            <!--Фильтр-->
+                            <Grid Name="FilterPanel_Employees" HorizontalAlignment="Right" Width="70">
+                                <Border Style="{DynamicResource FilterBody}">
+                                    <Grid>
+
+                                    </Grid>
+                                </Border>
+                                <Border Style="{DynamicResource FilterLatch}">
+                                    <ToggleButton Name="Filter_Employees" Style="{DynamicResource FilterButton}">
+                                        <ToggleButton.Triggers>
+                                            <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                        Storyboard.TargetName="FilterPanel_Employees"
+                                                        Storyboard.TargetProperty="(Width)"
+                                                        From="70" To="600"
+                                                        Duration="0:0:0.2"
+                                                        AutoReverse="False"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                        Storyboard.TargetName="FilterPanel_Employees"
+                                                        Storyboard.TargetProperty="(Width)"
+                                                        From="600" To="70"
+                                                        Duration="0:0:0.2"
+                                                        AutoReverse="False"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </ToggleButton.Triggers>
+                                    </ToggleButton>
+                                </Border>
+                            </Grid>
+                        </Grid>
+                    </Border>
+
+                    <Border Name="EmployeesGroupsBorder" Style="{StaticResource MainPanelBorder}" Visibility="Visible">
+                        <Grid>
+                            <!--Шапка-->
+                            <Grid Style="{StaticResource MainPanelHeader}">
+                                <Button Name="EmployeesGroupsAddButton" Style="{DynamicResource AddButton}"/>
+
+                                <TextBlock Text="Отделы" Style="{DynamicResource HeaderWithAddButton}"/>
+                            </Grid>
+
+                            <!--Таблица-->
+                            <DataGrid Name="EmployeesGroupsTable" Style="{DynamicResource MainDataGrid}" ItemsSource="{Binding Path=EmployeesTable}">
+                                <DataGrid.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Icon="{materialDesign:PackIcon Kind=Pencil}" Header="Редактировать"/>
+                                        <MenuItem Icon="{materialDesign:PackIcon Kind=ContentCopy}" Header="Копировать" InputGestureText="Ctrl+C"/>
+                                        <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}" Header="Удалить" InputGestureText="Del"/>
+                                    </ContextMenu>
+                                </DataGrid.ContextMenu>
+                            </DataGrid>
+
+                            <!--Фильтр-->
+                            <Grid Name="FilterPanel_EmployeesGroups" HorizontalAlignment="Right" Width="70">
+                                <Border Style="{DynamicResource FilterBody}">
+                                    <Grid>
+
+                                    </Grid>
+                                </Border>
+                                <Border Style="{DynamicResource FilterLatch}">
+                                    <ToggleButton Name="Filter_EmployeesGroups" Style="{DynamicResource FilterButton}">
+                                        <ToggleButton.Triggers>
+                                            <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                        Storyboard.TargetName="FilterPanel_EmployeesGroups"
+                                                        Storyboard.TargetProperty="(Width)"
+                                                        From="70" To="600"
+                                                        Duration="0:0:0.2"
+                                                        AutoReverse="False"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation
+                                                        Storyboard.TargetName="FilterPanel_EmployeesGroups"
+                                                        Storyboard.TargetProperty="(Width)"
+                                                        From="600" To="70"
+                                                        Duration="0:0:0.2"
+                                                        AutoReverse="False"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </ToggleButton.Triggers>
+                                    </ToggleButton>
+                                </Border>
+                            </Grid>
+                        </Grid>
+                    </Border>
+
+                    <Border Name="ComputersBorder" Style="{StaticResource MainPanelBorder}" Visibility="Collapsed">
+                        <Grid>
                             <!--Шапка-->
                             <Grid Style="{StaticResource MainPanelHeader}">
                                 <Button Name="ComputerAddButton" Style="{DynamicResource AddButton}"/>
@@ -42,11 +227,11 @@
                                     <Button Name="Report_Computers" Style="{DynamicResource ReportButton}"/>
                                 </StackPanel>
                                 
-                                <TextBlock Text="Компьютеры" Style="{DynamicResource Header}"/>
+                                <TextBlock Text="Компьютеры" Style="{DynamicResource HeaderWithAddButton}"/>
                             </Grid>
                             
                             <!--Таблица-->
-                            <DataGrid Name="ComputersTable" Style="{DynamicResource MainDataGrid}">
+                            <DataGrid Name="ComputersTable" Style="{DynamicResource MainDataGrid}" ItemsSource="{Binding Path=ComputersTable}">
                             <DataGrid.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Icon="{materialDesign:PackIcon Kind=Star}" Header="В избарнное"/>
@@ -106,7 +291,7 @@
 
                 <!--#region Navigation Panel -->
                 <Grid Name="NavigationPanel" Background="Transparent" Width="0" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">
-                    
+
                     <Grid Name="MainMenu" Width="0" HorizontalAlignment="Left">
                         <Border Style="{DynamicResource NavigationPanel}">
                             <TabControl TabStripPlacement="Left">
@@ -262,40 +447,7 @@
                     
                     <Grid Name="ArchiveMenu" Width="0" HorizontalAlignment="Left">
                         <Border Style="{DynamicResource NavigationPanel}">
-                            <TabControl TabStripPlacement="Left">
-                                <!--Сотрудники-->
-                                <TabItem Margin="0 0 0 0">
-                                    <TabItem.Header>
-                                        <Image Source="images\Employees.png" Margin="-10" Height="40"/>
-                                    </TabItem.Header>
-
-                                    <Grid Background="#404040">
-
-                                    </Grid>
-                                </TabItem>
-
-                                <!--Техника-->
-                                <TabItem Margin="0 5 0 0">
-                                    <TabItem.Header>
-                                        <Image Source="images\PC.png" Margin="-10" Height="35"/>
-                                    </TabItem.Header>
-
-                                    <Grid Background="#404040">
-
-                                    </Grid>
-                                </TabItem>
-
-                                <!--Мебель-->
-                                <TabItem Margin="0 5 0 0">
-                                    <TabItem.Header>
-                                        <Image Source="images\Furniture.png" Margin="-10" Height="35"/>
-                                    </TabItem.Header>
-
-                                    <Grid Background="#404040">
-
-                                    </Grid>
-                                </TabItem>
-                            </TabControl>
+                           
                         </Border>
                     </Grid>
                 </Grid>
@@ -306,57 +458,8 @@
 
                     <StackPanel Name="LeftPanel_TopButtons" VerticalAlignment="Top" HorizontalAlignment="Center">
 
-                        <ToggleButton Name="MenuButton" Style="{DynamicResource NavigationButton}" ToolTip="Меню" Checked="CustomUI_MenuSwitch">
-                            <StackPanel>
-                                <materialDesign:PackIcon Kind="Menu" Height="35" Width="35" HorizontalAlignment="Center"/>
-                            </StackPanel>
-                            <ToggleButton.Triggers>
-                                <EventTrigger RoutedEvent="ToggleButton.Checked">
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation
-                                            Storyboard.TargetName="NavigationPanel"
-                                            Storyboard.TargetProperty="(Grid.Width)"
-                                            From="0" To="500"
-                                            Duration="0:0:0.2"
-                                            AutoReverse="False"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation
-                                            Storyboard.TargetName="MainMenu"
-                                            Storyboard.TargetProperty="(Grid.Width)"
-                                            From="0" To="500"
-                                            Duration="0:0:0.2"
-                                            AutoReverse="False"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation
-                                            Storyboard.TargetName="NavigationPanel"
-                                            Storyboard.TargetProperty="(Grid.Width)"
-                                            From="500" To="0"
-                                            Duration="0:0:0.2"
-                                            AutoReverse="False"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation
-                                            Storyboard.TargetName="MainMenu"
-                                            Storyboard.TargetProperty="(Grid.Width)"
-                                            From="500" To="0"
-                                            Duration="0:0:0.2"
-                                            AutoReverse="False"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </ToggleButton.Triggers>
-                        </ToggleButton>
+
+                        <ToggleButton Name="MenuButton" Style="{DynamicResource NavigationButton_MainMenu}" ToolTip="Меню" Checked="CustomUI_MenuSwitch"/>
 
                         <Button Name="FavouriteButton" Style="{DynamicResource MaterialDesignFloatingActionButton}" BorderBrush="Transparent" Background="Transparent" Foreground="#FF9700" Height="50" Width="50" ToolTip="Избранное">
                             <StackPanel>
@@ -370,26 +473,7 @@
                             </StackPanel>
                             <ToggleButton.Triggers>
                                 <EventTrigger RoutedEvent="ToggleButton.Checked">
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation
-                                            Storyboard.TargetName="NavigationPanel"
-                                            Storyboard.TargetProperty="(Grid.Width)"
-                                            From="0" To="500"
-                                            Duration="0:0:0.2"
-                                            AutoReverse="False"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation
-                                            Storyboard.TargetName="AdminMenu"
-                                            Storyboard.TargetProperty="(Grid.Width)"
-                                            From="0" To="500"
-                                            Duration="0:0:0.2"
-                                            AutoReverse="False"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
+                                    
                                 </EventTrigger>
                                 <EventTrigger RoutedEvent="ToggleButton.Unchecked">
                                     <BeginStoryboard>
@@ -519,7 +603,9 @@
                 
                 <!--#region Footer-->
                 <Grid Grid.ColumnSpan="3" Grid.Row="2" Background="#252525">
-                    
+                    <TextBlock Name="FavouriteCounter" Style="{DynamicResource FooterSelectedRowsCounter}" Text="{Binding ElementName=FavouriteTable, Path=SelectedItems.Count, StringFormat=Выбрано: {0}}" Visibility="{Binding ElementName=FavouriteBorder, Path=Visibility}"/>
+                    <TextBlock Name="EmployeesCounter" Style="{DynamicResource FooterSelectedRowsCounter}" Text="{Binding ElementName=EmployeesTable, Path=SelectedItems.Count, StringFormat=Выбрано: {0}}" Visibility="{Binding ElementName=EmployeesBorder, Path=Visibility}"/>
+                    <TextBlock Name="EmployeesGroupsCounter" Style="{DynamicResource FooterSelectedRowsCounter}" Text="{Binding ElementName=EmployeesGroupsTable, Path=SelectedItems.Count, StringFormat=Выбрано: {0}}" Visibility="{Binding ElementName=EmployeesGroupsBorder, Path=Visibility}"/>
                 </Grid>
                 <!--#endregion-->
 

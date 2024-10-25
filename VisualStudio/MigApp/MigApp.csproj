@@ -286,39 +286,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\MigLogo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Employees.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\PC.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Document.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\FavImage.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Users.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Settings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Exit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\TrashBin.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Manual.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Exel.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\Icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -334,19 +301,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\Reload.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Furniture.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\menu.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Laptop.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />

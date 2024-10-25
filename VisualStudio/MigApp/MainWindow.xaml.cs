@@ -1,28 +1,18 @@
 ﻿using MigApp.Classes;
 using System.Windows;
 using System.Windows.Controls;
-using System.Reflection;
 using System.Windows.Input;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+
 namespace MigApp
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
-        MiscClass mc = new MiscClass();
         MainWindowHandler mwh = new MainWindowHandler();
 
         public MainWindow()
         {
             InitializeComponent();
             DataContext = mwh;
-            //RoleCheck();
-            //UpdateAllTables();
-            //UserLoginText.Text = CurrentUser;
         }
 
 

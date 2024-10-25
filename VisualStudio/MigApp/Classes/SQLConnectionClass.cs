@@ -32,9 +32,6 @@ namespace MigApp
         // Проверка подключения
         public bool SQLtest()
         {
-            //SqlConnection sqlConnection = new SqlConnection($@"Data Source = {MigApp.Properties.Settings.Default.Server}; Initial Catalog = {MigApp.Properties.Settings.Default.Database}; Integrated Security = false; User id = sa; Password = {MigApp.Properties.Settings.Default.DBPassword}");
-            //SqlConnection sqlConnection = new SqlConnection($@"Data Source = {MigApp.Properties.Settings.Default.Server}; Initial Catalog = {MigApp.Properties.Settings.Default.Database}; Integrated Security = True");
-
             sqlConnection.ConnectionString = $@"Data Source = {MigApp.Properties.Settings.Default.Server}; Initial Catalog = {MigApp.Properties.Settings.Default.Database}; Integrated Security = false; User id = sa; Password = {MigApp.Properties.Settings.Default.DBPassword}";
             try
             {

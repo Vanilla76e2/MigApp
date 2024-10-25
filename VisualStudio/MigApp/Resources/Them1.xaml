@@ -11,9 +11,12 @@
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="70 0"/>
     </Style>
     
+    <Style x:Key="HeaderWithAddButton" TargetType="TextBlock" BasedOn="{StaticResource Header}">
+        <Setter Property="Margin" Value="70 0"/>
+    </Style>
+   
     <Style x:Key="Title" TargetType="TextBlock">
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontWeight" Value="Thin"/>
@@ -183,7 +186,7 @@
         <Setter Property="Foreground" Value="#FF9700"/>
         <Setter Property="Margin" Value="-10"/>
     </Style>
-    
+
     <Style x:Key="NavigationPanel" TargetType="Border">
         <Setter Property="Background" Value="#383838"/>
         <Setter Property="CornerRadius" Value="15 0 0 15"/>
@@ -214,6 +217,50 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="30 0 0 0"/>
     </Style>
+
+    <Style x:Key="NavigationButton_MainMenu" TargetType="ToggleButton" BasedOn="{StaticResource NavigationButton}">
+        <Setter Property="Content">
+            <Setter.Value>
+                <StackPanel>
+                    <materialDesign:PackIcon Kind="Menu" Height="35" Width="35" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            
+            <!-- Открыть -->
+            <EventTrigger RoutedEvent="ToggleButton.Checked">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="NavigationPanel" Storyboard.TargetProperty="(Grid.Width)" From="0" To="500" Duration="0:0:0.2" AutoReverse="False"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="MainMenu" Storyboard.TargetProperty="(Grid.Width)" From="0" To="500" Duration="0:0:0.2" AutoReverse="False"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+
+            <!-- Закрыть -->
+            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="NavigationPanel" Storyboard.TargetProperty="(Grid.Width)" From="500" To="0" Duration="0:0:0.2" AutoReverse="False"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="MainMenu" Storyboard.TargetProperty="(Grid.Width)" From="500" To="0" Duration="0:0:0.2" AutoReverse="False"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
     <!--#endregion-->
     
     <Style x:Key="HeaderPanelText" TargetType="TextBlock">
@@ -231,6 +278,14 @@
         <Setter Property="Height" Value="30"/>
         <Setter Property="Margin" Value="0 10"/>
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+    </Style>
+
+    <Style x:Key="FooterSelectedRowsCounter" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="Gray"/>
+        <Setter Property="FontWeight" Value="Thin"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="50 0"/>
     </Style>
     
 </ResourceDictionary>
