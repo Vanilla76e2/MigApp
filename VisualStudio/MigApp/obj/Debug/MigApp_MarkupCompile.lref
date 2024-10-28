@@ -12,7 +12,9 @@ FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\CRWindows\RoutersWindow.xaml;;
 FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\CRWindows\SwitchesWindow.xaml;;
 FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\CRWindows\TabletsWindow.xaml;;
 FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\LoginWindow.xaml;;
-FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\MainWindow.xaml;;
+FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\MVVM\View\EmployeesView.xaml;;
+FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\MVVM\View\FavouriteView.xaml;;
+FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\MVVM\View\MainWindow.xaml;;
 FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\SearchWindow.xaml;;
 FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\SettingsWin.xaml;;
 

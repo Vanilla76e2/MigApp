@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using MigApp.Core;
+using MigApp.MVVM.ViewModel;
+using MigApp.Services;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +17,31 @@ namespace MigApp
     /// </summary>
     public partial class App : Application
     {
+        private readonly ServiceProvider _serviceProvider;
+
+        public App()
+        {
+            IServiceCollection services = new ServiceCollection();
+
+            services.AddSingleton<MainWindow>(provider => new MainWindow
+            {
+                DataContext = provider.GetRequiredService<MainViewModel>()
+            });
+            services.AddSingleton<MainViewModel>();
+            services.AddSingleton<FavouriteViewModel>();
+            services.AddSingleton<EmployeesViewModel>();
+            services.AddSingleton<INavigationService, NavigationService>();
+
+            services.AddSingleton<Func<Type, ViewModel>>(serviceProvider => viewModelType => (ViewModel)serviceProvider.GetRequiredService(viewModelType));
+
+            _serviceProvider = services.BuildServiceProvider();
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            _serviceProvider.GetRequiredService<MainWindow>();
+            MainWindow.Show();
+            base.OnStartup(e);
+        }
     }
 }

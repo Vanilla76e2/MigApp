@@ -57,11 +57,11 @@ namespace MigApp.Classes
             get => tabletsTable;
             set { tabletsTable = value; OnPropertyChanged(); }
         }
-        private DataTable notebooksTable { get; set; }
-        public DataTable NotebooksTable
+        private DataTable laptopsTable { get; set; }
+        public DataTable LaptopsTable
         {
-            get => notebooksTable;
-            set { notebooksTable = value; OnPropertyChanged(); }
+            get => laptopsTable;
+            set { laptopsTable = value; OnPropertyChanged(); }
         }
         private DataTable orgtechTable { get; set; }
         public DataTable OrgtechTable
@@ -100,11 +100,11 @@ namespace MigApp.Classes
             set { furnitureTable = value; OnPropertyChanged(); }
         }
         private DataTable furnitureTypeTable { get; set; }
-        //public DataTable FurnitureTypeTable
-        //{
-        //    get => FurnitureTypeTable;
-        //    set { FurnitureTypeTable = value; OnPropertyChanged();}
-        //}
+        public DataTable FurnitureTypeTable
+        {
+            get => FurnitureTypeTable;
+            set { FurnitureTypeTable = value; OnPropertyChanged(); }
+        }
         #endregion
 
         #region Admins Tables
@@ -198,5 +198,8 @@ namespace MigApp.Classes
         }
         #endregion
         #endregion
+
+        public Object SelectedBorder { get; set; }
+
     }
 }

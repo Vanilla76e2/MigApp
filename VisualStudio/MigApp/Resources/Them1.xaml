@@ -76,6 +76,7 @@
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="ToolTip" Value="Создать"/>
+        <Setter Property="Visibility" Value="Visible"/>
         <Setter Property="Content">
             <Setter.Value>
                 <materialDesign:PackIcon Kind="Add" Width="30" Height="30" Margin="-15 -5" Foreground="#FF9700"/>
@@ -198,7 +199,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="NavigationButton" TargetType="ToggleButton" BasedOn="{StaticResource MaterialDesignActionToggleButton}">
+    <Style x:Key="LeftPanel_Buttons" TargetType="ToggleButton" BasedOn="{StaticResource MaterialDesignActionToggleButton}">
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="#FF9700"/>
@@ -218,7 +219,7 @@
         <Setter Property="Margin" Value="30 0 0 0"/>
     </Style>
 
-    <Style x:Key="NavigationButton_MainMenu" TargetType="ToggleButton" BasedOn="{StaticResource NavigationButton}">
+    <Style x:Key="LeftPanel_MainMenu" TargetType="ToggleButton" BasedOn="{StaticResource LeftPanel_Buttons}">
         <Setter Property="Content">
             <Setter.Value>
                 <StackPanel>
@@ -226,40 +227,36 @@
                 </StackPanel>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            
-            <!-- Открыть -->
-            <EventTrigger RoutedEvent="ToggleButton.Checked">
-                <EventTrigger.Actions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation Storyboard.TargetName="NavigationPanel" Storyboard.TargetProperty="(Grid.Width)" From="0" To="500" Duration="0:0:0.2" AutoReverse="False"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation Storyboard.TargetName="MainMenu" Storyboard.TargetProperty="(Grid.Width)" From="0" To="500" Duration="0:0:0.2" AutoReverse="False"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger.Actions>
-            </EventTrigger>
+    </Style>
 
-            <!-- Закрыть -->
-            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
-                <EventTrigger.Actions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation Storyboard.TargetName="NavigationPanel" Storyboard.TargetProperty="(Grid.Width)" From="500" To="0" Duration="0:0:0.2" AutoReverse="False"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation Storyboard.TargetName="MainMenu" Storyboard.TargetProperty="(Grid.Width)" From="500" To="0" Duration="0:0:0.2" AutoReverse="False"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger.Actions>
-            </EventTrigger>
-        </Style.Triggers>
+    <Style x:Key="LeftPanel_AdminMenu" TargetType="ToggleButton" BasedOn="{StaticResource LeftPanel_Buttons}">
+        <Setter Property="Content">
+            <Setter.Value>
+                <StackPanel>
+                    <materialDesign:PackIcon Kind="Administrator" Height="35" Width="35" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="LeftPanel_ArchiveMenu" TargetType="ToggleButton" BasedOn="{StaticResource LeftPanel_Buttons}">
+        <Setter Property="Content">
+            <Setter.Value>
+                <StackPanel>
+                    <materialDesign:PackIcon Kind="TrashCan" Height="35" Width="35" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="NavigationButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignPaperButton}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Height" Value="60"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Padding" Value="8"/>
     </Style>
     <!--#endregion-->
     

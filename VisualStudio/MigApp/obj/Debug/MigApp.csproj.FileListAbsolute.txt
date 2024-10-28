@@ -411,7 +411,6 @@ C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\PCWindow.g.c
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\RoutersWindow.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\TabletsWindow.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\LoginWindow.g.cs
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MainWindow.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\SearchWindow.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\SettingsWin.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\App.g.cs
@@ -428,7 +427,6 @@ C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\PCWindow.bam
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\RoutersWindow.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\TabletsWindow.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\LoginWindow.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MainWindow.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\Resources\Them1.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\SearchWindow.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\SettingsWin.baml
@@ -678,3 +676,20 @@ E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MigApp.csproj.CoreC
 E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MigApp.csproj.Up2Date
 E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MigApp.exe
 E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MigApp.pdb
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\EmployeesView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\FavouriteView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWindow.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\Microsoft.Extensions.DependencyInjection.dll
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\Microsoft.Extensions.DependencyInjection.xml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\EmployeesView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\FavouriteView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWindow.baml
