@@ -71,7 +71,13 @@
   <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>MigApp.App</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net-Next, Version=4.0.3.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt.Net-Next.4.0.3\lib\net472\BCrypt.Net-Next.dll</HintPath>
+    </Reference>
     <Reference Include="FilteredComboBox, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\THEFilteredComboBox.1.0.0\lib\net35\FilteredComboBox.dll</HintPath>
     </Reference>
@@ -81,6 +87,21 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=4.9.0.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.4.9.0\lib\net462\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.HashCode.1.1.1\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=8.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.8.0.1\lib\net462\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=8.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.8.0.2\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -88,8 +109,46 @@
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.77\lib\net462\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
+    <Reference Include="Npgsql, Version=8.0.5.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.8.0.5\lib\netstandard2.0\Npgsql.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.8.0.0\lib\net462\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.8.0.0\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=8.0.0.5, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.8.0.5\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Channels, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Channels.8.0.0\lib\net462\System.Threading.Channels.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -126,6 +185,9 @@
     </ApplicationDefinition>
     <Compile Include="Classes\Encrypting.cs" />
     <Compile Include="Classes\MiscClass.cs" />
+    <Compile Include="Core\ObservableObject.cs" />
+    <Compile Include="Core\RelayCommand.cs" />
+    <Compile Include="Core\ViewModel.cs" />
     <Compile Include="CRWindows\AdminPanel\RoleWindow.xaml.cs">
       <DependentUpon>RoleWindow.xaml</DependentUpon>
     </Compile>
@@ -147,14 +209,19 @@
     <Compile Include="CRWindows\MonitorWindow.xaml.cs">
       <DependentUpon>MonitorWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\Model\CRWindows\Computers\ComputerComponentsModel.cs" />
+    <Compile Include="MVVM\Model\CRWindows\Computers\ComputerConnectedDevicesModel.cs" />
+    <Compile Include="MVVM\Model\CRWindows\Computers\ComputerServiceHistory.cs" />
+    <Compile Include="MVVM\Model\CRWindows\PersonComboBoxModel.cs" />
+    <Compile Include="MVVM\ViewModel\CRWindows\ComputersWindowModel.cs" />
+    <Compile Include="MVVM\View\CRWidows\ComputersWindow.xaml.cs">
+      <DependentUpon>ComputersWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CRWindows\NotebookWindow.xaml.cs">
       <DependentUpon>NotebookWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="CRWindows\OrgTechWindow.xaml.cs">
       <DependentUpon>OrgTechWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CRWindows\PCWindow.xaml.cs">
-      <DependentUpon>PCWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="CRWindows\RoutersWindow.xaml.cs">
       <DependentUpon>RoutersWindow.xaml</DependentUpon>
@@ -165,13 +232,91 @@
     <Compile Include="CRWindows\TabletsWindow.xaml.cs">
       <DependentUpon>TabletsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomElements\IPAddressControl.xaml.cs">
+      <DependentUpon>IPAddressControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Model\MainWindowPanels\ComputersModel.cs" />
+    <Compile Include="MVVM\ViewModel\MainWindowPanels\CCTVViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\MainWindowPanels\ComputersViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\MainWindowPanels\DepartmentViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\MainWindowPanels\EmployeesViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\MainWindowPanels\FavouriteViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\MainWindowPanels\FurnitureTypeViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\MainWindowPanels\FurnitureViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\MainWindowPanels\IPViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\MainWindowPanels\LaptopsViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\LoginViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\MainWindowPanels\LogsViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\MainViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\MainWindowPanels\MonitorsViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\MainWindowPanels\OrgtechViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\MainWindowPanels\RolesViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\MainWindowPanels\RoutersViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\MainWindowPanels\SwitchesViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\MainWindowPanels\TabletsViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\MainWindowPanels\UsersViewModel.cs" />
+    <Compile Include="MVVM\View\MainWidowPanels\CCTVView.xaml.cs">
+      <DependentUpon>CCTVView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\MainWidowPanels\ComputersView.xaml.cs">
+      <DependentUpon>ComputersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\MainWidowPanels\DepartmentView.xaml.cs">
+      <DependentUpon>DepartmentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\MainWidowPanels\EmployeesView.xaml.cs">
+      <DependentUpon>EmployeesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\MainWidowPanels\FavouriteView.xaml.cs">
+      <DependentUpon>FavouriteView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\MainWidowPanels\FurnitureTypesView.xaml.cs">
+      <DependentUpon>FurnitureTypesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\MainWidowPanels\FurnitureView.xaml.cs">
+      <DependentUpon>FurnitureView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\MainWidowPanels\IPView.xaml.cs">
+      <DependentUpon>IPView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\MainWidowPanels\LaptopsView.xaml.cs">
+      <DependentUpon>LaptopsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\MainWidowPanels\LogsView.xaml.cs">
+      <DependentUpon>LogsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\MainWidowPanels\MonitorsView.xaml.cs">
+      <DependentUpon>MonitorsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\MainWidowPanels\OrgtechView.xaml.cs">
+      <DependentUpon>OrgtechView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\MainWidowPanels\RolesView.xaml.cs">
+      <DependentUpon>RolesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\MainWidowPanels\RoutersView.xaml.cs">
+      <DependentUpon>RoutersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\MainWidowPanels\SwitchesView.xaml.cs">
+      <DependentUpon>SwitchesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\MainWidowPanels\TabletsVeiw.xaml.cs">
+      <DependentUpon>TabletsVeiw.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\MainWidowPanels\UsersView.xaml.cs">
+      <DependentUpon>UsersView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SearchWindow.xaml.cs">
       <DependentUpon>SearchWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingsWin.xaml.cs">
-      <DependentUpon>SettingsWin.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Classes\SQLConnectionClass.cs" />
+    <Compile Include="Services\ApplicationContext.cs" />
+    <Compile Include="Services\GetModel.cs" />
+    <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Services\PostgreSQLClass.cs" />
+    <Compile Include="Core\SQLConnectionClass.cs" />
     <Page Include="CRWindows\AdminPanel\RoleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -200,15 +345,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\View\CRWidows\ComputersWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CRWindows\NotebookWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CRWindows\OrgTechWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CRWindows\PCWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -224,11 +369,59 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LoginWindow.xaml">
+    <Page Include="CustomElements\IPAddressControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="LoginWindowOLD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\MainWidowPanels\CCTVView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\MainWidowPanels\ComputersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\MainWidowPanels\DepartmentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\MainWidowPanels\EmployeesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\MainWidowPanels\FavouriteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\MainWidowPanels\FurnitureTypesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\MainWidowPanels\FurnitureView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\MainWidowPanels\IPView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\MainWidowPanels\LaptopsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\MainWidowPanels\LogsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -236,22 +429,46 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="LoginWindow.xaml.cs">
-      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    <Compile Include="LoginWindowOLD.xaml.cs">
+      <DependentUpon>LoginWindowOLD.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="MVVM\View\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MVVM\View\MainWidowPanels\MonitorsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\MainWidowPanels\OrgtechView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\MainWidowPanels\RolesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\MainWidowPanels\RoutersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\MainWidowPanels\SwitchesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\MainWidowPanels\TabletsVeiw.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\MainWidowPanels\UsersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Them1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SearchWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SettingsWin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -285,39 +502,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\MigLogo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Employees.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\PC.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Document.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\FavImage.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Users.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Settings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Exit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\TrashBin.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Manual.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\Exel.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="images\Icon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -333,14 +517,12 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\Reload.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="images\Furniture.png" />
+    <Resource Include="images\loading.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

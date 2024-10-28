@@ -1,18 +1,15 @@
-﻿using System;
+﻿using MigApp.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
-using System.Runtime.ConstrainedExecution;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace MigApp
 {
@@ -21,7 +18,7 @@ namespace MigApp
         HttpClient hc = new HttpClient();
         WebClient wc = new WebClient();
         string curver = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
-        string ver, prerel, url = null;
+        //string ver, prerel, url = null;
 
         public string Splitter(string txt)
         {
@@ -174,7 +171,7 @@ namespace MigApp
         {
             try
             {
-                Dns.GetHostEntry("dotnet.beget.tech");
+                Dns.GetHostEntry("8.8.8.8");
                 return true;
             }
             catch
@@ -183,70 +180,70 @@ namespace MigApp
             }
         }
 
-        public async void CheckVersion()
+        public void CheckVersion()
         {
-            if (InternetChecker())
-            {
-                // Получение API
-                hc.BaseAddress = new Uri("https://api.github.com/repos/Vanilla76e2/MigApp/releases");
-                hc.DefaultRequestHeaders.Add("User-Agent", "MigApp");
-                HttpResponseMessage response = await hc.GetAsync("https://api.github.com/repos/Vanilla76e2/MigApp/releases");
-                string json = await response.Content.ReadAsStringAsync();
+            //if (InternetChecker())
+            //{
+            //    // Получение API
+            //    hc.BaseAddress = new Uri("https://api.github.com/repos/Vanilla76e2/MigApp/releases");
+            //    hc.DefaultRequestHeaders.Add("User-Agent", "MigApp");
+            //    HttpResponseMessage response = await hc.GetAsync("https://api.github.com/repos/Vanilla76e2/MigApp/releases");
+            //    string json = await response.Content.ReadAsStringAsync();
 
-                try
-                {
-                    // Парсинг
-                    string[] strings = json.Split(',');
-                    foreach (string s in strings)
-                    {
-                        if (s.IndexOf("tag_name") != -1)
-                        {
-                            string[] temp = s.Split(':');
-                            ver = temp[1].Substring(2, 5);
-                        }
-                        else if (s.IndexOf("prerelease") != -1)
-                        {
-                            string[] temp = s.Split(':');
-                            prerel = temp[1].Trim();
-                        }
-                        else if (s.IndexOf("browser_download_url") != -1 && prerel == "false")
-                        {
-                            string[] temp = s.Split(':');
-                            string temp2 = temp[1] + ":" + temp[2];
-                            url = temp2.Substring(temp2.IndexOf("https"), temp2.IndexOf(".msi") + 3);
-                        }
-                        if (ver != null && prerel != null && url != null)
-                            break;
-                    }
-                    ver = ver.Replace(".","");
-                    curver = curver.Replace(".", "");
-                    if (Convert.ToUInt32(curver) < Convert.ToInt32(ver))
-                    {
-                        if (MessageBox.Show("Доступна новая версия. Обновить?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                        {
-                            string tmpserv = Path.GetTempPath() + "MigAppConnectionParametrs.txt";
-                            StreamWriter sw = File.CreateText(tmpserv);
-                            sw.WriteLine(MigApp.Properties.Settings.Default.Server + "|" + MigApp.Properties.Settings.Default.Database +  "|" + MigApp.Properties.Settings.Default.DBPassword);
-                            sw.Close();
-                            string tmpmsi = Path.GetTempPath() + "MigAppInstaller.msi";
-                            Uri uri = new Uri(url);
-                            wc.DownloadFile(uri, tmpmsi);
-                            Installer(tmpmsi);
-                        }
-                    }
-                }
-                catch 
-                {
-                    Console.WriteLine(ver);
-                    Console.WriteLine(prerel);
-                    Console.WriteLine(url);
-                    MessageBox.Show("Ошибка при попытке обновления", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Нет доступа к сети", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
+            //    try
+            //    {
+            //        // Парсинг
+            //        string[] strings = json.Split(',');
+            //        foreach (string s in strings)
+            //        {
+            //            if (s.IndexOf("tag_name") != -1)
+            //            {
+            //                string[] temp = s.Split(':');
+            //                ver = temp[1].Substring(2, 5);
+            //            }
+            //            else if (s.IndexOf("prerelease") != -1)
+            //            {
+            //                string[] temp = s.Split(':');
+            //                prerel = temp[1].Trim();
+            //            }
+            //            else if (s.IndexOf("browser_download_url") != -1 && prerel == "false")
+            //            {
+            //                string[] temp = s.Split(':');
+            //                string temp2 = temp[1] + ":" + temp[2];
+            //                url = temp2.Substring(temp2.IndexOf("https"), temp2.IndexOf(".msi") + 3);
+            //            }
+            //            if (ver != null && prerel != null && url != null)
+            //                break;
+            //        }
+            //        ver = ver.Replace(".","");
+            //        curver = curver.Replace(".", "");
+            //        if (Convert.ToUInt32(curver) < Convert.ToInt32(ver))
+            //        {
+            //            if (MessageBox.Show("Доступна новая версия. Обновить?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            //            {
+            //                string tmpserv = Path.GetTempPath() + "MigAppConnectionParametrs.txt";
+            //                StreamWriter sw = File.CreateText(tmpserv);
+            //                sw.WriteLine(MigApp.Properties.Settings.Default.Server + "|" + MigApp.Properties.Settings.Default.Database +  "|" + MigApp.Properties.Settings.Default.DBPassword);
+            //                sw.Close();
+            //                string tmpmsi = Path.GetTempPath() + "MigAppInstaller.msi";
+            //                Uri uri = new Uri(url);
+            //                wc.DownloadFile(uri, tmpmsi);
+            //                Installer(tmpmsi);
+            //            }
+            //        }
+            //    }
+            //    catch 
+            //    {
+            //        Console.WriteLine(ver);
+            //        Console.WriteLine(prerel);
+            //        Console.WriteLine(url);
+            //        MessageBox.Show("Ошибка при попытке обновления", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Нет доступа к сети", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+            //}
         }
 
         private void Installer(string filepath)
@@ -258,56 +255,112 @@ namespace MigApp
             Application.Current.Shutdown();
         }
 
-        // Очистка фильтров при запуске
-        public void ClearFilters()
+        // Горячие клавиши
+        public void HotKeys(object sender, KeyEventArgs e)
         {
-            MigApp.Properties.Settings.Default.comEmp = null;
-            MigApp.Properties.Settings.Default.comPC = null;
-            MigApp.Properties.Settings.Default.comNB = null;
-            MigApp.Properties.Settings.Default.comTab = null;
-            MigApp.Properties.Settings.Default.comOT = null;
-            MigApp.Properties.Settings.Default.comMon = null;
-            MigApp.Properties.Settings.Default.comUsers = null;
-            MigApp.Properties.Settings.Default.comLogs = null;
-            MigApp.Properties.Settings.Default.comEmpDel = null;
-            MigApp.Properties.Settings.Default.comPCDel = null;
-            MigApp.Properties.Settings.Default.comNBDel = null;
-            MigApp.Properties.Settings.Default.comTabDel = null;
-            MigApp.Properties.Settings.Default.comOTDel = null;
-            MigApp.Properties.Settings.Default.comMonDel = null;
-            MigApp.Properties.Settings.Default.comPCRep = null;
-            MigApp.Properties.Settings.Default.comNBRep = null;
-            MigApp.Properties.Settings.Default.comTabRep = null;
-            MigApp.Properties.Settings.Default.comRout = null;
-            MigApp.Properties.Settings.Default.comRoutDel = null;
-            MigApp.Properties.Settings.Default.comSwitch = null;
-            MigApp.Properties.Settings.Default.comSwitchDel = null;
-            MigApp.Properties.Settings.Default.comFurn = null;
-            MigApp.Properties.Settings.Default.comFurnDel = null;
-            MigApp.Properties.Settings.Default.ParamsEmp = null;
-            MigApp.Properties.Settings.Default.ParamsPC = null;
-            MigApp.Properties.Settings.Default.ParamsNB = null;
-            MigApp.Properties.Settings.Default.ParamsTab = null;
-            MigApp.Properties.Settings.Default.ParamsOT = null;
-            MigApp.Properties.Settings.Default.ParamsMon = null;
-            MigApp.Properties.Settings.Default.ParamsUsers = null;
-            MigApp.Properties.Settings.Default.ParamsLogs = null;
-            MigApp.Properties.Settings.Default.ParamsEmpDel = null;
-            MigApp.Properties.Settings.Default.ParamsPCDel = null;
-            MigApp.Properties.Settings.Default.ParamsNBDel = null;
-            MigApp.Properties.Settings.Default.ParamsTabDel = null;
-            MigApp.Properties.Settings.Default.ParamsOTDel = null;
-            MigApp.Properties.Settings.Default.ParamsMonDel = null;
-            MigApp.Properties.Settings.Default.ParamsPCRep = null;
-            MigApp.Properties.Settings.Default.ParamsNBRep = null;
-            MigApp.Properties.Settings.Default.ParamsTabRep = null;
-            MigApp.Properties.Settings.Default.ParamsRout = null;
-            MigApp.Properties.Settings.Default.ParamsRoutDel = null;
-            MigApp.Properties.Settings.Default.ParamsSwitch = null;
-            MigApp.Properties.Settings.Default.ParamsSwitchDel = null;
-            MigApp.Properties.Settings.Default.ParamsFurn = null;
-            MigApp.Properties.Settings.Default.ParamsFurnDel = null;
-            MigApp.Properties.Settings.Default.Save();
+            if (e.KeyboardDevice.Modifiers == ModifierKeys.Control && e.Key == Key.B)
+            {
+                e.Handled = true;
+            }
+        }
+
+        // Перезапуск приложения
+        public void RestartApplication()
+        {
+            // Закрытие  текущего  приложения
+            Application.Current.Shutdown();
+
+            // Запуск  нового  экземпляра  приложения
+            Process.Start(Application.ResourceAssembly.Location);
+        }
+
+
+        public DataTable SortTableByIP(string sortDirection, DataTable table)
+        {
+            // 1.  Преобразовать строки IP в IPAddress
+            var ipAddressesWithRows = table.AsEnumerable()
+                .Select(row => new
+                {
+                    IpAddr = IPAddress.Parse(row.Field<string>("IP")),
+                    Row = row
+                });
+
+            // 2.  Сортировка  с  помощью  LINQ  и  CompareTo
+            IEnumerable<dynamic> sortedRows;
+            if (sortDirection == "ASC")
+            {
+                sortedRows = ipAddressesWithRows.OrderBy(x => x.IpAddr.GetAddressBytes(), new ByteArrayComparer());
+            }
+            else // sortDirection == "DESC"
+            {
+                sortedRows = ipAddressesWithRows.OrderByDescending(x => x.IpAddr.GetAddressBytes(), new ByteArrayComparer());
+            }
+
+            // 3.  Создать новый DataTable с отсортированными данными
+            DataTable sortedTable = table.Clone(); // Создаем пустую копию структуры Table
+            foreach (var item in sortedRows)
+            {
+                sortedTable.ImportRow(item.Row);
+            }
+
+            // 4.  Заменить старый DataTable новым
+            return sortedTable;
+        }
+
+        public bool AreEqual<T>(DataTable table, ObservableCollection<T> observableCollection) // Сравнение данных в коллекции и таблице
+        {
+            if (table == null || observableCollection == null)
+                return false;
+            if (table.Rows.Count != observableCollection.Count)
+                return false;
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                var dataRow = table.Rows[i];
+                var observableItem = observableCollection[i];
+
+                if (CompareRowWithObject(dataRow, observableItem))
+                    return false;
+            }
+            return true;
+        }
+
+        private bool CompareRowWithObject<T>(DataRow dataRow, T observableItem) // Построчное сравнение данных в коллекции и таблице
+        {
+            var properties = typeof(T).GetProperties();
+
+            foreach (var property in properties)
+            {
+                if (dataRow.Table.Columns.Contains(property.Name))
+                {
+                    var dataValue = dataRow[property.Name];
+                    var itemValue = property.GetValue(observableItem);
+
+                    if (!Equals(dataValue, itemValue))
+                        return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    public class ByteArrayComparer : IComparer<byte[]> // Сравнение для сортировки ip таблицы
+    {
+        public int Compare(byte[] x, byte[] y)
+        {
+            if (x.Length != y.Length)
+            {
+                return x.Length - y.Length; // Сравнение  по  длине
+            }
+
+            for (int i = 0; i < x.Length; i++)
+            {
+                if (x[i] != y[i])
+                {
+                    return x[i] - y[i]; // Сравнение  по  элементам
+                }
+            }
+
+            return 0; // Равны
         }
     }
 }

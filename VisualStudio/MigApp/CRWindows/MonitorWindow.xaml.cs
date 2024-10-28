@@ -19,7 +19,7 @@ namespace MigApp.CRWindows
         DataTable table = new DataTable();
         string sqlTable = "Monitor", logname = "Мониторы";
         string InventoryNum;
-        string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
+        string CurrentUser = MigApp.Properties.Settings.Default.userLogin;
         bool Deleted, EmpPerm, GrPerm;
 
         // true - Создание
@@ -297,8 +297,6 @@ namespace MigApp.CRWindows
             PC.Text = string.Empty;
             userList.Clear();
             PCList.Clear();
-            PCWindow win = new PCWindow(true, null, false, EmpPerm, GrPerm);
-            win.ShowDialog();
             PCListFill(User.Text);
             if (PCList.Count() == 0)
             {

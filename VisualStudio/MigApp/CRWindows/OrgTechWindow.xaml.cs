@@ -18,7 +18,7 @@ namespace MigApp.CRWindows
         MiscClass mc = new MiscClass();
         DataTable table = new DataTable();
         string sqlTable = "OrgTech", logname = "Оргтехника";
-        string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
+        string CurrentUser = MigApp.Properties.Settings.Default.userLogin;
         string InventoryNum;
         bool Deleted, EmpPerm, GrPerm;
         string ip = "";
@@ -447,8 +447,6 @@ namespace MigApp.CRWindows
 
         private void CreateNewPC(object sender, RoutedEventArgs e)
         {
-            PCWindow win = new PCWindow(true, null, false, EmpPerm, GrPerm);
-            win.ShowDialog();
             PCListFill(User.Text);
             if (PCList.Count() == 0)
             {

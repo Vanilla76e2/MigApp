@@ -1,0 +1,420 @@
+﻿<Window x:Class="MigApp.MVVM.View.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MigApp.MVVM.View"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="{Binding Path=WindowTitle}" MinHeight="650" MinWidth="920" WindowStartupLocation="CenterScreen" ResizeMode="CanResize" AllowsTransparency="True" WindowStyle="None">
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+            CaptionHeight="50"
+            UseAeroCaptionButtons="True"
+            CornerRadius="20"
+            ResizeBorderThickness="10"
+            GlassFrameThickness="0"/>
+    </WindowChrome.WindowChrome>
+    <Grid Background="Black">
+        <Border>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="15"/>
+                </Grid.RowDefinitions>
+
+                <!-- Main Content -->
+                <ContentControl Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Content="{Binding Navigation.CurrentView}" MouseDown="CustomUI_CloseMenu"/>
+
+                <!--#region Navigation Panel -->
+                <Grid Name="NavigationPanel" Background="Transparent" Width="0" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left">
+
+                    <Grid Name="MainMenu" Width="0" HorizontalAlignment="Left">
+                        <Border Style="{DynamicResource NavigationPanel}">
+                            <TabControl TabStripPlacement="Left">
+                                <!--Сотрудники-->
+                                <TabItem>
+                                    <TabItem.Header>
+                                        <materialDesign:PackIcon Kind="AccountGroup" Style="{DynamicResource LeftPanelICons}" ToolTip="Сотрудники"/>
+                                    </TabItem.Header>
+
+                                    <Grid Background="#404040">
+                                        <StackPanel>
+                                            <Button Name="Navigation_Employees" Style="{StaticResource NavigationButton}" Command="{Binding NavigateToEmployeesCommand}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="AccountTie" Style="{DynamicResource NavigationIcons}"/>
+                                                    <TextBlock Text="Сотрудники" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </Button>
+                                            <Button Name="Navigation_Department" Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToDepartmentCommand}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="Work" Style="{DynamicResource NavigationIcons}"/>
+                                                    <TextBlock Text="Отделы" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                </TabItem>
+
+                                <!--Техника-->
+                                <TabItem Margin="0 5 0 0">
+                                    <TabItem.Header>
+                                        <materialDesign:PackIcon Kind="MonitorCellphone" Style="{DynamicResource LeftPanelICons}" ToolTip="Техника"/>
+                                    </TabItem.Header>
+
+                                    <Grid Background="#404040">
+                                        <StackPanel>
+                                            <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToComputersCommand}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="DesktopTower" Style="{DynamicResource NavigationIcons}"/>
+                                                    <TextBlock Text="Компьютеры" Style="{DynamicResource NavigationTextBlock}"/>
+                                                </StackPanel>
+                                            </Button>
+
+                                            <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToLaptopsCommand}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="Computer" Style="{DynamicResource NavigationIcons}"/>
+                                                    <TextBlock Text="Ноутбуки" Style="{DynamicResource NavigationTextBlock}"/>
+                                                </StackPanel>
+                                            </Button>
+
+                                            <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToTabletsCommand}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="Tablet" Style="{DynamicResource NavigationIcons}"/>
+                                                    <TextBlock Text="Планшеты" Style="{DynamicResource NavigationTextBlock}"/>
+                                                </StackPanel>
+                                            </Button>
+
+                                            <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToOrgtechCommand}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="Printer" Style="{DynamicResource NavigationIcons}"/>
+                                                    <TextBlock Text="Оргтехника" Style="{DynamicResource NavigationTextBlock}"/>
+                                                </StackPanel>
+                                            </Button>
+
+                                            <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToMonitorsCommand}" Visibility="Collapsed">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="Monitor" Style="{DynamicResource NavigationIcons}"/>
+                                                    <TextBlock Text="Мониторы" Style="{DynamicResource NavigationTextBlock}"/>
+                                                </StackPanel>
+                                            </Button>
+
+                                            <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToRoutersCommand}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="RouterWireless" Style="{DynamicResource NavigationIcons}"/>
+                                                    <TextBlock Text="Роутеры" Style="{DynamicResource NavigationTextBlock}"/>
+                                                </StackPanel>
+                                            </Button>
+
+                                            <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToSwitchesCommand}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="RouterNetwork" Style="{DynamicResource NavigationIcons}"/>
+                                                    <TextBlock Text="Коммутаторы" Style="{DynamicResource NavigationTextBlock}"/>
+                                                </StackPanel>
+                                            </Button>
+
+                                            <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToCCTVCommand}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="Cctv" Style="{DynamicResource NavigationIcons}"/>
+                                                    <TextBlock Text="Видеонаблюдение" Style="{DynamicResource NavigationTextBlock}"/>
+                                                </StackPanel>
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                </TabItem>
+
+                                <!--Мебель-->
+                                <TabItem Margin="0 5 0 0">
+                                    <TabItem.Header>
+                                        <materialDesign:PackIcon Kind="Wardrobe" Style="{DynamicResource LeftPanelICons}" ToolTip="Мебель"/>
+                                    </TabItem.Header>
+
+                                    <Grid Background="#404040">
+                                        <StackPanel>
+                                            <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToFurnitureCommand}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="Dresser" Style="{DynamicResource NavigationIcons}"/>
+                                                    <TextBlock Text="Мебель" Style="{DynamicResource NavigationTextBlock}"/>
+                                                </StackPanel>
+                                            </Button>
+
+                                            <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToFurnitureTypeCommand}">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <materialDesign:PackIcon Kind="TagMultiple" Style="{DynamicResource NavigationIcons}"/>
+                                                    <TextBlock Text="Виды мебели" Style="{DynamicResource NavigationTextBlock}"/>
+                                                </StackPanel>
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                </TabItem>
+                            </TabControl>
+                        </Border>
+                    </Grid>
+
+                    <Grid Name="AdminMenu" Width="0" HorizontalAlignment="Left">
+                        <Border Style="{DynamicResource NavigationPanel}">
+                            <StackPanel ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                                <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToUsersCommand}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="AccountEdit" Width="40" Height="40" Margin="10 0 0 0" Foreground="#FF9700"/>
+                                        <TextBlock Text="Пользователи" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToRolesCommand}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="AccountWrench" Margin="10 0 0 0" Width="40" Height="40" Foreground="#FF9700"/>
+                                        <TextBlock Text="Роли" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToLogsCommand}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="History" Margin="10 0 0 0" Height="40" Width="40" Foreground="#FF9700"/>
+                                        <TextBlock Text="Журнал событий" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToIPCommand}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="IpNetwork" Margin="10 0 0 0" Height="40" Width="40" Foreground="#FF9700"/>
+                                        <TextBlock Text="IP адреса" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <Grid Name="ArchiveMenu" Width="0" HorizontalAlignment="Left">
+                        <Border Style="{DynamicResource NavigationPanel}">
+
+                        </Border>
+                    </Grid>
+                </Grid>
+                <!--#endregion-->
+
+                <!--#region Left Panel-->
+                <Grid Name="LeftPanel" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Background="#252525">
+
+                    <StackPanel Name="LeftPanel_TopButtons" VerticalAlignment="Top" HorizontalAlignment="Center">
+
+
+                        <ToggleButton Name="MenuButton" Style="{StaticResource LeftPanel_MainMenu}" ToolTip="Меню" Checked="CustomUI_MenuSwitch">
+                            <ToggleButton.Triggers>
+                                <!-- Open navigation menu -->
+                                <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="NavigationPanel"
+                                            Storyboard.TargetProperty="(Grid.Width)"
+                                            From="0" To="500"
+                                            Duration="0:0:0.2"
+                                            AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="MainMenu"
+                                                Storyboard.TargetProperty="(Grid.Width)"
+                                                From="0" To="500"
+                                                Duration="0:0:0.2"
+                                                AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <!-- Close navigation menu -->
+                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="NavigationPanel"
+                                            Storyboard.TargetProperty="(Grid.Width)"
+                                            From="500" To="0"
+                                            Duration="0:0:0.2"
+                                            AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="MainMenu"
+                                            Storyboard.TargetProperty="(Grid.Width)"
+                                            From="500" To="0"
+                                            Duration="0:0:0.2"
+                                            AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </ToggleButton.Triggers>
+                        </ToggleButton>
+
+                        <Button Name="FavouriteButton" Style="{StaticResource MaterialDesignFloatingActionButton}" BorderBrush="Transparent" Background="Transparent" Foreground="#FF9700" Height="50" Width="50" ToolTip="Избранное" Command="{Binding NavigateToFavouriteCommand}">
+                            <StackPanel>
+                                <materialDesign:PackIcon Kind="Star" Height="45" Width="45"/>
+                            </StackPanel>
+                        </Button>
+
+                        <ToggleButton Name="AdminButton" Style="{StaticResource LeftPanel_AdminMenu}" ToolTip="Администрирование" Checked="CustomUI_MenuSwitch">
+                            <ToggleButton.Triggers>
+                                <!-- Open navigation menu -->
+                                <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                        Storyboard.TargetName="NavigationPanel"
+                                        Storyboard.TargetProperty="(Grid.Width)"
+                                        From="0" To="500"
+                                        Duration="0:0:0.2"
+                                        AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="AdminMenu"
+                                            Storyboard.TargetProperty="(Grid.Width)"
+                                            From="0" To="500"
+                                            Duration="0:0:0.2"
+                                            AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <!-- Close navigation menu -->
+                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="NavigationPanel"
+                                            Storyboard.TargetProperty="(Grid.Width)"
+                                            From="500" To="0"
+                                            Duration="0:0:0.2"
+                                            AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="AdminMenu"
+                                            Storyboard.TargetProperty="(Grid.Width)"
+                                            From="500" To="0"
+                                            Duration="0:0:0.2"
+                                            AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </ToggleButton.Triggers>
+                        </ToggleButton>
+
+                        <ToggleButton Name="ArchiveButton" Style="{StaticResource LeftPanel_ArchiveMenu}" ToolTip="Архив" Checked="CustomUI_MenuSwitch">
+                            <ToggleButton.Triggers>
+                                <!-- Open navigation menu -->
+                                <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="NavigationPanel"
+                                            Storyboard.TargetProperty="(Grid.Width)"
+                                            From="0" To="500"
+                                            Duration="0:0:0.2"
+                                            AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="ArchiveMenu"
+                                            Storyboard.TargetProperty="(Grid.Width)"
+                                            From="0" To="500"
+                                            Duration="0:0:0.2"
+                                            AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <!-- Close navigation menu -->
+                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="NavigationPanel"
+                                            Storyboard.TargetProperty="(Grid.Width)"
+                                            From="500" To="0"
+                                            Duration="0:0:0.2"
+                                            AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                            Storyboard.TargetName="ArchiveMenu"
+                                            Storyboard.TargetProperty="(Grid.Width)"
+                                            From="500" To="0"
+                                            Duration="0:0:0.2"
+                                            AutoReverse="False"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </ToggleButton.Triggers>
+                        </ToggleButton>
+
+                    </StackPanel>
+
+                    <StackPanel Name="LeftPanel_BottomButtons" VerticalAlignment="Bottom" Margin="0 0 0 15">
+
+                        <Button HorizontalAlignment="Center" Style="{DynamicResource LeftPanelBottomButtons}" ToolTip="Руководство | F1">
+                            <StackPanel>
+                                <materialDesign:PackIcon Kind="AboutOutline" Height="40" Width="40" Margin="-20 -20"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button HorizontalAlignment="Center" Style="{DynamicResource LeftPanelBottomButtons}" ToolTip="Обновить таблицы | F5">
+                            <StackPanel>
+                                <materialDesign:PackIcon Kind="Reload" Height="40" Width="40" Margin="0 -20"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button HorizontalAlignment="Center" Style="{DynamicResource LeftPanelBottomButtons}" ToolTip="Выход" Command="{Binding LogOutCommand}">
+                            <materialDesign:PackIcon Kind="Logout" Width="40" Height="40" Margin="1 -10"/>
+                        </Button>
+
+                    </StackPanel>
+
+                </Grid>
+                <!--#endregion-->
+
+                <!--#region Header -->
+                <Grid Grid.ColumnSpan="3" Grid.Row="0" Background="#252525">
+                    <TextBlock Name="WindowTitle" Text="{Binding Path=WindowTitle}" Style="{DynamicResource HeaderPanelText}" Margin="15 0"/>
+                    <TextBlock Name="UserLoginText" Text="{Binding Path=CurrentUser}" Style="{DynamicResource HeaderPanelText}" HorizontalAlignment="Right" Margin="0 0 130 0"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Name="Custom_MinimizeButton" Style="{DynamicResource WindowControlButtons}" Click="CustomUI_WindowControl">
+                            <StackPanel>
+                                <materialDesign:PackIcon Kind="Minimize" Margin="-5 0"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Name="Custom_MaximizeButton" Style="{DynamicResource WindowControlButtons}" Click="CustomUI_WindowControl">
+                            <StackPanel>
+                                <materialDesign:PackIcon Kind="Maximize" Margin="-5 0"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Name="Custom_CloseButton" Style="{DynamicResource WindowControlButtons}" Click="CustomUI_WindowControl">
+                            <StackPanel>
+                                <materialDesign:PackIcon Kind="Close" Margin="-5 0"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+                <!--#endregion-->
+
+            </Grid>
+        </Border>
+
+        <Border Name="Blindfall" Background="Black" Opacity="0.35" Visibility="Collapsed"/>
+        
+    </Grid>
+</Window>
