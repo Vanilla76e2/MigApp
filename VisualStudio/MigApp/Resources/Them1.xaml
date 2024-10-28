@@ -257,6 +257,40 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Margin" Value="5"/>
         <Setter Property="Padding" Value="8"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ButtonBase}">
+                    <Grid>
+                        <AdornerDecorator CacheMode="{Binding RelativeSource={RelativeSource Self}, Path=(materialDesign:ShadowAssist.CacheMode)}">
+                            <Grid>
+                                <Border Name="background" Background="{TemplateBinding Background}" CornerRadius="5" Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(materialDesign:ElevationAssist.Elevation)}"/>
+                                <Border Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5" />
+                            </Grid>
+                        </AdornerDecorator>
+                        <materialDesign:Ripple Padding="{TemplateBinding Padding}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <materialDesign:Ripple.Clip>
+                                <MultiBinding Converter="{StaticResource BorderClipConverter}">
+                                    <Binding ElementName="border" Path="ActualWidth" />
+                                    <Binding ElementName="border" Path="ActualHeight" />
+                                    <Binding ElementName="border" Path="CornerRadius" />
+                                    <Binding ElementName="border" Path="BorderThickness" />
+                                </MultiBinding>
+                            </materialDesign:Ripple.Clip>
+                        </materialDesign:Ripple>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="UIElement.IsMouseOver" Value="true">
+                            <Setter TargetName="background" Property="Background" Value="#525252" />
+                            <Setter TargetName="border" Value="#525252" Property="Background"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="UIElement.Opacity" Value="0.38" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="materialDesign:RippleAssist.Feedback" Value="LightGray" />
     </Style>
     <!--#endregion-->
     
@@ -283,6 +317,11 @@
         <Setter Property="HorizontalAlignment" Value="Right"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="50 0"/>
+    </Style>
+
+    <Style x:Key="Footer" TargetType="Border">
+        <Setter Property="Background" Value="#252525"/>
+        <Setter Property="Grid.Row" Value="1"/>
     </Style>
     
 </ResourceDictionary>

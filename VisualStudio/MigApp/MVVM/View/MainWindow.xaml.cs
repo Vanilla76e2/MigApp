@@ -1,13 +1,15 @@
-﻿using MigApp.Classes;
+﻿
+using MigApp.MVVM.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace MigApp
 {
     public partial class MainWindow : Window
     {
-
+        NavigationService navigationService;
         public MainWindow()
         {
             InitializeComponent();

@@ -140,7 +140,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\Encrypting.cs" />
-    <Compile Include="Classes\MainWindowHandler.cs" />
     <Compile Include="Classes\MiscClass.cs" />
     <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Core\RelayCommand.cs" />

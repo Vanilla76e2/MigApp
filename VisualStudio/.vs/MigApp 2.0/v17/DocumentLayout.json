@@ -1,10 +1,38 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\",
+  "WorkspaceRootPath": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|c:\\myprograms\\github\\migapp\\visualstudio\\migapp\\mvvm\\view\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|e:\\work\\my works\\github\\migapp\\visualstudio\\migapp\\mvvm\\view\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\mvvm\\view\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|e:\\work\\my works\\github\\migapp\\visualstudio\\migapp\\mvvm\\view\\employeesview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\mvvm\\view\\employeesview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|e:\\work\\my works\\github\\migapp\\visualstudio\\migapp\\mvvm\\view\\favouriteview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\mvvm\\view\\favouriteview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|e:\\work\\my works\\github\\migapp\\visualstudio\\migapp\\mvvm\\viewmodel\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\mvvm\\viewmodel\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|e:\\work\\my works\\github\\migapp\\visualstudio\\migapp\\mvvm\\view\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\mvvm\\view\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|e:\\work\\my works\\github\\migapp\\visualstudio\\migapp\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|e:\\work\\my works\\github\\migapp\\visualstudio\\migapp\\resources\\them1.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\resources\\them1.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|e:\\work\\my works\\github\\migapp\\visualstudio\\migapp\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,18 +42,130 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Them1.xaml",
+              "DocumentMoniker": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\Resources\\Them1.xaml",
+              "RelativeDocumentMoniker": "MigApp\\Resources\\Them1.xaml",
+              "ToolTip": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\Resources\\Them1.xaml",
+              "RelativeToolTip": "MigApp\\Resources\\Them1.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-10-28T14:57:29.926Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "App.xaml",
+              "DocumentMoniker": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\App.xaml",
+              "RelativeDocumentMoniker": "MigApp\\App.xaml",
+              "ToolTip": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\App.xaml",
+              "RelativeToolTip": "MigApp\\App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-10-28T13:34:11.546Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\App.xaml.cs",
+              "RelativeDocumentMoniker": "MigApp\\App.xaml.cs",
+              "ToolTip": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\App.xaml.cs",
+              "RelativeToolTip": "MigApp\\App.xaml.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAmwCIAAABdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-28T13:20:56.367Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\View\\MainWindow.xaml",
+              "DocumentMoniker": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\View\\MainWindow.xaml",
               "RelativeDocumentMoniker": "MigApp\\MVVM\\View\\MainWindow.xaml",
-              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\View\\MainWindow.xaml",
+              "ToolTip": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\View\\MainWindow.xaml",
               "RelativeToolTip": "MigApp\\MVVM\\View\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2024-10-28T11:56:36.675Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\View\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MigApp\\MVVM\\View\\MainWindow.xaml.cs",
+              "ToolTip": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\View\\MainWindow.xaml.cs",
+              "RelativeToolTip": "MigApp\\MVVM\\View\\MainWindow.xaml.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-28T13:18:45.151Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FavouriteView.xaml",
+              "DocumentMoniker": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\View\\FavouriteView.xaml",
+              "RelativeDocumentMoniker": "MigApp\\MVVM\\View\\FavouriteView.xaml",
+              "ToolTip": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\View\\FavouriteView.xaml",
+              "RelativeToolTip": "MigApp\\MVVM\\View\\FavouriteView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-10-28T14:48:05.098Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\ViewModel\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "MigApp\\MVVM\\ViewModel\\MainViewModel.cs",
+              "ToolTip": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\ViewModel\\MainViewModel.cs",
+              "RelativeToolTip": "MigApp\\MVVM\\ViewModel\\MainViewModel.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAACAAAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-28T13:16:31.906Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "a8734772-14e1-4285-bf9f-0eed3ab2373d",
+        "Display": 1,
+        "X": 222,
+        "Y": -28,
+        "Width": 1213,
+        "Height": 808,
+        "WindowState": 2
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EmployeesView.xaml",
+              "DocumentMoniker": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\View\\EmployeesView.xaml",
+              "RelativeDocumentMoniker": "MigApp\\MVVM\\View\\EmployeesView.xaml",
+              "ToolTip": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\View\\EmployeesView.xaml",
+              "RelativeToolTip": "MigApp\\MVVM\\View\\EmployeesView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-10-28T16:28:51.301Z",
               "EditorCaption": ""
             }
           ]

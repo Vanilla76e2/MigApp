@@ -29,7 +29,7 @@
                 </Grid.RowDefinitions>
 
                 <!-- Main Content -->
-                <ContentControl Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Content="{Binding Navigation.CurrentView}"/>
+                <ContentControl Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Content="{Binding Navigation.CurrentView}" MouseDown="CustomUI_CloseMenu"/>
 
                 <!--#region Main Panel-->
                 <Grid Name="MainGrid" Grid.Column="1" Grid.Row="1" Background="#252525" MouseDown="CustomUI_CloseMenu" Visibility="Collapsed">
@@ -1184,13 +1184,13 @@
                                     <Grid Background="#404040">
                                         <StackPanel>
                                             <Button Name="Navigation_Employees" Style="{StaticResource NavigationButton}" Command="{Binding NavigateToEmployeesCommand}">
-                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="AccountTie" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Сотрудники" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
                                                 </StackPanel>
                                             </Button>
                                             <Button Name="Navigation_EmployeesGroups" Style="{DynamicResource NavigationButton}">
-                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Work" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Отделы" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
                                                 </StackPanel>
@@ -1208,56 +1208,56 @@
                                     <Grid Background="#404040">
                                         <StackPanel>
                                             <Button Style="{DynamicResource NavigationButton}">
-                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="DesktopTower" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Компьютеры" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </Button>
 
                                             <Button Style="{DynamicResource NavigationButton}">
-                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Computer" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Ноутбуки" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </Button>
 
                                             <Button Style="{DynamicResource NavigationButton}">
-                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Tablet" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Планшеты" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </Button>
 
                                             <Button Style="{DynamicResource NavigationButton}">
-                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Printer" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Оргтехника" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </Button>
 
                                             <Button Style="{DynamicResource NavigationButton}">
-                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Monitor" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Мониторы" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </Button>
 
                                             <Button Style="{DynamicResource NavigationButton}">
-                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="RouterWireless" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Роутеры" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </Button>
 
                                             <Button Style="{DynamicResource NavigationButton}">
-                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="RouterNetwork" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Коммутаторы" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </Button>
 
                                             <Button Style="{DynamicResource NavigationButton}">
-                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Cctv" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Видеонаблюдение" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
@@ -1275,14 +1275,14 @@
                                     <Grid Background="#404040">
                                         <StackPanel>
                                             <Button Style="{DynamicResource NavigationButton}">
-                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Dresser" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Мебель" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </Button>
 
                                             <Button Style="{DynamicResource NavigationButton}">
-                                                <StackPanel Orientation="Horizontal" Margin="5 5 5 0">
+                                                <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="TagMultiple" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Виды мебели" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
@@ -1296,32 +1296,32 @@
                     
                     <Grid Name="AdminMenu" Width="0" HorizontalAlignment="Left">
                         <Border Style="{DynamicResource NavigationPanel}">
-                            <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                                <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}" Margin="5 5 5 0">
+                            <StackPanel ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                <Button Style="{DynamicResource NavigationButton}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="AccountEdit" Width="40" Height="40" Margin="10 0 0 0" Foreground="#FF9700"/>
                                         <TextBlock Text="Пользователи" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
                                     </StackPanel>
-                                </ListViewItem>
-                                <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}" Margin="5 5 5 0">
+                                </Button>
+                                <Button Style="{DynamicResource NavigationButton}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="AccountWrench" Margin="10 0 0 0" Width="40" Height="40" Foreground="#FF9700"/>
                                         <TextBlock Text="Роли" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
                                     </StackPanel>
-                                </ListViewItem>
-                                <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}" Margin="5 5 5 0">
+                                </Button>
+                                <Button Style="{DynamicResource NavigationButton}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="History" Margin="10 0 0 0" Height="40" Width="40" Foreground="#FF9700"/>
                                         <TextBlock Text="Журнал событий" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
                                     </StackPanel>
-                                </ListViewItem>
-                                <ListViewItem Style="{DynamicResource MaterialDesignNavigationListBoxItem}" Margin="5 5 5 0">
+                                </Button>
+                                <Button Style="{DynamicResource NavigationButton}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="IpNetwork" Margin="10 0 0 0" Height="40" Width="40" Foreground="#FF9700"/>
                                         <TextBlock Text="IP адреса" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
                                     </StackPanel>
-                                </ListViewItem>
-                            </ListView>
+                                </Button>
+                            </StackPanel>
                         </Border>
                     </Grid>
                     
@@ -1504,18 +1504,18 @@
                         
                         <Button HorizontalAlignment="Center" Style="{DynamicResource LeftPanelBottomButtons}" ToolTip="Руководство | F1">
                             <StackPanel>
-                                <materialDesign:PackIcon Kind="AboutOutline" Height="40" Width="40"/>
+                                <materialDesign:PackIcon Kind="AboutOutline" Height="40" Width="40" Margin="-20 -20"/>
                             </StackPanel>
                         </Button>
 
                         <Button HorizontalAlignment="Center" Style="{DynamicResource LeftPanelBottomButtons}" ToolTip="Обновить таблицы | F5">
                             <StackPanel>
-                                <materialDesign:PackIcon Kind="Reload" Height="40" Width="40"/>
+                                <materialDesign:PackIcon Kind="Reload" Height="40" Width="40" Margin="0 -20"/>
                             </StackPanel>
                         </Button>
 
                         <Button HorizontalAlignment="Center" Style="{DynamicResource LeftPanelBottomButtons}" ToolTip="Выход">
-                            <materialDesign:PackIcon Kind="Logout" Width="40" Height="40"/>
+                            <materialDesign:PackIcon Kind="Logout" Width="40" Height="40" Margin="1 -10"/>
                         </Button>
                         
                     </StackPanel>

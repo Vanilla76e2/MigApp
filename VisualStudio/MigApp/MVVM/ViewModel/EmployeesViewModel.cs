@@ -8,5 +8,6 @@ namespace MigApp.MVVM.ViewModel
 {
     internal class EmployeesViewModel: Core.ViewModel
     {
+        
     }
 }

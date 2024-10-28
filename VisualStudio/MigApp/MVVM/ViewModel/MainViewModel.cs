@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MigApp.MVVM.ViewModel
 {
     internal class MainViewModel : Core.ViewModel
     {
         private INavigationService _navigation;
+        public string WindowTitle { get; set;} = "MigApp v" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
 
         public INavigationService Navigation
         {

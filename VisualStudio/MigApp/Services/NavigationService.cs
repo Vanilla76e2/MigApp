@@ -1,4 +1,6 @@
 ﻿using MigApp.Core;
+using MigApp.MVVM.View;
+using MigApp.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +33,7 @@ namespace MigApp.Services
         public NavigationService(Func<Type, ViewModel> viewModelFactory)
         {
             _viewModelFactory = viewModelFactory;
+            CurrentView = _viewModelFactory.Invoke(typeof(FavouriteViewModel));
         }
 
         public void NavigateTo<TViewModel>() where TViewModel : ViewModel

@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\
+E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\
 MigApp
 none
 false
 DEBUG;TRACE
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\App.xaml
+E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\App.xaml
 20-1566155525
 
-34-859340506
-291559218731
+33-1868971007
+29-1489294591
 CRWindows\AdminPanel\RoleWindow.xaml;CRWindows\AdminPanel\UsersWindow.xaml;CRWindows\EmpGroupWindow.xaml;CRWindows\EmployeesWindow.xaml;CRWindows\FurnitureTypeWindow.xaml;CRWindows\FurnitureWindow.xaml;CRWindows\MonitorWindow.xaml;CRWindows\NotebookWindow.xaml;CRWindows\OrgTechWindow.xaml;CRWindows\PCWindow.xaml;CRWindows\RoutersWindow.xaml;CRWindows\SwitchesWindow.xaml;CRWindows\TabletsWindow.xaml;LoginWindow.xaml;MVVM\View\EmployeesView.xaml;MVVM\View\FavouriteView.xaml;MVVM\View\MainWindow.xaml;Resources\Them1.xaml;SearchWindow.xaml;SettingsWin.xaml;
 
 False
