@@ -22,6 +22,66 @@
                 <view:EmployeesView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type TypeName=viewModel:EmployeesGroupsViewModel}">
+                <view:EmployeesGroupsView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=viewModel:ComputersViewModel}">
+                <view:ComputersView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=viewModel:LaptopsViewModel}">
+                <view:LaptopsView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=viewModel:TabletsViewModel}">
+                <view:TabletsVeiw/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=viewModel:OrgtechViewModel}">
+                <view:OrgtechView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=viewModel:MonitorsViewModel}">
+                <view:MonitorsView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=viewModel:RoutersViewModel}">
+                <view:RoutersView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=viewModel:SwitchesViewModel}">
+                <view:SwitchesView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=viewModel:CCTVViewModel}">
+                <view:CCTVView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=viewModel:FurnitureViewModel}">
+                <view:FurnitureView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=viewModel:FurnitureTypeViewModel}">
+                <view:FurnitureTypesView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=viewModel:UsersViewModel}">
+                <view:UsersView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=viewModel:RolesViewModel}">
+                <view:RolesView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=viewModel:LogsViewModel}">
+                <view:LogsView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type TypeName=viewModel:IPViewModel}">
+                <view:IPView/>
+            </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

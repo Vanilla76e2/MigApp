@@ -28,8 +28,27 @@ namespace MigApp
                 DataContext = provider.GetRequiredService<MainViewModel>()
             });
             services.AddSingleton<MainViewModel>();
+
             services.AddSingleton<FavouriteViewModel>();
+
             services.AddSingleton<EmployeesViewModel>();
+            services.AddSingleton<EmployeesGroupsViewModel>();
+            services.AddSingleton<ComputersViewModel>();
+            services.AddSingleton<LaptopsViewModel>();
+            services.AddSingleton<TabletsViewModel>();
+            services.AddSingleton<OrgtechViewModel>();
+            services.AddSingleton<MonitorsViewModel>();
+            services.AddSingleton<RoutersViewModel>();
+            services.AddSingleton<SwitchesViewModel>();
+            services.AddSingleton<CCTVViewModel>();
+
+            services.AddSingleton<FurnitureViewModel>();
+            services.AddSingleton<FurnitureTypeViewModel>();
+
+            services.AddSingleton<UsersViewModel>();
+            services.AddSingleton<RolesViewModel>();
+            services.AddSingleton<LogsViewModel>();
+            services.AddSingleton<IPViewModel>();
             services.AddSingleton<INavigationService, NavigationService>();
 
             services.AddSingleton<Func<Type, ViewModel>>(serviceProvider => viewModelType => (ViewModel)serviceProvider.GetRequiredService(viewModelType));

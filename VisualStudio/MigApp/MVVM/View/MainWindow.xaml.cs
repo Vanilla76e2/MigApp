@@ -9,7 +9,6 @@ namespace MigApp
 {
     public partial class MainWindow : Window
     {
-        NavigationService navigationService;
         public MainWindow()
         {
             InitializeComponent();

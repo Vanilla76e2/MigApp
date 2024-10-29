@@ -183,14 +183,74 @@
     <Compile Include="CRWindows\TabletsWindow.xaml.cs">
       <DependentUpon>TabletsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\ViewModel\CCTVViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\ComputersViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\EmployeesGroupsViewModel.cs" />
     <Compile Include="MVVM\ViewModel\EmployeesViewModel.cs" />
     <Compile Include="MVVM\ViewModel\FavouriteViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\FurnitureTypeViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\FurnitureViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\IPViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\LaptopsViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\LogsViewModel.cs" />
     <Compile Include="MVVM\ViewModel\MainViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\MonitorsViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\OrgtechViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\RolesViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\RoutersViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\SwitchesViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\TabletsViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\UsersViewModel.cs" />
+    <Compile Include="MVVM\View\CCTVView.xaml.cs">
+      <DependentUpon>CCTVView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\ComputersView.xaml.cs">
+      <DependentUpon>ComputersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\EmployeesGroupsView.xaml.cs">
+      <DependentUpon>EmployeesGroupsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\View\EmployeesView.xaml.cs">
       <DependentUpon>EmployeesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\FavouriteView.xaml.cs">
       <DependentUpon>FavouriteView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\FurnitureTypesView.xaml.cs">
+      <DependentUpon>FurnitureTypesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\FurnitureView.xaml.cs">
+      <DependentUpon>FurnitureView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\IPView.xaml.cs">
+      <DependentUpon>IPView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\LaptopsView.xaml.cs">
+      <DependentUpon>LaptopsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\LogsView.xaml.cs">
+      <DependentUpon>LogsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\MonitorsView.xaml.cs">
+      <DependentUpon>MonitorsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\OrgtechView.xaml.cs">
+      <DependentUpon>OrgtechView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\RolesView.xaml.cs">
+      <DependentUpon>RolesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\RoutersView.xaml.cs">
+      <DependentUpon>RoutersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\SwitchesView.xaml.cs">
+      <DependentUpon>SwitchesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\TabletsVeiw.xaml.cs">
+      <DependentUpon>TabletsVeiw.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\UsersView.xaml.cs">
+      <DependentUpon>UsersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="SearchWindow.xaml.cs">
       <DependentUpon>SearchWindow.xaml</DependentUpon>
@@ -256,11 +316,43 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MVVM\View\CCTVView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\ComputersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\EmployeesGroupsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\EmployeesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\View\FavouriteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\FurnitureTypesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\FurnitureView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\IPView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\LaptopsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\LogsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -279,6 +371,34 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MVVM\View\MonitorsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\OrgtechView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\RolesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\RoutersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\SwitchesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\TabletsVeiw.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\UsersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Them1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

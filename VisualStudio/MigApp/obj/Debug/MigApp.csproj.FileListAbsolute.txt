@@ -708,3 +708,33 @@ E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Threading.Ta
 E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\EmployeesView.baml
 E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\FavouriteView.baml
 E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWindow.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\EmployeesGroupsView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\EmployeesGroupsView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\ComputersView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\LaptopsView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MonitorsView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\OrgtechView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\TabletsVeiw.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\ComputersView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\LaptopsView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MonitorsView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\OrgtechView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\TabletsVeiw.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\CCTVView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\IPView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\LogsView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\RolesView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\RoutersView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\SwitchesView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\UsersView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\CCTVView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\IPView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\LogsView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\RolesView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\RoutersView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\SwitchesView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\UsersView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\FurnitureTypesView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\FurnitureView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\FurnitureTypesView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\FurnitureView.baml

@@ -1189,7 +1189,7 @@
                                                     <TextBlock Text="Сотрудники" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
                                                 </StackPanel>
                                             </Button>
-                                            <Button Name="Navigation_EmployeesGroups" Style="{DynamicResource NavigationButton}">
+                                            <Button Name="Navigation_EmployeesGroups" Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToEmployeesGroupsCommand}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Work" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Отделы" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
@@ -1207,56 +1207,56 @@
 
                                     <Grid Background="#404040">
                                         <StackPanel>
-                                            <Button Style="{DynamicResource NavigationButton}">
+                                            <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToComputersCommand}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="DesktopTower" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Компьютеры" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </Button>
 
-                                            <Button Style="{DynamicResource NavigationButton}">
+                                            <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToLaptopsCommand}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Computer" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Ноутбуки" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </Button>
 
-                                            <Button Style="{DynamicResource NavigationButton}">
+                                            <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToTabletsCommand}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Tablet" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Планшеты" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </Button>
 
-                                            <Button Style="{DynamicResource NavigationButton}">
+                                            <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToOrgtechCommand}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Printer" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Оргтехника" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </Button>
 
-                                            <Button Style="{DynamicResource NavigationButton}">
+                                            <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToMonitorsCommand}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Monitor" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Мониторы" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </Button>
 
-                                            <Button Style="{DynamicResource NavigationButton}">
+                                            <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToRoutersCommand}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="RouterWireless" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Роутеры" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </Button>
 
-                                            <Button Style="{DynamicResource NavigationButton}">
+                                            <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToSwitchesCommand}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="RouterNetwork" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Коммутаторы" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </Button>
 
-                                            <Button Style="{DynamicResource NavigationButton}">
+                                            <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToCCTVCommand}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Cctv" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Видеонаблюдение" Style="{DynamicResource NavigationTextBlock}"/>
@@ -1274,14 +1274,14 @@
 
                                     <Grid Background="#404040">
                                         <StackPanel>
-                                            <Button Style="{DynamicResource NavigationButton}">
+                                            <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToFurnitureCommand}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Dresser" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Мебель" Style="{DynamicResource NavigationTextBlock}"/>
                                                 </StackPanel>
                                             </Button>
 
-                                            <Button Style="{DynamicResource NavigationButton}">
+                                            <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToFurnitureTypeCommand}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="TagMultiple" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Виды мебели" Style="{DynamicResource NavigationTextBlock}"/>
@@ -1297,25 +1297,27 @@
                     <Grid Name="AdminMenu" Width="0" HorizontalAlignment="Left">
                         <Border Style="{DynamicResource NavigationPanel}">
                             <StackPanel ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                                <Button Style="{DynamicResource NavigationButton}">
+                                
+                                <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToUsersCommand}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="AccountEdit" Width="40" Height="40" Margin="10 0 0 0" Foreground="#FF9700"/>
                                         <TextBlock Text="Пользователи" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </Button>
-                                <Button Style="{DynamicResource NavigationButton}">
+                                
+                                <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToRolesCommand}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="AccountWrench" Margin="10 0 0 0" Width="40" Height="40" Foreground="#FF9700"/>
                                         <TextBlock Text="Роли" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </Button>
-                                <Button Style="{DynamicResource NavigationButton}">
+                                <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToLogsCommand}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="History" Margin="10 0 0 0" Height="40" Width="40" Foreground="#FF9700"/>
                                         <TextBlock Text="Журнал событий" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </Button>
-                                <Button Style="{DynamicResource NavigationButton}">
+                                <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToIPCommand}">
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="IpNetwork" Margin="10 0 0 0" Height="40" Width="40" Foreground="#FF9700"/>
                                         <TextBlock Text="IP адреса" Style="{DynamicResource TextBlock_20}" Margin="30 0 0 0" VerticalAlignment="Center"/>
