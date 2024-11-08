@@ -410,9 +410,7 @@ C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\OrgTechWindo
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\PCWindow.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\RoutersWindow.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\TabletsWindow.g.cs
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\LoginWindow.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\SearchWindow.g.cs
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\SettingsWin.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\App.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MigApp_MarkupCompile.cache
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MigApp_MarkupCompile.lref
@@ -426,10 +424,8 @@ C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\OrgTechWindo
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\PCWindow.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\RoutersWindow.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\TabletsWindow.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\LoginWindow.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\Resources\Them1.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\SearchWindow.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\SettingsWin.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MigApp.g.resources
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MigApp.Properties.Resources.resources
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MigApp.csproj.GenerateResource.cache
@@ -676,7 +672,6 @@ E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MigApp.exe
 E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MigApp.pdb
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\EmployeesView.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\FavouriteView.g.cs
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWindow.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
@@ -690,7 +685,6 @@ C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Runtime.Compile
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\EmployeesView.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\FavouriteView.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWindow.baml
 E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\EmployeesView.g.cs
 E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\FavouriteView.g.cs
 E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWindow.g.cs
@@ -708,8 +702,6 @@ E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Threading.Ta
 E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\EmployeesView.baml
 E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\FavouriteView.baml
 E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWindow.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\EmployeesGroupsView.g.cs
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\EmployeesGroupsView.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\ComputersView.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\LaptopsView.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MonitorsView.g.cs
@@ -738,3 +730,35 @@ C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\FurnitureTyp
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\FurnitureView.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\FurnitureTypesView.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\FurnitureView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\Microsoft.Bcl.HashCode.dll
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\Npgsql.dll
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Buffers.dll
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Collections.Immutable.dll
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Memory.dll
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Numerics.Vectors.dll
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Text.Encodings.Web.dll
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Text.Json.dll
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Threading.Channels.dll
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.ValueTuple.dll
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\Microsoft.Bcl.HashCode.xml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\Npgsql.xml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Buffers.xml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Collections.Immutable.xml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Memory.xml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Numerics.Vectors.xml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Text.Encodings.Web.xml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Text.Json.xml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Threading.Channels.xml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.ValueTuple.xml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\DepartmentView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\DepartmentView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\LoginWindowOLD.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\LoginView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\LoginWindowOLD.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\LoginView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainView.baml

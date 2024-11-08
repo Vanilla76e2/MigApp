@@ -1,23 +1,38 @@
 ﻿
+using Microsoft.Extensions.DependencyInjection;
 using MigApp.MVVM.ViewModel;
+using MigApp.Services;
+using System;
+using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
 
-namespace MigApp
+namespace MigApp.MVVM.View
 {
-    public partial class MainWindow : Window
+    public partial class MainView : Window
     {
-        public MainWindow()
+        PostgreSQLClass pgsql = PostgreSQLClass.getinstance();
+
+        public MainView()
         {
             InitializeComponent();
-            
+            MaxWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
+            MaxHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
         }
 
+        public MainView(IServiceProvider serviceProvider)
+        {
+            InitializeComponent();
+            MaxWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
+            MaxHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
+            DataContext = new MainViewModel(serviceProvider, serviceProvider.GetRequiredService<INavigationService>());
+        }
 
         #region OLD
-        //#region Обновления
+        #region Обновления
         //// Обновление всех таблиц
         //private void UpdateAllTables()
         //{
@@ -72,12 +87,12 @@ namespace MigApp
         //    ReportTab.ItemsSource = sqlcc.DataGridUpdate("*", "Report_Tablets", $"{MigApp.Properties.Settings.Default.comTabRep}").DefaultView;
         //    ReportIP.ItemsSource = sqlcc.Report_IP().DefaultView;
         //}
-        //#endregion
+        #endregion
 
-        //#region Контекстное меню
+        #region Контекстное меню
 
-        //#region Удаление
-        //#region Таблицы пользователей
+        #region Удаление
+        #region Таблицы пользователей
         //// Удаление сотрудников
         //private void Delete_Employee(object sender, RoutedEventArgs e)
         //{
@@ -319,9 +334,9 @@ namespace MigApp
         //        catch { }
         //}
 
-        //#endregion
+        #endregion
 
-        //#region Админпанель
+        #region Админпанель
         //// Удаление ролей
         //private void Delete_Role(object sender, RoutedEventArgs e)
         //{
@@ -369,9 +384,9 @@ namespace MigApp
         //    }
         //    catch { }
         //}
-        //#endregion
+        #endregion
 
-        //#region Архив
+        #region Архив
         //// Удаление сотрудников
         //private void Delete_DeletedEmployee(object sender, RoutedEventArgs e)
         //{
@@ -562,10 +577,10 @@ namespace MigApp
         //    catch { }
         //}
 
-        //#endregion
-        //#endregion
+        #endregion
+        #endregion
 
-        //#region Редактирование
+        #region Редактирование
         //// Редактировать сотрудника
         //private void Redact_Employee(object sender, RoutedEventArgs e)
         //{
@@ -778,9 +793,9 @@ namespace MigApp
         //    }
         //    catch { }
         //}
-        //#endregion
+        #endregion
 
-        //#region Избранное
+        #region Избранное
         //// Добавить сотрудника в избранное
         //private void Fav_Employee(object sender, RoutedEventArgs e)
         //{
@@ -1036,9 +1051,9 @@ namespace MigApp
         //    }
         //    catch { }
         //}
-        //#endregion
+        #endregion
 
-        //#region Открыть удалённое
+        #region Открыть удалённое
         //// Сотрудники
         //private void Open_DeletedEmployee(object sender, RoutedEventArgs e)
         //{
@@ -1143,9 +1158,9 @@ namespace MigApp
         //    string invnum = item.Row["Инвентарный номер"].ToString();
         //    FurnitureCROpen(false, invnum, true);
         //}
-        //#endregion
+        #endregion
 
-        //#region Восстановление
+        #region Восстановление
         //// Сотрудники
         //private void Recovery_Employee(object sender, RoutedEventArgs e)
         //{
@@ -1334,15 +1349,15 @@ namespace MigApp
         //    }
         //    catch { }
         //}
-        //#endregion
+        #endregion
 
-        //#endregion
+        #endregion
 
-        //#region Фильтры
+        #region Фильтры
 
-        //#region Включить фильтр
+        #region Включить фильтр
 
-        //#region Фильтр пользовательских таблиц
+        #region Фильтр пользовательских таблиц
         //// Фильтр сотрудников
         //private void SEmployee(object sender, RoutedEventArgs e)
         //{
@@ -1486,9 +1501,9 @@ namespace MigApp
         //    }
         //    BlindfallSwitch();
         //}
-        //#endregion
+        #endregion
 
-        //#region Фильтр Админпанель
+        #region Фильтр Админпанель
         //// Пользователи
         //private void SUser(object sender, RoutedEventArgs e)
         //{
@@ -1520,9 +1535,9 @@ namespace MigApp
         //    }
         //    BlindfallSwitch();
         //}
-        //#endregion
+        #endregion
 
-        //#region Архив
+        #region Архив
 
         //// Сотрудники Архив
         //private void SEmployee_Del(object sender, RoutedEventArgs e)
@@ -1668,9 +1683,9 @@ namespace MigApp
         //    BlindfallSwitch();
         //}
 
-        //#endregion
+        #endregion
 
-        //#region Отчёты
+        #region Отчёты
         //// ПК
         //private void SReportPC(object sender, RoutedEventArgs e)
         //{
@@ -1725,13 +1740,13 @@ namespace MigApp
         //{
 
         //}
-        //#endregion
+        #endregion
 
-        //#endregion
+        #endregion
 
-        //#region Выключить фильтр
+        #region Выключить фильтр
 
-        //#region Фильтр пользовательских таблиц
+        #region Фильтр пользовательских таблиц
         //// Очистка фильтра сотрудников
         //private void FilterEmpClear(object sender, RoutedEventArgs e)
         //{
@@ -1830,9 +1845,9 @@ namespace MigApp
         //    FurnTable.Margin = new Thickness(0, 50, 5, 20);
         //    FurnTable.ItemsSource = sqlcc.DataGridUpdate("*", "Furniture_View", "").DefaultView;
         //}
-        //#endregion
+        #endregion
 
-        //#region Фильтр Админпанель
+        #region Фильтр Админпанель
         //// Пользователи
         //private void FilterUsersClear(object sender, RoutedEventArgs e)
         //{
@@ -1854,9 +1869,9 @@ namespace MigApp
         //    LogsTable.Margin = new Thickness(0, 50, 5, 20);
         //    LogsTable.ItemsSource = sqlcc.DataGridUpdate("*", "Logs_View", "ORDER BY ID DESC").DefaultView;
         //}
-        //#endregion
+        #endregion
 
-        //#region Архив
+        #region Архив
         //// Сотрудники Архив
         //private void FilterEmployeesClear_Del(object sender, RoutedEventArgs e)
         //{
@@ -1955,9 +1970,9 @@ namespace MigApp
         //    FurnDeleted.Margin = new Thickness(0, 50, 5, 20);
         //    FurnDeleted.ItemsSource = sqlcc.DataGridUpdate("*", "Furniture_Deleted", "").DefaultView;
         //}
-        //#endregion
+        #endregion
 
-        //#region Отчёты
+        #region Отчёты
 
         //// ПК
         //private void FilterReportPCClear(object sender, RoutedEventArgs e)
@@ -1997,13 +2012,13 @@ namespace MigApp
         //{
 
         //}
-        //#endregion
+        #endregion
 
-        //#endregion
+        #endregion
 
-        //#endregion
+        #endregion
 
-        //#region Кнопки создания
+        #region Кнопки создания
         //// Cоздать сотрудника
         //private void EmployeeCreateClick(object sender, RoutedEventArgs e)
         //{
@@ -2092,9 +2107,9 @@ namespace MigApp
         //    if (FurnRedPerm || Admin)
         //        FurnitureCROpen(true, null, false);
         //}
-        //#endregion
+        #endregion
 
-        //#region Открытие CR окон
+        #region Открытие CR окон
         //// Открыть окно сотрудников
         //private void EmployeeCROpen(bool mode, string id, bool deleted)
         //{
@@ -2339,9 +2354,9 @@ namespace MigApp
         //        BlindfallSwitch();
         //    }
         //}
-        //#endregion
+        #endregion
 
-        //#region Запрет сотритровки
+        #region Запрет сотритровки
 
         //// Логи дата
         //private void LogsSorting(object sender, DataGridSortingEventArgs e)
@@ -2366,9 +2381,9 @@ namespace MigApp
         //    if (column.Header.ToString() == "IP")
         //        e.Handled = true;
         //}
-        //#endregion
+        #endregion
 
-        //#region Роли
+        #region Роли
 
         //private void RoleCheck()
         //{
@@ -2491,9 +2506,9 @@ namespace MigApp
         //    }
         //}
 
-        //#endregion
+        #endregion
 
-        //#region Exel Экспорт
+        #region Exel Экспорт
 
         //// Экспорт отчёта ПК
         //private void ExportReportPC(object sender, RoutedEventArgs e)
@@ -2519,9 +2534,9 @@ namespace MigApp
         //    mc.ExcelExport(ReportIP);
         //}
 
-        //#endregion
+        #endregion
 
-        //#region Счётчики
+        #region Счётчики
 
         //private void SelectedCounter(object sender, SelectedCellsChangedEventArgs e)
         //{
@@ -2590,7 +2605,7 @@ namespace MigApp
         //        FurnDelSelectedCount.Text = "Выбрано: " + FurnDeleted.SelectedItems.Count.ToString();
         //}
 
-        //#endregion
+        #endregion
 
         //// Затемнить окно
         //private void BlindfallSwitch()
@@ -2654,11 +2669,13 @@ namespace MigApp
         {
             if (sender.Equals(Custom_MinimizeButton))
                 this.WindowState = WindowState.Minimized;
+
             else if (sender.Equals(Custom_MaximizeButton))
                 if (this.WindowState == WindowState.Maximized)
                     this.WindowState = WindowState.Normal;
                 else
                     this.WindowState = WindowState.Maximized;
+
             else if (sender.Equals(Custom_CloseButton))
                 Application.Current.Shutdown();
         }
@@ -2691,51 +2708,6 @@ namespace MigApp
                 ArchiveMenu.Visibility = Visibility.Visible;
             }
         }
-
-        // Switch tables
-        private void CustomUI_SwitchBorder(object sender, MouseButtonEventArgs e)
-        {
-            if (sender.Equals(FavouriteButton))
-            {
-                HideAllBorders();
-                FavouriteBorder.Visibility = Visibility.Visible;
-            }
-            else if (sender.Equals(Navigation_Employees))
-            {
-
-            }
-        }
-
-        private void HideAllBorders()
-        {
-            //foreach(var item in MainGrid.Children)
-            //{
-            //    if(item is Border)
-            //    {
-            //        Border border = (Border)item;
-            //        border.Visibility = Visibility.Collapsed;
-            //    }
-            //}
-        }
-
-        private void Navigation_Seleted(object sender, RoutedEventArgs e)
-        {
-            if (sender.Equals(Navigation_Employees))
-                EmployeesBorder.Visibility = Visibility.Visible;
-            if (sender.Equals(Navigation_EmployeesGroups))
-                EmployeesGroupsBorder.Visibility = Visibility.Visible;
-        }
-
-        private void Navigation_Unseleted(object sender, RoutedEventArgs e)
-        {
-            if (sender.Equals(Navigation_Employees))
-                EmployeesBorder.Visibility = Visibility.Hidden;
-            if (sender.Equals(Navigation_EmployeesGroups))
-                EmployeesGroupsBorder.Visibility = Visibility.Hidden;
-        }
-
         #endregion
-
-
     }
 }

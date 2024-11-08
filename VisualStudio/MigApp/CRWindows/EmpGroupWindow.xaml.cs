@@ -11,7 +11,7 @@ namespace MigApp.CRWindows
         MiscClass mc = new MiscClass();
         string sqlTable = "[Group]", logname = "Отделы";
         string NAME;
-        string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
+        string CurrentUser = MigApp.Properties.Settings.Default.userLogin;
 
         bool Mode = false;
         public EmpGroupWindow(bool mode, string name)

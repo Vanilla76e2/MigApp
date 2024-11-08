@@ -3,11 +3,7 @@ using MigApp.Core;
 using MigApp.MVVM.ViewModel;
 using MigApp.Services;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+using MigApp.MVVM.View;
 using System.Windows;
 
 namespace MigApp
@@ -23,16 +19,22 @@ namespace MigApp
         {
             IServiceCollection services = new ServiceCollection();
 
-            services.AddSingleton<MainWindow>(provider => new MainWindow
+            services.AddSingleton<NavigationService, NavigationService>();
+
+            services.AddSingleton<LoginView>(provider => new LoginView(provider));
+
+            services.AddSingleton<MainView>(provider => new MainView
             {
                 DataContext = provider.GetRequiredService<MainViewModel>()
             });
+
             services.AddSingleton<MainViewModel>();
+            services.AddSingleton<LoginViewModel>();
 
             services.AddSingleton<FavouriteViewModel>();
 
             services.AddSingleton<EmployeesViewModel>();
-            services.AddSingleton<EmployeesGroupsViewModel>();
+            services.AddSingleton<DepartmentViewModel>();
             services.AddSingleton<ComputersViewModel>();
             services.AddSingleton<LaptopsViewModel>();
             services.AddSingleton<TabletsViewModel>();
@@ -56,10 +58,16 @@ namespace MigApp
             _serviceProvider = services.BuildServiceProvider();
         }
 
+        private void ShowLoginView()
+        {
+            var loginView = _serviceProvider.GetRequiredService<LoginView>();
+            Current.MainWindow = loginView;
+            Current.MainWindow.Show();
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
-            _serviceProvider.GetRequiredService<MainWindow>();
-            MainWindow.Show();
+            ShowLoginView();
             base.OnStartup(e);
         }
     }

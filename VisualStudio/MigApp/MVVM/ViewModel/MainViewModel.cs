@@ -1,4 +1,5 @@
 ﻿using MigApp.Core;
+using MigApp.MVVM.View;
 using MigApp.Services;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,11 @@ namespace MigApp.MVVM.ViewModel
 {
     internal class MainViewModel : Core.ViewModel
     {
-        private INavigationService _navigation;
         public string WindowTitle { get; set;} = "MigApp v" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
+        public string CurrentUser { get; set; } = "Test";
 
+        private readonly IServiceProvider _serviceProvider;
+        private INavigationService _navigation;
         public INavigationService Navigation
         {
             get => _navigation;
@@ -24,10 +27,11 @@ namespace MigApp.MVVM.ViewModel
             }
         }
 
+        #region Команды
         public RelayCommand NavigateToFavouriteCommand { get; set; }
 
         public RelayCommand NavigateToEmployeesCommand { get; set; }
-        public RelayCommand NavigateToEmployeesGroupsCommand { get; set; }
+        public RelayCommand NavigateToDepartmentCommand { get; set; }
         public RelayCommand NavigateToComputersCommand { get; set; }
         public RelayCommand NavigateToLaptopsCommand { get; set; }
         public RelayCommand NavigateToTabletsCommand { get; set; }
@@ -45,13 +49,19 @@ namespace MigApp.MVVM.ViewModel
         public RelayCommand NavigateToLogsCommand { get; set; }
         public RelayCommand NavigateToIPCommand { get; set; }
 
-        public MainViewModel(INavigationService navService)
+        public RelayCommand LogOutCommand { get; }
+        #endregion
+
+        // Конструктор класса с командами
+        public MainViewModel(IServiceProvider serviceProvider, INavigationService navService)
         {
+            _serviceProvider = serviceProvider;
             Navigation = navService;
+
             NavigateToFavouriteCommand = new RelayCommand(o => { Navigation.NavigateTo<FavouriteViewModel>(); }, o => true);
 
             NavigateToEmployeesCommand = new RelayCommand(o => { Navigation.NavigateTo<EmployeesViewModel>(); }, o => true);
-            NavigateToEmployeesGroupsCommand = new RelayCommand(o => { Navigation.NavigateTo<EmployeesGroupsViewModel>(); }, o => true);
+            NavigateToDepartmentCommand = new RelayCommand(o => { Navigation.NavigateTo<DepartmentViewModel>(); }, o => true);
             NavigateToComputersCommand = new RelayCommand(o => { Navigation.NavigateTo<ComputersViewModel>(); }, o => true);
             NavigateToLaptopsCommand = new RelayCommand(o => { Navigation.NavigateTo<LaptopsViewModel>(); }, o => true);
             NavigateToTabletsCommand = new RelayCommand(o => { Navigation.NavigateTo<TabletsViewModel>(); }, o => true);
@@ -69,6 +79,19 @@ namespace MigApp.MVVM.ViewModel
             NavigateToRolesCommand = new RelayCommand(o => { Navigation.NavigateTo<RolesViewModel>(); }, o => true);
             NavigateToLogsCommand = new RelayCommand(o => { Navigation.NavigateTo<LogsViewModel>(); }, o => true);
             NavigateToIPCommand = new RelayCommand(o => { Navigation.NavigateTo<IPViewModel>(); }, o => true);
+
+            LogOutCommand = new RelayCommand(o => LogOut(), o => true);
+        }
+
+        // Команда выхода из профиля
+        public void LogOut()
+        {
+            // Открыть LoginView
+            Navigation.NavigateToLoginWindow();
+
+            // Закрыть MainWindow
+            var mainWindow = Application.Current.Windows.OfType<MainView>().FirstOrDefault();
+            if (mainWindow != null) { mainWindow.Close(); }
         }
     }
 }

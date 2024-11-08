@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace MigApp.MVVM.View
 {
     /// <summary>
-    /// Логика взаимодействия для EmployeesGroupsView.xaml
+    /// Логика взаимодействия для DepartmentView.xaml
     /// </summary>
-    public partial class EmployeesGroupsView : UserControl
+    public partial class DepartmentView : UserControl
     {
-        public EmployeesGroupsView()
+        public DepartmentView()
         {
             InitializeComponent();
         }

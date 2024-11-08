@@ -21,7 +21,6 @@
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontWeight" Value="Thin"/>
         <Setter Property="Foreground" Value="DarkGray"/>
-        
     </Style>
 
     <Style x:Key="TextBlock_20" TargetType="TextBlock">
@@ -117,6 +116,25 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="FilterTextBox" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+        <Setter Property="Width" Value="300"/>
+        <Setter Property="Background" Value="#424242"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="15"/>
+    </Style>
+
+    <Style x:Key="FilterComboBox" TargetType="ComboBox" BasedOn="{StaticResource MaterialDesignComboBox}">
+        <Setter Property="Width" Value="300"/>
+        <Setter Property="Background" Value="#424242"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="15"/>
+    </Style>
+
+    <Style x:Key="FilterTextBlock" TargetType="TextBlock" BasedOn="{StaticResource TextBlock_20}">
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
     <!--#endregion-->
 
     <Style x:Key="MainPanelBorder" TargetType="Border">
@@ -165,7 +183,7 @@
 
     <Style x:Key="MainDataGrid" TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
         <Setter Property="Margin" Value="10 50 15 10"/>
-        <Setter Property="IsReadOnly" Value="False"/>
+        <Setter Property="IsReadOnly" Value="True"/>
         <Setter Property="CanUserReorderColumns" Value="False"/>
         <Setter Property="Background" Value="#505050"/>
         <Setter Property="Foreground" Value="White"/>
@@ -263,7 +281,7 @@
                     <Grid>
                         <AdornerDecorator CacheMode="{Binding RelativeSource={RelativeSource Self}, Path=(materialDesign:ShadowAssist.CacheMode)}">
                             <Grid>
-                                <Border Name="background" Background="{TemplateBinding Background}" CornerRadius="5" Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(materialDesign:ElevationAssist.Elevation)}"/>
+                                <Border Name="background" Background="{TemplateBinding Background}" CornerRadius="5"/>
                                 <Border Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5" />
                             </Grid>
                         </AdornerDecorator>
@@ -323,5 +341,97 @@
         <Setter Property="Background" Value="#252525"/>
         <Setter Property="Grid.Row" Value="1"/>
     </Style>
+
+    <!--#region LoginView -->
+    <Style x:Key="LoginEnterButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="120"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Height" Value="35"/>
+    </Style>
+
+    <Style x:Key="LoginSettingsButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignFloatingActionMiniButton}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Content">
+            <Setter.Value>
+                <materialDesign:PackIcon Kind="Settings" Height="30" Width="30" Foreground="#FF9700"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="LoginInfoButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignFloatingActionMiniButton}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Content">
+            <Setter.Value>
+                <materialDesign:PackIcon Kind="Info" Height="30" Width="30" Foreground="#FF9700"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ProgresRing" TargetType="ProgressBar">
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="IsIndeterminate" Value="True"/>
+        <Setter Property="Margin" Value="10"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ProgressBar}">
+                    <Grid>
+                        <Image Source="../images/loading.png" RenderTransformOrigin=".5,.5">
+                            <Image.RenderTransform>
+                                <RotateTransform x:Name="RotateTransform1" Angle="0"/>
+                            </Image.RenderTransform>
+                        </Image>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="RotateTransform1" Storyboard.TargetProperty="Angle" From="0" To="360" Duration="0:0:3" RepeatBehavior="Forever" AutoReverse="False"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="LoginTextbox" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+        <Setter Property="Width" Value="260"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="MaxLength" Value="20"/>
+    </Style>
+
+    <Style x:Key="LoginPasswordbox" TargetType="PasswordBox" BasedOn="{StaticResource MaterialDesignPasswordBox}">
+        <Setter Property="Width" Value="260"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="MaxLength" Value="20"/>
+    </Style>
+
+    <Style x:Key="LoginTextBlock" TargetType="TextBlock" BasedOn="{StaticResource TextBlock_20}">
+        <Setter Property="FontSize" Value="26"/>
+        <Setter Property="Width" Value="100"/>
+    </Style>
+
+    <Style x:Key="LoginCheckBox" TargetType="CheckBox" BasedOn="{StaticResource MaterialDesignCheckBox}">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="0 10 0 0"/>
+    </Style>
+    <!--#endregion-->
     
 </ResourceDictionary>

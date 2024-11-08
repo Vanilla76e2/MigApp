@@ -7,9 +7,9 @@ namespace MigApp
 {
     internal class SQLConnectionClass
     {
-        //SqlConnection sqlConnection = new SqlConnection($@"Data Source = {MigApp.Properties.Settings.Default.Server}; Initial Catalog = {MigApp.Properties.Settings.Default.Database}; Integrated Security = True");
+        SqlConnection sqlConnection = new SqlConnection($@"Data Source = 192.168.0.5; Initial Catalog = MigDataBase; Integrated Security = False; User id = sa; Password = ""migPass2024""");
 
-        SqlConnection sqlConnection = new SqlConnection($@"Data Source = {MigApp.Properties.Settings.Default.Server}; Initial Catalog = {MigApp.Properties.Settings.Default.Database}; Integrated Security = false; User id = sa; Password = {MigApp.Properties.Settings.Default.DBPassword}");
+        //SqlConnection sqlConnection = new SqlConnection($@"Data Source = {MigApp.Properties.Settings.Default.Server}; Initial Catalog = {MigApp.Properties.Settings.Default.Database}; Integrated Security = false; User id = sa; Password = {MigApp.Properties.Settings.Default.DBPassword}");
         DataTable Table = new DataTable("");
 
         private static SQLConnectionClass instance;
@@ -32,7 +32,7 @@ namespace MigApp
         // Проверка подключения
         public bool SQLtest()
         {
-            sqlConnection.ConnectionString = $@"Data Source = {MigApp.Properties.Settings.Default.Server}; Initial Catalog = {MigApp.Properties.Settings.Default.Database}; Integrated Security = false; User id = sa; Password = {MigApp.Properties.Settings.Default.DBPassword}";
+            sqlConnection.ConnectionString = $@"Data Source = {MigApp.Properties.Settings.Default.pgServer}; Initial Catalog = {MigApp.Properties.Settings.Default.pgDatabase}; Integrated Security = false; User id = sa; Password = {MigApp.Properties.Settings.Default.pgPassword}";
             try
             {
                 sqlConnection.Open();

@@ -5,6 +5,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,7 +17,7 @@ namespace MigApp
         HttpClient hc = new HttpClient();
         WebClient wc = new WebClient();
         string curver = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
-        string ver, prerel, url = null;
+        //string ver, prerel, url = null;
 
         public string Splitter(string txt)
         {
@@ -178,70 +179,70 @@ namespace MigApp
             }
         }
 
-        public async void CheckVersion()
+        public void CheckVersion()
         {
-            if (InternetChecker())
-            {
-                // Получение API
-                hc.BaseAddress = new Uri("https://api.github.com/repos/Vanilla76e2/MigApp/releases");
-                hc.DefaultRequestHeaders.Add("User-Agent", "MigApp");
-                HttpResponseMessage response = await hc.GetAsync("https://api.github.com/repos/Vanilla76e2/MigApp/releases");
-                string json = await response.Content.ReadAsStringAsync();
+            //if (InternetChecker())
+            //{
+            //    // Получение API
+            //    hc.BaseAddress = new Uri("https://api.github.com/repos/Vanilla76e2/MigApp/releases");
+            //    hc.DefaultRequestHeaders.Add("User-Agent", "MigApp");
+            //    HttpResponseMessage response = await hc.GetAsync("https://api.github.com/repos/Vanilla76e2/MigApp/releases");
+            //    string json = await response.Content.ReadAsStringAsync();
 
-                try
-                {
-                    // Парсинг
-                    string[] strings = json.Split(',');
-                    foreach (string s in strings)
-                    {
-                        if (s.IndexOf("tag_name") != -1)
-                        {
-                            string[] temp = s.Split(':');
-                            ver = temp[1].Substring(2, 5);
-                        }
-                        else if (s.IndexOf("prerelease") != -1)
-                        {
-                            string[] temp = s.Split(':');
-                            prerel = temp[1].Trim();
-                        }
-                        else if (s.IndexOf("browser_download_url") != -1 && prerel == "false")
-                        {
-                            string[] temp = s.Split(':');
-                            string temp2 = temp[1] + ":" + temp[2];
-                            url = temp2.Substring(temp2.IndexOf("https"), temp2.IndexOf(".msi") + 3);
-                        }
-                        if (ver != null && prerel != null && url != null)
-                            break;
-                    }
-                    ver = ver.Replace(".","");
-                    curver = curver.Replace(".", "");
-                    if (Convert.ToUInt32(curver) < Convert.ToInt32(ver))
-                    {
-                        if (MessageBox.Show("Доступна новая версия. Обновить?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                        {
-                            string tmpserv = Path.GetTempPath() + "MigAppConnectionParametrs.txt";
-                            StreamWriter sw = File.CreateText(tmpserv);
-                            sw.WriteLine(MigApp.Properties.Settings.Default.Server + "|" + MigApp.Properties.Settings.Default.Database +  "|" + MigApp.Properties.Settings.Default.DBPassword);
-                            sw.Close();
-                            string tmpmsi = Path.GetTempPath() + "MigAppInstaller.msi";
-                            Uri uri = new Uri(url);
-                            wc.DownloadFile(uri, tmpmsi);
-                            Installer(tmpmsi);
-                        }
-                    }
-                }
-                catch 
-                {
-                    Console.WriteLine(ver);
-                    Console.WriteLine(prerel);
-                    Console.WriteLine(url);
-                    MessageBox.Show("Ошибка при попытке обновления", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Нет доступа к сети", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
+            //    try
+            //    {
+            //        // Парсинг
+            //        string[] strings = json.Split(',');
+            //        foreach (string s in strings)
+            //        {
+            //            if (s.IndexOf("tag_name") != -1)
+            //            {
+            //                string[] temp = s.Split(':');
+            //                ver = temp[1].Substring(2, 5);
+            //            }
+            //            else if (s.IndexOf("prerelease") != -1)
+            //            {
+            //                string[] temp = s.Split(':');
+            //                prerel = temp[1].Trim();
+            //            }
+            //            else if (s.IndexOf("browser_download_url") != -1 && prerel == "false")
+            //            {
+            //                string[] temp = s.Split(':');
+            //                string temp2 = temp[1] + ":" + temp[2];
+            //                url = temp2.Substring(temp2.IndexOf("https"), temp2.IndexOf(".msi") + 3);
+            //            }
+            //            if (ver != null && prerel != null && url != null)
+            //                break;
+            //        }
+            //        ver = ver.Replace(".","");
+            //        curver = curver.Replace(".", "");
+            //        if (Convert.ToUInt32(curver) < Convert.ToInt32(ver))
+            //        {
+            //            if (MessageBox.Show("Доступна новая версия. Обновить?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            //            {
+            //                string tmpserv = Path.GetTempPath() + "MigAppConnectionParametrs.txt";
+            //                StreamWriter sw = File.CreateText(tmpserv);
+            //                sw.WriteLine(MigApp.Properties.Settings.Default.Server + "|" + MigApp.Properties.Settings.Default.Database +  "|" + MigApp.Properties.Settings.Default.DBPassword);
+            //                sw.Close();
+            //                string tmpmsi = Path.GetTempPath() + "MigAppInstaller.msi";
+            //                Uri uri = new Uri(url);
+            //                wc.DownloadFile(uri, tmpmsi);
+            //                Installer(tmpmsi);
+            //            }
+            //        }
+            //    }
+            //    catch 
+            //    {
+            //        Console.WriteLine(ver);
+            //        Console.WriteLine(prerel);
+            //        Console.WriteLine(url);
+            //        MessageBox.Show("Ошибка при попытке обновления", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Нет доступа к сети", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+            //}
         }
 
         private void Installer(string filepath)
@@ -260,6 +261,16 @@ namespace MigApp
             {
                 e.Handled = true;
             }
+        }
+
+        // Перезапуск приложения
+        public void RestartApplication()
+        {
+            // Закрытие  текущего  приложения
+            Application.Current.Shutdown();
+
+            // Запуск  нового  экземпляра  приложения
+            Process.Start(Application.ResourceAssembly.Location);
         }
     }
 }

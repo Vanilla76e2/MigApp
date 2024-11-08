@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MigApp.MVVM.ViewModel
 {
-    internal class EmployeesGroupsViewModel : Core.ViewModel
+    internal class DepartmentViewModel : Core.ViewModel
     {
 
     }

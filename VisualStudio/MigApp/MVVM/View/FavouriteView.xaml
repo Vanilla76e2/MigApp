@@ -21,7 +21,7 @@
                 </Grid>
 
                 <!--Таблица-->
-                <DataGrid Name="Table" Style="{DynamicResource MainDataGrid}" ItemsSource="{Binding Path=FavouriteTable}">
+                <DataGrid Name="Table" Style="{DynamicResource MainDataGrid}">
                     <DataGrid.ContextMenu>
                         <ContextMenu>
                             <MenuItem Icon="{materialDesign:PackIcon Kind=Pencil}" Header="Редактировать"/>

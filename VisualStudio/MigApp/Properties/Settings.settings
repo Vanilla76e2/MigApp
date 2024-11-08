@@ -2,26 +2,32 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MigApp.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Server" Type="System.String" Scope="User">
+    <Setting Name="pgServer" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Database" Type="System.String" Scope="User">
+    <Setting Name="pgPort" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="DBPassword" Type="System.String" Scope="User">
+    <Setting Name="pgUser" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="UserLogin" Type="System.String" Scope="User">
+    <Setting Name="pgPassword" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="UserPassword" Type="System.String" Scope="User">
+    <Setting Name="pgDatabase" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="UserRole" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="userLogin" Type="System.String" Scope="User">
+      <Value Profile="(Default)">123</Value>
     </Setting>
-    <Setting Name="RemPass" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+    <Setting Name="userPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">123</Value>
+    </Setting>
+    <Setting Name="userPasswordL" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="userRemember" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

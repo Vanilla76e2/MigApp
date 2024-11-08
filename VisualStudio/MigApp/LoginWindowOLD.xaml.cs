@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using MigApp.MVVM.View;
 using System.Text;
 using System.IO;
 using System.Reflection;
@@ -10,24 +11,24 @@ namespace MigApp
     /// <summary>
     /// Логика взаимодействия для LoginWindow.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class LoginWindowOLD : Window
     {
         SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
         MiscClass mc = new MiscClass();
         Encrypter encrypt = new Encrypter();
         string curver = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
 
-        public LoginWindow()
+        public LoginWindowOLD()
         {
             InitializeComponent();
             CustomTitle.Text = "   MigApp v" + curver;
             Title = "MigApp v" + curver;
             UserLogin.Focus();
             //Проверка на запомнить пароль
-            if (MigApp.Properties.Settings.Default.RemPass)
+            if (MigApp.Properties.Settings.Default.userRemember)
             {
-                UserLogin.Text = MigApp.Properties.Settings.Default.UserLogin;
-                UserPassword2.Password = MigApp.Properties.Settings.Default.UserPassword;
+                UserLogin.Text = MigApp.Properties.Settings.Default.userLogin;
+                UserPassword2.Password = MigApp.Properties.Settings.Default.userPassword;
                 UserPassword2.Visibility = Visibility.Visible;
                 Enter2.Visibility = Visibility.Visible;
                 RemPass.IsChecked = true;
@@ -49,20 +50,17 @@ namespace MigApp
                     {
                         if (RemPass.IsChecked == true)
                         {
-                            MigApp.Properties.Settings.Default.RemPass = true;
-                            MigApp.Properties.Settings.Default.UserPassword = UserPassword1.Password;
+                            MigApp.Properties.Settings.Default.userRemember = true;
+                            MigApp.Properties.Settings.Default.userPassword = UserPassword1.Password;
                             MigApp.Properties.Settings.Default.Save();
                         }
                         else
                         {
-                            MigApp.Properties.Settings.Default.RemPass = false;
+                            MigApp.Properties.Settings.Default.userRemember = false;
                             MigApp.Properties.Settings.Default.Save();
                         }
-                        MigApp.Properties.Settings.Default.UserLogin = UserLogin.Text;
-                        MigApp.Properties.Settings.Default.UserRole = sqlcc.ReqRef($"SELECT Role FROM Users WHERE Login = '{UserLogin.Text}'");
+                        MigApp.Properties.Settings.Default.userLogin = UserLogin.Text;
                         MigApp.Properties.Settings.Default.Save();
-                        MainWindow win = new MainWindow();
-                        win.Show(); Close();
                     }
                     else if (sqlcc.ReqRef($"Select Password From Users Where Login = '{UserLogin.Text}'") == "")
                     {
@@ -87,15 +85,12 @@ namespace MigApp
                     {
                         if (RemPass.IsChecked == false)
                         {
-                            MigApp.Properties.Settings.Default.RemPass = false;
+                            MigApp.Properties.Settings.Default.userRemember = false;
                             MigApp.Properties.Settings.Default.Save();
                         }
 
-                        MigApp.Properties.Settings.Default.UserLogin = UserLogin.Text;
-                        MigApp.Properties.Settings.Default.UserRole = sqlcc.ReqRef($"SELECT Role FROM Users WHERE Login = '{UserLogin.Text}'");
+                        MigApp.Properties.Settings.Default.userLogin = UserLogin.Text;
                         MigApp.Properties.Settings.Default.Save();
-                        MainWindow win = new MainWindow();
-                        win.Show();
                         Close();
                     }
                     else if (sqlcc.ReqRef($"Select Password From Users Where Login = '{UserLogin.Text}'") == "")
@@ -119,8 +114,6 @@ namespace MigApp
         //Открытие окна настроек
         private void SettingsClick(object sender, RoutedEventArgs e)
         {
-            SettingsWin win = new SettingsWin();
-            win.ShowDialog();
         }
 
         #region Безопасность
@@ -201,9 +194,9 @@ namespace MigApp
                 string tmp = Path.GetTempPath() + "MigAppConnectionParametrs.txt";
                 string constr = File.ReadAllText(tmp, Encoding.UTF8);
                 string[] conparams = constr.Split('|');
-                MigApp.Properties.Settings.Default.Server = conparams[0];
-                MigApp.Properties.Settings.Default.Database = conparams[1];
-                MigApp.Properties.Settings.Default.DBPassword = conparams[2];
+                MigApp.Properties.Settings.Default.pgServer = conparams[0];
+                MigApp.Properties.Settings.Default.pgDatabase = conparams[1];
+                MigApp.Properties.Settings.Default.pgPassword = conparams[2];
                 MigApp.Properties.Settings.Default.Save();
                 File.Delete(tmp);
             }
@@ -213,8 +206,7 @@ namespace MigApp
             {
 
                 MessageBox.Show("База данных не найдена!", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
-                SettingsWin win = new SettingsWin();
-                win.ShowDialog();
+                
             }
         }
     }

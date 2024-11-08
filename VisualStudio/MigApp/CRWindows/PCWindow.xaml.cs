@@ -25,7 +25,7 @@ namespace MigApp.CRWindows
         MiscClass mc = new MiscClass();
         DataTable table = new DataTable();
         string sqlTable = "Computers", logname = "Компьютеры";
-        string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
+        string CurrentUser = MigApp.Properties.Settings.Default.userLogin;
         string InventoryNum;
         string ip;
         bool Deleted, GrPerm;

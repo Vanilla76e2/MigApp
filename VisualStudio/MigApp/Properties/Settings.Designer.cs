@@ -12,7 +12,7 @@ namespace MigApp.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.11.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -26,84 +26,108 @@ namespace MigApp.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Server {
+        public string pgServer {
             get {
-                return ((string)(this["Server"]));
+                return ((string)(this["pgServer"]));
             }
             set {
-                this["Server"] = value;
+                this["pgServer"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Database {
+        public string pgPort {
             get {
-                return ((string)(this["Database"]));
+                return ((string)(this["pgPort"]));
             }
             set {
-                this["Database"] = value;
+                this["pgPort"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string DBPassword {
+        public string pgUser {
             get {
-                return ((string)(this["DBPassword"]));
+                return ((string)(this["pgUser"]));
             }
             set {
-                this["DBPassword"] = value;
+                this["pgUser"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string UserLogin {
+        public string pgPassword {
             get {
-                return ((string)(this["UserLogin"]));
+                return ((string)(this["pgPassword"]));
             }
             set {
-                this["UserLogin"] = value;
+                this["pgPassword"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string UserPassword {
+        public string pgDatabase {
             get {
-                return ((string)(this["UserPassword"]));
+                return ((string)(this["pgDatabase"]));
             }
             set {
-                this["UserPassword"] = value;
+                this["pgDatabase"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string UserRole {
+        [global::System.Configuration.DefaultSettingValueAttribute("123")]
+        public string userLogin {
             get {
-                return ((string)(this["UserRole"]));
+                return ((string)(this["userLogin"]));
             }
             set {
-                this["UserRole"] = value;
+                this["userLogin"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool RemPass {
+        [global::System.Configuration.DefaultSettingValueAttribute("123")]
+        public string userPassword {
             get {
-                return ((bool)(this["RemPass"]));
+                return ((string)(this["userPassword"]));
             }
             set {
-                this["RemPass"] = value;
+                this["userPassword"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int userPasswordL {
+            get {
+                return ((int)(this["userPasswordL"]));
+            }
+            set {
+                this["userPasswordL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool userRemember {
+            get {
+                return ((bool)(this["userRemember"]));
+            }
+            set {
+                this["userRemember"] = value;
             }
         }
     }

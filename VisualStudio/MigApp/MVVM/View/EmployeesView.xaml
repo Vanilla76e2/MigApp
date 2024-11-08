@@ -17,7 +17,7 @@
             <Grid>
                 <!-- Шапка -->
                 <Grid Style="{StaticResource MainPanelHeader}">
-                    <Button Name="EmployeesAddButton" Style="{StaticResource AddButton}"/>
+                    <Button Name="EmployeesAddButton" Style="{StaticResource AddButton}" Command="{Binding AddCommand}"/>
                     <TextBlock Text="Сотрудники" Style="{StaticResource HeaderWithAddButton}"/>
                 </Grid>
 
@@ -25,13 +25,11 @@
                 <DataGrid Name="Table" Style="{DynamicResource MainDataGrid}" ItemsSource="{Binding Path=EmployeesTable}">
                     <DataGrid.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Icon="{materialDesign:PackIcon Kind=Star}" Header="В избарнное"/>
+                            <MenuItem Icon="{materialDesign:PackIcon Kind=Pencil}" Header="Редактировать" Command="{Binding RedactCommand}"/>
+                            <MenuItem Icon="{materialDesign:PackIcon Kind=ContentCopy}" Header="Копировать" InputGestureText="Ctrl+C" Command="{Binding MyCopyCommand}"/>
+                            <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}" Header="Удалить" InputGestureText="Del" Command="{Binding MyDeleteCommand}"/>
                             <Separator/>
-                            <MenuItem Icon="{materialDesign:PackIcon Kind=Pencil}" Header="Редактировать"/>
-                            <MenuItem Icon="{materialDesign:PackIcon Kind=ContentCopy}" Header="Копировать" InputGestureText="Ctrl+C"/>
-                            <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}" Header="Удалить" InputGestureText="Del"/>
-                            <Separator/>
-                            <MenuItem Icon="{materialDesign:PackIcon Kind=File}" Header="Отчёт"/>
+                            <MenuItem Icon="{materialDesign:PackIcon Kind=File}" Header="Отчёт" Command="{Binding ReportCommand}"/>
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                 </DataGrid>
@@ -40,7 +38,28 @@
                 <Grid Name="FilterPanel" HorizontalAlignment="Right" Width="70">
                     <Border Style="{StaticResource FilterBody}">
                         <Grid>
-
+                            <StackPanel HorizontalAlignment="Center" Margin="10 0 0 50">
+                                <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                                    <TextBlock Text="ID" Style="{DynamicResource FilterTextBlock}"/>
+                                    <TextBox Name="ID" Style="{DynamicResource FilterTextBox}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                                    <TextBlock Text="ФИО" Style="{DynamicResource FilterTextBlock}"/>
+                                    <TextBox Name="FIO" Style="{DynamicResource FilterTextBox}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                                    <TextBlock Text="Отдел" Style="{DynamicResource FilterTextBlock}"/>
+                                    <ComboBox Name="Group" Style="{DynamicResource FilterComboBox}" IsEditable="True" IsTextSearchEnabled="True"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                                    <TextBlock Text="Кабинет" Style="{DynamicResource FilterTextBlock}"/>
+                                    <TextBox Name="Room" Style="{DynamicResource FilterTextBox}"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <Grid Margin="60 15"  VerticalAlignment="Bottom">
+                                <Button Content="Применить" HorizontalAlignment="Left" Width="300" Command="{Binding ApplyFilterCommand}"/>
+                                <Button Content="Сбросить" Style="{DynamicResource MaterialDesignOutlinedButton}" HorizontalAlignment="Right" Command="{Binding ClearFilterCommand}"/>
+                            </Grid>
                         </Grid>
                     </Border>
                     <Border Style="{DynamicResource FilterLatch}">

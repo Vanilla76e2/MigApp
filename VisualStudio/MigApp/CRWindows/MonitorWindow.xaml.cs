@@ -19,7 +19,7 @@ namespace MigApp.CRWindows
         DataTable table = new DataTable();
         string sqlTable = "Monitor", logname = "Мониторы";
         string InventoryNum;
-        string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
+        string CurrentUser = MigApp.Properties.Settings.Default.userLogin;
         bool Deleted, EmpPerm, GrPerm;
 
         // true - Создание

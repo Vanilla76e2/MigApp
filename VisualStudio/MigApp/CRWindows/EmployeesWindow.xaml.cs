@@ -12,9 +12,8 @@ namespace MigApp.CRWindows
         MiscClass mc = new MiscClass();
         DataTable table = new DataTable();
         string sqlTable = "Employees", logname = "Сотрудники";
-        string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
+        string CurrentUser = MigApp.Properties.Settings.Default.userLogin;
         string ID;
-        string oldfavrow;
         bool Deleted;
 
         // true - Создание
@@ -45,7 +44,6 @@ namespace MigApp.CRWindows
                     else
                     {
                         sqlcc.ReqNonRef($"UPDATE {sqlTable} SET FIO = '{FIO.Text}', [Group] = '{Group.Text}', Room = '{Room.Text}' WHERE ID LIKE {ID}");
-                        sqlcc.FavoriteUpdate(oldfavrow, "", FIO.Text, "", CurrentUser, false);
                         sqlcc.Loging(CurrentUser, "Редактирование", logname, FIO.Text, "");
                     }
                     DialogResult = true; Close();
@@ -70,7 +68,6 @@ namespace MigApp.CRWindows
                 if (MessageBox.Show("Вы уверены что хотите удалить запись?","Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
                     sqlcc.ReqNonRef($"UPDATE {sqlTable} SET Deleted = 1, DelDate = '{DateTime.Now}' WHERE ID LIKE {ID}");
-                    sqlcc.FavoriteUpdate(oldfavrow, "", oldfavrow, "", CurrentUser, true);
                     sqlcc.Loging(CurrentUser, "Удаление", logname, FIO.Text, "");
                     DialogResult = true; Close();
                 }
@@ -101,15 +98,15 @@ namespace MigApp.CRWindows
 
         private void ListFill()
         {
-            groupList.Clear();
-            DataTable table = new DataTable();
-            table = sqlcc.DataGridUpdate("*", "Group_View","");
-            foreach (DataRow row in table.Rows)
-            {
-                groupList.Add(row["Name"].ToString());
-            }
-            Group.ItemsSource = null;
-            Group.ItemsSource = groupList;
+            //groupList.Clear();
+            //DataTable table = new DataTable();
+            //table = sqlcc.DataGridUpdate("*", "Group_View","");
+            //foreach (DataRow row in table.Rows)
+            //{
+            //    groupList.Add(row["Name"].ToString());
+            //}
+            //Group.ItemsSource = null;
+            //Group.ItemsSource = groupList;
         }
 
         private List<string> groupList = new List<string>();
@@ -117,49 +114,49 @@ namespace MigApp.CRWindows
         // Заполнение полей и изменение названия окна
         private void Start(string ID, bool perm)
         {
-            if (!perm)
-            {
-                GroupAdd.Visibility = Visibility.Collapsed;
-                Group.Width = 380;
-            }
+            //if (!perm)
+            //{
+            //    GroupAdd.Visibility = Visibility.Collapsed;
+            //    Group.Width = 380;
+            //}
 
-            if (Mode)
-            {
-                Title = "Сотрудники (Создание)";
-                DeleteButton.Visibility = Visibility.Collapsed;
-                ListFill();
-            }
-            else if (!Mode && !Deleted)
-            {
-                try
-                {
-                    Title = "Сотрудники (Редактирование)";
-                    ListFill();
-                    table = sqlcc.DataGridUpdate("*", "Employees_View", $"WHERE ID LIKE {ID}");
-                    DataRow row = table.Rows[0];
-                    FIO.Text = row["ФИО"].ToString(); 
-                    oldfavrow = row["ФИО"].ToString();
-                    Group.Text = row["Отдел"].ToString();
-                    Room.Text = row["Кабинет"].ToString();
-                }
-                catch
-                { MessageBox.Show("Запись не найдена", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); }
-            }
-            else if (!Mode && Deleted)
-            {
-                try
-                {
-                    LockAll();
-                    Title = "Сотрудники (Редактирование)";
-                    table = sqlcc.DataGridUpdate("*", "Employees_Deleted", $"WHERE ID LIKE {ID}");
-                    DataRow row = table.Rows[0];
-                    FIO.Text = row["ФИО"].ToString();
-                    Group.Text = row["Отдел"].ToString();
-                    Room.Text = row["Кабинет"].ToString();
-                }
-                catch
-                { MessageBox.Show("Запись не найдена", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); }
-            }
+            //if (Mode)
+            //{
+            //    Title = "Сотрудники (Создание)";
+            //    DeleteButton.Visibility = Visibility.Collapsed;
+            //    ListFill();
+            //}
+            //else if (!Mode && !Deleted)
+            //{
+            //    try
+            //    {
+            //        Title = "Сотрудники (Редактирование)";
+            //        ListFill();
+            //        table = sqlcc.DataGridUpdate("*", "Employees_View", $"WHERE ID LIKE {ID}");
+            //        DataRow row = table.Rows[0];
+            //        FIO.Text = row["ФИО"].ToString(); 
+            //        oldfavrow = row["ФИО"].ToString();
+            //        Group.Text = row["Отдел"].ToString();
+            //        Room.Text = row["Кабинет"].ToString();
+            //    }
+            //    catch
+            //    { MessageBox.Show("Запись не найдена", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); }
+            //}
+            //else if (!Mode && Deleted)
+            //{
+            //    try
+            //    {
+            //        LockAll();
+            //        Title = "Сотрудники (Редактирование)";
+            //        table = sqlcc.DataGridUpdate("*", "Employees_Deleted", $"WHERE ID LIKE {ID}");
+            //        DataRow row = table.Rows[0];
+            //        FIO.Text = row["ФИО"].ToString();
+            //        Group.Text = row["Отдел"].ToString();
+            //        Room.Text = row["Кабинет"].ToString();
+            //    }
+            //    catch
+            //    { MessageBox.Show("Запись не найдена", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); }
+            //}
         }
 
         private void NumOnly(object sender, TextCompositionEventArgs e)

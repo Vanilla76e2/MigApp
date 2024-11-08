@@ -22,7 +22,7 @@ namespace MigApp.CRWindows
         SQLConnectionClass sqlcc = SQLConnectionClass.getinstance();
         string sqlTable = "FurnitureType", logname = "Типы мебели";
         string ID;
-        string CurrentUser = MigApp.Properties.Settings.Default.UserLogin;
+        string CurrentUser = MigApp.Properties.Settings.Default.userLogin;
 
         bool Mode = false;
 
