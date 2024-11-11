@@ -18,16 +18,13 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="userLogin" Type="System.String" Scope="User">
-      <Value Profile="(Default)">123</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="userPassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)">123</Value>
-    </Setting>
-    <Setting Name="userPasswordL" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">3</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="userRemember" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

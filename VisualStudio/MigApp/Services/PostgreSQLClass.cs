@@ -9,7 +9,8 @@ namespace MigApp.Services
 {
     internal class PostgreSQLClass
     {
-        string connectionString = "Server=localhost; port=5432; user id=MigApp; password=migPass2024; database=MigDataBase;"; // Заменить на динамические параметры
+
+        string connectionString = $"Server={MigApp.Properties.Settings.Default.pgServer}; port={MigApp.Properties.Settings.Default.pgPort}; user id={MigApp.Properties.Settings.Default.pgUser}; password={MigApp.Properties.Settings.Default.pgPassword}; database={MigApp.Properties.Settings.Default.pgDatabase};";
         NpgsqlConnection pgCon;
 
         private PostgreSQLClass()
@@ -49,15 +50,24 @@ namespace MigApp.Services
         public async Task<bool> ConnectionTest()
         {
             Console.WriteLine("\nConnectionTest: Начата проверка подключения к PostgreSQL");
-            connectionString = "Server=localhost; port=5432; user id=MigApp; password=migPass2024; database=MigDataBase;"; // Заменить на динамические параметры
+            connectionString = $"Server={MigApp.Properties.Settings.Default.pgServer}; port={MigApp.Properties.Settings.Default.pgPort}; user id={MigApp.Properties.Settings.Default.pgUser}; password={MigApp.Properties.Settings.Default.pgPassword}; database={MigApp.Properties.Settings.Default.pgDatabase};"; 
             try
             {
                 pgCon = new NpgsqlConnection(connectionString);
-                await pgCon.OpenAsync();
-                Console.WriteLine($"ConnectionTest: Статус подключения = {pgCon.State.ToString()}");
-                pgCon.Dispose();
-                Console.WriteLine($"ConnectionTest: Результат проверки: успех\nConnectionTest: Статус подключения = {pgCon.State.ToString()}");
-                return true;
+                var conTask = pgCon.OpenAsync();
+                if (await Task.WhenAny(conTask, Task.Delay(TimeSpan.FromSeconds(10))) == conTask)
+                {
+                    Console.WriteLine($"ConnectionTest: Статус подключения = {pgCon.State.ToString()}");
+                    pgCon.Dispose();
+                    Console.WriteLine($"ConnectionTest: Результат проверки: успех\nConnectionTest: Статус подключения = {pgCon.State.ToString()}");
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine($"ConnectionTest: При попытке установить соединение было превышено время ожидания");
+                    return false;
+                }
+
             }
             catch (Exception ex)
             {

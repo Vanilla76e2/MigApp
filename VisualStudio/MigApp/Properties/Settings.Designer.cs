@@ -85,7 +85,7 @@ namespace MigApp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("123")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string userLogin {
             get {
                 return ((string)(this["userLogin"]));
@@ -97,7 +97,7 @@ namespace MigApp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("123")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string userPassword {
             get {
                 return ((string)(this["userPassword"]));
@@ -109,19 +109,7 @@ namespace MigApp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("3")]
-        public int userPasswordL {
-            get {
-                return ((int)(this["userPasswordL"]));
-            }
-            set {
-                this["userPasswordL"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool userRemember {
             get {
                 return ((bool)(this["userRemember"]));

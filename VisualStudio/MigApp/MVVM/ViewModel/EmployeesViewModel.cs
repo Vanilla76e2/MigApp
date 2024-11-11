@@ -32,7 +32,7 @@ namespace MigApp.MVVM.ViewModel
             }
         }
 
-        public async void LoadTable()
+        public async Task LoadTableAsync()
         {
             try
             {
@@ -66,7 +66,9 @@ namespace MigApp.MVVM.ViewModel
             set
             {
                 _employeesFilter = value;
-                LoadTable();
+                #pragma warning disable CS4014
+                LoadTableAsync();
+                #pragma warning restore CS4014
             }
         }
 
@@ -121,9 +123,9 @@ namespace MigApp.MVVM.ViewModel
 
         }
 
-        public void OnNavigatedTo()
+        public async Task OnNavigatedTo()
         {
-            LoadTable();
+            await LoadTableAsync();
         }
 
         private void AddEmployee()

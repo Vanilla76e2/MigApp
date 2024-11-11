@@ -22,12 +22,40 @@ namespace MigApp.MVVM.ViewModel
         Encrypter enc = new Encrypter();
         private readonly IServiceProvider _serviceProvider;
         private readonly INavigationService _navigationService;
-        
+
 
         #region Переменные
+        private bool isSettingsOn { get; set; } = false;
+        public bool IsSettingsOn
+        {
+            get => isSettingsOn;
+            set
+            {
+                isSettingsOn = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool IsSettingsOff
+        {
+            get
+            {
+                return !isSettingsOn;
+            }
+        }
 
-        public bool IsConnectionCorrect { get; set; }
-        private bool isLoading { get; set; }
+        // Авторизация
+        private bool isConnectionCorrect { get; set; }
+        public bool IsConnectionCorrect
+        {
+            get => isConnectionCorrect;
+            set
+            {
+                isConnectionCorrect = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool isLoading { get; set; } = true;
         public bool IsLoading
         {
             get => isLoading;
@@ -39,7 +67,7 @@ namespace MigApp.MVVM.ViewModel
         }
 
         private string userLogin { get; set; } = string.Empty;
-        public string UserLogin 
+        public string UserLogin
         {
             get => userLogin;
             set
@@ -58,25 +86,91 @@ namespace MigApp.MVVM.ViewModel
         }
         public bool IsPasswordRemembered { get; set; }
 
+        // Настройки
+        private string dbServer { get; set; }
+        public string DBServer
+        {
+            get => dbServer;
+            set
+            {
+                dbServer = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string dbPort { get; set; }
+        public string DBPort
+        {
+            get => dbPort;
+            set
+            {
+                dbPort = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string dbName { get; set; }
+        public string DBName
+        {
+            get => dbName;
+            set
+            {
+                dbName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string dbUser { get; set; }
+        public string DBUser
+        {
+            get => dbUser;
+            set
+            {
+                dbUser = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string dbPassword { get; set; }
+        public string DBPassword
+        {
+            get => dbPassword;
+            set
+            {
+                dbPassword = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region Команды
 
         public RelayCommand LoginCommand { get; set; }
+        public RelayCommand SettingsCommitCommand { get; set; }
 
         #endregion
 
         public LoginViewModel(IServiceProvider serviceProvider)
         {
-            if (IsPasswordRemembered)
-            {
-                userLogin = MigApp.Properties.Settings.Default.userLogin;
-                userPassword = MigApp.Properties.Settings.Default.userPassword;
-            }
-
-            LoginCommand = new RelayCommand(async o => await ExecuteLoginCommand(), o => true);
             _serviceProvider = serviceProvider;
             _navigationService = serviceProvider.GetRequiredService<INavigationService>();
+
+            #region Данные пользователя
+            IsPasswordRemembered = MigApp.Properties.Settings.Default.userRemember;
+            userLogin = MigApp.Properties.Settings.Default.userLogin;
+            userPassword = MigApp.Properties.Settings.Default.userPassword;
+            #endregion
+
+            #region Данные подключения
+            DBServer = MigApp.Properties.Settings.Default.pgServer;
+            DBPort = MigApp.Properties.Settings.Default.pgPort;
+            DBName = MigApp.Properties.Settings.Default.pgDatabase;
+            DBUser = MigApp.Properties.Settings.Default.pgUser;
+            #endregion
+
+            LoginCommand = new RelayCommand(async o => await ExecuteLoginCommand(), o => true);
+            SettingsCommitCommand = new RelayCommand(async o => await OnSettingsCommit(), o => true);
+
         }
 
         // Проверка подключения
@@ -87,6 +181,11 @@ namespace MigApp.MVVM.ViewModel
             {
                 bool result = await pgsql.ConnectionTest();
                 IsConnectionCorrect = result;
+                if (!result)
+                {
+                    MessageBox.Show("Подключение к базе данных отсутствует.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Error);
+                    IsSettingsOn = true;
+                }
             }
             catch (Exception ex)
             {
@@ -101,34 +200,118 @@ namespace MigApp.MVVM.ViewModel
         // Команда на авторизацию в систему
         public async Task ExecuteLoginCommand()
         {
-            //IsLoading = true;
-            //try
-            //{
-            //    bool isValid = await pgsql.CheckLogin(userLogin, userPassword);
-            //    if (true)
-            //    {
-            //        // Открыть MainView
-            //        _navigationService.NavigateToMainWindow();
+            #if DEBUG
+            _navigationService.NavigateToMainWindow();
+            var debug = Application.Current.Windows.OfType<LoginView>().FirstOrDefault();
+            if (debug != null) { debug.Close(); }
+            return;
+            #endif
 
-            //        // Закрыть LoginView
-            //        var loginWindow = Application.Current.Windows.OfType<LoginView>().FirstOrDefault();
-            //        if (loginWindow != null) { loginWindow.Close(); }
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Неверный логин или пароль", "Внимание", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine($"ExecuteLoginCommand: {ex}");
-            //    MessageBox.Show("Произошла непредвиденная ошибка.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            //}
-            //finally
-            //{
-            //    IsLoading = false;
-            //}
-            MessageBox.Show($"Login: {userLogin}\nPassword: {userPassword}");
+            IsLoading = true;
+            try
+            {
+                bool isValid = await pgsql.CheckLogin(userLogin, userPassword);
+                if (isValid)
+                {
+                    if (IsPasswordRemembered)
+                    {
+                        MigApp.Properties.Settings.Default.userRemember = true;
+                        MigApp.Properties.Settings.Default.userLogin = userLogin;
+                        MigApp.Properties.Settings.Default.userPassword = userPassword;
+                    }
+                    MigApp.Properties.Settings.Default.Save();
+
+                    // Открыть MainView
+                    _navigationService.NavigateToMainWindow();
+
+                    // Закрыть LoginView
+                    var loginWindow = Application.Current.Windows.OfType<LoginView>().FirstOrDefault();
+                    if (loginWindow != null) { loginWindow.Close(); }
+                }
+                else
+                {
+                    MessageBox.Show("Неверный логин или пароль.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ExecuteLoginCommand: {ex}");
+                MessageBox.Show("Произошла непредвиденная ошибка.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+
+        // Вход по памяти
+        public async Task OnLoginRemembered()
+        {
+            if (IsConnectionCorrect)
+            {
+                IsLoading = true;
+                if (IsPasswordRemembered)
+                {
+                    bool isValid = await pgsql.CheckLogin(userLogin, userPassword);
+                    if (isValid)
+                    {
+                        _navigationService.NavigateToMainWindow();
+                        var loginWindow = Application.Current.Windows.OfType<LoginView>().FirstOrDefault();
+                        if (loginWindow != null) { loginWindow.Close(); }
+                    }
+                    else
+                    {
+                        IsLoading = false;
+                        MessageBox.Show("Неверный логин или пароль.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+                else
+                {
+                    IsLoading = false;
+                }
+            }
+        }
+
+        // Изменение параметров подключения
+        public async Task OnSettingsCommit()
+        {
+            IsLoading = true;
+            try
+            {
+                SaveConnectionParametrs();
+                bool result = await pgsql.ConnectionTest();
+                IsConnectionCorrect = result;
+                if (result)
+                {
+                    MessageBox.Show("Подключение к базе данных установлено.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    IsSettingsOn = false;
+                }
+                else
+                {
+                    MessageBox.Show("Подключение к базе данных отсутствует.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"OnSettingsCommit: {ex}");
+                MessageBox.Show("Произошла непредвиденная ошибка.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+
+        // Сохранение параметров подключения
+        private void SaveConnectionParametrs()
+        {
+            MigApp.Properties.Settings.Default.pgServer = DBServer;
+            MigApp.Properties.Settings.Default.pgPort = DBPort;
+            MigApp.Properties.Settings.Default.pgDatabase = DBName;
+            MigApp.Properties.Settings.Default.pgUser = DBUser;
+            MigApp.Properties.Settings.Default.pgPassword = DBPassword;
+            MigApp.Properties.Settings.Default.Save();
         }
     }
 }

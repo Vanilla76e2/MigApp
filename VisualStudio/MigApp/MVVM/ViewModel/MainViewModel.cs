@@ -13,7 +13,16 @@ namespace MigApp.MVVM.ViewModel
     internal class MainViewModel : Core.ViewModel
     {
         public string WindowTitle { get; set;} = "MigApp v" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
-        public string CurrentUser { get; set; } = "Test";
+        private string currentUser { get; set; }
+        public string CurrentUser
+        {
+            get => currentUser;
+            set
+            {
+                currentUser = value;
+                OnPropertyChanged();
+            }
+        }
 
         private readonly IServiceProvider _serviceProvider;
         private INavigationService _navigation;
@@ -55,6 +64,10 @@ namespace MigApp.MVVM.ViewModel
         // Конструктор класса с командами
         public MainViewModel(IServiceProvider serviceProvider, INavigationService navService)
         {
+            #if DEBUG
+            CurrentUser = "Debug";
+            #endif
+
             _serviceProvider = serviceProvider;
             Navigation = navService;
 
@@ -86,12 +99,30 @@ namespace MigApp.MVVM.ViewModel
         // Команда выхода из профиля
         public void LogOut()
         {
+            MigApp.Properties.Settings.Default.userLogin = string.Empty;
+            MigApp.Properties.Settings.Default.userPassword = string.Empty;
+            MigApp.Properties.Settings.Default.userRemember = false;
+            MigApp.Properties.Settings.Default.Save();
+
             // Открыть LoginView
             Navigation.NavigateToLoginWindow();
 
             // Закрыть MainWindow
             var mainWindow = Application.Current.Windows.OfType<MainView>().FirstOrDefault();
             if (mainWindow != null) { mainWindow.Close(); }
+        }
+
+        private async Task UpdateTable()
+        {
+            var currentView = Navigation.CurrentView;
+            if(currentView is EmployeesViewModel employeesViewModel)
+            {
+                await employeesViewModel.LoadTableAsync();
+            }
+            else
+            {
+                Console.WriteLine("UpdateTable: CurrentView не соответствует ни одному из предусмотренных параметров");
+            }
         }
     }
 }

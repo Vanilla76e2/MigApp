@@ -351,7 +351,15 @@
         <Setter Property="Height" Value="35"/>
     </Style>
 
-    <Style x:Key="LoginSettingsButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignFloatingActionMiniButton}">
+    <Style x:Key="SettingsCommitButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="160"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Height" Value="35"/>
+    </Style>
+
+    <Style x:Key="LoginSettingsButton" TargetType="ToggleButton" BasedOn="{StaticResource MaterialDesignFloatingActionMiniButton}">
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Right"/>
         <Setter Property="Margin" Value="10"/>
@@ -390,7 +398,7 @@
                     <Grid>
                         <Image Source="../images/loading.png" RenderTransformOrigin=".5,.5">
                             <Image.RenderTransform>
-                                <RotateTransform x:Name="RotateTransform1" Angle="0"/>
+                                <RotateTransform x:Name="RotateTransform" Angle="0"/>
                             </Image.RenderTransform>
                         </Image>
                     </Grid>
@@ -398,7 +406,7 @@
                         <EventTrigger RoutedEvent="Loaded">
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <DoubleAnimation Storyboard.TargetName="RotateTransform1" Storyboard.TargetProperty="Angle" From="0" To="360" Duration="0:0:3" RepeatBehavior="Forever" AutoReverse="False"/>
+                                    <DoubleAnimation Storyboard.TargetName="RotateTransform" Storyboard.TargetProperty="Angle" From="0" To="360" Duration="0:0:3" RepeatBehavior="Forever" AutoReverse="False"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
@@ -431,6 +439,18 @@
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Margin" Value="0 10 0 0"/>
+    </Style>
+    <!--#endregion-->
+    
+    <!--#region SettingsView-->
+    <Style x:Key="SettingsTextbox" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="materialDesign:TextFieldAssist.CharacterCounterVisibility" Value="Collapsed"/>
+    </Style>
+    <Style x:Key="SettingsPasswordbox" TargetType="PasswordBox" BasedOn="{StaticResource MaterialDesignPasswordBox}">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="20"/>
     </Style>
     <!--#endregion-->
     

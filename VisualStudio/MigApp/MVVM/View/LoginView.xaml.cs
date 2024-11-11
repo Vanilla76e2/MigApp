@@ -17,27 +17,29 @@ namespace MigApp.MVVM.View
         public LoginView()
         {
             InitializeComponent();
-            FillUserInfo();
         }
 
         public LoginView(IServiceProvider serviceProvider)
         {
             InitializeComponent();
             DataContext = new LoginViewModel(serviceProvider);
-            FillUserInfo();
+            FillConnectionParametrs();
         }
 
+        // Закрыть приложение
         private void CloseClick(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
 
+        // При загрузке окна
         private async void OnLoaded(object sender, RoutedEventArgs e)
         {
             var viewModel = DataContext as LoginViewModel;
             if (viewModel != null)
             {
                 await viewModel.InitializeAsync();
+                await viewModel.OnLoginRemembered();
             }
             else
             {
@@ -45,6 +47,7 @@ namespace MigApp.MVVM.View
             }
         }
 
+        // Отслеживание изменения пароля пользователя
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             var passwordBox = sender as PasswordBox;
@@ -58,15 +61,24 @@ namespace MigApp.MVVM.View
             }
         }
 
-        private void FillUserInfo()
+        // Отслеживание изменения пароля БД
+        private void DataBase_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if(MigApp.Properties.Settings.Default.userRemember)
-            loginBox.Text = MigApp.Properties.Settings.Default.userLogin;
-            int i = MigApp.Properties.Settings.Default.userPasswordL;
-            for (int j = 0; j < i; j++)
+            var passwordBox = sender as PasswordBox;
+            if(passwordBox != null)
             {
-                passwordBox.Password += "1";
+                var viewModel = DataContext as LoginViewModel;
+                if (viewModel != null)
+                {
+                    viewModel.DBPassword = passwordBox.Password;
+                }
             }
+        }
+
+        // Заполенение параметров подключения
+        private void FillConnectionParametrs()
+        {
+            DBPassword_Passwordbox.Password = MigApp.Properties.Settings.Default.pgPassword;
         }
     }
 }

@@ -4,6 +4,7 @@ using MigApp.MVVM.View;
 using MigApp.MVVM.ViewModel;
 using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace MigApp.Services
@@ -11,7 +12,7 @@ namespace MigApp.Services
     public interface INavigationService
     {
         ViewModel CurrentView { get; }
-        void NavigateTo<T>() where T : ViewModel;
+        Task NavigateTo<T>() where T : ViewModel;
 
         void NavigateToMainWindow();
         void NavigateToLoginWindow();
@@ -43,16 +44,16 @@ namespace MigApp.Services
         }
 
         // Навигация внутри MainWindow
-        public void NavigateTo<TViewModel>() where TViewModel : ViewModel
+        public async Task NavigateTo<TViewModel>() where TViewModel : ViewModel
         {
             ViewModel viewModel = _viewModelFactory.Invoke(typeof(TViewModel));
             CurrentView = viewModel;
 
             if (viewModel is EmployeesViewModel employeesViewModel)
             {
-                employeesViewModel.OnNavigatedTo();
+                await employeesViewModel.OnNavigatedTo();
             } 
-            // Сюда добавлять для обновления таблиц
+            // Сюда добавлять обновления таблиц
         }
 
         public void NavigateToMainWindow()
