@@ -762,3 +762,5 @@ C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\LoginWindowOLD.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\LoginView.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainView.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\BCrypt.Net-Next.dll
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\BCrypt.Net-Next.xml

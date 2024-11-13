@@ -118,5 +118,17 @@ namespace MigApp.Properties {
                 this["userRemember"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string userID {
+            get {
+                return ((string)(this["userID"]));
+            }
+            set {
+                this["userID"] = value;
+            }
+        }
     }
 }

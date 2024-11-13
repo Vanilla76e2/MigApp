@@ -1,11 +1,13 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MigApp.Core;
+using MigApp.CRWindows;
 using MigApp.MVVM.View;
 using MigApp.MVVM.ViewModel;
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Media3D;
 
 namespace MigApp.Services
 {
@@ -14,7 +16,7 @@ namespace MigApp.Services
         ViewModel CurrentView { get; }
         Task NavigateTo<T>() where T : ViewModel;
 
-        void NavigateToMainWindow();
+        Task NavigateToMainWindow();
         void NavigateToLoginWindow();
     }
 
@@ -47,16 +49,83 @@ namespace MigApp.Services
         public async Task NavigateTo<TViewModel>() where TViewModel : ViewModel
         {
             ViewModel viewModel = _viewModelFactory.Invoke(typeof(TViewModel));
-            CurrentView = viewModel;
-
-            if (viewModel is EmployeesViewModel employeesViewModel)
+            if (viewModel != CurrentView)
             {
-                await employeesViewModel.OnNavigatedTo();
-            } 
-            // Сюда добавлять обновления таблиц
+                CurrentView = viewModel;
+
+                if (viewModel is EmployeesViewModel employeesViewModel)
+                {
+                    await employeesViewModel.LoadTableAsync();
+                }
+                else if (viewModel is FavouriteViewModel favouriteViewModel)
+                {
+                    await favouriteViewModel.LoadTableAsync();
+                }
+                else if (viewModel is DepartmentViewModel departmentViewModel)
+                {
+                    await departmentViewModel.LoadTableAsync();
+                }
+                else if (viewModel is ComputersViewModel computersViewModel)
+                {
+                    await computersViewModel.LoadTableAsync();
+                }
+                else if (viewModel is LaptopsViewModel laptopsViewModel)
+                {
+                    await laptopsViewModel.LoadTableAsync();
+                }
+                else if (viewModel is TabletsViewModel tabletsViewModel)
+                {
+                    await tabletsViewModel.LoadTableAsync();
+                }
+                else if (viewModel is OrgtechViewModel orgtechViewModel)
+                {
+                    await orgtechViewModel.LoadTableAsync();
+                }
+                else if (viewModel is MonitorsViewModel monitorsViewModel)
+                {
+                    await monitorsViewModel.LoadTableAsync();
+                }
+                else if (viewModel is RoutersViewModel routersViewModel)
+                {
+                    await routersViewModel.LoadTableAsync();
+                }
+                else if (viewModel is SwitchesViewModel switchesViewModel)
+                {
+                    await switchesViewModel.LoadTableAsync();
+                }
+                else if (viewModel is CCTVViewModel cctvViewModel)
+                {
+                    await cctvViewModel.LoadTableAsync();
+                }
+                else if (viewModel is FurnitureTypeViewModel furnitureTypeViewModel)
+                {
+                    await furnitureTypeViewModel.LoadTableAsync();
+                }
+                else if (viewModel is FurnitureViewModel furnitureViewModel)
+                {
+                    await furnitureViewModel.LoadTableAsync();
+                }
+                else if (viewModel is UsersViewModel usersViewModel)
+                {
+                    await usersViewModel.LoadTableAsync();
+                }
+                else if (viewModel is RolesViewModel rolesViewModel)
+                {
+                    await rolesViewModel.LoadTableAsync();
+                }
+                else if (viewModel is LogsViewModel logsViewModel)
+                {
+                    await logsViewModel.LoadTableAsync();
+                }
+                else if (viewModel is IPViewModel ipViewModel)
+                {
+                    await ipViewModel.LoadTableAsync();
+                }
+                // Сюда добавлять обновления таблиц
+            }
         }
 
-        public void NavigateToMainWindow()
+        public async Task NavigateToMainWindow()
         {
             var window = new MainView(_serviceProvider);
 
@@ -65,6 +134,7 @@ namespace MigApp.Services
                 Application.Current.MainWindow = window;
                 window.Show();
             }
+            await NavigateTo<FavouriteViewModel>();
         }
 
         public void NavigateToLoginWindow()

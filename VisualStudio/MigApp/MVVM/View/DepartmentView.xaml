@@ -17,15 +17,15 @@
             <Grid>
                 <!-- Шапка -->
                 <Grid Style="{StaticResource MainPanelHeader}">
-                    <Button Name="EmployeesAddButton" Style="{StaticResource AddButton}"/>
+                    <Button Name="EmployeesAddButton" Style="{StaticResource AddButton}" Command="{Binding AddCommand}"/>
                     <TextBlock Text="Отделы" Style="{StaticResource HeaderWithAddButton}"/>
                 </Grid>
 
                 <!--Таблица-->
-                <DataGrid Name="Table" Style="{DynamicResource MainDataGrid}" ItemsSource="{Binding Path=EmployeesTable}">
+                <DataGrid Name="Table" Style="{DynamicResource MainDataGrid}" ItemsSource="{Binding Path=Table}">
                     <DataGrid.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Icon="{materialDesign:PackIcon Kind=Pencil}" Header="Редактировать"/>
+                            <MenuItem Icon="{materialDesign:PackIcon Kind=Pencil}" Header="Редактировать" Command="{Binding RedactCommand}"/>
                             <MenuItem Icon="{materialDesign:PackIcon Kind=ContentCopy}" Header="Копировать" InputGestureText="Ctrl+C"/>
                             <MenuItem Icon="{materialDesign:PackIcon Kind=Delete}" Header="Удалить" InputGestureText="Del"/>
                         </ContextMenu>

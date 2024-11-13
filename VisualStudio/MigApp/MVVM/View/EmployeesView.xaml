@@ -22,7 +22,7 @@
                 </Grid>
 
                 <!--Таблица-->
-                <DataGrid Name="Table" Style="{DynamicResource MainDataGrid}" ItemsSource="{Binding Path=EmployeesTable}">
+                <DataGrid Name="Table" Style="{DynamicResource MainDataGrid}" ItemsSource="{Binding Table}">
                     <DataGrid.ContextMenu>
                         <ContextMenu>
                             <MenuItem Icon="{materialDesign:PackIcon Kind=Pencil}" Header="Редактировать" Command="{Binding RedactCommand}"/>

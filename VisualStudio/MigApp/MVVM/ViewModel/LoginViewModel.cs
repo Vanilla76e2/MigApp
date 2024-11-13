@@ -201,7 +201,7 @@ namespace MigApp.MVVM.ViewModel
         public async Task ExecuteLoginCommand()
         {
             #if DEBUG
-            _navigationService.NavigateToMainWindow();
+            await _navigationService.NavigateToMainWindow();
             var debug = Application.Current.Windows.OfType<LoginView>().FirstOrDefault();
             if (debug != null) { debug.Close(); }
             return;
@@ -218,19 +218,16 @@ namespace MigApp.MVVM.ViewModel
                         MigApp.Properties.Settings.Default.userRemember = true;
                         MigApp.Properties.Settings.Default.userLogin = userLogin;
                         MigApp.Properties.Settings.Default.userPassword = userPassword;
+                        MigApp.Properties.Settings.Default.userID = await pgsql.GetUserID(userLogin);
+                        MigApp.Properties.Settings.Default.Save();
                     }
-                    MigApp.Properties.Settings.Default.Save();
 
                     // Открыть MainView
-                    _navigationService.NavigateToMainWindow();
+                    await _navigationService.NavigateToMainWindow();
 
                     // Закрыть LoginView
                     var loginWindow = Application.Current.Windows.OfType<LoginView>().FirstOrDefault();
                     if (loginWindow != null) { loginWindow.Close(); }
-                }
-                else
-                {
-                    MessageBox.Show("Неверный логин или пароль.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception ex)
@@ -250,25 +247,22 @@ namespace MigApp.MVVM.ViewModel
             if (IsConnectionCorrect)
             {
                 IsLoading = true;
-                if (IsPasswordRemembered)
+                try
                 {
-                    bool isValid = await pgsql.CheckLogin(userLogin, userPassword);
-                    if (isValid)
+                    if (IsPasswordRemembered)
                     {
-                        _navigationService.NavigateToMainWindow();
-                        var loginWindow = Application.Current.Windows.OfType<LoginView>().FirstOrDefault();
-                        if (loginWindow != null) { loginWindow.Close(); }
+                        bool isValid = await pgsql.CheckRememberedLogin(userLogin, userPassword);
+                        if (isValid)
+                        {
+                            await _navigationService.NavigateToMainWindow();
+                            var loginWindow = Application.Current.Windows.OfType<LoginView>().FirstOrDefault();
+                            if (loginWindow != null) { loginWindow.Close(); }
+                        }
                     }
-                    else
-                    {
-                        IsLoading = false;
-                        MessageBox.Show("Неверный логин или пароль.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
+
                 }
-                else
-                {
-                    IsLoading = false;
-                }
+                catch { }
+                finally { IsLoading = false; }
             }
         }
 

@@ -25,7 +25,7 @@
                 </Grid>
 
                 <!--Таблица-->
-                <DataGrid Name="Table" Style="{DynamicResource MainDataGrid}">
+                <DataGrid Name="Table" Style="{DynamicResource MainDataGrid}" ItemsSource="{Binding Path=Table}">
                     <DataGrid.ContextMenu>
                         <ContextMenu>
                             <MenuItem Icon="{materialDesign:PackIcon Kind=Star}" Header="В избарнное"/>

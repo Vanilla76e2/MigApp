@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -8,6 +12,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace MigApp
@@ -273,4 +278,5 @@ namespace MigApp
             Process.Start(Application.ResourceAssembly.Location);
         }
     }
+
 }
