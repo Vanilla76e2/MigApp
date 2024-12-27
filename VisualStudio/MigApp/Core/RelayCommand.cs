@@ -34,6 +34,7 @@ namespace MigApp.Core
         public void Execute(object parameter)
         {
             _execute(parameter);
+            return;
         }
 
     }

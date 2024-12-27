@@ -455,8 +455,6 @@ namespace MigApp.CRWindows
 
         private void CreateNewPC(object sender, RoutedEventArgs e)
         {
-            PCWindow win = new PCWindow(true, null, false, EmpPerm, GrPerm);
-            win.ShowDialog();
             PCListFill(User.Text);
             if (PCList.Count() == 0)
             {

@@ -407,7 +407,6 @@ C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\EmployeesWin
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\MonitorWindow.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\NotebookWindow.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\OrgTechWindow.g.cs
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\PCWindow.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\RoutersWindow.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\TabletsWindow.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\SearchWindow.g.cs
@@ -421,7 +420,6 @@ C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\EmployeesWin
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\MonitorWindow.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\NotebookWindow.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\OrgTechWindow.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\PCWindow.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\RoutersWindow.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CRWindows\TabletsWindow.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\Resources\Them1.baml
@@ -670,8 +668,6 @@ E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MigApp.csproj.CoreC
 E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MigApp.csproj.Up2Date
 E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MigApp.exe
 E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MigApp.pdb
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\EmployeesView.g.cs
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\FavouriteView.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
@@ -683,8 +679,6 @@ C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\Microsoft.Extensions.D
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Threading.Tasks.Extensions.xml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\EmployeesView.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\FavouriteView.baml
 E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\EmployeesView.g.cs
 E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\FavouriteView.g.cs
 E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWindow.g.cs
@@ -702,34 +696,6 @@ E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Threading.Ta
 E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\EmployeesView.baml
 E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\FavouriteView.baml
 E:\Work\My Works\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWindow.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\ComputersView.g.cs
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\LaptopsView.g.cs
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MonitorsView.g.cs
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\OrgtechView.g.cs
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\TabletsVeiw.g.cs
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\ComputersView.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\LaptopsView.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MonitorsView.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\OrgtechView.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\TabletsVeiw.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\CCTVView.g.cs
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\IPView.g.cs
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\LogsView.g.cs
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\RolesView.g.cs
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\RoutersView.g.cs
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\SwitchesView.g.cs
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\UsersView.g.cs
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\CCTVView.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\IPView.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\LogsView.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\RolesView.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\RoutersView.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\SwitchesView.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\UsersView.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\FurnitureTypesView.g.cs
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\FurnitureView.g.cs
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\FurnitureTypesView.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\FurnitureView.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\Microsoft.Bcl.HashCode.dll
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\Npgsql.dll
@@ -754,8 +720,6 @@ C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Text.Encodings.
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Text.Json.xml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.Threading.Channels.xml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\System.ValueTuple.xml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\DepartmentView.g.cs
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\DepartmentView.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\LoginWindowOLD.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\LoginView.g.cs
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\LoginWindowOLD.baml
@@ -764,3 +728,41 @@ C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainView.g.c
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainView.baml
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\BCrypt.Net-Next.dll
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\BCrypt.Net-Next.xml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CustomElements\IPAddressControl.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\CustomElements\IPAddressControl.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\CRWidows\ComputersWindow.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\CCTVView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\ComputersView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\DepartmentView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\EmployeesView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\FavouriteView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\FurnitureTypesView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\FurnitureView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\IPView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\LaptopsView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\LogsView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\MonitorsView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\OrgtechView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\RolesView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\RoutersView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\SwitchesView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\TabletsVeiw.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\UsersView.g.cs
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\CRWidows\ComputersWindow.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\CCTVView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\ComputersView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\DepartmentView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\EmployeesView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\FavouriteView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\FurnitureTypesView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\FurnitureView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\IPView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\LaptopsView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\LogsView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\MonitorsView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\OrgtechView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\RolesView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\RoutersView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\SwitchesView.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\TabletsVeiw.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\MVVM\View\MainWidowPanels\UsersView.baml

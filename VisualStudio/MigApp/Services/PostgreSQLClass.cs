@@ -1,6 +1,10 @@
-﻿using Npgsql;
+﻿using MigApp.MVVM.ViewModel;
+using Npgsql;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -180,6 +184,29 @@ namespace MigApp.Services
             }
         }
 
+        // Отправка таблицы
+        public async Task SendComputersComponents(DataTable table, string tableName)
+        {
+            try
+            {
+                Console.WriteLine("\nSendComputersComponents: Отправлен запрос на заполнение таблицы");
+                await connection();
+                foreach (DataRow row in table.Rows)
+                {
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"SendComputersComponents: {ex.Message}");
+            }
+            finally
+            {
+                pgCon.Dispose();
+                Console.WriteLine($"SendComputersComponents: Статус подключения = {pgCon.State.ToString()}");
+            }
+        }
+
         // Логирование
         public async Task Loging(string CurrentUser, string Action, string Table, string Row, string Specifies)
         {
@@ -266,11 +293,12 @@ namespace MigApp.Services
         }
 
         // IP Table
-        public async Task<DataTable> Report_IP(string subnet)
+        public async Task<DataTable> GetIPsAsync(string subnet)
         {
             DataTable result = new DataTable();
             result.Columns.Add("IP", typeof(String));
             result.Columns.Add("Устройство", typeof(String));
+            result.Columns.Add("ID", typeof(String));
             result.Columns.Add("Инвентарный номер", typeof(String));
             result.Columns.Add("Имя", typeof(String));
             result.Columns.Add("Комментарий", typeof(String));
@@ -282,117 +310,141 @@ namespace MigApp.Services
                 result.Rows.Add(ip);
             }
 
-            DataTable PC = await GetTable("ip, inventory_number, name, comment", "\"Technic\".computers", "");
+            DataTable PC = await GetTable("ip, id, inventory_number, name, comment", "\"Technic\".computers", "");
             foreach (DataRow row in PC.Rows)
             {
-                string ipAddress = row["ip"].ToString();
-                DataRow ipRow = result.Select($"IP = '{ipAddress}'")[0];
-
-                if (ipRow != null)
+                try
                 {
-                    if (ipRow["Устройство"].ToString().Length == 0)
-                    {
-                        ipRow["Устройство"] = "Компьютер";
-                        ipRow["Инвентарный номер"] = row["inventory_number"].ToString();
-                        ipRow["Имя"] = row["name"].ToString();
-                        ipRow["Комментарий"] = row["comment"].ToString();
-                    }
-                    else
-                    {
-                        DataRow newRow = result.NewRow();
-                        newRow["IP"] = ipAddress;
-                        newRow["Устройство"] = "Компьютер";
-                        newRow["Инвентарный номер"] = row["inventory_number"].ToString();
-                        newRow["Имя"] = row["name"].ToString();
-                        newRow["Комментарий"] = row["comment"].ToString();
-                        result.Rows.Add(newRow);
-                    }
-                }
-            }
+                    string ipAddress = row["ip"].ToString();
+                    DataRow ipRow = result.Select($"IP = '{ipAddress}'")[0];
 
-            DataTable OrgTech = await GetTable("ip, type, inventory_number, model, comment", "\"Technic\".orgtechnic", "");
+                    if (ipRow != null)
+                    {
+                        if (ipRow["Устройство"].ToString().Length == 0)
+                        {
+                            ipRow["Устройство"] = "Компьютер";
+                            ipRow["ID"] = row["id"].ToString();
+                            ipRow["Инвентарный номер"] = row["inventory_number"].ToString();
+                            ipRow["Имя"] = row["name"].ToString();
+                            ipRow["Комментарий"] = row["comment"].ToString();
+                        }
+                        else
+                        {
+                            DataRow newRow = result.NewRow();
+                            newRow["IP"] = ipAddress;
+                            newRow["Устройство"] = "Компьютер";
+                            newRow["ID"] = row["id"].ToString();
+                            newRow["Инвентарный номер"] = row["inventory_number"].ToString();
+                            newRow["Имя"] = row["name"].ToString();
+                            newRow["Комментарий"] = row["comment"].ToString();
+                            result.Rows.Add(newRow);
+                        }
+                    }
+                } catch { }
+            }
+            Console.WriteLine("GetIPsAsync: Компьютеры отсканированы");
+
+            DataTable OrgTech = await GetTable("ip, type, id, inventory_number, model, comment", "\"Technic\".orgtechnic", "");
             foreach (DataRow row in OrgTech.Rows)
             {
-                string ipAddress = row["ip"].ToString();
-                DataRow ipRow = result.Select($"IP = '{ipAddress}'")[0];
-
-                if (ipRow != null)
+                try
                 {
-                    if (ipRow["Устройство"].ToString().Length == 0)
-                    {
-                        ipRow["Устройство"] = row["type"].ToString();
-                        ipRow["Инвентарный номер"] = row["inventory_number"].ToString();
-                        ipRow["Имя"] = row["model"].ToString();
-                        ipRow["Комментарий"] = row["comment"].ToString();
-                    }
-                    else
-                    {
-                        DataRow newRow = result.NewRow();
-                        newRow["IP"] = ipAddress;
-                        newRow["Устройство"] = row["type"].ToString();
-                        newRow["Инвентарный номер"] = row["inventory_number"].ToString();
-                        newRow["Имя"] = row["model"].ToString();
-                        newRow["Комментарий"] = row["comment"].ToString();
-                        result.Rows.Add(newRow);
-                    }
-                }
-            }
+                    string ipAddress = row["IP"].ToString();
+                    DataRow ipRow = result.Select($"IP = '{ipAddress}'")[0];
 
-            DataTable Routers = await GetTable("ip, inventory_number, model, comment", "\"Technic\".routers", "");
+                    if (ipRow != null)
+                    {
+                        if (ipRow["Устройство"].ToString().Length == 0)
+                        {
+                            ipRow["Устройство"] = row["type"].ToString();
+                            ipRow["ID"] = row["id"].ToString();
+                            ipRow["Инвентарный номер"] = row["inventory_number"].ToString();
+                            ipRow["Имя"] = row["model"].ToString();
+                            ipRow["Комментарий"] = row["comment"].ToString();
+                        }
+                        else
+                        {
+                            DataRow newRow = result.NewRow();
+                            newRow["IP"] = ipAddress;
+                            newRow["Устройство"] = row["type"].ToString();
+                            newRow["ID"] = row["id"].ToString();
+                            newRow["Инвентарный номер"] = row["inventory_number"].ToString();
+                            newRow["Имя"] = row["model"].ToString();
+                            newRow["Комментарий"] = row["comment"].ToString();
+                            result.Rows.Add(newRow);
+                        }
+                    }
+                } catch { }
+            }
+            Console.WriteLine("GetIPsAsync: Оргтехника отсканирована");
+
+            DataTable Routers = await GetTable("ip, id, inventory_number, model, comment", "\"Technic\".routers", "");
             foreach (DataRow row in Routers.Rows)
             {
-                string ipAddress = row["ip"].ToString();
-                DataRow ipRow = result.Select($"IP = '{ipAddress}'")[0];
-
-                if (ipRow != null)
+                try
                 {
-                    if (ipRow["Устройство"].ToString().Length == 0)
-                    {
-                        ipRow["Устройство"] = "Роутер";
-                        ipRow["Инвентарный номер"] = row["inventory_number"].ToString();
-                        ipRow["Имя"] = row["model"].ToString();
-                        ipRow["Комментарий"] = row["comment"].ToString();
-                    }
-                    else
-                    {
-                        DataRow newRow = result.NewRow();
-                        newRow["IP"] = ipAddress;
-                        newRow["Устройство"] = "Роутер";
-                        newRow["Инвентарный номер"] = row["inventory_number"].ToString();
-                        newRow["Имя"] = row["model"].ToString();
-                        newRow["Комментарий"] = row["comment"].ToString();
-                        result.Rows.Add(newRow);
-                    }
-                }
-            }
+                    string ipAddress = row["IP"].ToString();
+                    DataRow ipRow = result.Select($"IP = '{ipAddress}'")[0];
 
-            DataTable Switches = await GetTable("ip, inventory_number, model, comment", "\"Technic\".switches", "");
+                    if (ipRow != null)
+                    {
+                        if (ipRow["Устройство"].ToString().Length == 0)
+                        {
+                            ipRow["Устройство"] = "Роутер";
+                            ipRow["ID"] = row["id"].ToString();
+                            ipRow["Инвентарный номер"] = row["inventory_number"].ToString();
+                            ipRow["Имя"] = row["model"].ToString();
+                            ipRow["Комментарий"] = row["comment"].ToString();
+                        }
+                        else
+                        {
+                            DataRow newRow = result.NewRow();
+                            newRow["IP"] = ipAddress;
+                            newRow["Устройство"] = "Роутер";
+                            newRow["ID"] = row["id"].ToString();
+                            newRow["Инвентарный номер"] = row["inventory_number"].ToString();
+                            newRow["Имя"] = row["model"].ToString();
+                            newRow["Комментарий"] = row["comment"].ToString();
+                            result.Rows.Add(newRow);
+                        }
+                    }
+                } catch { }
+            }
+            Console.WriteLine("GetIPsAsync: Роутеры отсканированы");
+
+            DataTable Switches = await GetTable("ip, id, inventory_number, model, comment", "\"Technic\".switches", "");
             foreach (DataRow row in Switches.Rows)
             {
-                string ipAddress = row["ip"].ToString();
-                DataRow ipRow = result.Select($"IP = '{ipAddress}'")[0];
-
-                if (ipRow != null)
+                try
                 {
-                    if (ipRow["Устройство"].ToString().Length == 0)
+                    string ipAddress = row["IP"].ToString();
+                    DataRow ipRow = result.Select($"IP = '{ipAddress}'")[0];
+
+                    if (ipRow != null)
                     {
-                        ipRow["Устройство"] = "Коммутатор";
-                        ipRow["Инвентарный номер"] = row["inventory_number"].ToString();
-                        ipRow["Имя"] = row["model"].ToString();
-                        ipRow["Комментарий"] = row["comment"].ToString();
+                        if (ipRow["Устройство"].ToString().Length == 0)
+                        {
+                            ipRow["Устройство"] = "Коммутатор";
+                            ipRow["ID"] = row["id"].ToString();
+                            ipRow["Инвентарный номер"] = row["inventory_number"].ToString();
+                            ipRow["Имя"] = row["model"].ToString();
+                            ipRow["Комментарий"] = row["comment"].ToString();
+                        }
+                        else
+                        {
+                            DataRow newRow = result.NewRow();
+                            newRow["IP"] = ipAddress;
+                            newRow["Устройство"] = "Коммутатор";
+                            newRow["ID"] = row["id"].ToString();
+                            newRow["Инвентарный номер"] = row["inventory_number"].ToString();
+                            newRow["Имя"] = row["model"].ToString();
+                            newRow["Комментарий"] = row["comment"].ToString();
+                            result.Rows.Add(newRow);
+                        }
                     }
-                    else
-                    {
-                        DataRow newRow = result.NewRow();
-                        newRow["IP"] = ipAddress;
-                        newRow["Устройство"] = "Коммутатор";
-                        newRow["Инвентарный номер"] = row["inventory_number"].ToString();
-                        newRow["Имя"] = row["model"].ToString();
-                        newRow["Комментарий"] = row["comment"].ToString();
-                        result.Rows.Add(newRow);
-                    }
-                }
+                } catch { }
             }
+            Console.WriteLine("GetIPsAsync: Коммутаторы отсканированы");
 
             return result;
         }

@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using MigApp.MVVM.ViewModel;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
-using System.Globalization;
-using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Reflection;
-using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 
 namespace MigApp
@@ -276,6 +271,60 @@ namespace MigApp
 
             // Запуск  нового  экземпляра  приложения
             Process.Start(Application.ResourceAssembly.Location);
+        }
+
+
+        public DataTable SortTableByIP(string sortDirection, DataTable table)
+        {
+            // 1.  Преобразовать строки IP в IPAddress
+            var ipAddressesWithRows = table.AsEnumerable()
+                .Select(row => new
+                {
+                    IpAddr = IPAddress.Parse(row.Field<string>("IP")),
+                    Row = row
+                });
+
+            // 2.  Сортировка  с  помощью  LINQ  и  CompareTo
+            IEnumerable<dynamic> sortedRows;
+            if (sortDirection == "ASC")
+            {
+                sortedRows = ipAddressesWithRows.OrderBy(x => x.IpAddr.GetAddressBytes(), new ByteArrayComparer());
+            }
+            else // sortDirection == "DESC"
+            {
+                sortedRows = ipAddressesWithRows.OrderByDescending(x => x.IpAddr.GetAddressBytes(), new ByteArrayComparer());
+            }
+
+            // 3.  Создать новый DataTable с отсортированными данными
+            DataTable sortedTable = table.Clone(); // Создаем пустую копию структуры Table
+            foreach (var item in sortedRows)
+            {
+                sortedTable.ImportRow(item.Row);
+            }
+
+            // 4.  Заменить старый DataTable новым
+            return sortedTable;
+        }
+    }
+
+    public class ByteArrayComparer : IComparer<byte[]>
+    {
+        public int Compare(byte[] x, byte[] y)
+        {
+            if (x.Length != y.Length)
+            {
+                return x.Length - y.Length; // Сравнение  по  длине
+            }
+
+            for (int i = 0; i < x.Length; i++)
+            {
+                if (x[i] != y[i])
+                {
+                    return x[i] - y[i]; // Сравнение  по  элементам
+                }
+            }
+
+            return 0; // Равны
         }
     }
 

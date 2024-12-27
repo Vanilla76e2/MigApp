@@ -67,7 +67,7 @@ namespace MigApp.Services
                 }
                 else if (viewModel is ComputersViewModel computersViewModel)
                 {
-                    await computersViewModel.LoadTableAsync();
+                    computersViewModel.LoadTableAsync();
                 }
                 else if (viewModel is LaptopsViewModel laptopsViewModel)
                 {

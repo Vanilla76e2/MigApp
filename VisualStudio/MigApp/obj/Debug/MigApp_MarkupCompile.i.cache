@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\App.xaml
-35-987564996
+36882111388
 
-66-430181112
+74-1857243307
 45-265134998
-CRWindows\AdminPanel\RoleWindow.xaml;CRWindows\AdminPanel\UsersWindow.xaml;CRWindows\EmpGroupWindow.xaml;CRWindows\EmployeesWindow.xaml;CRWindows\FurnitureTypeWindow.xaml;CRWindows\FurnitureWindow.xaml;CRWindows\MonitorWindow.xaml;CRWindows\NotebookWindow.xaml;CRWindows\OrgTechWindow.xaml;CRWindows\PCWindow.xaml;CRWindows\RoutersWindow.xaml;CRWindows\SwitchesWindow.xaml;CRWindows\TabletsWindow.xaml;LoginWindowOLD.xaml;MVVM\View\CCTVView.xaml;MVVM\View\ComputersView.xaml;MVVM\View\DepartmentView.xaml;MVVM\View\EmployeesView.xaml;MVVM\View\FavouriteView.xaml;MVVM\View\FurnitureTypesView.xaml;MVVM\View\FurnitureView.xaml;MVVM\View\IPView.xaml;MVVM\View\LaptopsView.xaml;MVVM\View\LoginView.xaml;MVVM\View\LogsView.xaml;MVVM\View\MainView.xaml;MVVM\View\MonitorsView.xaml;MVVM\View\OrgtechView.xaml;MVVM\View\RolesView.xaml;MVVM\View\RoutersView.xaml;MVVM\View\SwitchesView.xaml;MVVM\View\TabletsVeiw.xaml;MVVM\View\UsersView.xaml;Resources\Them1.xaml;SearchWindow.xaml;
+CRWindows\AdminPanel\RoleWindow.xaml;CRWindows\AdminPanel\UsersWindow.xaml;CRWindows\EmpGroupWindow.xaml;CRWindows\EmployeesWindow.xaml;CRWindows\FurnitureTypeWindow.xaml;CRWindows\FurnitureWindow.xaml;CRWindows\MonitorWindow.xaml;MVVM\View\CRWidows\ComputersWindow.xaml;CRWindows\NotebookWindow.xaml;CRWindows\OrgTechWindow.xaml;CRWindows\RoutersWindow.xaml;CRWindows\SwitchesWindow.xaml;CRWindows\TabletsWindow.xaml;CustomElements\IPAddressControl.xaml;LoginWindowOLD.xaml;MVVM\View\MainWidowPanels\CCTVView.xaml;MVVM\View\MainWidowPanels\ComputersView.xaml;MVVM\View\MainWidowPanels\DepartmentView.xaml;MVVM\View\MainWidowPanels\EmployeesView.xaml;MVVM\View\MainWidowPanels\FavouriteView.xaml;MVVM\View\MainWidowPanels\FurnitureTypesView.xaml;MVVM\View\MainWidowPanels\FurnitureView.xaml;MVVM\View\MainWidowPanels\IPView.xaml;MVVM\View\MainWidowPanels\LaptopsView.xaml;MVVM\View\LoginView.xaml;MVVM\View\MainWidowPanels\LogsView.xaml;MVVM\View\MainView.xaml;MVVM\View\MainWidowPanels\MonitorsView.xaml;MVVM\View\MainWidowPanels\OrgtechView.xaml;MVVM\View\MainWidowPanels\RolesView.xaml;MVVM\View\MainWidowPanels\RoutersView.xaml;MVVM\View\MainWidowPanels\SwitchesView.xaml;MVVM\View\MainWidowPanels\TabletsVeiw.xaml;MVVM\View\MainWidowPanels\UsersView.xaml;Resources\Them1.xaml;SearchWindow.xaml;
 
 False
 
