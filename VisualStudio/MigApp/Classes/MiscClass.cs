@@ -1,6 +1,7 @@
 ﻿using MigApp.MVVM.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Diagnostics;
 using System.Net;
@@ -305,9 +306,44 @@ namespace MigApp
             // 4.  Заменить старый DataTable новым
             return sortedTable;
         }
+
+        public bool AreEqual<T>(DataTable table, ObservableCollection<T> observableCollection) // Сравнение данных в коллекции и таблице
+        {
+            if (table == null || observableCollection == null)
+                return false;
+            if (table.Rows.Count != observableCollection.Count)
+                return false;
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                var dataRow = table.Rows[i];
+                var observableItem = observableCollection[i];
+
+                if (CompareRowWithObject(dataRow, observableItem))
+                    return false;
+            }
+            return true;
+        }
+
+        private bool CompareRowWithObject<T>(DataRow dataRow, T observableItem) // Построчное сравнение данных в коллекции и таблице
+        {
+            var properties = typeof(T).GetProperties();
+
+            foreach (var property in properties)
+            {
+                if (dataRow.Table.Columns.Contains(property.Name))
+                {
+                    var dataValue = dataRow[property.Name];
+                    var itemValue = property.GetValue(observableItem);
+
+                    if (!Equals(dataValue, itemValue))
+                        return false;
+                }
+            }
+            return true;
+        }
     }
 
-    public class ByteArrayComparer : IComparer<byte[]>
+    public class ByteArrayComparer : IComparer<byte[]> // Сравнение для сортировки ip таблицы
     {
         public int Compare(byte[] x, byte[] y)
         {
@@ -327,5 +363,4 @@ namespace MigApp
             return 0; // Равны
         }
     }
-
 }

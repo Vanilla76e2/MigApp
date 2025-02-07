@@ -1,5 +1,6 @@
 ﻿using MigApp.Core;
 using MigApp.Services;
+using System;
 using System.Data;
 using System.Threading.Tasks;
 using System.Windows;
@@ -9,7 +10,8 @@ namespace MigApp.MVVM.ViewModel
 {
     internal class FavouriteViewModel : Core.ViewModel
     {
-        PostgreSQLClass pgsql = PostgreSQLClass.getinstance();
+        PostgreSQLClass pgsql = PostgreSQLClass.GetInstance();
+        ApplicationContext appContext = ApplicationContext.GetInstance();
 
         #region Таблица
         private DataTable table;
@@ -44,7 +46,7 @@ namespace MigApp.MVVM.ViewModel
         #endregion
 
         #region Фильтр
-        private string filter = $"Where user_id = {MigApp.Properties.Settings.Default.userID}";
+        private string filter;
         public string Filter
         {
             get => filter;
@@ -96,6 +98,8 @@ namespace MigApp.MVVM.ViewModel
 
         public FavouriteViewModel()
         {
+            filter = $"Where user_id = {appContext.CurrentUser.ID}";
+
             ClearFilterCommand = new RelayCommand(o => ClearFilter(), o => true);
             ApplyFilterCommand = new RelayCommand(o => ApplyFilter(), o => true);
 

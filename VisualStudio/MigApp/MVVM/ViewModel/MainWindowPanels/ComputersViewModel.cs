@@ -17,7 +17,7 @@ namespace MigApp.MVVM.ViewModel
 {
     internal class ComputersViewModel : Core.ViewModel
     {
-        PostgreSQLClass pgsql = PostgreSQLClass.getinstance();
+        PostgreSQLClass pgsql = PostgreSQLClass.GetInstance();
         GetModel getModel = new GetModel();
 
         #region Таблица

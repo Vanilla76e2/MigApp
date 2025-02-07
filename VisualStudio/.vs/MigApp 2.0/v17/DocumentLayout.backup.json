@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\migapp\\customelements\\ipaddresscontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\customelements\\ipaddresscontrol.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\migapp\\services\\postgresqlclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\services\\postgresqlclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\migapp\\customelements\\ipaddresscontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\customelements\\ipaddresscontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|c:\\myprograms\\github\\migapp\\visualstudio\\migapp\\mvvm\\viewmodel\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\mvvm\\viewmodel\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\migapp\\services\\applicationcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\services\\applicationcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|c:\\myprograms\\github\\migapp\\visualstudio\\migapp\\mvvm\\viewmodel\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\mvvm\\viewmodel\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\migapp\\mvvm\\viewmodel\\crwindows\\computerswindowmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\mvvm\\viewmodel\\crwindows\\computerswindowmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|c:\\myprograms\\github\\migapp\\visualstudio\\migapp\\mvvm\\view\\crwidows\\computerswindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -19,32 +31,22 @@
       "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\mvvm\\view\\crwidows\\computerswindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\migapp\\mvvm\\viewmodel\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\mvvm\\viewmodel\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\migapp\\mvvm\\viewmodel\\mainwindowpanels\\favouriteviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\mvvm\\viewmodel\\mainwindowpanels\\favouriteviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|c:\\myprograms\\github\\migapp\\visualstudio\\migapp\\mvvm\\view\\loginview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\mvvm\\view\\loginview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|MigApp||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|c:\\myprograms\\github\\migapp\\visualstudio\\migapp\\mvvm\\view\\loginview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\mvvm\\view\\loginview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\migapp\\classes\\miscclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\classes\\miscclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|c:\\myprograms\\github\\migapp\\visualstudio\\migapp\\resources\\them1.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\migapp\\resources\\them1.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\resources\\them1.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|c:\\myprograms\\github\\migapp\\visualstudio\\migapp\\mvvm\\viewmodel\\crwindows\\computerswindowmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\mvvm\\viewmodel\\crwindows\\computerswindowmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\migapp\\mvvm\\viewmodel\\mainwindowpanels\\computersviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\mvvm\\viewmodel\\mainwindowpanels\\computersviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\migapp\\core\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|solutionrelative:migapp\\core\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FEDB5790-DC3F-40F8-8008-E77CE3BE2AE5}|MigApp\\MigApp.csproj|c:\\myprograms\\github\\migapp\\visualstudio\\migapp\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|5e9a8ac2-4f34-4521-858f-4c248ba31532"
     }
   ],
   "DocumentGroupContainers": [
@@ -62,7 +64,131 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LoginViewModel.cs",
+              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\ViewModel\\LoginViewModel.cs",
+              "RelativeDocumentMoniker": "MigApp\\MVVM\\ViewModel\\LoginViewModel.cs",
+              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\ViewModel\\LoginViewModel.cs",
+              "RelativeToolTip": "MigApp\\MVVM\\ViewModel\\LoginViewModel.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABQAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-07T10:03:19.417Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\ViewModel\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "MigApp\\MVVM\\ViewModel\\MainViewModel.cs",
+              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\ViewModel\\MainViewModel.cs",
+              "RelativeToolTip": "MigApp\\MVVM\\ViewModel\\MainViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHwAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-07T05:12:22.335Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 7,
+              "Title": "FavouriteViewModel.cs",
+              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\ViewModel\\MainWindowPanels\\FavouriteViewModel.cs",
+              "RelativeDocumentMoniker": "MigApp\\MVVM\\ViewModel\\MainWindowPanels\\FavouriteViewModel.cs",
+              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\ViewModel\\MainWindowPanels\\FavouriteViewModel.cs",
+              "RelativeToolTip": "MigApp\\MVVM\\ViewModel\\MainWindowPanels\\FavouriteViewModel.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAgwEEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-04T10:51:58.203Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MigApp",
+              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj",
+              "RelativeDocumentMoniker": "MigApp\\MigApp.csproj",
+              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj",
+              "RelativeToolTip": "MigApp\\MigApp.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-02-04T10:44:08.18Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PostgreSQLClass.cs",
+              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\Services\\PostgreSQLClass.cs",
+              "RelativeDocumentMoniker": "MigApp\\Services\\PostgreSQLClass.cs",
+              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\Services\\PostgreSQLClass.cs",
+              "RelativeToolTip": "MigApp\\Services\\PostgreSQLClass.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABoAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-04T09:54:51.224Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ApplicationContext.cs",
+              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\Services\\ApplicationContext.cs",
+              "RelativeDocumentMoniker": "MigApp\\Services\\ApplicationContext.cs",
+              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\Services\\ApplicationContext.cs",
+              "RelativeToolTip": "MigApp\\Services\\ApplicationContext.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-04T09:54:38.264Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ComputersWindowModel.cs",
+              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\ViewModel\\CRWindows\\ComputersWindowModel.cs",
+              "RelativeDocumentMoniker": "MigApp\\MVVM\\ViewModel\\CRWindows\\ComputersWindowModel.cs",
+              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\ViewModel\\CRWindows\\ComputersWindowModel.cs",
+              "RelativeToolTip": "MigApp\\MVVM\\ViewModel\\CRWindows\\ComputersWindowModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-26T06:04:47.989Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MiscClass.cs",
+              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\Classes\\MiscClass.cs",
+              "RelativeDocumentMoniker": "MigApp\\Classes\\MiscClass.cs",
+              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\Classes\\MiscClass.cs",
+              "RelativeToolTip": "MigApp\\Classes\\MiscClass.cs",
+              "ViewState": "AgIAAIgAAAAAAAAAAAAAAKkAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-17T05:45:16.912Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "f31296da-258d-41dd-b201-bf8784389ddc",
+        "Display": 0,
+        "X": 43,
+        "Y": 97,
+        "Width": 1882,
+        "Height": 719,
+        "WindowState": 2
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "Them1.xaml",
               "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\Resources\\Them1.xaml",
               "RelativeDocumentMoniker": "MigApp\\Resources\\Them1.xaml",
@@ -75,148 +201,26 @@
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "LoginView.xaml.cs",
-              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\View\\LoginView.xaml.cs",
-              "RelativeDocumentMoniker": "MigApp\\MVVM\\View\\LoginView.xaml.cs",
-              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\View\\LoginView.xaml.cs",
-              "RelativeToolTip": "MigApp\\MVVM\\View\\LoginView.xaml.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAowB4AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-26T06:04:10.216Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "LoginView.xaml",
-              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\View\\LoginView.xaml",
-              "RelativeDocumentMoniker": "MigApp\\MVVM\\View\\LoginView.xaml",
-              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\View\\LoginView.xaml",
-              "RelativeToolTip": "MigApp\\MVVM\\View\\LoginView.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-26T06:03:58.374Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ComputersViewModel.cs",
-              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\ViewModel\\MainWindowPanels\\ComputersViewModel.cs",
-              "RelativeDocumentMoniker": "MigApp\\MVVM\\ViewModel\\MainWindowPanels\\ComputersViewModel.cs",
-              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\ViewModel\\MainWindowPanels\\ComputersViewModel.cs",
-              "RelativeToolTip": "MigApp\\MVVM\\ViewModel\\MainWindowPanels\\ComputersViewModel.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAAAHUAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-20T10:31:02.786Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "LoginViewModel.cs",
-              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\ViewModel\\LoginViewModel.cs",
-              "RelativeDocumentMoniker": "MigApp\\MVVM\\ViewModel\\LoginViewModel.cs",
-              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\ViewModel\\LoginViewModel.cs",
-              "RelativeToolTip": "MigApp\\MVVM\\ViewModel\\LoginViewModel.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAwwEEAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-18T09:59:51.992Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ComputersWindowModel.cs",
-              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\ViewModel\\CRWindows\\ComputersWindowModel.cs",
-              "RelativeDocumentMoniker": "MigApp\\MVVM\\ViewModel\\CRWindows\\ComputersWindowModel.cs",
-              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\ViewModel\\CRWindows\\ComputersWindowModel.cs",
-              "RelativeToolTip": "MigApp\\MVVM\\ViewModel\\CRWindows\\ComputersWindowModel.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAADcAAABKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-26T06:04:47.989Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Orientation": 0,
-      "VerticalTabListWidth": 256,
-      "FloatingWindowState": {
-        "Id": "07ebfca1-fcbb-4fd0-8274-dabdbeaab025",
-        "Display": 0,
-        "X": 43,
-        "Y": 326,
-        "Width": 1882,
-        "Height": 719,
-        "WindowState": 2
-      },
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 3,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "RelayCommand.cs",
-              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\Core\\RelayCommand.cs",
-              "RelativeDocumentMoniker": "MigApp\\Core\\RelayCommand.cs",
-              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\Core\\RelayCommand.cs",
-              "RelativeToolTip": "MigApp\\Core\\RelayCommand.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-20T06:55:06.699Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ComputersWindow.xaml.cs",
-              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\View\\CRWidows\\ComputersWindow.xaml.cs",
-              "RelativeDocumentMoniker": "MigApp\\MVVM\\View\\CRWidows\\ComputersWindow.xaml.cs",
-              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\View\\CRWidows\\ComputersWindow.xaml.cs",
-              "RelativeToolTip": "MigApp\\MVVM\\View\\CRWidows\\ComputersWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-26T06:04:53.412Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "ComputersWindow.xaml",
               "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\View\\CRWidows\\ComputersWindow.xaml",
               "RelativeDocumentMoniker": "MigApp\\MVVM\\View\\CRWidows\\ComputersWindow.xaml",
               "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\View\\CRWidows\\ComputersWindow.xaml",
               "RelativeToolTip": "MigApp\\MVVM\\View\\CRWidows\\ComputersWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-18T11:39:22.592Z",
+              "WhenOpened": "2025-01-16T10:04:27.847Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "IPAddressControl.xaml.cs",
-              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\CustomElements\\IPAddressControl.xaml.cs",
-              "RelativeDocumentMoniker": "MigApp\\CustomElements\\IPAddressControl.xaml.cs",
-              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\CustomElements\\IPAddressControl.xaml.cs",
-              "RelativeToolTip": "MigApp\\CustomElements\\IPAddressControl.xaml.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAlwEIAAABPAAAAAAAAAA==",
+              "DocumentIndex": 6,
+              "Title": "ComputersWindow.xaml.cs",
+              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\View\\CRWidows\\ComputersWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MigApp\\MVVM\\View\\CRWidows\\ComputersWindow.xaml.cs",
+              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MVVM\\View\\CRWidows\\ComputersWindow.xaml.cs",
+              "RelativeToolTip": "MigApp\\MVVM\\View\\CRWidows\\ComputersWindow.xaml.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-26T06:09:24.471Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "IPAddressControl.xaml",
-              "DocumentMoniker": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\CustomElements\\IPAddressControl.xaml",
-              "RelativeDocumentMoniker": "MigApp\\CustomElements\\IPAddressControl.xaml",
-              "ToolTip": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\CustomElements\\IPAddressControl.xaml",
-              "RelativeToolTip": "MigApp\\CustomElements\\IPAddressControl.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-12-19T05:22:25.904Z",
+              "WhenOpened": "2025-02-04T05:55:10.267Z",
               "EditorCaption": ""
             }
           ]

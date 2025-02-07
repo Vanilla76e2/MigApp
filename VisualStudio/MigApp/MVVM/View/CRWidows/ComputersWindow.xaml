@@ -71,11 +71,18 @@
                                         <RowDefinition Height="50"/>
                                         <RowDefinition Height="1*"/>
                                     </Grid.RowDefinitions>
-                                    <DataGrid Height="210" Style="{DynamicResource ManualDataGrid}" ItemsSource="{Binding Components}" VerticalAlignment="Bottom" Grid.Row="1">
+                                    <DataGrid Height="210" Style="{DynamicResource ManualDataGrid}" ItemsSource="{Binding Components}" VerticalAlignment="Bottom" CanUserAddRows="False" Grid.Row="1">
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Header="ID" IsReadOnly="True" Binding="{Binding id}"/>
                                             <DataGridTextColumn Header="Наименование" Binding="{Binding name}"/>
-                                            <DataGridTextColumn Header="Инвентарный номер" Binding="{Binding inventory_number}"/>
+                                            <DataGridTextColumn Header="Инвентарный номер" Binding="{Binding inventory_number}">
+                                                <DataGridTextColumn.EditingElementStyle>
+                                                    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}">
+                                                        <Setter Property="MaxLength" Value="15"/>
+                                                        <Setter Property="materialDesign:TextFieldAssist.CharacterCounterVisibility" Value="Collapsed"/>
+                                                    </Style>
+                                                </DataGridTextColumn.EditingElementStyle>
+                                            </DataGridTextColumn>
                                             <DataGridTextColumn Header="Спецификация" Binding="{Binding specifies}"/>
                                         </DataGrid.Columns>
                                     </DataGrid>
@@ -93,13 +100,13 @@
                                                         <materialDesign:PackIcon Kind="ArrowDownDropCircleOutline" Height="20" Width="20"/>
                                                     </StackPanel>
                                                 </MenuItem.Header>
-                                                <MenuItem Header="Материнская плата"/>
-                                                <MenuItem Header="ЦП" ToolTip="Центральный процессор"/>
-                                                <MenuItem Header="ОЗУ" ToolTip="Оперативная память"/>
-                                                <MenuItem Header="Блок питания"/>
-                                                <MenuItem Header="ГП" ToolTip="Графический процессор"/>
+                                                <MenuItem Header="Материнская плата" Command="{Binding AddMotherboard}"/>
+                                                <MenuItem Header="ЦП" ToolTip="Центральный процессор" Command="{Binding AddCPU}"/>
+                                                <MenuItem Header="ОЗУ" ToolTip="Оперативная память" Command="{Binding AddRAM}"/>
+                                                <MenuItem Header="Блок питания" Command="{Binding AddPS}"/>
+                                                <MenuItem Header="ГП" ToolTip="Графический процессор" Command="{Binding AddGPU}"/>
                                                 <Separator/>
-                                                <MenuItem Header="Другое"/>
+                                                <MenuItem Header="Другое" Command="{Binding AddOtherComponent}"/>
                                             </MenuItem>
                                         </Menu>
                                     </Grid>
@@ -110,12 +117,20 @@
                                         <RowDefinition Height="50"/>
                                         <RowDefinition Height="1*"/>
                                     </Grid.RowDefinitions>
-                                    <DataGrid Height="210" Style="{DynamicResource ManualDataGrid}" ItemsSource="{Binding Devices}" VerticalAlignment="Bottom" Grid.Row="1">
+                                    <DataGrid Height="210" Style="{DynamicResource ManualDataGrid}" ItemsSource="{Binding Devices}" CanUserAddRows="False" VerticalAlignment="Bottom" Grid.Row="1">
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Header="ID" IsReadOnly="True" Binding="{Binding id}"/>
                                             <DataGridTextColumn Header="Наименование" Binding="{Binding name}"/>
-                                            <DataGridTextColumn Header="Инвентарный номер" Binding="{Binding inventory_number}"/>
+                                            <DataGridTextColumn Header="Инвентарный номер" Binding="{Binding inventory_number}">
+                                                <DataGridTextColumn.EditingElementStyle>
+                                                    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignDataGridComboBoxEditableTextBox}">
+                                                        <Setter Property="MaxLength" Value="15"/>
+                                                        <Setter Property="materialDesign:TextFieldAssist.CharacterCounterVisibility" Value="Collapsed"/>
+                                                    </Style>
+                                                </DataGridTextColumn.EditingElementStyle>
+                                            </DataGridTextColumn>
                                             <DataGridTextColumn Header="Модель" Binding="{Binding model}"/>
+                                            <DataGridTextColumn Header="Спецификация" Binding="{Binding model}"/>
                                             <DataGridTextColumn Header="Комментарий" Binding="{Binding comment}"/>
                                         </DataGrid.Columns>
                                     </DataGrid>
@@ -133,10 +148,10 @@
                                                         <materialDesign:PackIcon Kind="ArrowDownDropCircleOutline" Height="20" Width="20"/>
                                                     </StackPanel>
                                                 </MenuItem.Header>
-                                                <MenuItem Header="Монитор"/>
-                                                <MenuItem Header="Оргтехника"/>
+                                                <MenuItem Header="Монитор" Command="{Binding AddMonitor}"/>
+                                                <MenuItem Header="ИБП" Command="{Binding AddUPS}"/>
                                                 <Separator/>
-                                                <MenuItem Header="Другое"/>
+                                                <MenuItem Header="Другое" Command="{Binding AddOtherDevice}"/>
                                             </MenuItem>
                                         </Menu>
                                     </Grid>
@@ -147,7 +162,7 @@
 
                     <TabItem Header="Журнал обслуживания" Margin="0 10 0 0">
                         <Border Style="{DynamicResource MainPanelBorder}" Margin="0 0 0 30">
-                            <Grid Margin="20 0 20 10">
+                            <Grid Margin="10 0 10 10">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="60"/>
                                     <RowDefinition/>
@@ -157,19 +172,47 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <Button Style="{DynamicResource AddButton}" ToolTip="Добавить запись">
+                                <Button Style="{DynamicResource AddButton}" ToolTip="Добавить запись" Command="{Binding AddService}">
                                     <Button.Content>
                                         <materialDesign:PackIcon Kind="Add" Width="30" Height="30" Margin="-15 -5" Foreground="#FF9700"/>
                                     </Button.Content>
                                 </Button>
                                 
                                 <TextBlock Text="Журнал обслуживания" Style="{DynamicResource Header}" Grid.Column="1"/>
-                                <DataGrid Grid.Row="1" Grid.ColumnSpan="2" Style="{DynamicResource ManualDataGrid}" ItemsSource="{DynamicResource ServiceHistory}">
+                                <DataGrid Grid.Row="1" Grid.ColumnSpan="2" Style="{DynamicResource ManualDataGrid}" ItemsSource="{Binding ServiceHistory}" CanUserAddRows="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="ID" IsReadOnly="True" Binding="{Binding id}"/>
-                                        <DataGridTextColumn Header="Дата" Binding="{Binding date}"/>
-                                        <DataGridTextColumn Header="Сотрудник" Binding="{Binding employee}"/>
-                                        <DataGridTextColumn Header="Описание работ" Binding="{Binding descryption}"/>
+                                        <DataGridTextColumn Header="ID" IsReadOnly="True" Binding="{Binding id}" MinWidth="50" MaxWidth="100"/>
+                                        <DataGridTemplateColumn Header="Дата" Width="100" CanUserResize="False">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding date}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                            <DataGridTemplateColumn.CellEditingTemplate>
+                                                <DataTemplate>
+                                                    <DatePicker SelectedDate="{Binding date, UpdateSourceTrigger=PropertyChanged}" Language="Ru"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellEditingTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="Сотрудник" MinWidth="200">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <ComboBox ItemsSource="{Binding DataContext.UserList, RelativeSource={RelativeSource AncestorType={x:Type local:ComputersWindow}}}" DisplayMemberPath="fio" SelectedValuePath="fio" SelectedValue="{Binding employee, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource MaterialDesignDataGridComboBox}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="Описание работ" Binding="{Binding description}" MaxWidth="485" MinWidth="200">
+                                            <DataGridTextColumn.EditingElementStyle>
+                                                <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}">
+                                                    <Setter Property="TextWrapping" Value="Wrap"/>
+                                                </Style>
+                                            </DataGridTextColumn.EditingElementStyle>
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MaterialDesignDataGridTextColumnStyle}">
+                                                    <Setter Property="TextWrapping" Value="Wrap"/>
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -181,7 +224,7 @@
                 <!--#region Buttons -->
                 <Grid Margin="15 30" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="1">
                     <StackPanel Width="150">
-                        <Button Content="Сохранить" Margin="0 10" FontSize="18" Click="Button_Click"/>
+                        <Button Content="Сохранить" Margin="0 10" FontSize="18"/>
                         <Button Content="Удалить" FontSize="18" Style="{DynamicResource MaterialDesignOutlinedButton}"/>
                     </StackPanel>
                 </Grid>

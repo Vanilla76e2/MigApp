@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -14,33 +15,43 @@ namespace MigApp.Services
 {
     internal class PostgreSQLClass
     {
+        // Строка подключения к БД
         string connectionString = $"Server={MigApp.Properties.Settings.Default.pgServer}; port={MigApp.Properties.Settings.Default.pgPort}; user id={MigApp.Properties.Settings.Default.pgUser}; password={MigApp.Properties.Settings.Default.pgPassword}; database={MigApp.Properties.Settings.Default.pgDatabase};";
         NpgsqlConnection pgCon;
 
         private PostgreSQLClass()
         {
 
-        }
+        } // Пустой конструктор класса для получения Singletone экземпляра класса
 
-        private static PostgreSQLClass instance;
+        private static PostgreSQLClass instance; // Объявление объекта для Singletone экземпляра класса
 
-        public static PostgreSQLClass getinstance()
+        private static readonly object _lock = new object(); // Объявление объекта для блокировки потоков
+
+        /// <summary>
+        /// Получение Singletone экземпляра класса
+        /// </summary>
+        /// <returns>PostgreSQLClass</returns>
+        public static PostgreSQLClass GetInstance()
         {
             if (instance == null)
-            {
-                instance = new PostgreSQLClass();
-            }
+                lock (_lock) // Блокирует потоки, если метод уже используется другим потоком
+                    if (instance == null)
+                        instance = new PostgreSQLClass(); // Установка экземпляра класса
             return instance;
-        }
+        } 
 
-        private async Task connection()
+        /// <summary>
+        /// Устанавливает соединение с базой данных
+        /// </summary>
+        private async Task Сonnection()
         {
             try
             {
-                pgCon = new NpgsqlConnection(connectionString);
+                pgCon = new NpgsqlConnection(connectionString); // Получение строки подключения к БД
                 if (pgCon.State == ConnectionState.Closed)
                 {
-                    await pgCon.OpenAsync();
+                    await pgCon.OpenAsync(); // Открытие соединения с БД
                     Console.WriteLine($"connection: Статус подключения = {pgCon.State.ToString()}");
                 }
             }
@@ -48,21 +59,25 @@ namespace MigApp.Services
             {
                 Console.WriteLine($"connection: Ошибка при подключении к PostgreSQL: {ex.Message}");
             }
-        }
+        } 
 
-        // Проверка подключения
+        /// <summary>
+        /// Проверяет возможность подключения к базе данных
+        /// </summary>
+        /// <returns></returns>
         public async Task<bool> ConnectionTest()
         {
             Console.WriteLine("\nConnectionTest: Начата проверка подключения к PostgreSQL");
+            // Установка строки подключения
             connectionString = $"Server={MigApp.Properties.Settings.Default.pgServer}; port={MigApp.Properties.Settings.Default.pgPort}; user id={MigApp.Properties.Settings.Default.pgUser}; password={MigApp.Properties.Settings.Default.pgPassword}; database={MigApp.Properties.Settings.Default.pgDatabase};"; 
             try
             {
-                pgCon = new NpgsqlConnection(connectionString);
-                var conTask = pgCon.OpenAsync();
-                if (await Task.WhenAny(conTask, Task.Delay(TimeSpan.FromSeconds(10))) == conTask)
+                pgCon = new NpgsqlConnection(connectionString); // Получение строки подключения к БД
+                var conTask = pgCon.OpenAsync(); // Открытие соединения с БД
+                if (await Task.WhenAny(conTask, Task.Delay(TimeSpan.FromSeconds(10))) == conTask) // Ожидание подключения в течнии 10 секунд
                 {
                     Console.WriteLine($"ConnectionTest: Статус подключения = {pgCon.State.ToString()}");
-                    pgCon.Dispose();
+                    pgCon.Dispose(); // Закрытие соединения с БД
                     Console.WriteLine($"ConnectionTest: Результат проверки: успех\nConnectionTest: Статус подключения = {pgCon.State.ToString()}");
                     return true;
                 }
@@ -78,21 +93,20 @@ namespace MigApp.Services
                 Console.WriteLine($"ConnectionTest: Результат проверки: {ex.Message}");
                 return false; 
             }
-        }
+        } // Проверка подключения
 
-        // Запрос с возвратом
         public async Task<string> ReqRef(string text)
         {
             try
             {
                 Console.WriteLine("\nReqRef: Отправлен запрос с возвратом");
-                await connection();
+                await Сonnection(); // Открытие соединения с БД
                 Console.WriteLine($"ReqRef: Отправлен запрос '{text}'");
-                NpgsqlCommand com = new NpgsqlCommand(text, pgCon);
-                var result = await com.ExecuteScalarAsync();
+                NpgsqlCommand com = new NpgsqlCommand(text, pgCon); // Сборка пакета запроса
+                var result = await com.ExecuteScalarAsync(); // Чтение ответа от БД
                 if (result != null)
                 {
-                    return Convert.ToString(result);
+                    return Convert.ToString(result); // Возврат результата
                 }
                 else
                 {
@@ -106,43 +120,33 @@ namespace MigApp.Services
                 MessageBox.Show("Error ReqRef\nНе удалось выполнить запрос.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return "";
             }
-            finally 
-            { 
-                pgCon.Dispose();
-                Console.WriteLine($"ReqRef: Статус подключения = {pgCon.State.ToString()}");
-            }
-        }
+        } // Запрос с возвратом
 
-        // Запрос без возврата
+        
         public async Task ReqNonRef(string text)
         {
             try
             {
                 Console.WriteLine("\nReqNonRef: Отправлен запрос без возврата");
-                await connection();
-                NpgsqlCommand com = new NpgsqlCommand(text, pgCon);
-                await com.ExecuteNonQueryAsync();
+                await connection(); // Открытие соединения с БД
+                NpgsqlCommand com = new NpgsqlCommand(text, pgCon); // Сборка пакета запроса
+                await com.ExecuteNonQueryAsync(); // Ожидание выполнения запроса
             }
             catch (Exception ex)
             { 
                 Console.WriteLine($"ReqNonRef: Ошибка при выполнении запроса: {ex.Message}");
                 MessageBox.Show("Error ReqNonRef\nНе удалось выполнить запрос.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); 
             }
-            finally 
-            { 
-                pgCon.Dispose();
-                Console.WriteLine($"ReqNonRef: Статус подключения = {pgCon.State.ToString()}");
-            }
-        }
+        } // Запрос без возврата
 
-        // Запрос на удаление
+        
         public async Task ReqDel(string text)
         {
             try
             {
                 Console.WriteLine("\nReqDel: Отправлен запрос на удаление");
-                await connection();
-                NpgsqlCommand com = new NpgsqlCommand(text, PostgreSQLClass.getinstance().pgCon);
+                await Сonnection(); // Открытие соединения с БД
+                NpgsqlCommand com = new NpgsqlCommand(text, PostgreSQLClass.GetInstance().pgCon);
                 await com.ExecuteNonQueryAsync();
             }
             catch (Exception ex)
@@ -150,12 +154,7 @@ namespace MigApp.Services
                 Console.WriteLine($"ReqDel: Ошибка при выполнении запроса: {ex.Message}");
                 MessageBox.Show("Не удалось удалить поле!\nВозможно оно используется как внешний ключ.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            finally
-            { 
-                pgCon.Dispose();
-                Console.WriteLine($"ReqDel: Статус подключения = {pgCon.State.ToString()}");
-            }
-        }
+        } // Запрос на удаление
 
         // Получение таблицы
         public async Task<DataTable> GetTable(string items, string table, string command)
@@ -163,7 +162,7 @@ namespace MigApp.Services
             try
             {
                 Console.WriteLine($"\nGetTable: Отправлен запрос на получение таблицы {table}");
-                await connection();
+                await Сonnection();
                 NpgsqlCommand com = new NpgsqlCommand($"SELECT {items} FROM {table} {command}", pgCon);
                 NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(com);
                 DataTable Table = new DataTable($"{table}");
@@ -177,11 +176,6 @@ namespace MigApp.Services
                 DataTable Table = new DataTable($"{table}");
                 return Table;
             }
-            finally 
-            { 
-                pgCon.Dispose();
-                Console.WriteLine($"GetTable: Статус подключения = {pgCon.State.ToString()}");
-            }
         }
 
         // Отправка таблицы
@@ -190,7 +184,7 @@ namespace MigApp.Services
             try
             {
                 Console.WriteLine("\nSendComputersComponents: Отправлен запрос на заполнение таблицы");
-                await connection();
+                await Сonnection();
                 foreach (DataRow row in table.Rows)
                 {
                     
@@ -199,12 +193,7 @@ namespace MigApp.Services
             catch (Exception ex)
             {
                 Console.WriteLine($"SendComputersComponents: {ex.Message}");
-            }
-            finally
-            {
-                pgCon.Dispose();
-                Console.WriteLine($"SendComputersComponents: Статус подключения = {pgCon.State.ToString()}");
-            }
+            } Console.WriteLine($"SendComputersComponents: Статус подключения = {pgCon.State.ToString()}");
         }
 
         // Логирование

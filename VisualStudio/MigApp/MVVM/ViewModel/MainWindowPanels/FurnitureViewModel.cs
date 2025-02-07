@@ -13,7 +13,7 @@ namespace MigApp.MVVM.ViewModel
 {
     internal class FurnitureViewModel: Core.ViewModel
     {
-        PostgreSQLClass pgsql = PostgreSQLClass.getinstance();
+        PostgreSQLClass pgsql = PostgreSQLClass.GetInstance();
 
         #region Таблица
 

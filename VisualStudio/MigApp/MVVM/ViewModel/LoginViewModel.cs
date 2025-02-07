@@ -17,15 +17,17 @@ namespace MigApp.MVVM.ViewModel
 {
     internal class LoginViewModel : Core.ViewModel
     {
-        PostgreSQLClass pgsql = PostgreSQLClass.getinstance();
-        MiscClass mc = new MiscClass();
-        Encrypter enc = new Encrypter();
-        private readonly IServiceProvider _serviceProvider;
-        private readonly INavigationService _navigationService;
+        PostgreSQLClass pgsql = PostgreSQLClass.GetInstance(); // Объявление класса для подключения к БД
+        ApplicationContext appContext = ApplicationContext.GetInstance(); // Объявление класса для использования контекста данных приложения
+        MiscClass mc = new MiscClass(); // Объявление класса для использования различных методов
+        Encrypter enc = new Encrypter(); // Объявление класса для использования шифрования
+        private readonly IServiceProvider _serviceProvider; // Объявление сервис-провайдера для разрешения зависимостей
+        private readonly INavigationService _navigationService; // Объявление сервиса навигатора для переключения между представлениями
 
 
         #region Переменные
-        private bool isSettingsOn { get; set; } = false;
+        private bool isSettingsOn { get; set; } = false;  // Параметр хранящий статус видимости настроек
+        // Установка и получение параметра статуса отображения настроек
         public bool IsSettingsOn
         {
             get => isSettingsOn;
@@ -35,16 +37,9 @@ namespace MigApp.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-        public bool IsSettingsOff
-        {
-            get
-            {
-                return !isSettingsOn;
-            }
-        }
 
         // Авторизация
-        private bool isConnectionCorrect { get; set; }
+        private bool isConnectionCorrect { get; set; } // Параметр хранящий статус подключения к БД
         public bool IsConnectionCorrect
         {
             get => isConnectionCorrect;
@@ -53,9 +48,9 @@ namespace MigApp.MVVM.ViewModel
                 isConnectionCorrect = value;
                 OnPropertyChanged();
             }
-        }
+        } // Установка и получение параметра статуса подключения к БД
 
-        private bool isLoading { get; set; } = true;
+        private bool isLoading { get; set; } = true; // Параметр хранящий статус отображения загрзуки
         public bool IsLoading
         {
             get => isLoading;
@@ -64,9 +59,9 @@ namespace MigApp.MVVM.ViewModel
                 isLoading = value;
                 OnPropertyChanged();
             }
-        }
+        } // Установка и получение параметра статуса отображения загрузки
 
-        private string userLogin { get; set; } = string.Empty;
+        private string userLogin { get; set; } = string.Empty; // Параметр хранящий логин пользователя
         public string UserLogin
         {
             get => userLogin;
@@ -74,8 +69,9 @@ namespace MigApp.MVVM.ViewModel
             {
                 userLogin = value;
             }
-        }
-        private string userPassword { get; set; } = string.Empty;
+        } // Установка и получение логина пользователя
+
+        private string userPassword { get; set; } = string.Empty; // Параметр хранящий пароль пользователя
         public string UserPassword
         {
             get => userPassword;
@@ -83,11 +79,12 @@ namespace MigApp.MVVM.ViewModel
             {
                 userPassword = enc.HashPassword(value.ToString());
             }
-        }
-        public bool IsPasswordRemembered { get; set; }
+        } // Установка и получение пароля пользователя
+
+        public bool IsPasswordRemembered { get; set; } // Параметр хранящий статус сохранения данных входа
 
         // Настройки
-        private string dbServer { get; set; }
+        private string dbServer { get; set; } // Параметр хранящий сервер для подключения к БД
         public string DBServer
         {
             get => dbServer;
@@ -96,9 +93,9 @@ namespace MigApp.MVVM.ViewModel
                 dbServer = value;
                 OnPropertyChanged();
             }
-        }
+        } // Установка и получение сервера для подключения к БД
 
-        private string dbPort { get; set; }
+        private string dbPort { get; set; } // Параметр хранящий порт для подключения к БД
         public string DBPort
         {
             get => dbPort;
@@ -107,9 +104,9 @@ namespace MigApp.MVVM.ViewModel
                 dbPort = value;
                 OnPropertyChanged();
             }
-        }
+        } // Установка и получение порта для подключения к БД
 
-        private string dbName { get; set; }
+        private string dbName { get; set; } // Параметр хранящий имя БД
         public string DBName
         {
             get => dbName;
@@ -118,9 +115,9 @@ namespace MigApp.MVVM.ViewModel
                 dbName = value;
                 OnPropertyChanged();
             }
-        }
+        } // Установка и получение имени ЬД
 
-        private string dbUser { get; set; }
+        private string dbUser { get; set; } // Параметр хранящий имя пользователя от БД
         public string DBUser
         {
             get => dbUser;
@@ -129,9 +126,9 @@ namespace MigApp.MVVM.ViewModel
                 dbUser = value;
                 OnPropertyChanged();
             }
-        }
+        } // Установка и получение имени пользователя от БД
 
-        private string dbPassword { get; set; }
+        private string dbPassword { get; set; } // Параметр хранящий пароль от БД
         public string DBPassword
         {
             get => dbPassword;
@@ -140,27 +137,30 @@ namespace MigApp.MVVM.ViewModel
                 dbPassword = value;
                 OnPropertyChanged();
             }
-        }
+        } // Установка и получение пароля от БД
         #endregion
 
         #region Команды
 
-        public RelayCommand LoginCommand { get; set; }
-        public RelayCommand SettingsCommitCommand { get; set; }
+        public RelayCommand LoginCommand { get; set; } // Объявление команды на авторизацию
+        public RelayCommand SettingsCommitCommand { get; set; } // Объявление команды на сохранение настроек
 
         #endregion
 
+        // Основной конструктор класса LoginViewModel
         public LoginViewModel(IServiceProvider serviceProvider)
         {
-            _serviceProvider = serviceProvider;
-            _navigationService = serviceProvider.GetRequiredService<INavigationService>();
+            _serviceProvider = serviceProvider; // Установка сервис-провайдера для разрешения зависимостей
+            _navigationService = serviceProvider.GetRequiredService<INavigationService>(); // Установка сервиса навигатора для переключения между представлениями
 
+            // Восстановление данных пользователя
             #region Данные пользователя
             IsPasswordRemembered = MigApp.Properties.Settings.Default.userRemember;
             userLogin = MigApp.Properties.Settings.Default.userLogin;
             userPassword = MigApp.Properties.Settings.Default.userPassword;
             #endregion
 
+            // Восстановление данных для подключения
             #region Данные подключения
             DBServer = MigApp.Properties.Settings.Default.pgServer;
             DBPort = MigApp.Properties.Settings.Default.pgPort;
@@ -168,23 +168,23 @@ namespace MigApp.MVVM.ViewModel
             DBUser = MigApp.Properties.Settings.Default.pgUser;
             #endregion
 
-            LoginCommand = new RelayCommand(async o => await ExecuteLoginCommand(), o => true);
-            SettingsCommitCommand = new RelayCommand(async o => await OnSettingsCommit(), o => true);
+            LoginCommand = new RelayCommand(async o => await ExecuteLoginCommand(), o => true); // Установка команды авторизации
+            SettingsCommitCommand = new RelayCommand(async o => await OnSettingsCommit(), o => true); // Установка команды сохранения настроек
 
         }
 
         // Проверка подключения
         public async Task InitializeAsync()
         {
-            IsLoading = true;
+            IsLoading = true; // Включить отображение загрузки
             try
             {
-                bool result = await pgsql.ConnectionTest();
-                IsConnectionCorrect = result;
+                bool result = await pgsql.ConnectionTest(); // Проверка подключения к БД
+                IsConnectionCorrect = result; // Установка статуса подключения к БД
                 if (!result)
                 {
                     MessageBox.Show("Подключение к базе данных отсутствует.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Error);
-                    IsSettingsOn = true;
+                    IsSettingsOn = true; // Включить отображение настройки, если не удалось установить соединение
                 }
             }
             catch (Exception ex)
@@ -193,7 +193,7 @@ namespace MigApp.MVVM.ViewModel
             }
             finally
             {
-                IsLoading = false;
+                IsLoading = false; // Отключить отображение загрузки
             }
         }
 
@@ -207,27 +207,26 @@ namespace MigApp.MVVM.ViewModel
             return;
             #endif
 
-            IsLoading = true;
+            IsLoading = true; // Включение отображения загрузки
             try
             {
-                bool isValid = await pgsql.CheckLogin(userLogin, userPassword);
+                bool isValid = await pgsql.CheckLogin(userLogin, userPassword); // Проверка данных пользователя
                 if (isValid)
                 {
-                    if (IsPasswordRemembered)
+                    if (IsPasswordRemembered) // Если установлен параметр запоминания данных, то данные сохраняются
                     {
                         MigApp.Properties.Settings.Default.userRemember = true;
                         MigApp.Properties.Settings.Default.userLogin = userLogin;
                         MigApp.Properties.Settings.Default.userPassword = userPassword;
-                        MigApp.Properties.Settings.Default.userID = await pgsql.GetUserID(userLogin);
                         MigApp.Properties.Settings.Default.Save();
                     }
 
-                    // Открыть MainView
-                    await _navigationService.NavigateToMainWindow();
+                    appContext.SetCurrentUser(userLogin); // Отправить данные пользователя в ApplicationContext
 
-                    // Закрыть LoginView
-                    var loginWindow = Application.Current.Windows.OfType<LoginView>().FirstOrDefault();
-                    if (loginWindow != null) { loginWindow.Close(); }
+                    await _navigationService.NavigateToMainWindow(); // Открыть MainView при помощи сервиса навигации
+
+                    var loginWindow = Application.Current.Windows.OfType<LoginView>().FirstOrDefault(); // Получить LoginView как экземпляр объекта
+                    if (loginWindow != null) { loginWindow.Close(); } // Закрыть LoginView
                 }
             }
             catch (Exception ex)
@@ -237,48 +236,54 @@ namespace MigApp.MVVM.ViewModel
             }
             finally
             {
-                IsLoading = false;
+                IsLoading = false; // Отключение отображения загрузки
             }
         }
 
         // Вход по памяти
         public async Task OnLoginRemembered()
         {
-            if (IsConnectionCorrect)
+            if (IsConnectionCorrect) // Проверка статуса соединения
             {
-                IsLoading = true;
+                IsLoading = true; // Включить отображение загрузки
                 try
                 {
-                    if (IsPasswordRemembered)
+                    if (IsPasswordRemembered) // Проверка параметра запоминания данных
                     {
-                        bool isValid = await pgsql.CheckRememberedLogin(userLogin, userPassword);
-                        if (isValid)
+                        bool isValid = await pgsql.CheckRememberedLogin(userLogin, userPassword); // Проверка данных пользователя
+                        if (isValid) // Если данные корректны, то открывается главное окно
                         {
-                            await _navigationService.NavigateToMainWindow();
-                            var loginWindow = Application.Current.Windows.OfType<LoginView>().FirstOrDefault();
-                            if (loginWindow != null) { loginWindow.Close(); }
+                            await _navigationService.NavigateToMainWindow(); // Открыть MainView при помощи сервиса навигации
+                            var loginWindow = Application.Current.Windows.OfType<LoginView>().FirstOrDefault(); // Получить LoginView как экземпляр объекта
+                            if (loginWindow != null) { loginWindow.Close(); } // Закрыть LoginView 
                         }
                     }
-
                 }
-                catch { }
-                finally { IsLoading = false; }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"OnLoginRemembered: {ex}");
+                    MessageBox.Show("Произошла непредвиденная ошибка.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                finally 
+                { 
+                    IsLoading = false; //Отключение отображения загрузки  
+                }
             }
         }
 
         // Изменение параметров подключения
         public async Task OnSettingsCommit()
         {
-            IsLoading = true;
+            IsLoading = true; // Включение отображения загрузки
             try
             {
-                SaveConnectionParametrs();
-                bool result = await pgsql.ConnectionTest();
-                IsConnectionCorrect = result;
+                SaveConnectionParametrs(); // Сохранение параметров подключения к БД
+                bool result = await pgsql.ConnectionTest(); // Проверка подключения к БД
+                IsConnectionCorrect = result; // Установка статуса подключения к БД
                 if (result)
                 {
                     MessageBox.Show("Подключение к базе данных установлено.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                    IsSettingsOn = false;
+                    IsSettingsOn = false; // Отключить отображение настроек
                 }
                 else
                 {
@@ -293,7 +298,7 @@ namespace MigApp.MVVM.ViewModel
             }
             finally
             {
-                IsLoading = false;
+                IsLoading = false; // Отключить отображение загрузки
             }
         }
 

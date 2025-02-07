@@ -16,7 +16,7 @@ namespace MigApp.MVVM.ViewModel
 {
     internal class IPViewModel : Core.ViewModel
     {
-        PostgreSQLClass pgsql = PostgreSQLClass.getinstance();
+        PostgreSQLClass pgsql = PostgreSQLClass.GetInstance();
         MiscClass mc = new MiscClass();
 
 

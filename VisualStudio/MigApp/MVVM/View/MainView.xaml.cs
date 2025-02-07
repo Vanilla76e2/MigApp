@@ -15,7 +15,7 @@ namespace MigApp.MVVM.View
 {
     public partial class MainView : Window
     {
-        PostgreSQLClass pgsql = PostgreSQLClass.getinstance();
+        PostgreSQLClass pgsql = PostgreSQLClass.GetInstance();
 
         public MainView()
         {

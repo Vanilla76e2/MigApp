@@ -9,7 +9,7 @@ namespace MigApp.Services
 {
     internal class GetModel
     {
-        PostgreSQLClass pgsql = PostgreSQLClass.getinstance();
+        PostgreSQLClass pgsql = PostgreSQLClass.GetInstance();
         public async Task<List<ComputersModel>> Computers(string filter)
         {
             var computers = new List<ComputersModel>();

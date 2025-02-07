@@ -12,7 +12,7 @@ namespace MigApp.MVVM.View
     /// </summary>
     public partial class LoginView : Window
     {
-        PostgreSQLClass pgsql = PostgreSQLClass.getinstance();
+        PostgreSQLClass pgsql = PostgreSQLClass.GetInstance();
 
         public LoginView()
         {

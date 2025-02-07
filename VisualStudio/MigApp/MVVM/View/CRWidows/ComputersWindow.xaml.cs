@@ -1,5 +1,6 @@
 ﻿using MigApp.MVVM.ViewModel.CRWindows;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace MigApp.MVVM.View.CRWindows
@@ -27,12 +28,6 @@ namespace MigApp.MVVM.View.CRWindows
             {
                 this.Close();
             }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Console.WriteLine("View " + Test.IP);
-            computersWindowModel.test();
         }
     }
 }

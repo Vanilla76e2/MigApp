@@ -97,7 +97,7 @@
                                                 </StackPanel>
                                             </Button>
 
-                                            <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToMonitorsCommand}">
+                                            <Button Style="{DynamicResource NavigationButton}" Command="{Binding NavigateToMonitorsCommand}" Visibility="Collapsed">
                                                 <StackPanel Orientation="Horizontal">
                                                     <materialDesign:PackIcon Kind="Monitor" Style="{DynamicResource NavigationIcons}"/>
                                                     <TextBlock Text="Мониторы" Style="{DynamicResource NavigationTextBlock}"/>
