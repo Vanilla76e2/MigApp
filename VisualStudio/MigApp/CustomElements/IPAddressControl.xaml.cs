@@ -49,19 +49,20 @@ namespace MigApp.CustomElements
 
         private void IPcheck(object sender, TextChangedEventArgs e)
         {
-            TextBox textBox = sender as TextBox;
-
-            if (textBox.Text.Length == 3)
-                MoveFocusToNextTextBox(GetTextBoxIndex(textBox));
-            try
+            if (sender is TextBox textBox)
             {
-                if (Convert.ToInt32(textBox.Text) > 255)
+                if (textBox.Text.Length == 3)
+                    MoveFocusToNextTextBox(GetTextBoxIndex(textBox));
+                try
                 {
-                    textBox.Text = "255";
-                    textBox.CaretIndex = textBox.Text.Length;
+                    if (Convert.ToInt32(textBox.Text) > 255)
+                    {
+                        textBox.Text = "255";
+                        textBox.CaretIndex = textBox.Text.Length;
+                    }
                 }
+                catch { }
             }
-            catch { }
         }
 
         private void IPGotFocus(object sender, KeyboardFocusChangedEventArgs e)

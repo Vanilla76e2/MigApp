@@ -1,5 +1,4 @@
-﻿
-using MigApp.Services;
+﻿using MigApp.Services;
 using Npgsql.PostgresTypes;
 
 namespace MigApp.Core
