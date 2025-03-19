@@ -3,93 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:MigApp"
              xmlns:viewModel="clr-namespace:MigApp.MVVM.ViewModel"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:view="clr-namespace:MigApp.MVVM.View">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Orange.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
-                <ResourceDictionary Source="Resources/Them1.xaml"/>
+                <materialDesign:BundledTheme BaseTheme="Dark" PrimaryColor="Orange" SecondaryColor="Lime" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
+                <ResourceDictionary Source="Resources/DarkTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
-            <DataTemplate DataType="{x:Type TypeName=viewModel:MainViewModel}">
-                <view:MainView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=viewModel:FavouriteViewModel}">
-                <view:FavouriteView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=viewModel:EmployeesViewModel}">
-                <view:EmployeesView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=viewModel:DepartmentViewModel}">
-                <view:DepartmentView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=viewModel:ComputersViewModel}">
-                <view:ComputersView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=viewModel:LaptopsViewModel}">
-                <view:LaptopsView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=viewModel:TabletsViewModel}">
-                <view:TabletsVeiw/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=viewModel:OrgtechViewModel}">
-                <view:OrgtechView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=viewModel:MonitorsViewModel}">
-                <view:MonitorsView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=viewModel:RoutersViewModel}">
-                <view:RoutersView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=viewModel:SwitchesViewModel}">
-                <view:SwitchesView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=viewModel:CCTVViewModel}">
-                <view:CCTVView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=viewModel:FurnitureViewModel}">
-                <view:FurnitureView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=viewModel:FurnitureTypeViewModel}">
-                <view:FurnitureTypesView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=viewModel:UsersViewModel}">
-                <view:UsersView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=viewModel:RolesViewModel}">
-                <view:RolesView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=viewModel:LogsViewModel}">
-                <view:LogsView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=viewModel:IPViewModel}">
-                <view:IPView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type TypeName=viewModel:LoginViewModel}">
-                <view:LoginView/>
-            </DataTemplate>
-
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

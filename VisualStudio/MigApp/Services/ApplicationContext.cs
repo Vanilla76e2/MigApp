@@ -4,14 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Data;
 
 namespace MigApp.Services
 {
     internal class ApplicationContext
     {
-        PostgreSQLClass pgsql = PostgreSQLClass.GetInstance(); // Объявляем класс для подключения к БД
+         // Объявляем класс для подключения к БД
 
         private ApplicationContext()
         {
@@ -38,31 +37,31 @@ namespace MigApp.Services
         #region Данные о текущем пользователе
         public async void SetCurrentUser(string login)
         {
-            // Устанавливаем логин пользователя
-            CurrentUser.Login = login;
+            //// Устанавливаем логин пользователя
+            //CurrentUser.Login = login;
 
-            // Получаем ID пользователя
-            CurrentUser.ID = await pgsql.GetUserID(login);
+            //// Получаем ID пользователя
+            //CurrentUser.ID = await pgsql.GetUserID(login);
 
-            // Получаем ФИО пользователя
-            CurrentUser.FIO = await pgsql.ReqRef($"SELECT fio FROM \"Misc\".users_profiles_view WHERE users_profiles.id = {CurrentUser.ID}");
+            //// Получаем ФИО пользователя
+            //CurrentUser.FIO = await pgsql.ReqRef($"SELECT fio FROM \"Misc\".users_profiles_view WHERE users_profiles.id = {CurrentUser.ID}");
 
-            // Получаем ID роли
-            CurrentUser.RoleID = await pgsql.ReqRef($"SELECT role FROM \"Misc\".users_profiles WHERE id = {CurrentUser.ID}");
+            //// Получаем ID роли
+            //CurrentUser.RoleID = await pgsql.ReqRef($"SELECT role FROM \"Misc\".users_profiles WHERE id = {CurrentUser.ID}");
 
-            // Получем данные о роли
-            DataTable table = await pgsql.GetTable("*", "\"Misc\".roles", $"id = {CurrentUser.RoleID}");
-            if (table != null && table.Rows.Count > 0)
-            {
-                DataRow row = table.Rows[0];
+            //// Получем данные о роли
+            //DataTable table = await pgsql.GetTable("*", "\"Misc\".roles", $"id = {CurrentUser.RoleID}");
+            //if (table != null && table.Rows.Count > 0)
+            //{
+            //    DataRow row = table.Rows[0];
 
-                // Установка параметров роли
-                CurrentUser.RoleName = row["role_name"].ToString();
-                CurrentUser.IsAdmin = row["administrator_permission"] == DBNull.Value ? null : (bool?)Convert.ToBoolean(row["administrator_permission"]);
-                CurrentUser.CanEditTechnics = row["employees_permission"] == DBNull.Value ? null : (bool?)Convert.ToBoolean(row["employees_permission"]);
-                CurrentUser.CanEditEmployees = row["technics_permission"] == DBNull.Value ? null : (bool?)Convert.ToBoolean(row["technics_permission"]);
-                CurrentUser.CanEditFurniture = row["furniture_permission"] == DBNull.Value ? null : (bool?)Convert.ToBoolean(row["furniture_permission"]);
-            }
+            //    // Установка параметров роли
+            //    CurrentUser.RoleName = row["role_name"].ToString();
+            //    CurrentUser.IsAdmin = row["administrator_permission"] == DBNull.Value ? null : (bool?)Convert.ToBoolean(row["administrator_permission"]);
+            //    CurrentUser.CanEditTechnics = row["employees_permission"] == DBNull.Value ? null : (bool?)Convert.ToBoolean(row["employees_permission"]);
+            //    CurrentUser.CanEditEmployees = row["technics_permission"] == DBNull.Value ? null : (bool?)Convert.ToBoolean(row["technics_permission"]);
+            //    CurrentUser.CanEditFurniture = row["furniture_permission"] == DBNull.Value ? null : (bool?)Convert.ToBoolean(row["furniture_permission"]);
+            //}
 
         }
 
