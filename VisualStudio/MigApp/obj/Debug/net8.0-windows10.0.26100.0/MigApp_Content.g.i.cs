@@ -8,7 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("illink.descriptors.librarybuild.xml")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/icon.ico")]
 
 

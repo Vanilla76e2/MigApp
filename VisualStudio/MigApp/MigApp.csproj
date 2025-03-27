@@ -17,6 +17,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Services\**" />
+    <Page Remove="Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Images\Icon.ico" />
   </ItemGroup>
 
@@ -78,10 +85,6 @@
     <Using Include="MigApp.Core.Services" />
     <Using Include="MigApp.Data" />
     <Using Include="System.Diagnostics" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\DataBaseServices\" />
   </ItemGroup>
 
 </Project>

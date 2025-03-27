@@ -1,14 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace MigApp.Core.Services.AppUpdate
 {
     interface IAppUpdateService
     {
-        Task<bool> CheckDorUpdatesAsync();
+        /// <summary>
+        /// Начинает процесс обновления приложения.
+        /// </summary>
         Task UpdateApplication();
+
+        /// <summary>
+        /// Сравнивает полученную версию с текущей.
+        /// </summary>
+        /// <returns>Возвращает ture если полученная версия новее, false если установлена последняя версия.</returns>
+        bool IsNewerVersionAvailable(ReleaseInfo releaseInfo);
+
+        Task<ReleaseInfo?> GetLatestReleaseInfoAsync();
     }
 }

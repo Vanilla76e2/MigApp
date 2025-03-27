@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Converters;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Security.Policy;
 
 namespace MigApp.Core.Services
 {
@@ -13,6 +12,7 @@ namespace MigApp.Core.Services
     internal class InternetService : IInternetService
     {
         private readonly IDnsResolver _dnsResolver;
+        private readonly HttpClient _httpClient = new HttpClient();
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="InternetService"/>.
@@ -41,6 +41,28 @@ namespace MigApp.Core.Services
                 return false;
             }
 
+        }
+
+        /// <summary>
+        /// Выполняет HTTP GET-запрос к указанному URI с заданными заголовками.
+        /// </summary>
+        /// <param name="uri">Базовый URI для запроса</param>
+        /// <param name="headerName">Имя добавляемого заголовка</param>
+        /// <param name="values">Значения заголовка</param>
+        /// <returns>Объект HttpResponseMessage с ответом сервера</returns>
+        /// <exception cref="ArgumentNullException">Выбрасывается, если uri, headerName или values равны null</exception>
+        /// <exception cref="HttpRequestException">Выбрасывается при неудачном запросе (Status Code не 2XX)</exception>
+        public async Task<HttpResponseMessage> GetHttpResponseAsync(string uri, string headerName, string? value)
+        {
+            ArgumentNullException.ThrowIfNull(uri, nameof(uri));
+            ArgumentNullException.ThrowIfNull(headerName, nameof(uri));
+
+            _httpClient.BaseAddress = new Uri(uri);
+            _httpClient.DefaultRequestHeaders.Add(headerName, value);
+
+            HttpResponseMessage response = await _httpClient.GetAsync("");
+            response.EnsureSuccessStatusCode();
+            return response;
         }
     }
 }

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp.Tests\\MigApp.Tests.csproj": {}
+    "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp.Tests\\MigApp.Tests.csproj": {}
   },
   "projects": {
-    "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp.Tests\\MigApp.Tests.csproj": {
+    "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp.Tests\\MigApp.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp.Tests\\MigApp.Tests.csproj",
+        "projectUniqueName": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp.Tests\\MigApp.Tests.csproj",
         "projectName": "MigApp.Tests",
-        "projectPath": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp.Tests\\MigApp.Tests.csproj",
-        "packagesPath": "C:\\Users\\Vanilla76e2\\.nuget\\packages\\",
-        "outputPath": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp.Tests\\obj\\",
+        "projectPath": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp.Tests\\MigApp.Tests.csproj",
+        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
+        "outputPath": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Vanilla76e2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -32,8 +32,8 @@
           "net8.0-windows10.0.26100": {
             "targetAlias": "net8.0-windows10.0.26100.0",
             "projectReferences": {
-              "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj": {
-                "projectPath": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj"
+              "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj": {
+                "projectPath": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj"
               }
             }
           }
@@ -118,24 +118,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj": {
+    "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj",
+        "projectUniqueName": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj",
         "projectName": "MigApp",
-        "projectPath": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj",
-        "packagesPath": "C:\\Users\\Vanilla76e2\\.nuget\\packages\\",
-        "outputPath": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\obj\\",
+        "projectPath": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj",
+        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
+        "outputPath": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Vanilla76e2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -321,7 +321,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

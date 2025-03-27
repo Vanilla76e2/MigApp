@@ -1,35 +1,16 @@
 ﻿namespace MigApp.Core.Services
 {
+    /// <summary>
+    /// Сервис для проверки подключения к интернету и версии приложения.
+    /// </summary>
     interface IVersionService
     {
         /// <summary>
-        /// Сервис для проверки подключения к интернету и версии приложения.
+        /// Асинхронно получает информацию о последнем релизе.
         /// </summary>
-        public interface IVersionService
-        {
-            /// <summary>
-            /// Асинхронно проверяет наличие интернет-соединения.
-            /// </summary>
-            /// <returns></returns>
-            Task HasInternetConnectionAsync();
+        /// <returns></returns>
+        Task<ReleaseInfo?> GetLatestReleaseInfoAsync();
 
-            /// <summary>
-            /// Асинхронно получает информацию о последнем релизе.
-            /// </summary>
-            /// <returns></returns>
-            Task<ReleaseInfo?> GetLatestReleaseInfoAsync();
-
-            /// <summary>
-            /// Проверяет, доступно ли новое обновление.
-            /// </summary>
-            /// <returns></returns>
-            bool IsNewerVersionAvailable();
-
-            /// <summary>
-            /// Асинхронно обновляет приложение.
-            /// </summary>
-            /// <returns></returns>
-            Task UpdateApplicationAsync();
-        }
+        string GetCurrentVersion();
     }
 }
