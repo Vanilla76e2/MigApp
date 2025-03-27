@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using MigApp.Core;
+using MigApp.Core.Services.DatabaseService;
+using MigApp.Core.Services.NavigationService;
+using MigApp.Core.Session;
 using MigApp.MVVM.View;
 using MigApp.MVVM.ViewModel;
-using MigApp.Services;
-using System.Configuration;
 using System.Windows;
 
 namespace MigApp;
@@ -23,7 +23,11 @@ public partial class App : Application
         // Регистрация сервисов
         services.AddSingleton<INavigationService, NavigationService>();
         services.AddSingleton<IVersionService, VersionService>();
-        services.AddSingleton<IAppLogger, LoggerService>();
+        services.AddSingleton<IAppLogger, AppLogger>();
+        services.AddTransient<IDatabaseService, DatabaseService>();
+        services.AddScoped<ISecurityService, SecurityService>();
+        services.AddScoped<IUserSession, UserSession>();
+        services.AddTransient<IInternetService, InternetService>();
         services.AddSingleton<CrashLogger>();
 
         services.AddScoped<LoginWindow>(provider => new LoginWindow(provider));

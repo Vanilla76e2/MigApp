@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MigApp.MVVM.ViewModel;
-using MigApp.Services;
+
 using System;
 using System.Windows;
 using System.Windows.Controls;

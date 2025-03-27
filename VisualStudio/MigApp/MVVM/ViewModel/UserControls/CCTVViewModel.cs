@@ -1,4 +1,4 @@
-﻿using MigApp.Services;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +16,7 @@ using System.Collections.ObjectModel;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using MigApp.Interfaces;
+using MigApp.Core.Services;
 
 namespace MigApp.MVVM.ViewModel
 {

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+using MigApp.Core.Authorization;
 
 namespace MigApp.Data;
 
@@ -17,13 +15,13 @@ public partial class Role
     public bool IsAdministrator { get; set; }
 
     [Column("employees_accesslevel")]
-    public int EmployeesAccesslevel { get; set; }
+    public RolePermission EmployeesAccesslevel { get; set; }
 
     [Column("technics_accesslevel")]
-    public int TechnicsAccesslevel { get; set; }
+    public RolePermission TechnicsAccesslevel { get; set; }
 
     [Column("furniture_accesslevel")]
-    public int FurnitureAccesslevel { get; set; }
+    public RolePermission FurnitureAccesslevel { get; set; }
 
     [Column("role_name")]
     [StringLength(255)]

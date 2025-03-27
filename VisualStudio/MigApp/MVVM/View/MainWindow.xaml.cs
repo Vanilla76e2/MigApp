@@ -1,7 +1,8 @@
 ﻿
 using Microsoft.Extensions.DependencyInjection;
+using MigApp.Core.Services.NavigationService;
 using MigApp.MVVM.ViewModel;
-using MigApp.Services;
+
 using System.Windows;
 using System.Windows.Input;
 
