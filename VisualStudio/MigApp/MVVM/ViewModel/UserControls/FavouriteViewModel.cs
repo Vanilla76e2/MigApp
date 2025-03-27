@@ -1,5 +1,5 @@
 ﻿using MigApp.Core;
-using MigApp.Services;
+
 using System;
 using System.Data;
 using System.Threading.Tasks;
@@ -11,7 +11,7 @@ namespace MigApp.MVVM.ViewModel
     internal class FavouriteViewModel : Core.ViewModel
     {
         
-        ApplicationContext appContext = ApplicationContext.GetInstance();
+        //ApplicationContext appContext = ApplicationContext.GetInstance();
 
         #region Таблица
         private DataTable table;
@@ -98,7 +98,6 @@ namespace MigApp.MVVM.ViewModel
 
         public FavouriteViewModel()
         {
-            filter = $"Where user_id = {appContext.CurrentUser.ID}";
 
             ClearFilterCommand = new RelayCommand(o => ClearFilter(), o => true);
             ApplyFilterCommand = new RelayCommand(o => ApplyFilter(), o => true);

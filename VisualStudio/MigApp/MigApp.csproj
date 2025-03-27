@@ -17,11 +17,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Services\**" />
+    <Page Remove="Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Images\Icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="CredentialManagement" Version="1.0.2" />
     <PackageReference Include="MaterialDesignColors" Version="5.2.1" />
     <PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="9.0.2" />
@@ -74,8 +82,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="MigApp.Core.Services" />
     <Using Include="MigApp.Data" />
-    <Using Include="MigApp.Interfaces" />
     <Using Include="System.Diagnostics" />
   </ItemGroup>
 

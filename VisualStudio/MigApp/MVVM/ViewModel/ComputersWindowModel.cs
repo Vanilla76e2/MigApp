@@ -1,18 +1,11 @@
 ﻿using MigApp.Core;
-using MigApp.Services;
-using System;
-using System.Collections.ObjectModel;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
+using System.Diagnostics;
 
 namespace MigApp.MVVM.ViewModel.CRWindows
 {
     internal class ComputersWindowModel : Core.ViewModel
     {
-        ApplicationContext appContext = ApplicationContext.GetInstance(); // Объявление класса для использования контекста данных приложения
+        //ApplicationContext appContext = ApplicationContext.GetInstance(); // Объявление класса для использования контекста данных приложения
 
 
 

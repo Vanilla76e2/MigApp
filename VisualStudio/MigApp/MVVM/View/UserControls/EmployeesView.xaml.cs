@@ -1,5 +1,5 @@
 ﻿using MigApp.MVVM.ViewModel;
-using MigApp.Services;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
