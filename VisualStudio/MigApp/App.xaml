@@ -8,10 +8,30 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <!-- 1. Material Design (самые базовые настройки) -->
                 <materialDesign:BundledTheme BaseTheme="Dark" PrimaryColor="Orange" SecondaryColor="Lime" />
+
+                <!-- 2. Мои цветовые ресурсы -->
+                <ResourceDictionary Source="Styles/Colors.xaml"/>
+
+                <!-- 3. Material Design компоненты (должны идти после моих цветов) -->
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
-                <ResourceDictionary Source="Resources/DarkTheme.xaml"/>
+                <!-- Другие необходимые MD компоненты -->
+
+                <!-- 4. Ваши базовые стили -->
+                <ResourceDictionary Source="Styles/CoreStyles.xaml"/>
+                <ResourceDictionary Source="Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="Styles/NavigationStyles.xaml"/>
+                <ResourceDictionary Source="Styles/DataGridStyles.xaml"/>
+                <ResourceDictionary Source="Styles/SpecialControls.xaml"/>
+                <ResourceDictionary Source="Styles/FormStyles.xaml"/>
+                <ResourceDictionary Source="Styles/WindowStyles.xaml"/>
+
+                <!-- 5. Активная тема (имеет наивысший приоритет) -->
+                <ResourceDictionary Source="Styles/DarkTheme.xaml"/>
+                
             </ResourceDictionary.MergedDictionaries>
+
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
     </Application.Resources>

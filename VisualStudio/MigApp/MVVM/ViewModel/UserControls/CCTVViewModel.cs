@@ -1,30 +1,17 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using MigApp.Data;
-using System.Windows;
-using System.Data;
+﻿using Microsoft.EntityFrameworkCore;
 using MigApp.Core;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.Metrics;
 using System.Collections.ObjectModel;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Threading.Tasks;
-using MigApp.Core.Services;
+using System.Data;
+using System.Windows;
+using System.Windows.Input;
 
 namespace MigApp.MVVM.ViewModel
 {
     internal class CCTVViewModel : Core.ViewModel, ILoadbleViewModel
     {
-        private readonly MigDataBaseContext dbc;
+        private readonly MigDatabaseContext dbc;
 
-        public CCTVViewModel(MigDataBaseContext context)
+        public CCTVViewModel(MigDatabaseContext context)
         {
             dbc = context;
             AddCommand = new RelayCommand(o => AddEmployee(), o => true);

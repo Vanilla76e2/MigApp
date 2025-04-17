@@ -1,16 +1,12 @@
 ﻿using MigApp.Core;
-
-using System;
 using System.Data;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace MigApp.MVVM.ViewModel
 {
     internal class FavouriteViewModel : Core.ViewModel
     {
-        
+
         //ApplicationContext appContext = ApplicationContext.GetInstance();
 
         #region Таблица
@@ -53,9 +49,9 @@ namespace MigApp.MVVM.ViewModel
             set
             {
                 filter = value;
-                #pragma warning disable CS4014
+#pragma warning disable CS4014
                 LoadTableAsync();
-                #pragma warning restore CS4014
+#pragma warning restore CS4014
             }
         }
 

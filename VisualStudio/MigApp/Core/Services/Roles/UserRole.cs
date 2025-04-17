@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MigApp.Core.Authorization
+﻿namespace MigApp.Core.Services
 {
     public sealed class UserRole
     {
         public string Id { get; }
-        public string UserName { get; }
+        public string Username { get; }
 
         public bool IsAdmin { get; }
         public RolePermission EmployeeAccessLevel { get; }
         public RolePermission TechnicsAccessLevel { get; }
         public RolePermission FurnitureAccessLevel { get; }
 
-        public UserRole(string? id, string? userName, bool isAdmin, RolePermission employeeAccessLevel, RolePermission technicsAccessLevel, RolePermission furnitureAccessLevel)
+        public UserRole(string? id, string? Username, bool isAdmin, RolePermission employeeAccessLevel, RolePermission technicsAccessLevel, RolePermission furnitureAccessLevel)
         {
             Id = id ?? throw new ArgumentNullException(nameof(id));
-            UserName = userName ?? throw new ArgumentNullException(nameof(userName));
+            Username = Username ?? throw new ArgumentNullException(nameof(Username));
             IsAdmin = isAdmin;
             EmployeeAccessLevel = employeeAccessLevel;
             TechnicsAccessLevel = technicsAccessLevel;

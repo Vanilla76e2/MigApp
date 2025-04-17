@@ -1,12 +1,13 @@
-﻿using System.IO;
-using Serilog;
+﻿using Serilog;
+using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace MigApp.Core.Services
 {
     /// <summary>
     /// Класс, реализующий интерфейс IAppLogger и использующий Serilog для записи логов.
     /// </summary>
-    internal class AppLogger : IAppLogger
+    public class AppLogger : IAppLogger
     {
         private readonly ILogger _logger;
         private string? _currentLogFilePath;
@@ -14,16 +15,16 @@ namespace MigApp.Core.Services
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="AppLogger"/>.
         /// </summary>
-        public AppLogger(ILogger logger)
+        public AppLogger()
         {
             try
             {
                 _currentLogFilePath = GetLogFilePath("Logs");
                 var configuration = new LoggerConfiguration();
-    #if DEBUG
+#if DEBUG
                 // При отладке логи будут выводиться в консоль и окно Output Visual Studio.
                 configuration.MinimumLevel.Debug().WriteTo.Console().WriteTo.Debug();
-    #else
+#else
                 // В релизной версии приложения логи будут записываться в файл.
                 configuration.MinimumLevel.Information().WriteTo.File(
                     _currentLogFilePath, 
@@ -31,18 +32,17 @@ namespace MigApp.Core.Services
                     outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}",
                     retainedFileCountLimit: 1
                 );
-    #endif
-                Log.Logger = configuration.CreateLogger();
-                _logger = Log.Logger;
+#endif
+                _logger = configuration.CreateLogger();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"{nameof(AppLogger)}: Не удалось инициализировать логгер. {ex.Message}");
+                throw;
             }
             finally
             {
                 if (_logger == null) throw new NullReferenceException(nameof(_logger));
-                Debug.WriteLine($"{nameof(AppLogger)}: Не удалось инициализировать логгер.");
             }
         }
 
@@ -106,135 +106,93 @@ namespace MigApp.Core.Services
             }
         }
 
-
         /// <summary>
-        /// Записывает отладочное сообщение в лог.
+        /// Извлекает имя класса из пути к файлу
         /// </summary>
-        /// <param name="message">Сообщение для записи.</param>
-        public void LogDebug(string message)
+        /// <param name="filepath"></param>
+        /// <returns></returns>
+        private static string GetContextFromFilePath(string filepath)
         {
-            _logger.Debug($"[DEBUG] {message}");
+            try
+            {
+                return Path.GetFileNameWithoutExtension(filepath);
+            }
+            catch
+            {
+                return "Unknown";
+            }
         }
 
         /// <summary>
-        /// Записывает отладочное сообщение в лог.
+        /// Записывает отладочное сообщение в лог. Автоматически получает контекст.
         /// </summary>
         /// <param name="message">Сообщение для записи.</param>
-        public void LogDebug(string message, string context)
+        public void LogDebug(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string filePath = "")
         {
-            _logger.Debug($"[DEBUG] {context}: {message}");
+            var context = GetContextFromFilePath(filePath);
+            _logger.Debug($"{context}.{memberName}: {message}");
         }
 
         /// <summary>
-        /// Записывает информационное сообщение в лог.
+        /// Записывает информационное сообщение в лог. Автоматически получает контекст.
         /// </summary>
         /// <param name="message">Сообщение для записи.</param>
-        public void LogInformation(string message)
+        public void LogInformation(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string filePath = "")
         {
-            _logger.Information($"[INFO] {message}");
+            var context = GetContextFromFilePath(filePath);
+            _logger.Information($"{context}.{memberName}: {message}");
         }
 
         /// <summary>
-        /// Записывает информационное сообщение в лог.
+        /// Записывает предупреждающее сообщение в лог. Автоматически получает контекст.
         /// </summary>
         /// <param name="message">Сообщение для записи.</param>
-        public void LogInformation(string message, string context)
+        public void LogWarning(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string filePath = "")
         {
-            _logger.Information($"[INFO] {context}: {message}");
+            var context = GetContextFromFilePath(filePath);
+            _logger.Warning($"{context}.{memberName}: {message}");
         }
 
         /// <summary>
-        /// Записывает предупреждающее сообщение в лог.
+        /// Записывает сообщение об ошибке в лог. Автоматически получает контекст.
         /// </summary>
         /// <param name="message">Сообщение для записи.</param>
-        public void LogWarning(string message)
+        public void LogError(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string filePath = "")
         {
-            _logger.Warning($"[WARN] {message}");
+            var context = GetContextFromFilePath(filePath);
+            _logger.Error($"{context}.{memberName}: {message}");
         }
 
         /// <summary>
-        /// Записывает предупреждающее сообщение в лог.
+        /// Записывает сообщение об ошибке в лог. Автоматически получает контекст.
         /// </summary>
+        /// /// <param name="ex">Исключение для записи.</param>
         /// <param name="message">Сообщение для записи.</param>
-        public void LogWarning(string message, string context)
+        public void LogError(Exception ex, string message, [CallerMemberName] string memberName = "", [CallerFilePath] string filePath = "")
         {
-            _logger.Warning($"[WARN] {context}: {message}");
+            var context = GetContextFromFilePath(filePath);
+            _logger.Error($"{context}.{memberName}: {message}\n{ex}");
         }
 
         /// <summary>
-        /// Записывает сообщение об ошибке в лог.
+        /// Записывает сообщение о критической ошибке в лог. Автоматически получает контекст.
         /// </summary>
         /// <param name="message">Сообщение для записи.</param>
-        public void LogError(string message)
+        public void LogCritical(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string filePath = "")
         {
-            _logger.Error($"[ERROR] {message}");
+            var context = GetContextFromFilePath(filePath);
+            _logger.Fatal($"{context}.{memberName}: {message}");
         }
 
         /// <summary>
-        /// Записывает сообщение об ошибке в лог.
-        /// </summary>
-        /// <param name="message">Сообщение для записи.</param>
-        public void LogError(string message, string context)
-        {
-            _logger.Error($"[ERROR] {context}: {message}");
-        }
-
-        /// <summary>
-        /// Записывает сообщение об ошибке в лог с информацией об исключении.
+        /// Записывает сообщение о критической ошибке в лог. Автоматически получает контекст.
         /// </summary>
         /// <param name="ex">Исключение для записи.</param>
         /// <param name="message">Сообщение для записи.</param>
-        public void LogError(Exception ex, string message)
+        public void LogCritical(Exception ex, string message, [CallerMemberName] string memberName = "", [CallerFilePath] string filePath = "")
         {
-            _logger.Error($"[ERROR] {message}\n\t{ex}");
-        }
-
-        /// <summary>
-        /// Записывает сообщение об ошибке в лог с информацией об исключении.
-        /// </summary>
-        /// <param name="ex">Исключение для записи.</param>
-        /// <param name="message">Сообщение для записи.</param>
-        public void LogError(Exception ex, string message, string context)
-        {
-            _logger.Error($"[ERROR] {context}: {message}\n\t{ex}");
-        }
-
-        /// <summary>
-        /// Записывает критическое сообщение в лог.
-        /// </summary>
-        /// <param name="message">Сообщение для записи.</param>
-        public void LogCritical(string message)
-        {
-            _logger.Fatal($"[CRIT] {message}");
-        }
-
-        /// <summary>
-        /// Записывает критическое сообщение в лог.
-        /// </summary>
-        /// <param name="message">Сообщение для записи.</param>
-        public void LogCritical(string message, string context)
-        {
-            _logger.Error($"[CRIT] {context}: {message}");
-        }
-
-        /// <summary>
-        /// Записывает критическое сообщение в лог с информацией об исключении.
-        /// </summary>
-        /// <param name="ex">Исключение для записи.</param>
-        /// <param name="message">Сообщение для записи.</param>
-        public void LogCritical(Exception ex, string message)
-        {
-            _logger.Fatal(ex, message);
-        }
-
-        /// <summary>
-        /// Записывает критическое сообщение в лог с информацией об исключении.
-        /// </summary>
-        /// <param name="ex">Исключение для записи.</param>
-        /// <param name="message">Сообщение для записи.</param>
-        public void LogCritical(Exception ex, string message, string context)
-        {
-            _logger.Error($"[ERROR] {context}: {message}\n\t{ex}");
+            var context = GetContextFromFilePath(filePath);
+            _logger.Fatal($"{context}.{memberName}: {message}\n{ex}");
         }
     }
 }

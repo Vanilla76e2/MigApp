@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MigApp.MVVM.Model
+﻿namespace MigApp.MVVM.Model
 {
     public class ComputerServiceHistory
     {
-        public string? id {  get; set; }
+        public string? id { get; set; }
         private string? _date { get; set; }
         public string? date
         {
@@ -21,7 +15,7 @@ namespace MigApp.MVVM.Model
                     _date = value;
             }
         }
-        public string? employee {  get; set; }
+        public string? employee { get; set; }
         public string? description { get; set; }
     }
 }

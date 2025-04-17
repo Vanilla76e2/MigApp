@@ -1,30 +1,46 @@
 ﻿using MigApp.Core.Services.Dispathcer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace MigApp.Core.Services
 {
     internal class UINotificationService : IUINotificationService
     {
-        private readonly IDispatcher _dispathcer;
+        private readonly IDispatcher _dispatcher;
+        private readonly IAppLogger _logger;
 
-        public UINotificationService(IDispatcher dispathcer)
+        /// <summary>
+        /// Инициализирует новый экземпляр сервиса уведомлений.
+        /// </summary>
+        /// <param name="dispatcher">Диспетчер для выполнения в UI-потоке.</param>
+        /// <param name="logger">Логгер для записи событий.</param>
+        public UINotificationService(IDispatcher dispathcer, IAppLogger logger)
         {
-            _dispathcer = dispathcer;
+            _dispatcher = dispathcer;
+            _logger = logger;
         }
 
         /// <summary>
         /// Отображает диалоговое окно с подтверждением.
         /// </summary>
-        /// <param name="message"></param>
-        /// <returns>Возвращает true, если нажата кнопка Да. False, если нажата кнопка Нет.</returns>
+        /// <param name="message">Текст сообщения.</param>
+        /// <returns><see langword="true"/>, если нажата кнопка "Да". <see langword="false"/>, если нажата кнопка "Нет".</returns>
         public async Task<bool> ShowConfirmation(string message)
         {
-            return await _dispathcer.InvokeAsync(() => MessageBox.Show(message, "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes);
+            _logger.LogInformation($"Отображение диалога подтверждения: {message}");
+            try
+            {
+                var result = await _dispatcher.InvokeAsync(() =>
+                    MessageBox.Show(message, "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes);
+
+                _logger.LogDebug($"Пользователь выбрал: {(result ? "Да" : "Нет")}");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Ошибка при отображении диалога подтверждения: {message}");
+                throw;
+            }
         }
 
         /// <summary>
@@ -33,7 +49,19 @@ namespace MigApp.Core.Services
         /// <param name="message"></param>
         public async Task ShowErrorAsync(string message)
         {
-            await _dispathcer.InvokeAsync(() => { MessageBox.Show(message,"Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); });
+            _logger.LogDebug($"Отображение ошибки: {message}");
+            try
+            {
+                await _dispatcher.InvokeAsync(() =>
+                {
+                    MessageBox.Show(message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical(ex, $"Не удалось отобразить ошибку: {message}");
+                throw;
+            }
         }
 
         /// <summary>
@@ -42,7 +70,7 @@ namespace MigApp.Core.Services
         /// <param name="message"></param>
         public async Task ShowInfoAsync(string message)
         {
-            await _dispathcer.InvokeAsync(() => { MessageBox.Show(message, "Информация", MessageBoxButton.OK, MessageBoxImage.Information); });
+            await _dispatcher.InvokeAsync(() => { MessageBox.Show(message, "Информация", MessageBoxButton.OK, MessageBoxImage.Information); });
         }
 
         /// <summary>
@@ -51,7 +79,19 @@ namespace MigApp.Core.Services
         /// <param name="message"></param>
         public async Task ShowWarningAsync(string message)
         {
-            await _dispathcer.InvokeAsync(() => { MessageBox.Show(message, "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning); });
+            _logger.LogWarning($"Отображение предупреждения: {message}");
+            try
+            {
+                await _dispatcher.InvokeAsync(() =>
+                {
+                    MessageBox.Show(message, "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Не удалось отобразить предупреждение: {message}");
+                throw;
+            }
         }
     }
 }

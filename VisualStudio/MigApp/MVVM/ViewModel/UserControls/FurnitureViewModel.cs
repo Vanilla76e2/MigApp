@@ -1,19 +1,12 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Windows;
+﻿using MigApp.Core;
 using System.Data;
-using MigApp.Core;
+using System.Windows.Input;
 
 namespace MigApp.MVVM.ViewModel
 {
-    internal class FurnitureViewModel: Core.ViewModel
+    internal class FurnitureViewModel : Core.ViewModel
     {
-        
+
 
         #region Таблица
 

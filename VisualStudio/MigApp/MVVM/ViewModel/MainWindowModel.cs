@@ -1,14 +1,6 @@
 ﻿using MigApp.Core;
 using MigApp.MVVM.View;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Navigation;
-using MigApp.Core.Services.NavigationService;
 
 namespace MigApp.MVVM.ViewModel
 {
@@ -102,17 +94,13 @@ namespace MigApp.MVVM.ViewModel
         // Команда выхода из профиля
         public void LogOut()
         {
-            // Очистка запомненых данных
-            Properties.Settings.Default.userLogin = string.Empty;
-            Properties.Settings.Default.userPassword = string.Empty;
-            Properties.Settings.Default.userRemember = false;
-            Properties.Settings.Default.Save();
+           
 
             // Открыть окно LoginView
             Navigation.NavigateToLoginWindow();
 
             // Закрыть окно MainWindow
-            var mainWindow = Application.Current.Windows.OfType<MainView>().FirstOrDefault();
+            var mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
             if (mainWindow != null) { mainWindow.Close(); }
         }
 

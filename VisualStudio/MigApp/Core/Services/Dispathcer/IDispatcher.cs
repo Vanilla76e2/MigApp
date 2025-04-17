@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MigApp.Core.Services.Dispathcer
+﻿namespace MigApp.Core.Services.Dispathcer
 {
     /// <summary>  
     /// Предоставляет методы для выполнения операций в потоке пользовательского интерфейса (UI).  
     /// Позволяет безопасно взаимодействовать с UI из фоновых потоков.  
     /// </summary>  
-    interface IDispatcher
+    public interface IDispatcher
     {
         /// <summary>  
         /// Синхронно выполняет указанное действие в потоке UI.  

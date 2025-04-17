@@ -3,53 +3,142 @@ using MigApp.MVVM.Model;
 
 namespace MigApp.Core.Services
 {
-    internal class SecurityService : ISecurityService
+    public class SecurityService : ISecurityService
     {
-        public void SaveDataToVault(DatabaseConnectionParameters databaseConnectionParameters, UserAuthData userAuthData)
+        private readonly IAppLogger _logger;
+
+        public SecurityService(IAppLogger logger)
         {
-            DatabaseConnectionParameters encryptedDatabaseConnectionParameters = new DatabaseConnectionParameters
-            {
-                server = EncryptionHelper.Encrypt(databaseConnectionParameters.server ?? string.Empty),
-                port = EncryptionHelper.Encrypt(databaseConnectionParameters.port ?? string.Empty),
-                database = EncryptionHelper.Encrypt(databaseConnectionParameters.database ?? string.Empty),
-                user = EncryptionHelper.Encrypt(databaseConnectionParameters.user ?? string.Empty),
-                password = EncryptionHelper.Encrypt(databaseConnectionParameters.password ?? string.Empty)
-            };
-
-            UserAuthData encryptedUserAuthData = new UserAuthData
-            {
-                username = EncryptionHelper.Encrypt(userAuthData.username ?? string.Empty),
-                password = EncryptionHelper.Encrypt(userAuthData.password ?? string.Empty)
-            };
-
-            RegistrySecureHelper.SaveToRegistry(encryptedDatabaseConnectionParameters, encryptedUserAuthData);
+            _logger = logger;
         }
 
-        public (DatabaseConnectionParameters, UserAuthData) LoadDataFromVault() 
+        public void SaveDatabaseSettingsToVault(DatabaseConnectionParameters DatabaseConnectionParameters)
         {
-            var (encryptedDatabaseParams, encryptedAuthData) = RegistrySecureHelper.LoadFromRegistry();
-
-            DatabaseConnectionParameters DatabaseConnectionParameters = new DatabaseConnectionParameters
+            _logger.LogInformation("Сохранение параметров подключения к БД в хранилище");
+            try
             {
-                server = EncryptionHelper.Decrypt(encryptedDatabaseParams.server),
-                port = EncryptionHelper.Decrypt(encryptedDatabaseParams.port),
-                database = EncryptionHelper.Decrypt(encryptedDatabaseParams.database),
-                user = EncryptionHelper.Decrypt(encryptedDatabaseParams.user),
-                password = EncryptionHelper.Decrypt(encryptedDatabaseParams.password)
-            };
+                DatabaseConnectionParameters encryptedDatabaseConnectionParameters = new DatabaseConnectionParameters
+                (
+                    EncryptionHelper.Encrypt(DatabaseConnectionParameters.Host ?? string.Empty),
+                    EncryptionHelper.Encrypt(DatabaseConnectionParameters.Port ?? string.Empty),
+                    EncryptionHelper.Encrypt(DatabaseConnectionParameters.Database ?? string.Empty),
+                    EncryptionHelper.Encrypt(DatabaseConnectionParameters.Username ?? string.Empty),
+                    EncryptionHelper.Encrypt(DatabaseConnectionParameters.Password ?? string.Empty)
+                );
 
-            UserAuthData userAuthData = new UserAuthData
+                _logger.LogInformation("Параметры подключения успешно зашифрованы");
+                RegistrySecureHelper.SaveDatabaseSettingsToRegistry(encryptedDatabaseConnectionParameters);
+                _logger.LogInformation("Параметры подключения сохранены");
+            }
+            catch (Exception ex)
             {
-                username = EncryptionHelper.Decrypt(encryptedAuthData.username),
-                password = EncryptionHelper.Decrypt(encryptedAuthData.password)
-            };
+                _logger.LogError(ex, "Ошибка при сохранении параметров подключения");
+            }
+        }
 
-            return (DatabaseConnectionParameters, userAuthData);
+        public void SaveUserCredentialsToVault(UserCredentials userCredentials)
+        {
+            _logger.LogInformation("Сохранение учётных данных в хранилище");
+            try
+            {
+                UserCredentials encryptedUserAuthData = new UserCredentials
+                {
+                    Username = EncryptionHelper.Encrypt(userCredentials.Username ?? string.Empty),
+                    Password = EncryptionHelper.Encrypt(userCredentials.Password ?? string.Empty)
+                };
+
+                _logger.LogInformation("Учётные данные успешно зашифрованы");
+                RegistrySecureHelper.SaveUserCredentialsToVault(encryptedUserAuthData);
+                _logger.LogInformation("Учётные данные сохранены");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Ошибка при сохранении параметров подключения");
+            }
+        }
+
+        public DatabaseConnectionParameters LoadDatabaseSettingsFromVault()
+        {
+            _logger.LogInformation("Загрузка параметров подключения из хранилища");
+            try
+            {
+                var encryptedDatabaseParams = RegistrySecureHelper.LoadDatabaseSettingsFromRegistry();
+                _logger.LogInformation("Зашифрованные данные подключения получены");
+
+                DatabaseConnectionParameters decryptedDatabaseParams = new DatabaseConnectionParameters
+                (
+                    EncryptionHelper.Decrypt(encryptedDatabaseParams.Host),
+                    EncryptionHelper.Decrypt(encryptedDatabaseParams.Port),
+                    EncryptionHelper.Decrypt(encryptedDatabaseParams.Database),
+                    EncryptionHelper.Decrypt(encryptedDatabaseParams.Username),
+                    EncryptionHelper.Decrypt(encryptedDatabaseParams.Password)
+                );
+                _logger.LogInformation("Данные подключения успешно расшифрованы");
+
+                return decryptedDatabaseParams;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Ошибка при получении параметров подключения");
+                throw;
+            }
+        }
+
+        public UserCredentials LoadUserCredentialsFromVault()
+        {
+            _logger.LogInformation("Загрузка учётных данных из хранилища");
+
+            try
+            {
+                var encryptedCredentials = RegistrySecureHelper.LoadUserCredentialsFromRegistry();
+                _logger.LogInformation("Зашифрованные учётные данные получены");
+
+                UserCredentials decryptedCredentials = new UserCredentials
+                {
+                    Username = EncryptionHelper.Decrypt(encryptedCredentials.Username),
+                    Password = EncryptionHelper.Decrypt(encryptedCredentials.Password)
+                };
+                _logger.LogInformation("Учётные данные успешно расшифрованы");
+
+                return decryptedCredentials;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Ошибка при получении учётных данных");
+                throw;
+            }
         }
 
         public string HashText(string text)
         {
-            return BCrypt.Net.BCrypt.HashPassword(text);
+            try
+            {
+                string _hash = BCrypt.Net.BCrypt.HashPassword(text);
+                _logger.LogInformation("Строка успешно преобразована в хэш");
+                return _hash;
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, "Произошла ошибка при попытке получить хэш");
+                throw;
+            }
+
+        }
+
+        public bool VerifyHash(string text, string hashedText)
+        {
+            _logger.LogDebug($"Проверка хэша");
+            try
+            {
+                bool _res = BCrypt.Net.BCrypt.Verify(text, hashedText);
+                _logger.LogInformation($"Резльтат проверки хэша: {_res}");
+                return _res;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Ошибка при проверке хеша");
+                throw;
+            }
         }
     }
 }

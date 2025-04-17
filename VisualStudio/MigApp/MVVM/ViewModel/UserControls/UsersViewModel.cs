@@ -1,19 +1,12 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Windows;
+﻿using MigApp.Core;
 using System.Data;
-using MigApp.Core;
+using System.Windows.Input;
 
 namespace MigApp.MVVM.ViewModel
 {
     internal class UsersViewModel : Core.ViewModel
     {
-        
+
 
         #region Таблица
 
@@ -32,10 +25,10 @@ namespace MigApp.MVVM.ViewModel
         {
             //try
             //{
-            //    DataTable temp = await pgsql.GetTable("id, role_name, username, user_password", "\"Misc\".users_profiles_view", Filter);
+            //    DataTable temp = await pgsql.GetTable("id, role_name, Username, user_password", "\"Misc\".users_profiles_view", Filter);
             //    temp.Columns["id"].ColumnName = "ID";
             //    temp.Columns["role_name"].ColumnName = "Роль";
-            //    temp.Columns["username"].ColumnName = "Логин";
+            //    temp.Columns["Username"].ColumnName = "Логин";
             //    temp.Columns["user_password"].ColumnName = "Пароль";
             //    Table = temp;
             //}
@@ -43,6 +36,7 @@ namespace MigApp.MVVM.ViewModel
             //{
             //    MessageBox.Show("Не удалось получить данные из базы данных.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             //}
+            throw new NotImplementedException();
         }
 
         #endregion

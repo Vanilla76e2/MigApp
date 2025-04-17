@@ -1,19 +1,16 @@
-﻿using MigApp.Core.Authorization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace MigApp.Core.Session
 {
-    interface IUserSession
+    public interface IUserSession
     {
         string UserId { get; }
-        string UserName { get; }
-        UserRole Role { get; }
+        string Username { get; }
+        UserRole? Role { get; }
+        DateTime? LoginTime { get; }
         bool IsAuthenticated { get; }
 
+        UserSession StartSession(string id, string username, UserRole role);
+        void DisposeSession();
         bool CanReadTechnics();
         bool CanWriteTechnics();
         bool CanReadEmployees();

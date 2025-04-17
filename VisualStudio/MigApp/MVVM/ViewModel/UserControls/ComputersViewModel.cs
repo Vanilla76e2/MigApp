@@ -1,17 +1,8 @@
 ﻿using MigApp.Core;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Windows;
-using System.Data;
+using MigApp.MVVM.Model;
 using MigApp.MVVM.View.CRWindows;
 using System.Collections.ObjectModel;
-using MigApp.MVVM.Model;
-using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace MigApp.MVVM.ViewModel
 {
@@ -114,7 +105,7 @@ namespace MigApp.MVVM.ViewModel
 
         public ComputersViewModel()
         {
-            
+
 
             AddCommand = new RelayCommand(o => { ComputersWindow rcwin = new ComputersWindow(); rcwin.Show(); return; }, o => true);
 

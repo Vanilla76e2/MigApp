@@ -1,7 +1,7 @@
 ﻿
 namespace MigApp.Core.Services
 {
-    interface ILoadbleViewModel
+    public interface ILoadbleViewModel
     {
         Task LoadTableAsync();
     }

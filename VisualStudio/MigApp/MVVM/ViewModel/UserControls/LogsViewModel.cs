@@ -1,13 +1,6 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Windows;
+﻿using MigApp.Core;
 using System.Data;
-using MigApp.Core;
+using System.Windows.Input;
 
 namespace MigApp.MVVM.ViewModel
 {
@@ -31,10 +24,10 @@ namespace MigApp.MVVM.ViewModel
         {
             //try
             //{
-            //    DataTable temp = await pgsql.GetTable("id, action_date, username, action, table_name, row, specifies", "\"Misc\".logs", Filter);
+            //    DataTable temp = await pgsql.GetTable("id, action_date, Username, action, table_name, row, specifies", "\"Misc\".logs", Filter);
             //    temp.Columns["id"].ColumnName = "ID";
             //    temp.Columns["action_date"].ColumnName = "Дата";
-            //    temp.Columns["username"].ColumnName = "Пользователь";
+            //    temp.Columns["Username"].ColumnName = "Пользователь";
             //    temp.Columns["action"].ColumnName = "Действие";
             //    temp.Columns["table_name"].ColumnName = "Таблица";
             //    temp.Columns["row"].ColumnName = "Запись";

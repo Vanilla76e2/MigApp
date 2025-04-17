@@ -1,17 +1,8 @@
-﻿
-using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Windows;
-using System.Data;
-using System;
-using System.Runtime.CompilerServices;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Collections.ObjectModel;
-using System.Net;
-using System.Linq;
-using MigApp.Core;
+﻿using MigApp.Core;
 using MigApp.Helpers;
+using System.Data;
+using System.Net;
+using System.Windows.Input;
 
 namespace MigApp.MVVM.ViewModel
 {
@@ -79,9 +70,9 @@ namespace MigApp.MVVM.ViewModel
             set
             {
                 filter = value;
-//#pragma warning disable CS4014
-//                LoadTableAsync();
-//#pragma warning restore CS4014
+                //#pragma warning disable CS4014
+                //                LoadTableAsync();
+                //#pragma warning restore CS4014
             }
         }
 
@@ -163,8 +154,8 @@ namespace MigApp.MVVM.ViewModel
             MyCopyCommand = new RelayCommand(o => MyCopy(), o => true);
             RedactCommand = new RelayCommand(o => Redact(), o => true);
 
-            AddSubnetCommand = new RelayCommand(o => { Subnet += 1; }, o => true); 
-            SubstrSubnetCommand = new RelayCommand(o => { Subnet -= 1; }, o => true); 
+            AddSubnetCommand = new RelayCommand(o => { Subnet += 1; }, o => true);
+            SubstrSubnetCommand = new RelayCommand(o => { Subnet -= 1; }, o => true);
         }
 
         /// <summary>
@@ -206,6 +197,6 @@ namespace MigApp.MVVM.ViewModel
             return sortedTable;
         }
 
-        
+
     }
 }

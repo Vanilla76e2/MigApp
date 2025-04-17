@@ -1,134 +1,125 @@
 ﻿
 
-using System.IO;
-using System.Net.Http;
-using System.Windows;
+using MigApp.Core.Services.Installer;
 
 namespace MigApp.Core.Services.AppUpdate
 {
-    internal class AppUpdateService : IAppUpdateService
+    public class AppUpdateService : IAppUpdateService
     {
         private readonly IVersionService _versionService;
         private readonly IUINotificationService _niotificationService;
+        private readonly IInternetService _internetService;
+        private readonly IInstallerService _installerService;
         private readonly IAppLogger _logger;
         private ReleaseInfo? _latestReleaseInfo;
 
-
-        public AppUpdateService(IVersionService versionService, IUINotificationService notificationService, IAppLogger logger)
+        /// <summary>
+        /// Инициализирует новый экземпляр <see cref="AppUpdateService"/>.
+        /// </summary>
+        /// <param name="versionService">Сервис для работы с версиями приложения.</param>
+        /// <param name="notificationService">Сервис для взаимодействия с пользователем.</param>
+        /// <param name="logger">Сервис логирования.</param>
+        /// <param name="installer">Сервис для установки приложений.</param>
+        /// <param name="internet">Сервис для работы с интернет-соединением.</param>
+        public AppUpdateService(IVersionService versionService, IUINotificationService notificationService, IAppLogger logger, IInstallerService installer, IInternetService internet)
         {
             _versionService = versionService;
             _niotificationService = notificationService;
+            _installerService = installer;
+            _internetService = internet;
             _logger = logger;
         }
 
-        public Task<bool> CheckForUpdatesAsync()
+        /// <summary>
+        /// Получает информацию о последнем релизе из сервиса версий.
+        /// </summary>
+        private async Task GetLatestReleaseInfoAsync()
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<ReleaseInfo?> GetLatestReleaseInfoAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsNewerVersionAvailable(ReleaseInfo releaseInfo)
-        {
-            if (releaseInfo.Version != null && Version.TryParse(_versionService.GetCurrentVersion(), out Version? currentVersion) && Version.TryParse(releaseInfo.Version, out Version? newVersion))
+            try
             {
-                return newVersion > currentVersion;
+                _logger.LogDebug($"Запрос информации о последнем релизе");
+                _latestReleaseInfo = await _versionService.GetLatestReleaseInfoAsync();
+                _logger.LogInformation($"Получена информация о релизе: {_latestReleaseInfo?.Version ?? "null"}");
             }
-            else
+            catch (Exception ex)
             {
+                _logger.LogError(ex, $"Ошибка при получении информации о релизе");
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// Проверяет, доступна ли новая версия приложения.
+        /// </summary>
+        /// <param name="releaseInfo">Информация о релизе для проверки.</param>
+        /// <returns>
+        /// <see langword="true"/> если доступна новая версия; иначе <see langword="false"/>.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Возникает, если <paramref name="releaseInfo"/> равен null.
+        /// </exception>
+        private bool IsNewerVersionAvailable(ReleaseInfo releaseInfo)
+        {
+            ArgumentNullException.ThrowIfNull(releaseInfo, nameof(releaseInfo));
+            _logger.LogDebug($"Текущая версия={_versionService.GetCurrentVersion()}, новая версия={releaseInfo.Version}");
+
+            if (!Version.TryParse(_versionService.GetCurrentVersion(), out var currentVersion))
+            {
+                _logger.LogWarning($"Не удалось разобрать текущую версию: {_versionService.GetCurrentVersion()}");
                 return false;
             }
+
+            if (!Version.TryParse(releaseInfo.Version, out var newVersion))
+            {
+                _logger.LogWarning($"Не удалось разобрать новую версию: {releaseInfo.Version}");
+                return false;
+            }
+
+            bool isNewVersionAvailable = newVersion > currentVersion;
+            _logger.LogInformation($"Новая версия {(isNewVersionAvailable ? "доступна" : "не требуется")} ({currentVersion} → {newVersion})");
+            return isNewVersionAvailable;
         }
 
-        /// <summary>
-        /// Асинхронно проверяет наличие новой версии приложения и, если она доступна, запускает установщик.
-        /// </summary>
-        /// <param name="releaseInfo"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
+        ///<inheritdoc/>
         public async Task UpdateApplicationAsync()
         {
-            ArgumentNullException.ThrowIfNull(_latestReleaseInfo, "Информация о релизе оказалась null.");
-            string? dir = null;
-            dir = await DownloadInstallerAsync(_latestReleaseInfo.DownloadUrl);
-            if (dir != null)
-                InstallInstaller(dir);
-            else throw new FileNotFoundException($"Ссылка на директорию установщика оказалась null.");
-        }
-
-        /// <summary>
-        /// Асинхронно скачивает MSI-файл по указанному URL в папку TEMP.
-        /// </summary>
-        /// <param name="downloadUrl"></param>
-        /// <returns>Ссылка на скачанный файл.</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        private async Task<string?> DownloadInstallerAsync(string? downloadUrl)
-        {
             try
             {
-                ArgumentNullException.ThrowIfNull(downloadUrl, "Ссылка на скачивание оказалась null.");
+                _logger.LogDebug($"Запуск процесса обновления приложения");
+                await GetLatestReleaseInfoAsync();
 
-                string tmpmsi = Path.GetTempPath() + "MigAppInstaller.msi";
-
-                // Скачиваем файл
-                using (var response = await _httpClient.GetAsync(downloadUrl, HttpCompletionOption.ResponseHeadersRead))
+                _logger.LogDebug($"Проверка наличия версии: {_latestReleaseInfo != null}");
+                if (IsNewerVersionAvailable(_latestReleaseInfo ?? throw new NullReferenceException(nameof(_latestReleaseInfo))))
                 {
-                    response.EnsureSuccessStatusCode(); // Проверяем, что запрос прошел успешно
-
-                    using (var streamToReadFrom = await response.Content.ReadAsStreamAsync())
-                    using (var streamToWriteTo = File.Open(tmpmsi, FileMode.Create))
+                    _logger.LogInformation($"Обнаружена версия: {_latestReleaseInfo.Version}");
+                    if (await _niotificationService.ShowConfirmation($"Была обнаружена новая версия {_latestReleaseInfo.Version}.\nЖелаете обновить приложение?"))
                     {
-                        await streamToReadFrom.CopyToAsync(streamToWriteTo);
+                        _logger.LogDebug($"Пользователь подтвердил обновление до версии {_latestReleaseInfo.Version}");
+                        string? installerPath = await _internetService.DownloadAppInstallerAsync(_latestReleaseInfo.DownloadUrl!);
+                        _logger.LogInformation($"Установщик загружен по пути: {installerPath}");
+                        _installerService.Install(installerPath!);
+                        _logger.LogInformation($"Запущена установка новой версии приложения");
+                    }
+                    else
+                    {
+                        _logger.LogInformation($"Пользователь отказался от обновления до версии {_latestReleaseInfo.Version}");
                     }
                 }
-
-                return tmpmsi;
-            }
-            catch (HttpRequestException ex)
-            {
-                // Обрабатываем ошибки HTTP
-                Console.WriteLine($"Ошибка при скачивании файла: {ex.Message}");
-                return null; // Или бросаем исключение, если нужно
-            }
-            catch (Exception ex)
-            {
-                // Обрабатываем другие ошибки
-                Console.WriteLine($"Ошибка при скачивании файла: {ex.Message}");
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Запускает установщик по указанному пути.
-        /// </summary>
-        /// <param name="installerPath"></param>
-        /// <exception cref="ArgumentException"></exception>
-        private void InstallInstaller(string installerPath)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(installerPath) || !File.Exists(installerPath))
+                else
                 {
-                    throw new ArgumentException("Ссылка оказалась пустой или файл не существует.", nameof(installerPath));
+                    _logger.LogInformation($"Обновление не требуется, текущая версия актуальна");
                 }
-                // Запускаем установщик
-                var processStartInfo = new ProcessStartInfo
-                {
-                    FileName = installerPath,
-                    UseShellExecute = true,
-                    Verb = "runas"
-                };
-                Process.Start(processStartInfo);
-
-                Application.Current.Shutdown();
+            }
+            catch (NullReferenceException ex)
+            {
+                _logger.LogError(ex, $"Информация о релизе оказалась null");
+                throw;
             }
             catch (Exception ex)
             {
-                // Обработка ошибок при запуске установщика
-                Console.WriteLine($"Ошибка при запуске установщика: {ex.Message}");
+                _logger.LogCritical(ex, $"Критическая ошибка при обновлении приложения");
+                throw;
             }
         }
     }

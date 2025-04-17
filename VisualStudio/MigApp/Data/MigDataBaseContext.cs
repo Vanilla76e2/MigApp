@@ -1,28 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace MigApp.Data;
 
-public partial class MigDataBaseContext : DbContext
+public partial class MigDatabaseContext : DbContext
 {
     private readonly string? _connectionString;
 
-    public MigDataBaseContext(string connectionString)
-    {
-        _connectionString = connectionString;
-    }
+    //public MigDatabaseContext(string connectionString)
+    //{
+    //    _connectionString = connectionString;
+    //}
 
-    public MigDataBaseContext(DbContextOptions<MigDataBaseContext> options)
+    public MigDatabaseContext(DbContextOptions<MigDatabaseContext> options)
         : base(options)
     {
     }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (!string.IsNullOrEmpty(_connectionString))
-            optionsBuilder.UseNpgsql(_connectionString);
-    }
+    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //{
+    //    if (!string.IsNullOrEmpty(_connectionString))
+    //        optionsBuilder.UseNpgsql(_connectionString);
+    //}
 
     public virtual DbSet<Cctv> Cctvs { get; set; }
 
@@ -181,10 +179,10 @@ public partial class MigDataBaseContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("roles_pkey");
 
-            entity.Property(e => e.EmployeesAccesslevel).HasDefaultValue(0);
-            entity.Property(e => e.FurnitureAccesslevel).HasDefaultValue(0);
+            entity.Property(e => e.EmployeesAccesslevel).HasDefaultValue(RolePermission.None);
+            entity.Property(e => e.FurnitureAccesslevel).HasDefaultValue(RolePermission.None);
             entity.Property(e => e.IsAdministrator).HasDefaultValue(false);
-            entity.Property(e => e.TechnicsAccesslevel).HasDefaultValue(0);
+            entity.Property(e => e.TechnicsAccesslevel).HasDefaultValue(RolePermission.None);
         });
 
         modelBuilder.Entity<RolesView>(entity =>

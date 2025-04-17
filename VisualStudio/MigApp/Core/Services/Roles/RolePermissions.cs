@@ -1,5 +1,4 @@
-﻿
-namespace MigApp.Core.Authorization
+﻿namespace MigApp.Core.Services
 {
     public enum RolePermission
     {

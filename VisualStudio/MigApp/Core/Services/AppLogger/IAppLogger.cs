@@ -1,25 +1,20 @@
 ﻿
+using System.Runtime.CompilerServices;
+
 namespace MigApp.Core.Services
 {
     /// <summary>
     /// Интерфейс для логирования сообщений различных уровней важности.
     /// </summary>
-    interface IAppLogger
+    public interface IAppLogger
     {
-        void LogDebug(string message);
-        void LogDebug(string message, string context);
-        void LogInformation(string message);
-        void LogInformation(string message, string context);
-        void LogWarning(string message);
-        void LogWarning(string message, string context);
-        void LogError(string message);
-        void LogError(string message, string context);
-        void LogError(Exception ex, string message);
-        void LogError(Exception ex, string message, string context);
-        void LogCritical(string message);
-        void LogCritical(string message, string context);
-        void LogCritical(Exception ex, string message);
-        void LogCritical(Exception ex, string message, string context);
+        void LogDebug(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string filePath = "");
+        void LogInformation(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string filePath = "");
+        void LogWarning(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string filePath = "");
+        void LogError(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string filePath = "");
+        void LogError(Exception ex, string message, [CallerMemberName] string memberName = "", [CallerFilePath] string filePath = "");
+        void LogCritical(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string filePath = "");
+        void LogCritical(Exception ex, string message, [CallerMemberName] string memberName = "", [CallerFilePath] string filePath = "");
 
         void CreateCrashLog(Exception? ex, string message);
     }

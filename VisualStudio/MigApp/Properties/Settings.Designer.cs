@@ -25,109 +25,22 @@ namespace MigApp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string pgServer {
-            get {
-                return ((string)(this["pgServer"]));
-            }
-            set {
-                this["pgServer"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string pgPort {
-            get {
-                return ((string)(this["pgPort"]));
-            }
-            set {
-                this["pgPort"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string pgUser {
-            get {
-                return ((string)(this["pgUser"]));
-            }
-            set {
-                this["pgUser"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string pgPassword {
-            get {
-                return ((string)(this["pgPassword"]));
-            }
-            set {
-                this["pgPassword"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string pgDatabase {
-            get {
-                return ((string)(this["pgDatabase"]));
-            }
-            set {
-                this["pgDatabase"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string userLogin {
-            get {
-                return ((string)(this["userLogin"]));
-            }
-            set {
-                this["userLogin"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string userPassword {
-            get {
-                return ((string)(this["userPassword"]));
-            }
-            set {
-                this["userPassword"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool userRemember {
+        public bool userRemembered {
             get {
-                return ((bool)(this["userRemember"]));
+                return ((bool)(this["userRemembered"]));
             }
             set {
-                this["userRemember"] = value;
+                this["userRemembered"] = value;
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool IsMigrationCompleted {
+        [global::System.Configuration.DefaultSettingValueAttribute("https://api.github.com/repos/Vanilla76e2/MigApp/releases")]
+        public string GitApiReleasesUrl {
             get {
-                return ((bool)(this["IsMigrationCompleted"]));
-            }
-            set {
-                this["IsMigrationCompleted"] = value;
+                return ((string)(this["GitApiReleasesUrl"]));
             }
         }
     }
