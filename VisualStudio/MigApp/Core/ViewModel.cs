@@ -1,7 +1,4 @@
-﻿
-using Npgsql.PostgresTypes;
-
-namespace MigApp.Core
+﻿namespace MigApp.Core
 {
     public abstract class ViewModel : ObservableObject
     {

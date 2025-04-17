@@ -4,9 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MigApp.MVVM.View"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:behaviors="clr-namespace:MigApp.CustomElements.Behaviors"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="LoginView" Height="300" Width="450" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" Loaded="OnLoaded">
+        Title="LoginView" Height="300" Width="450" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen">
     <WindowChrome.WindowChrome>
         <WindowChrome
         CaptionHeight="40"
@@ -39,11 +41,15 @@
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel Orientation="Horizontal" Margin="0 10">
                     <TextBlock Text="Логин" Style="{DynamicResource LoginTextBlock}"/>
-                    <TextBox Name="loginBox" Style="{DynamicResource LoginTextbox}" Text="{Binding UserLogin}"/>
+                    <TextBox Name="loginBox" Style="{DynamicResource LoginTextbox}" Text="{Binding Username}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0 10">
                     <TextBlock Text="Пароль" Style="{DynamicResource LoginTextBlock}"/>
-                    <PasswordBox Name="passwordBox" Style="{DynamicResource LoginPasswordbox}" PasswordChanged="PasswordBox_PasswordChanged"/>
+                    <PasswordBox x:Name="passwordBox" Style="{DynamicResource LoginPasswordbox}">
+                        <i:Interaction.Behaviors>
+                            <behaviors:PasswordBoxBehavior Password="{Binding UserPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </i:Interaction.Behaviors>
+                    </PasswordBox>
                 </StackPanel>
                 <CheckBox Content="Запомнить пароль" Style="{DynamicResource LoginCheckBox}" IsChecked="{Binding IsPasswordRemembered}"/>
             </StackPanel>
@@ -80,7 +86,11 @@
 
                 <StackPanel Orientation="Horizontal" Margin="0 5">
                     <TextBlock Text="Пароль" Style="{DynamicResource TextBlock_20}" Width="130" Margin="0 0 10 0"/>
-                    <PasswordBox Name="DBPassword_Passwordbox" Width="280" Style="{DynamicResource SettingsPasswordbox}" PasswordChanged="DataBase_PasswordChanged" MaxLength="23"/>
+                    <PasswordBox Name="DBPassword_Passwordbox" Width="280" Style="{DynamicResource SettingsPasswordbox}" MaxLength="23">
+                        <i:Interaction.Behaviors>
+                            <behaviors:PasswordBoxBehavior Password="{Binding DBPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </i:Interaction.Behaviors>
+                    </PasswordBox>
                 </StackPanel>
 
             </StackPanel>
@@ -90,8 +100,8 @@
 
         <!--#region Footer-->
         <Grid Grid.Row="2" VerticalAlignment="Bottom">
-            <Button Content="Вход" Style="{DynamicResource LoginEnterButton}" Command="{Binding LoginCommand}" IsEnabled="{Binding IsConnectionCorrect}"/>
-            <Button Content="Подтвердить" Style="{DynamicResource SettingsCommitButton}" Command="{Binding SettingsCommitCommand}" Visibility="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <Button x:Name="LoginButton" Content="Вход" Style="{DynamicResource LoginEnterButton}" Command="{Binding LoginCommand}" IsEnabled="{Binding IsConnectionCorrect}" IsDefault="True"/>
+            <Button x:Name="CommitSettingsButton" Content="Подтвердить" Style="{DynamicResource SettingsCommitButton}" Command="{Binding CommitSettingsCommand}" Visibility="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <ToggleButton Style="{DynamicResource LoginSettingsButton}" IsChecked="{Binding IsSettingsOn}"/>
             <Button Style="{DynamicResource LoginInfoButton}"/>
         </Grid>

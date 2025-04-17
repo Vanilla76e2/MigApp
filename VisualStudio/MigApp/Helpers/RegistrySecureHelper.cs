@@ -1,11 +1,6 @@
 ﻿using Microsoft.Win32;
 using MigApp.MVVM.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace MigApp.Helpers
 {
@@ -14,68 +9,79 @@ namespace MigApp.Helpers
         private const string RegPath = @"HKEY_CURRENT_USER\Software\MigApp\Credentials";
 
         /// <summary>
-        /// Сохраняет данные в реестре.
+        /// Сохраняет параметры подключения к базе данных в реестре.
         /// </summary>
-        /// <param name="dbParams"></param>
-        /// <param name="userAuthData"></param>
-        public static void SaveToRegistry(DatabaseConnectionParameters dbParams, UserAuthData userAuthData)
+        /// <param name="dbParams">Набор параметров для подключения к базе данных.</param>
+        public static void SaveDatabaseSettingsToRegistry(DatabaseConnectionParameters dbParams)
         {
-            var dataToSave = new
-            {
-                DatabaseConnectionParameters = dbParams,
-                AuthData = userAuthData
-            };
-
-            string json = JsonSerializer.Serialize(dataToSave);
-            Registry.SetValue(RegPath, "AppSavedData", json);
+            string json = JsonSerializer.Serialize(dbParams);
+            Registry.SetValue(RegPath, "AppDatabaseSettings", json);
         }
 
         /// <summary>
-        /// Загружает данные из реестра.
+        /// Сохраняет учётные данные пользователя в реестре.
         /// </summary>
-        /// <returns>Возвращает <see cref="DatabaseConnectionParameters"/> и <see cref="UserAuthData"/>.</returns>
-        public static (DatabaseConnectionParameters, UserAuthData) LoadFromRegistry()
+        /// <param name="userCredetials">Учётные данные пользователя.</param>
+        public static void SaveUserCredentialsToVault(UserCredentials userCredetials)
         {
-            string? json = Registry.GetValue(RegPath, "AppSavedData", null) as string;
-            
-            if (string.IsNullOrEmpty(json)) return (new(), new());
+            string json = JsonSerializer.Serialize(userCredetials);
+            Registry.SetValue(RegPath, "UserCredentials", json);
+        }
+
+        /// <summary>
+        /// Загружает настройки подключения к базе данных из реестра.
+        /// </summary>
+        /// <returns><see cref="DatabaseConnectionParameters"/>.</returns>
+        public static DatabaseConnectionParameters LoadDatabaseSettingsFromRegistry()
+        {
+            string? json = Registry.GetValue(RegPath, "AppDatabaseSettings", null) as string;
+            if (string.IsNullOrEmpty(json)) return new();
 
             try
             {
-                var data = JsonSerializer.Deserialize<Dictionary<string, object>>(json);
-                if (data == null)
-                {
-                    return (new DatabaseConnectionParameters(), new UserAuthData());
-                }
+                var dbParams = JsonSerializer.Deserialize<DatabaseConnectionParameters>(json);
+                return dbParams ?? new DatabaseConnectionParameters();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                return new DatabaseConnectionParameters();
+            }
+        }
 
-                DatabaseConnectionParameters? dbParams = data.TryGetValue("DatabaseConnectionParameters", out var dbElement)
-                    ? SafeDeserialize<DatabaseConnectionParameters>(dbElement.ToString()!) ?? new()
-                    : new();
+        /// <summary>
+        /// Загружает учётные данные из реестра.
+        /// </summary>
+        /// <returns><see cref="UserCredentials"/>.</returns>
+        public static UserCredentials LoadUserCredentialsFromRegistry()
+        {
+            string? json = Registry.GetValue(RegPath, "userCredentials", null) as string;
 
-                UserAuthData? authData = data.TryGetValue("AuthData", out var authElement)
-                    ? SafeDeserialize<UserAuthData>(authElement.ToString()!) ?? new()
-                    : new();
+            if (string.IsNullOrEmpty(json)) return new();
 
-                return (dbParams, authData);
+            try
+            {
+                var credentials = JsonSerializer.Deserialize<UserCredentials>(json);
+                return credentials ?? new();
             }
             catch
             {
-                return (new DatabaseConnectionParameters(), new UserAuthData());
+                return new UserCredentials();
             }
         }
 
         /// <summary>
         /// Безопасный метод десериализации JSON-строки.
         /// </summary>
-        private static T? SafeDeserialize<T>(string json) where T : class, new()
+        private static T? SafeDeserialize<T>(string json)
         {
             try
             {
-                return JsonSerializer.Deserialize<T>(json) ?? new T();
+                return JsonSerializer.Deserialize<T>(json);
             }
             catch
             {
-                return new T();
+                return default;
             }
         }
     }

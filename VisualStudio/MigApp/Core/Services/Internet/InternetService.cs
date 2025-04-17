@@ -1,68 +1,111 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.IO;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Security.Policy;
 
 namespace MigApp.Core.Services
 {
     /// <summary>
-    /// Сервис для проверки наличия интернет-соединения.
+    /// Реализация сервиса <see cref="IInternetService"/>
     /// </summary>
-    internal class InternetService : IInternetService
+    public class InternetService : IInternetService
     {
         private readonly IDnsResolver _dnsResolver;
+        private readonly IAppLogger _logger;
         private readonly HttpClient _httpClient = new HttpClient();
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="InternetService"/>.
         /// </summary>
-        /// <param name="dnsResolver">Объект, реализующий интерфейс <see cref="IDnsResolver"/> для разрешения DNS-имен.</param>
-        /// <exception cref="ArgumentNullException">Возникает, если <paramref name="dnsResolver"/> равен null.</exception>
-        public InternetService (IDnsResolver dnsResolver)
+        public InternetService(IDnsResolver dnsResolver, IAppLogger logger)
         {
             _dnsResolver = dnsResolver;
+            _logger = logger;
         }
 
-        /// <summary>
-        /// Асинхронно проверяет наличие интернет-соединения путем разрешения IP-адреса 8.8.8.8 (Google Public DNS).
-        /// </summary>
-        /// <returns>Задача, представляющая асинхронную операцию. Возвращает true, если есть интернет-соединение, иначе false.</returns>
-        /// <exception cref="WebException">Возникает, если не удалось разрешить DNS-имя (например, при отсутствии интернет-соединения).</exception>
+        /// <inheritdoc/>
         public async Task<bool> HasInternetConnectionAsync()
         {
             try
             {
+                _logger.LogInformation("Проверка подключения к интернету...");
                 await _dnsResolver.GetHostEntryAsync("8.8.8.8");
+                _logger.LogInformation("Подключение к интернету доступно");
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Отсутствует подключение к интернету");
                 return false;
             }
-
         }
 
-        /// <summary>
-        /// Выполняет HTTP GET-запрос к указанному URI с заданными заголовками.
-        /// </summary>
-        /// <param name="uri">Базовый URI для запроса</param>
-        /// <param name="headerName">Имя добавляемого заголовка</param>
-        /// <param name="values">Значения заголовка</param>
-        /// <returns>Объект HttpResponseMessage с ответом сервера</returns>
-        /// <exception cref="ArgumentNullException">Выбрасывается, если uri, headerName или values равны null</exception>
-        /// <exception cref="HttpRequestException">Выбрасывается при неудачном запросе (Status Code не 2XX)</exception>
+        /// <inheritdoc/>
         public async Task<HttpResponseMessage> GetHttpResponseAsync(string uri, string headerName, string? value)
         {
+            _logger.LogInformation($"Начало HTTP-запроса к {uri} с заголовком {headerName}");
+
             ArgumentNullException.ThrowIfNull(uri, nameof(uri));
-            ArgumentNullException.ThrowIfNull(headerName, nameof(uri));
+            ArgumentNullException.ThrowIfNull(headerName, nameof(headerName));
 
-            _httpClient.BaseAddress = new Uri(uri);
-            _httpClient.DefaultRequestHeaders.Add(headerName, value);
+            try
+            {
+                _httpClient.BaseAddress = new Uri(uri);
+                _httpClient.DefaultRequestHeaders.Add(headerName, value);
 
-            HttpResponseMessage response = await _httpClient.GetAsync("");
-            response.EnsureSuccessStatusCode();
-            return response;
+                var response = await _httpClient.GetAsync("");
+                _logger.LogInformation($"HTTP-запрос к {uri} завершен со статусом {(int)response.StatusCode}");
+
+                response.EnsureSuccessStatusCode();
+                return response;
+            }
+            catch (HttpRequestException ex)
+            {
+                _logger.LogError(ex, $"Ошибка HTTP-запроса к {uri}");
+                throw;
+            }
+            catch (UriFormatException ex)
+            {
+                _logger.LogError(ex, $"Некорректный URI: {uri}");
+                throw;
+            }
+        }
+
+        /// <inheritdoc/>
+        public async Task<string?> DownloadAppInstallerAsync(string downloadUrl)
+        {
+            _logger.LogInformation($"Начало загрузки установщика из {downloadUrl}");
+
+            try
+            {
+                ArgumentNullException.ThrowIfNull(downloadUrl, nameof(downloadUrl));
+
+                string tmpmsi = Path.GetTempPath() + "MigAppInstaller.msi";
+                _logger.LogDebug($"Временный путь для установщика: {tmpmsi}");
+
+                using (var response = await _httpClient.GetAsync(downloadUrl, HttpCompletionOption.ResponseHeadersRead))
+                {
+                    response.EnsureSuccessStatusCode();
+                    _logger.LogInformation($"Файл успешно загружен с {downloadUrl}");
+
+                    using (var streamToReadFrom = await response.Content.ReadAsStreamAsync())
+                    using (var streamToWriteTo = File.Open(tmpmsi, FileMode.Create))
+                    {
+                        await streamToReadFrom.CopyToAsync(streamToWriteTo);
+                        _logger.LogInformation($"Файл сохранен по пути: {tmpmsi}");
+                    }
+                }
+
+                return tmpmsi;
+            }
+            catch (HttpRequestException ex)
+            {
+                _logger.LogError(ex, $"Ошибка загрузки файла с {downloadUrl}");
+                return null;
+            }
+            catch (IOException ex)
+            {
+                _logger.LogError(ex, $"Ошибка сохранения файла из {downloadUrl}");
+                return null;
+            }
         }
     }
 }

@@ -1,14 +1,5 @@
 ﻿using MigApp.Core;
-
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace MigApp.MVVM.ViewModel
@@ -63,9 +54,9 @@ namespace MigApp.MVVM.ViewModel
             set
             {
                 filter = value;
-                #pragma warning disable CS4014
+#pragma warning disable CS4014
                 LoadTableAsync();
-                #pragma warning restore CS4014
+#pragma warning restore CS4014
             }
         }
 
@@ -90,7 +81,7 @@ namespace MigApp.MVVM.ViewModel
 
         // Добавить запись
         public ICommand AddCommand { get; }
-        
+
         // Редактирование
         public ICommand RedactCommand { get; }
 
@@ -105,7 +96,7 @@ namespace MigApp.MVVM.ViewModel
 
         private void AddEmployee()
         {
-            
+
         }
 
         private void Redact()
@@ -136,10 +127,10 @@ namespace MigApp.MVVM.ViewModel
             ClearFilterCommand = new RelayCommand(o => ClearFilter(), o => { return Filter != "WHERE deleted = False"; });
             ApplyFilterCommand = new RelayCommand(o => ApplyFilter(), o => true);
 
-            MyCopyCommand = new RelayCommand(o =>  MyCopy(), o => true);
-            RedactCommand = new RelayCommand(o =>  Redact(), o => true);
-            MyDeleteCommand = new RelayCommand(o =>  MyDelete(), o => true);
-            ReportCommand = new RelayCommand(o =>  Report(), o => true);
+            MyCopyCommand = new RelayCommand(o => MyCopy(), o => true);
+            RedactCommand = new RelayCommand(o => Redact(), o => true);
+            MyDeleteCommand = new RelayCommand(o => MyDelete(), o => true);
+            ReportCommand = new RelayCommand(o => Report(), o => true);
 
         }
     }

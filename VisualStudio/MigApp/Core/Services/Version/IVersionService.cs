@@ -3,7 +3,7 @@
     /// <summary>
     /// Сервис для проверки подключения к интернету и версии приложения.
     /// </summary>
-    interface IVersionService
+    public interface IVersionService
     {
         /// <summary>
         /// Асинхронно получает информацию о последнем релизе.

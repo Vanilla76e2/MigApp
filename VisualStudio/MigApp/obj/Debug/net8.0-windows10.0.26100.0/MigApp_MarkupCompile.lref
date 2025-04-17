@@ -21,5 +21,7 @@ FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\MVVM\View\UserControls\RoutersV
 FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\MVVM\View\UserControls\SwitchesView.xaml;;
 FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\MVVM\View\UserControls\TabletsVeiw.xaml;;
 FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\MVVM\View\UserControls\UsersView.xaml;;
-FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\Resources\DarkTheme.xaml;;
+FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\Styles\DarkTheme.xaml;;
+FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\Styles\FormStyles.xaml;;
+FC:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\Styles\WindowStyles.xaml;;
 

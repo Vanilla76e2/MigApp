@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -35,10 +34,10 @@ namespace MigApp.CustomElements
             if (!string.IsNullOrEmpty(text))
             {
                 string[] parts = text.Split('.');
-                ip1.Text = parts.Length > 0? parts[0] : "";
-                ip2.Text = parts.Length > 1? parts[1] : "";
-                ip3.Text = parts.Length > 2? parts[2] : "";
-                ip4.Text = parts.Length > 3? parts[3] : "";
+                ip1.Text = parts.Length > 0 ? parts[0] : "";
+                ip2.Text = parts.Length > 1 ? parts[1] : "";
+                ip3.Text = parts.Length > 2 ? parts[2] : "";
+                ip4.Text = parts.Length > 3 ? parts[3] : "";
             }
         }
 
@@ -77,43 +76,43 @@ namespace MigApp.CustomElements
         {
             TextBox currentTextBox = (TextBox)sender;
             int currentIndex = GetTextBoxIndex(currentTextBox);
-            switch(e.Key)
+            switch (e.Key)
             {
                 case Key.Right:
-                {
-                    if (currentTextBox.CaretIndex == currentTextBox.Text.Length)
                     {
-                        e.Handled = true;
-                        MoveFocusToNextTextBox(currentIndex);
+                        if (currentTextBox.CaretIndex == currentTextBox.Text.Length)
+                        {
+                            e.Handled = true;
+                            MoveFocusToNextTextBox(currentIndex);
+                        }
+                        break;
                     }
-                    break;
-                }
                 case Key.OemPeriod:
                 case Key.Enter:
                 case Key.Space:
-                {
-                    e.Handled = true;
-                    MoveFocusToNextTextBox(currentIndex);
-                    break;
-                }
+                    {
+                        e.Handled = true;
+                        MoveFocusToNextTextBox(currentIndex);
+                        break;
+                    }
                 case Key.Left:
-                {
-                    if(currentTextBox.CaretIndex == 0)
                     {
-                        e.Handled = true;
-                        MoveFocusToPreviousTextBox(currentIndex);
+                        if (currentTextBox.CaretIndex == 0)
+                        {
+                            e.Handled = true;
+                            MoveFocusToPreviousTextBox(currentIndex);
+                        }
+                        break;
                     }
-                    break;
-                }
                 case Key.Back:
-                {
-                    if (currentTextBox.Text.Length == 0)
                     {
-                        e.Handled = true;
-                        MoveFocusToPreviousTextBox(currentIndex);
+                        if (currentTextBox.Text.Length == 0)
+                        {
+                            e.Handled = true;
+                            MoveFocusToPreviousTextBox(currentIndex);
+                        }
+                        break;
                     }
-                    break;
-                }
 
             }
         }
@@ -172,6 +171,6 @@ namespace MigApp.CustomElements
         }
         #endregion
 
-        
+
     }
 }

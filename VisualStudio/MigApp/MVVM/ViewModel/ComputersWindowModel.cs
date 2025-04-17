@@ -1,5 +1,4 @@
 ﻿using MigApp.Core;
-using System.Diagnostics;
 
 namespace MigApp.MVVM.ViewModel.CRWindows
 {
@@ -113,7 +112,7 @@ namespace MigApp.MVVM.ViewModel.CRWindows
             string employee = "";
             try
             {
-                
+
             }
             catch
             {
@@ -127,7 +126,7 @@ namespace MigApp.MVVM.ViewModel.CRWindows
         public RelayCommand saveData { get; set; } // Объявление команды на сохранение данных
         private async void SaveData() // Сохранение изменений в базе данных
         {
-            
+
             //if (id == null) // Создание записи
             //{
             //    //id = await pgsql.ReqRef($"INSERT INTO \"Technic\".computers (inventory_number, name, ip, employee_id, operating_system, comment) VALUES ({InventoryNumber}, '{ComputerName}', '{IP}', {SelectedUser}, '{OS}', '{Comment}') RETURNING id");
@@ -211,7 +210,7 @@ namespace MigApp.MVVM.ViewModel.CRWindows
             get => _ip;
             set
             {
-                if(_ip != value)
+                if (_ip != value)
                 {
                     _ip = value;
                     OnPropertyChanged(nameof(IP));

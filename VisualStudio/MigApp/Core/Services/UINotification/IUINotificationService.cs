@@ -1,7 +1,7 @@
 ﻿
 namespace MigApp.Core.Services
 {
-    internal interface IUINotificationService
+    public interface IUINotificationService
     {
         Task ShowInfoAsync(string message);
         Task ShowErrorAsync(string message);

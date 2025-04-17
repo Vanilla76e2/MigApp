@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace MigApp.Data;
 
@@ -12,7 +10,7 @@ public partial class UserProfileView
     [Column("id")]
     public int? Id { get; set; }
 
-    [Column("username")]
+    [Column("Username")]
     [StringLength(255)]
     public string? Username { get; set; }
 

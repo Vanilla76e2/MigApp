@@ -1,19 +1,15 @@
 ﻿
 namespace MigApp.Core.Services.AppUpdate
 {
-    interface IAppUpdateService
+    /// <summary>
+    /// Сервис для управления процессом обновления приложения.
+    /// </summary>
+    public interface IAppUpdateService
     {
         /// <summary>
-        /// Начинает процесс обновления приложения.
+        /// Асинхронно выполняет полный процесс обновления приложения.
         /// </summary>
-        Task UpdateApplication();
-
-        /// <summary>
-        /// Сравнивает полученную версию с текущей.
-        /// </summary>
-        /// <returns>Возвращает ture если полученная версия новее, false если установлена последняя версия.</returns>
-        bool IsNewerVersionAvailable(ReleaseInfo releaseInfo);
-
-        Task<ReleaseInfo?> GetLatestReleaseInfoAsync();
+        /// <returns>Задача, представляющая асинхронную операцию обновления.</returns>
+        Task UpdateApplicationAsync();
     }
 }

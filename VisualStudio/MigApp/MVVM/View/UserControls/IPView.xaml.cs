@@ -1,20 +1,7 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Net;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Linq;
-using System.Collections;
-using System.Collections.ObjectModel;
-using System.Data;
-using System;
-using System.Collections.Specialized;
-using System.Windows.Documents;
-using System.Globalization;
-using System.Windows.Media;
+﻿using MigApp.MVVM.ViewModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
-using MigApp.MVVM.ViewModel;
 
 
 namespace MigApp.MVVM.View
@@ -24,7 +11,7 @@ namespace MigApp.MVVM.View
     /// </summary>
     public partial class IPView : UserControl
     {
-        
+
         public IPView()
         {
             InitializeComponent();

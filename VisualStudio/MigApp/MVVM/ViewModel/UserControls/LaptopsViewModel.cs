@@ -1,8 +1,7 @@
 ﻿
-using System.Windows.Input;
-using System.Windows;
-using System.Data;
 using MigApp.Core;
+using System.Data;
+using System.Windows.Input;
 
 namespace MigApp.MVVM.ViewModel
 {

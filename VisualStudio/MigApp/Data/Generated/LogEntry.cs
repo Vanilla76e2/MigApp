@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace MigApp.Data;
 
@@ -19,7 +16,7 @@ public partial class LogEntry
     [Column("user_id")]
     public int? UserId { get; set; }
 
-    [Column("username")]
+    [Column("Username")]
     [StringLength(255)]
     public string? Username { get; set; }
 

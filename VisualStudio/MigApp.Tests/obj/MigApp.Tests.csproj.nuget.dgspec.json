@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp.Tests\\MigApp.Tests.csproj": {}
+    "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp.Tests\\MigApp.Tests.csproj": {}
   },
   "projects": {
-    "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp.Tests\\MigApp.Tests.csproj": {
+    "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp.Tests\\MigApp.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp.Tests\\MigApp.Tests.csproj",
+        "projectUniqueName": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp.Tests\\MigApp.Tests.csproj",
         "projectName": "MigApp.Tests",
-        "projectPath": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp.Tests\\MigApp.Tests.csproj",
-        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
-        "outputPath": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp.Tests\\obj\\",
+        "projectPath": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp.Tests\\MigApp.Tests.csproj",
+        "packagesPath": "C:\\Users\\Vanilla76e2\\.nuget\\packages\\",
+        "outputPath": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Vanilla76e2\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -32,8 +32,8 @@
           "net8.0-windows10.0.26100": {
             "targetAlias": "net8.0-windows10.0.26100.0",
             "projectReferences": {
-              "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj": {
-                "projectPath": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj"
+              "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj": {
+                "projectPath": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj"
               }
             }
           }
@@ -122,20 +122,20 @@
         }
       }
     },
-    "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj": {
+    "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj",
+        "projectUniqueName": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj",
         "projectName": "MigApp",
-        "projectPath": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj",
-        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
-        "outputPath": "E:\\Work\\My Works\\GitHub\\MigApp\\VisualStudio\\MigApp\\obj\\",
+        "projectPath": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj",
+        "packagesPath": "C:\\Users\\Vanilla76e2\\.nuget\\packages\\",
+        "outputPath": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Vanilla76e2\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -174,7 +174,10 @@
             },
             "CredentialManagement": {
               "target": "Package",
-              "version": "[1.0.2, )"
+              "version": "[1.0.2, )",
+              "noWarn": [
+                "NU1701"
+              ]
             },
             "MaterialDesignColors": {
               "target": "Package",

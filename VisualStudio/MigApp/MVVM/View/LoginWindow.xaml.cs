@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using MigApp.Core.Services.AppUpdate;
 using MigApp.MVVM.ViewModel;
-
-using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -12,16 +12,12 @@ namespace MigApp.MVVM.View
     /// </summary>
     public partial class LoginWindow : Window
     {
-        public LoginWindow()
+        public LoginWindow(LoginWindowModel viewModel)
         {
             InitializeComponent();
-        }
-
-        public LoginWindow(IServiceProvider serviceProvider)
-        {
-            InitializeComponent();
-            DataContext = new LoginWindowModel(serviceProvider);
-            FillConnectionParametrs();
+            DataContext = viewModel;
+            this.Closed += (s, e) => { if (DataContext is LoginWindowModel vm) vm.DisposePasswords(); };
+            SettignsGrid.IsVisibleChanged += (s, e) => { SwitchDefaultButton(); };
         }
 
         // Закрыть приложение
@@ -30,53 +26,18 @@ namespace MigApp.MVVM.View
             Application.Current.Shutdown();
         }
 
-        // При загрузке окна
-        private async void OnLoaded(object sender, RoutedEventArgs e)
+        private void SwitchDefaultButton()
         {
-            var viewModel = DataContext as LoginWindowModel;
-            if (viewModel != null)
+            if (SettignsGrid.Visibility == Visibility.Visible)
             {
-                await viewModel.InitializeAsync();
-                await viewModel.OnLoginRemembered();
+                LoginButton.IsDefault = false;
+                CommitSettingsButton.IsDefault = true;
             }
             else
             {
-                Debug.WriteLine("LoginView: viewModel = null");
+                LoginButton.IsDefault = true;
+                CommitSettingsButton.IsDefault = false;
             }
-        }
-
-        // Отслеживание изменения пароля пользователя
-        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            var passwordBox = sender as PasswordBox;
-            if (passwordBox != null)
-            {
-                var viewModel = DataContext as LoginWindowModel;
-                if (viewModel != null)
-                {
-                    viewModel.UserPassword = passwordBox.Password;
-                }
-            }
-        }
-
-        // Отслеживание изменения пароля БД
-        private void DataBase_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            var passwordBox = sender as PasswordBox;
-            if (passwordBox != null)
-            {
-                var viewModel = DataContext as LoginWindowModel;
-                if (viewModel != null)
-                {
-                    viewModel.DBPassword = passwordBox.Password;
-                }
-            }
-        }
-
-        // Заполенение параметров подключения
-        private void FillConnectionParametrs()
-        {
-            DBPassword_Passwordbox.Password = MigApp.Properties.Settings.Default.pgPassword;
         }
     }
 }

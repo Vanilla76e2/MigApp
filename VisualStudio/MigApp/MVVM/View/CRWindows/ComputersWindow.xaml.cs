@@ -1,7 +1,4 @@
-﻿using MigApp.MVVM.ViewModel;
-using System;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace MigApp.MVVM.View.CRWindows
 {

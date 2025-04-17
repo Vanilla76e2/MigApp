@@ -1,16 +1,11 @@
 ﻿using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MigApp.Core.Services
 {
     /// <summary>
     /// Класс, перехватывающий необработанные исключения и записывающий их в лог.
     /// </summary>
-    internal class CrashLogger : ICrashLogger
+    public class CrashLogger : ICrashLogger
     {
         private readonly IAppLogger _logger;
 

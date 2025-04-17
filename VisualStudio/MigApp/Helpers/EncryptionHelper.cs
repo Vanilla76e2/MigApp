@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace MigApp.Helpers
 {
@@ -22,7 +17,7 @@ namespace MigApp.Helpers
         /// <returns>Публичный ключ для шифрования.</returns>
         private static string GetOrCreatePublicKey()
         {
-            using var rsa = 
+            using var rsa =
                 new RSACryptoServiceProvider
                 (
                     new CspParameters
@@ -30,7 +25,7 @@ namespace MigApp.Helpers
                         KeyContainerName = KeyContainerName,
                         Flags = KeyFlags
                     }
-                )   
+                )
                 {
                     PersistKeyInCsp = true // Сохранить ключ в контейнере
                 };
@@ -59,9 +54,10 @@ namespace MigApp.Helpers
         /// <returns>Дешифрованная строка.</returns>
         public static string Decrypt(string? encryptedText)
         {
-            ArgumentNullException.ThrowIfNull(encryptedText, nameof(encryptedText));
 
-            using var rsa = 
+            if (string.IsNullOrWhiteSpace(encryptedText)) return string.Empty;
+
+            using var rsa =
                 new RSACryptoServiceProvider(
                 new CspParameters
                 {

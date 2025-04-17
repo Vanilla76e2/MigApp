@@ -1,20 +1,16 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using MigApp.Core;
 using MigApp.MVVM.View;
 using MigApp.MVVM.ViewModel;
-using System;
-using System.ComponentModel;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media.Media3D;
 
 namespace MigApp.Core.Services
 {
-    internal class NavigationService : ObservableObject, INavigationService
+    public class NavigationService : ObservableObject, INavigationService
     {
         private readonly Func<Type, ViewModel> _viewModelFactory;
         private readonly IServiceProvider _serviceProvider;
         private ViewModel? _currentView = null!;
+        private readonly IAppLogger _logger;
         public ViewModel? CurrentView
         {
             get => _currentView;
@@ -26,10 +22,11 @@ namespace MigApp.Core.Services
         }
 
         // Конструктор класса
-        public NavigationService(Func<Type, ViewModel> viewModelFactory, IServiceProvider serviceProvider)
+        public NavigationService(Func<Type, ViewModel> viewModelFactory, IServiceProvider serviceProvider, IAppLogger logger)
         {
             _viewModelFactory = viewModelFactory;
             _serviceProvider = serviceProvider;
+            _logger = logger;
 
             // По умолчанию открывается Избранное
             CurrentView = _viewModelFactory.Invoke(typeof(FavouriteViewModel));
@@ -47,16 +44,30 @@ namespace MigApp.Core.Services
         /// <exception cref="Exception">Возникает, если не удалось создать экземпляр ViewModel.</exception>
         public async Task NavigateTo<TViewModel>() where TViewModel : ViewModel
         {
-            ViewModel viewModel = _viewModelFactory.Invoke(typeof(TViewModel));
-            if (viewModel != CurrentView)
+            _logger.LogDebug($"Начало навигации к {typeof(TViewModel).Name}");   
+            try
             {
-                CurrentView = viewModel;
-
-                if (viewModel is ILoadbleViewModel loadbleViewModel)
+                ViewModel viewModel = _viewModelFactory.Invoke(typeof(TViewModel));
+                if (viewModel != CurrentView)
                 {
-                    await loadbleViewModel.LoadTableAsync();
+                    CurrentView = viewModel;
+                    _logger.LogInformation($"Текущая ViewModel изменена на {viewModel.GetType().Name}");
+
+                    if (viewModel is ILoadbleViewModel loadbleViewModel)
+                    {
+                        _logger.LogDebug($"Обнаружен интерфейс ILoadableViewModel. Начинается загрузка даннх");
+                        await loadbleViewModel.LoadTableAsync();
+                        _logger.LogInformation($"Данные {typeof(TViewModel).Name} успешно загружены");
+                    }
                 }
+                else _logger.LogInformation($"Модель {typeof(TViewModel).Name} уже активна");
             }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Ошибка при навигации к ViewModel {typeof(TViewModel).Name}");
+                throw;
+            }
+            
         }
 
         /// <summary>
@@ -73,20 +84,34 @@ namespace MigApp.Core.Services
         /// <exception cref="Exception">Возникает, если не удалось создать экземпляр окна.</exception>
         private async Task ShowWindow<TWindow>(Func<IServiceProvider, TWindow> windowFactory, Func<Task>? postShowAction = null) where TWindow : Window
         {
-            var window = windowFactory(_serviceProvider);
-
-            if (window != null)
+            _logger.LogDebug($"Начало отображения окна {typeof(TWindow).Name}");
+            try
             {
+                var window = windowFactory(_serviceProvider);
+
+                if(window == null)
+                {
+                    _logger.LogError($"Не удалось создать эеземпляр окна {typeof(TWindow).Name}");
+                    return;
+                }
+
+                _logger.LogInformation($"Окно {typeof(TWindow).Name} успешно создано");
+
                 Application.Current.MainWindow = window;
                 window.Show();
+                _logger.LogInformation($"Окно {typeof(TWindow).Name} установленно как главное");
+
                 if (postShowAction != null)
                 {
+                    _logger.LogDebug($"Выполнение post-действия для окна.");
                     await postShowAction();
+                    _logger.LogInformation($"Post-действие для окна {typeof(TWindow).Name} выполнено");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                Debug.WriteLine($"NavigationService.ShowWindow: Не удалось создать {typeof(TWindow).Name}.");
+                _logger.LogError(ex, $"Ошибка при отображении окна {typeof(TWindow).Name}");
+                throw;
             }
         }
 
@@ -95,7 +120,7 @@ namespace MigApp.Core.Services
         /// </summary>
         public async Task NavigateToMainWindow()
         {
-            await ShowWindow(sp => new MainView(sp), async () => await NavigateTo<FavouriteViewModel>());
+            await ShowWindow(sp => new MainWindow(sp), async () => await NavigateTo<FavouriteViewModel>());
         }
 
         /// <summary>
@@ -103,7 +128,7 @@ namespace MigApp.Core.Services
         /// </summary>
         public async Task NavigateToLoginWindow()
         {
-            await ShowWindow(sp => new LoginWindow(sp));
+            await ShowWindow(sp => new LoginWindow(sp.GetRequiredService<LoginWindowModel>()));
         }
     }
 }
