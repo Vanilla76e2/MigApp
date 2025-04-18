@@ -378,11 +378,9 @@ C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\net8.0-windows10.0.261
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\net8.0-windows10.0.26100.0\MigApp.pdb
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\net8.0-windows10.0.26100.0\MigApp.genruntimeconfig.cache
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\net8.0-windows10.0.26100.0\ref\MigApp.dll
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\net8.0-windows10.0.26100.0\Styles\ButtonStyles.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\net8.0-windows10.0.26100.0\Styles\Colors.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\net8.0-windows10.0.26100.0\Styles\CoreStyles.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\net8.0-windows10.0.26100.0\Styles\DataGridStyles.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\net8.0-windows10.0.26100.0\Styles\NavigationStyles.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\net8.0-windows10.0.26100.0\Styles\SpecialControls.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\net8.0-windows10.0.26100.0\Styles\FormStyles.baml
-C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\net8.0-windows10.0.26100.0\Styles\WindowStyles.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\net8.0-windows10.0.26100.0\ControlzEx.dll
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\net8.0-windows10.0.26100.0\MahApps.Metro.dll
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\bin\Debug\net8.0-windows10.0.26100.0\MaterialDesignThemes.MahApps.dll
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\net8.0-windows10.0.26100.0\Styles\Base\Colors.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\net8.0-windows10.0.26100.0\Styles\Base\CoreStyles.baml
+C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\obj\Debug\net8.0-windows10.0.26100.0\Styles\Specific\LoginWindowStyles.baml

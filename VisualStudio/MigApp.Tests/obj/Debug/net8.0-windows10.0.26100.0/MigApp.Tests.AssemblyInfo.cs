@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MigApp.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1e4c689041180d437e04a31dc2e843223d57f50d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ca48512e7b44989777420f25ff3c5af22b2abd9e")]
 [assembly: System.Reflection.AssemblyProductAttribute("MigApp.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MigApp.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -20,12 +20,6 @@ namespace MigApp.MVVM.View
             SettignsGrid.IsVisibleChanged += (s, e) => { SwitchDefaultButton(); };
         }
 
-        // Закрыть приложение
-        private void CloseClick(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
         private void SwitchDefaultButton()
         {
             if (SettignsGrid.Visibility == Visibility.Visible)
@@ -38,6 +32,11 @@ namespace MigApp.MVVM.View
                 LoginButton.IsDefault = true;
                 CommitSettingsButton.IsDefault = false;
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainSnackbar.MessageQueue?.Enqueue("Попытка отобразить сообщение");
         }
     }
 }

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\MyPrograms\GitHub\MigApp\VisualStudio\MigApp\App.xaml
-302022119954
+25-1991349955
 2190108695
 1211243176491
-233-171997845
-CustomElements\IPAddressControl.xaml;MVVM\View\CRWindows\ComputersWindow.xaml;MVVM\View\LoginWindow.xaml;MVVM\View\MainWindow.xaml;MVVM\View\UserControls\CCTVView.xaml;MVVM\View\UserControls\ComputersView.xaml;MVVM\View\UserControls\DepartmentView.xaml;MVVM\View\UserControls\EmployeesView.xaml;MVVM\View\UserControls\FavouriteView.xaml;MVVM\View\UserControls\FurnitureTypesView.xaml;MVVM\View\UserControls\FurnitureView.xaml;MVVM\View\UserControls\IPView.xaml;MVVM\View\UserControls\LaptopsView.xaml;MVVM\View\UserControls\LogsView.xaml;MVVM\View\UserControls\MonitorsView.xaml;MVVM\View\UserControls\OrgtechView.xaml;MVVM\View\UserControls\RolesView.xaml;MVVM\View\UserControls\RoutersView.xaml;MVVM\View\UserControls\SwitchesView.xaml;MVVM\View\UserControls\TabletsVeiw.xaml;MVVM\View\UserControls\UsersView.xaml;Styles\ButtonStyles.xaml;Styles\Colors.xaml;Styles\CoreStyles.xaml;Styles\DarkTheme.xaml;Styles\DataGridStyles.xaml;Styles\FormStyles.xaml;Styles\NavigationStyles.xaml;Styles\SpecialControls.xaml;Styles\WindowStyles.xaml;
+236-1768014929
+CustomElements\IPAddressControl.xaml;MVVM\View\CRWindows\ComputersWindow.xaml;MVVM\View\LoginWindow.xaml;MVVM\View\MainWindow.xaml;MVVM\View\UserControls\CCTVView.xaml;MVVM\View\UserControls\ComputersView.xaml;MVVM\View\UserControls\DepartmentView.xaml;MVVM\View\UserControls\EmployeesView.xaml;MVVM\View\UserControls\FavouriteView.xaml;MVVM\View\UserControls\FurnitureTypesView.xaml;MVVM\View\UserControls\FurnitureView.xaml;MVVM\View\UserControls\IPView.xaml;MVVM\View\UserControls\LaptopsView.xaml;MVVM\View\UserControls\LogsView.xaml;MVVM\View\UserControls\MonitorsView.xaml;MVVM\View\UserControls\OrgtechView.xaml;MVVM\View\UserControls\RolesView.xaml;MVVM\View\UserControls\RoutersView.xaml;MVVM\View\UserControls\SwitchesView.xaml;MVVM\View\UserControls\TabletsVeiw.xaml;MVVM\View\UserControls\UsersView.xaml;Styles\Base\Colors.xaml;Styles\Base\CoreStyles.xaml;Styles\DarkTheme.xaml;Styles\Specific\LoginWindowStyles.xaml;
 
 False
 

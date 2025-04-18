@@ -36,6 +36,7 @@
     <PackageReference Include="CredentialManagement" Version="1.0.2" NoWarn="NU1701" />
     <PackageReference Include="MaterialDesignColors" Version="5.2.1" />
     <PackageReference Include="MaterialDesignThemes" Version="5.2.1" />
+    <PackageReference Include="MaterialDesignThemes.MahApps" Version="5.2.1" />
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="9.0.2" />
     <PackageReference Include="Microsoft.Bcl.HashCode" Version="6.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.2" />

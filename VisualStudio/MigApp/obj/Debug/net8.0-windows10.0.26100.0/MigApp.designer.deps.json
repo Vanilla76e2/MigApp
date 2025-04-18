@@ -14,6 +14,18 @@
           }
         }
       },
+      "ControlzEx/4.3.0": {
+        "dependencies": {
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.135",
+          "System.Text.Json": "9.0.2"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/ControlzEx.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.3.0.108"
+          }
+        }
+      },
       "CredentialManagement/1.0.2": {
         "runtime": {
           "lib/net35/CredentialManagement.dll": {
@@ -27,6 +39,17 @@
           "lib/net6.0/Humanizer.dll": {
             "assemblyVersion": "2.14.0.0",
             "fileVersion": "2.14.1.48190"
+          }
+        }
+      },
+      "MahApps.Metro/2.0.0": {
+        "dependencies": {
+          "ControlzEx": "4.3.0"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/MahApps.Metro.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.894"
           }
         }
       },
@@ -45,6 +68,19 @@
         },
         "runtime": {
           "lib/net8.0/MaterialDesignThemes.Wpf.dll": {
+            "assemblyVersion": "5.2.1.0",
+            "fileVersion": "5.2.1.0"
+          }
+        }
+      },
+      "MaterialDesignThemes.MahApps/5.2.1": {
+        "dependencies": {
+          "MahApps.Metro": "2.0.0",
+          "MaterialDesignColors": "5.2.1",
+          "MaterialDesignThemes": "5.2.1"
+        },
+        "runtime": {
+          "lib/net8.0/MaterialDesignThemes.MahApps.dll": {
             "assemblyVersion": "5.2.1.0",
             "fileVersion": "5.2.1.0"
           }
@@ -865,6 +901,13 @@
       "path": "bcrypt.net-next/4.0.3",
       "hashPath": "bcrypt.net-next.4.0.3.nupkg.sha512"
     },
+    "ControlzEx/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-I7PKmQNIMO9+s4s50WXOApotnyEKL9G8vvYrZY7CLe7nufXwRSv+vWPrd4BYwZDQiWHbBwnXsC8zUPgPnEWr6g==",
+      "path": "controlzex/4.3.0",
+      "hashPath": "controlzex.4.3.0.nupkg.sha512"
+    },
     "CredentialManagement/1.0.2": {
       "type": "package",
       "serviceable": true,
@@ -879,6 +922,13 @@
       "path": "humanizer.core/2.14.1",
       "hashPath": "humanizer.core.2.14.1.nupkg.sha512"
     },
+    "MahApps.Metro/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-btjlE3Q8iebJB+4TBJZLcJBQZshKYqfkcATj9AS8veq4a506uE71NOTE1OSoavOJ70xasBjcdc+VuN17l+kIqw==",
+      "path": "mahapps.metro/2.0.0",
+      "hashPath": "mahapps.metro.2.0.0.nupkg.sha512"
+    },
     "MaterialDesignColors/5.2.1": {
       "type": "package",
       "serviceable": true,
@@ -892,6 +942,13 @@
       "sha512": "sha512-x8JDqNHJcTLLxIoVts3w7AbSq5Zo0FXTw89XqPN7+n0EKqLXFwWsywiUn08HDyTGAmZVJqbQsWKxKWCI8qfWsQ==",
       "path": "materialdesignthemes/5.2.1",
       "hashPath": "materialdesignthemes.5.2.1.nupkg.sha512"
+    },
+    "MaterialDesignThemes.MahApps/5.2.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8lbnJKQjn3Ri6irNSl797AK3AqgtlYs7NjDsCXPYRhrua2ULb5qX2AY7F7vwpHDPRj8II+auW6trTxS0Im9iEw==",
+      "path": "materialdesignthemes.mahapps/5.2.1",
+      "hashPath": "materialdesignthemes.mahapps.5.2.1.nupkg.sha512"
     },
     "Microsoft.Bcl.AsyncInterfaces/9.0.2": {
       "type": "package",

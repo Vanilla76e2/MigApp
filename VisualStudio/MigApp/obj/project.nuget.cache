@@ -1,14 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "cr8mxd2ijTk=",
+  "dgSpecHash": "eMwKzx+oOkA=",
   "success": true,
   "projectFilePath": "C:\\MyPrograms\\GitHub\\MigApp\\VisualStudio\\MigApp\\MigApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Vanilla76e2\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
+    "C:\\Users\\Vanilla76e2\\.nuget\\packages\\controlzex\\4.3.0\\controlzex.4.3.0.nupkg.sha512",
     "C:\\Users\\Vanilla76e2\\.nuget\\packages\\credentialmanagement\\1.0.2\\credentialmanagement.1.0.2.nupkg.sha512",
     "C:\\Users\\Vanilla76e2\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\Vanilla76e2\\.nuget\\packages\\mahapps.metro\\2.0.0\\mahapps.metro.2.0.0.nupkg.sha512",
     "C:\\Users\\Vanilla76e2\\.nuget\\packages\\materialdesigncolors\\5.2.1\\materialdesigncolors.5.2.1.nupkg.sha512",
     "C:\\Users\\Vanilla76e2\\.nuget\\packages\\materialdesignthemes\\5.2.1\\materialdesignthemes.5.2.1.nupkg.sha512",
+    "C:\\Users\\Vanilla76e2\\.nuget\\packages\\materialdesignthemes.mahapps\\5.2.1\\materialdesignthemes.mahapps.5.2.1.nupkg.sha512",
     "C:\\Users\\Vanilla76e2\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\9.0.2\\microsoft.bcl.asyncinterfaces.9.0.2.nupkg.sha512",
     "C:\\Users\\Vanilla76e2\\.nuget\\packages\\microsoft.bcl.hashcode\\6.0.0\\microsoft.bcl.hashcode.6.0.0.nupkg.sha512",
     "C:\\Users\\Vanilla76e2\\.nuget\\packages\\microsoft.build.framework\\17.8.3\\microsoft.build.framework.17.8.3.nupkg.sha512",

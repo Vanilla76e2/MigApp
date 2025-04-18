@@ -187,6 +187,10 @@
               "target": "Package",
               "version": "[5.2.1, )"
             },
+            "MaterialDesignThemes.MahApps": {
+              "target": "Package",
+              "version": "[5.2.1, )"
+            },
             "Microsoft.Bcl.AsyncInterfaces": {
               "target": "Package",
               "version": "[9.0.2, )"
