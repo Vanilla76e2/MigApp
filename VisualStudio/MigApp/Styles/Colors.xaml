@@ -10,7 +10,7 @@
 
     <!-- Фоновые цвета -->
     <Color x:Key="DarkBackgroundColor">#252525</Color>
-    <Color x:Key="MediumBackgroundColor">#383838</Color>
+    <Color x:Key="PrimaryBackgroundColor">#383838</Color>
     <Color x:Key="LightBackgroundColor">#424242</Color>
     <Color x:Key="LighterBackgroundColor">#505050</Color>
     <Color x:Key="LightestBackgroundColor">#525252</Color>
@@ -28,19 +28,20 @@
     <!-- Тени -->
     <Color x:Key="ShadowColor">#252525</Color>
 
+
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     <!--                       КИСТИ (BRUSHES)                           -->
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
     <!-- Акцентные кисти -->
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}"/>
-    <SolidColorBrush x:Key="PrimaryLightBrush" Color="{StaticResource PrimaryColor}" Opacity="0.7"/>
 
     <!-- Фоновые кисти -->
     <SolidColorBrush x:Key="DarkBackgroundBrush" Color="{StaticResource DarkBackgroundColor}"/>
-    <SolidColorBrush x:Key="MediumBackgroundBrush" Color="{StaticResource MediumBackgroundColor}"/>
+    <SolidColorBrush x:Key="PrimaryBackgroundBrush" Color="{StaticResource PrimaryBackgroundColor}"/>
     <SolidColorBrush x:Key="LightBackgroundBrush" Color="{StaticResource LightBackgroundColor}"/>
     <SolidColorBrush x:Key="LighterBackgroundBrush" Color="{StaticResource LighterBackgroundColor}"/>
+    <SolidColorBrush x:Key="LightestBackgroundBrush" Color="{StaticResource LightestBackgroundColor}"/>
 
     <!-- Текстовые кисти -->
     <SolidColorBrush x:Key="PrimaryTextBrush" Color="{StaticResource PrimaryTextColor}"/>
@@ -51,6 +52,7 @@
     <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderColor}"/>
     <SolidColorBrush x:Key="HoverBrush" Color="{StaticResource HoverColor}"/>
     <SolidColorBrush x:Key="PressedBrush" Color="{StaticResource PressedColor}"/>
+    <SolidColorBrush x:Key="TransparentBrush" Color="Transparent"/>
 
     <!-- Тени -->
     <SolidColorBrush x:Key="ShadowBrush" Color="{StaticResource ShadowColor}"/>
@@ -59,9 +61,6 @@
     <!--                  ДОПОЛНИТЕЛЬНЫЕ РЕСУРСЫ                         -->
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-    <!-- Для MaterialDesign -->
-    <SolidColorBrush x:Key="MaterialDesignBackground" Color="{StaticResource DarkBackgroundColor}"/>
-    <SolidColorBrush x:Key="MaterialDesignPaper" Color="{StaticResource MediumBackgroundColor}"/>
-    <SolidColorBrush x:Key="MaterialDesignCardBackground" Color="{StaticResource LightBackgroundColor}"/>
+    
 
 </ResourceDictionary>

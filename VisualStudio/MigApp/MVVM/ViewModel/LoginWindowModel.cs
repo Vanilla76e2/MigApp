@@ -1,10 +1,12 @@
-﻿using MigApp.Core;
+﻿using MaterialDesignThemes.Wpf;
+using MigApp.Core;
 using MigApp.Core.Services.AppUpdate;
 using MigApp.Helpers;
 using MigApp.MVVM.Model;
 using MigApp.Properties;
 using System.Runtime.InteropServices;
 using System.Security;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MigApp.MVVM.ViewModel
@@ -27,8 +29,19 @@ namespace MigApp.MVVM.ViewModel
         public RelayCommand LoginCommand { get; set; }
         public RelayCommand CommitSettingsCommand { get; set; }
         public RelayCommand ToggleSettingsCommand { get; set; }
+        public RelayCommand ShowGuideCommand { get; set; }
 
         #region Свойства
+        public string WindowTitle { get; } = $"MigApp {System.Reflection.Assembly.GetExecutingAssembly().GetName()?.Version?.ToString(3) ?? "Unknown Version"}";
+
+        public ISnackbarMessageQueue SnackbarMessageQueue { get; }
+
+        public void ShowMessage(string message)
+        {
+            _logger.LogDebug($"Принят текст сообщения: {message}");
+            SnackbarMessageQueue.Enqueue(message);
+        }
+
         private bool _isSettingsVisible { get; set; } = false;
         public bool IsSettingsOn
         {
@@ -225,6 +238,8 @@ namespace MigApp.MVVM.ViewModel
             LoginCommand = new RelayCommand(async o => await AuthorizeUserAsync(), o => IsConnectionCorrect);
             CommitSettingsCommand = new RelayCommand(async o => await CommitSettingsChangings(), o => true);
             ToggleSettingsCommand = new RelayCommand(o => ToggleSettings(), o => true);
+            ShowGuideCommand = new RelayCommand(o => ShowGuide(), o => true);
+            SnackbarMessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
 
             Task.Run(async () => { await InitializeAsync(); });
         }
@@ -423,9 +438,15 @@ namespace MigApp.MVVM.ViewModel
             }
         }
 
-        /// <summary>
-        /// Переключатель видимости окна настроек.
-        /// </summary>
+        private void ShowGuide()
+        {
+            SnackbarMessageQueue.Enqueue("Тестовое сообщение", "Открыть", () => System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = "https://example.com",
+                UseShellExecute = true
+            }));
+        }
+
         private void ToggleSettings()
         {
             IsSettingsOn = !IsSettingsOn;
