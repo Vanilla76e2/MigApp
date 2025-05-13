@@ -43,5 +43,17 @@ namespace MigApp.Properties {
                 return ((string)(this["GitApiReleasesUrl"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsDemoMode {
+            get {
+                return ((bool)(this["IsDemoMode"]));
+            }
+            set {
+                this["IsDemoMode"] = value;
+            }
+        }
     }
 }

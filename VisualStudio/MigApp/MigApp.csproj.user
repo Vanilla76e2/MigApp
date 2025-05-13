@@ -7,6 +7,9 @@
     <Compile Update="Controls\LabeledInput.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Controls\MainNavigationPanel.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Controls\WindowButtonsControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

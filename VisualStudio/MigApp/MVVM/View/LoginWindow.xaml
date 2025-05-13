@@ -86,7 +86,8 @@
                         Style="{DynamicResource LoginEnterButton}" 
                         Command="{Binding LoginCommand}" 
                         IsEnabled="{Binding IsConnectionCorrect}" 
-                        IsDefault="True"/>
+                        IsDefault="True"
+                        Visibility="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Invert}"/>
             
                 <Button x:Name="CommitSettingsButton" 
                         Content="Подтвердить" 
@@ -97,8 +98,19 @@
                 <ToggleButton x:Name="SettingsToggle" 
                               Style="{DynamicResource SettingsToggleButton}" 
                               IsChecked="{Binding IsSettingsOn}"/>
-            
-                <Button Style="{DynamicResource InfoButton}"/>
+
+                <Button Style="{DynamicResource InfoButton}"
+                        Visibility="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Invert}"/>
+
+                <StackPanel HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Bottom">
+                    <ToggleButton Style="{DynamicResource DemoModeToggleButton}"
+                                  Visibility="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                  />
+                    <TextBlock Text="Demo" 
+                               HorizontalAlignment="Center"
+                               Style="{DynamicResource HintText}"
+                               Height="20" Padding="0" Margin="0 -4 0 0"/>
+                </StackPanel>
             </Grid>
             <!--#endregion-->
 

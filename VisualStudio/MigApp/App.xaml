@@ -35,7 +35,7 @@
                 <!--<ResourceDictionary Source="/Styles/DarkTheme.xaml"/>-->
             </ResourceDictionary.MergedDictionaries>
 
-            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <helpers:BoolToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <helpers:BoolToErrorBrushConverter x:Key="BoolToErrorBrushConverter" ErrorBrush="Red" NormalBrush="Transparent"/>
             <helpers:HorizontalOnlyVisibilityConverter x:Key="HorizontalOnlyVisibilityConverter"/>
             <helpers:ResizeModeToVisibilityConverter x:Key="ResizeModeToVisibilityConverter"/>

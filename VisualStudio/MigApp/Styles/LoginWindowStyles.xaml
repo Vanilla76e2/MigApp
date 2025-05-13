@@ -18,6 +18,19 @@
         </Setter>
     </Style>
 
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!--                      СТИЛИ ДЛЯ LOGIN                            -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    
+    <!-- Buttons -->
+    <Style x:Key="LoginEnterButton" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="120"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Margin" Value="0 0 0 0"/>
+    </Style>
+
     <Style x:Key="InfoButton" TargetType="Button" BasedOn="{StaticResource IconButtonBase}">
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -27,19 +40,6 @@
                 <materialDesign:PackIcon Kind="InfoCircle" Width="40" Height="40"/>
             </Setter.Value>
         </Setter>
-    </Style>
-
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <!--                      СТИЛИ ДЛЯ LOGIN                            -->
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    
-    <!-- Button -->
-    <Style x:Key="LoginEnterButton" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="Width" Value="120"/>
-        <Setter Property="Height" Value="40"/>
-        <Setter Property="Margin" Value="0 0 0 0"/>
     </Style>
 
     <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -71,6 +71,11 @@
         <Setter Property="Width" Value="150"/>
         <Setter Property="Height" Value="40"/>
         <Setter Property="Margin" Value="0 0 0 10"/>
+    </Style>
+
+    <Style x:Key="DemoModeToggleButton" TargetType="ToggleButton" BasedOn="{StaticResource MaterialDesignSwitchToggleButton}">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        
     </Style>
 
 </ResourceDictionary>

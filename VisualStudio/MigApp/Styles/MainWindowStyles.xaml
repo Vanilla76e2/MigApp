@@ -9,7 +9,11 @@
     <!--                                   WINDOW                                       -->
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-    <Style x:Key="MainWindowStyle" TargetType="Window" BasedOn="{StaticResource WindowBaseStyle}">
+    <Style x:Key="MainWindowStyle" 
+           TargetType="Window" 
+           BasedOn="{StaticResource WindowBaseStyle}">
+        
+        
         
     </Style>
 
@@ -19,7 +23,51 @@
     <!--                               NAVIGATION MENU                                  -->
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-    
+    <!-- Buttons -->
+    <Style x:Key="NavigationToggleButtonStyle" 
+           TargetType="ToggleButton" 
+           BasedOn="{StaticResource MaterialDesignActionDarkToggleButton}">
+
+        <Setter Property="Background" Value="{DynamicResource TransparentBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="{DynamicResource CornerRadiusLarge}"
+                            Padding="{DynamicResource ThicknessNormal}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <!-- Hover -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="RenderTransformOrigin" Value="0.5, 0.5"/>
+                        </Trigger>
+                        
+                        <!-- IsChecked -->
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource PrimaryOverlayBrush}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource PrimaryBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+    <Style x:Key="NavigationButtonStyle"
+           TargetType="Button"
+           BasedOn="{StaticResource IconButtonBase}">
+
+        
+
+    </Style>
 
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
     <!--                                VIEW AREA                                       -->
