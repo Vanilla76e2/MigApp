@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="MigApp.Controls.LabeledInput"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:MigApp.Controls"
+             mc:Ignorable="d" 
+             x:Name="root"
+             d:DesignHeight="50" d:DesignWidth="300">
+    <StackPanel Orientation="{Binding Orientation, ElementName=root}">
+
+        <!--<StackPanel.ColumnDefinitions>
+            <ColumnDefinition Width="{Binding LabelWidth, ElementName=root}"
+                              MinWidth="{Binding LabelMinWidth, ElementName=root}"
+                              MaxWidth="{Binding LabelMaxWidth, ElementName=root}"/>
+            
+            --><!--<ColumnDefinition Width="{Binding GapWidth, ElementName=root}"/>--><!--
+
+            <ColumnDefinition Width="{Binding InputWidth, ElementName=root}"
+                              MinWidth="{Binding InputMinWidth, ElementName=root}"
+                              MaxWidth="{Binding InputMaxWidth, ElementName=root}"/>
+            
+        </StackPanel.ColumnDefinitions>-->
+
+        <!-- Labnel + * -->
+        <StackPanel Orientation="Horizontal" Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Height="{Binding LabelHeight, ElementName=root}"
+                    MinHeight="{Binding LabelMinHeight, ElementName=root}"
+                    MaxHeight="{Binding LabelMaxHeight, ElementName=root}"
+                    HorizontalAlignment="{Binding LabelHorizontalAlignment, ElementName=root}"
+                    Width="{Binding LabelWidth, ElementName=root}"
+                    MinWidth="{Binding LabelMinWidth, ElementName=root}"
+                    MaxWidth="{Binding LabelMaxWidth, ElementName=root}">
+
+            <TextBlock Text="{Binding Label, ElementName=root}"
+                       Style="{DynamicResource TextBlockBase}" />
+
+            <TextBlock Text="*"
+                       Foreground="Red"
+                       Margin="4,0,0,0"
+                       Visibility="{Binding IsRequired, ElementName=root, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        </StackPanel>
+
+        <!-- Gap -->
+        <Separator Background="Transparent" Grid.Column="1" 
+                   Width="{Binding GapWidth, ElementName=root}"/>
+
+        <!-- Input -->
+        <Border Background="{x:Null}"
+                BorderThickness="1"
+                BorderBrush="{Binding IsError, ElementName=root, Converter={StaticResource BoolToErrorBrushConverter}}"
+                CornerRadius="{StaticResource CornerRadiusSmall}"
+                Height="{Binding InputHeight, ElementName=root}"
+                MinHeight="{Binding InputMinHeight, ElementName=root}"
+                MaxHeight="{Binding InputMaxHeight, ElementName=root}"
+                HorizontalAlignment="{Binding InputHorizontalAlignment, ElementName=root}"
+                Grid.Column="2"
+                Width="{Binding InputWidth, ElementName=root}"
+                MinWidth="{Binding InputMinWidth, ElementName=root}"
+                MaxWidth="{Binding InputMaxWidth, ElementName=root}">
+
+            <ContentControl Content="{Binding InputContent, ElementName=root}"/>
+        </Border>
+    </StackPanel>
+</UserControl>

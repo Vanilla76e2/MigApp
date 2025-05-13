@@ -1,12 +1,10 @@
 ﻿using Microsoft.Xaml.Behaviors;
-using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 
-namespace MigApp.CustomElements.Behaviors
+namespace MigApp.Controls.Behaviors
 {
     public class PasswordBoxBehavior : Behavior<PasswordBox>
     {
@@ -85,7 +83,7 @@ namespace MigApp.CustomElements.Behaviors
 
         private static string SecureStringToString(SecureString value)
         {
-            IntPtr ptr = IntPtr.Zero;
+            nint ptr = nint.Zero;
             try
             {
                 ptr = Marshal.SecureStringToBSTR(value);
@@ -93,7 +91,7 @@ namespace MigApp.CustomElements.Behaviors
             }
             finally
             {
-                if (ptr != IntPtr.Zero)
+                if (ptr != nint.Zero)
                     Marshal.ZeroFreeBSTR(ptr);
             }
         }

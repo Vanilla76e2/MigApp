@@ -4,7 +4,8 @@
              xmlns:local="clr-namespace:MigApp"
              xmlns:viewModel="clr-namespace:MigApp.MVVM.ViewModel"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:view="clr-namespace:MigApp.MVVM.View">
+             xmlns:view="clr-namespace:MigApp.MVVM.View"
+             xmlns:helpers="clr-namespace:MigApp.Helpers">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -12,24 +13,32 @@
                 <materialDesign:BundledTheme BaseTheme="Dark" PrimaryColor="Orange" SecondaryColor="Lime" />
 
                 <!-- 2. Мои цветовые ресурсы -->
-                <ResourceDictionary Source="Styles/Base/Colors.xaml"/>
+                <ResourceDictionary Source="Styles/Colors.xaml"/>
 
                 <!-- 3. Material Design компоненты (должны идти после моих цветов) -->
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml"/>
                 <!-- Другие необходимые MD компоненты -->
 
                 <!-- 4. Ваши базовые стили -->
-                <ResourceDictionary Source="Styles/Base/CoreStyles.xaml"/>
+                <ResourceDictionary Source="Styles/CoreStyles.xaml"/>
+                <ResourceDictionary Source="/Images/MigAppLogo.xaml"/>
+                <ResourceDictionary Source="Styles/ControlStyles.xaml"/>
+                <ResourceDictionary Source="Styles/WindowStyles.xaml"/>
 
-                <!-- 5. Специфические темы-->
-                <ResourceDictionary Source="Styles/Specific/LoginWindowStyles.xaml"/>
+                <!-- 5. Уникальные стили окон -->
+                <ResourceDictionary Source="Styles/LoginWindowStyles.xaml"/>
+                <ResourceDictionary Source="Styles/MainWindowStyles.xaml"/>
 
                 <!-- 6. Активная тема (имеет наивысший приоритет) -->
                 <!--<ResourceDictionary Source="Styles/DarkTheme.xaml"/>-->
-                
+
+                <!--<ResourceDictionary Source="/Styles/DarkTheme.xaml"/>-->
             </ResourceDictionary.MergedDictionaries>
 
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <helpers:BoolToErrorBrushConverter x:Key="BoolToErrorBrushConverter" ErrorBrush="Red" NormalBrush="Transparent"/>
+            <helpers:HorizontalOnlyVisibilityConverter x:Key="HorizontalOnlyVisibilityConverter"/>
+            <helpers:ResizeModeToVisibilityConverter x:Key="ResizeModeToVisibilityConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

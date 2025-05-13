@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 
 
-namespace MigApp.CustomElements
+namespace MigApp.Controls
 {
     public partial class IPAddressControl : UserControl
     {

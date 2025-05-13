@@ -14,8 +14,15 @@ namespace MigApp.Helpers
         /// <param name="dbParams">Набор параметров для подключения к базе данных.</param>
         public static void SaveDatabaseSettingsToRegistry(DatabaseConnectionParameters dbParams)
         {
-            string json = JsonSerializer.Serialize(dbParams);
-            Registry.SetValue(RegPath, "AppDatabaseSettings", json);
+            if (OperatingSystem.IsWindows())
+            {
+                string json = JsonSerializer.Serialize(dbParams);
+                Registry.SetValue(RegPath, "AppDatabaseSettings", json);
+            }
+            else
+            {
+                throw new PlatformNotSupportedException("This functionality is only supported on Windows.");
+            }
         }
 
         /// <summary>
@@ -24,8 +31,15 @@ namespace MigApp.Helpers
         /// <param name="userCredetials">Учётные данные пользователя.</param>
         public static void SaveUserCredentialsToVault(UserCredentials userCredetials)
         {
-            string json = JsonSerializer.Serialize(userCredetials);
-            Registry.SetValue(RegPath, "UserCredentials", json);
+            if (OperatingSystem.IsWindows())
+            {
+                string json = JsonSerializer.Serialize(userCredetials);
+                Registry.SetValue(RegPath, "UserCredentials", json);
+            }
+            else
+            {
+                throw new PlatformNotSupportedException("This functionality is only supported on Windows.");
+            }
         }
 
         /// <summary>
@@ -34,18 +48,25 @@ namespace MigApp.Helpers
         /// <returns><see cref="DatabaseConnectionParameters"/>.</returns>
         public static DatabaseConnectionParameters LoadDatabaseSettingsFromRegistry()
         {
-            string? json = Registry.GetValue(RegPath, "AppDatabaseSettings", null) as string;
-            if (string.IsNullOrEmpty(json)) return new();
+            if (OperatingSystem.IsWindows())
+            {
+                string? json = Registry.GetValue(RegPath, "AppDatabaseSettings", null) as string;
+                if (string.IsNullOrEmpty(json)) return new();
 
-            try
-            {
-                var dbParams = JsonSerializer.Deserialize<DatabaseConnectionParameters>(json);
-                return dbParams ?? new DatabaseConnectionParameters();
+                try
+                {
+                    var dbParams = JsonSerializer.Deserialize<DatabaseConnectionParameters>(json);
+                    return dbParams ?? new DatabaseConnectionParameters();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                    return new DatabaseConnectionParameters();
+                }
             }
-            catch (Exception ex)
+            else
             {
-                Debug.WriteLine(ex);
-                return new DatabaseConnectionParameters();
+                throw new PlatformNotSupportedException("This functionality is only supported on Windows.");
             }
         }
 
@@ -55,18 +76,25 @@ namespace MigApp.Helpers
         /// <returns><see cref="UserCredentials"/>.</returns>
         public static UserCredentials LoadUserCredentialsFromRegistry()
         {
-            string? json = Registry.GetValue(RegPath, "userCredentials", null) as string;
-
-            if (string.IsNullOrEmpty(json)) return new();
-
-            try
+            if (OperatingSystem.IsWindows())
             {
-                var credentials = JsonSerializer.Deserialize<UserCredentials>(json);
-                return credentials ?? new();
+                string? json = Registry.GetValue(RegPath, "userCredentials", null) as string;
+
+                if (string.IsNullOrEmpty(json)) return new();
+
+                try
+                {
+                    var credentials = JsonSerializer.Deserialize<UserCredentials>(json);
+                    return credentials ?? new();
+                }
+                catch
+                {
+                    return new UserCredentials();
+                }
             }
-            catch
+            else
             {
-                return new UserCredentials();
+                throw new PlatformNotSupportedException("This functionality is only supported on Windows.");
             }
         }
 

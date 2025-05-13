@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>Images\Icon.ico</ApplicationIcon>
+    <ApplicationIcon>Images\MigAppIcon.ico</ApplicationIcon>
     <PlatformTarget>x64</PlatformTarget>
     <NeutralLanguage>ru</NeutralLanguage>
     <AssemblyVersion>2.0.0.12</AssemblyVersion>
@@ -25,10 +25,12 @@
 
   <ItemGroup>
     <None Remove="Images\loading.png" />
+    <None Remove="Images\MigAppIcon.ico" />
+    <None Remove="Images\MigAppLogo.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Images\Icon.ico" />
+    <Content Include="Images\MigAppIcon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -75,9 +77,20 @@
     <Resource Include="Images\loading.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\MigAppIcon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\MigAppLogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Localization\Strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -98,20 +111,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="MigApp.Core" />
     <Using Include="MigApp.Core.Services" />
     <Using Include="MigApp.Data" />
     <Using Include="System.Diagnostics" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Localization\Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Styles\Themes\" />
   </ItemGroup>
 
 </Project>

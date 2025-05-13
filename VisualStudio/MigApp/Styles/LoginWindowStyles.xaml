@@ -1,17 +1,76 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    xmlns:controls="clr-namespace:MigApp.Controls">
 
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <!--                    СТИЛИ ДЛЯ LOGINWINDOW                      -->
-    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    
-    
-    <Style x:Key="SettingsStackPanel" TargetType="StackPanel">
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="0 25 0 0"/>
+    <Style x:Key="LoginWindowStyle" TargetType="Window" BasedOn="{StaticResource WindowBaseStyle}">
+        <Setter Property="ResizeMode" Value="NoResize"/>
     </Style>
 
+    <Style x:Key="SettingsToggleButton" TargetType="ToggleButton" BasedOn="{StaticResource ToggleButtonBase}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="0 0 20 0"/>
+        <Setter Property="Content">
+            <Setter.Value>
+                <materialDesign:PackIcon Kind="Cog" Width="40" Height="40"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="InfoButton" TargetType="Button" BasedOn="{StaticResource IconButtonBase}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="20 0 0 0"/>
+        <Setter Property="Content">
+            <Setter.Value>
+                <materialDesign:PackIcon Kind="InfoCircle" Width="40" Height="40"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!--                      СТИЛИ ДЛЯ LOGIN                            -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
     
+    <!-- Button -->
+    <Style x:Key="LoginEnterButton" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="120"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Margin" Value="0 0 0 0"/>
+    </Style>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!--                    СТИЛИ ДЛЯ SETTINGS                           -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+    <!-- LabeledInput -->
+    <Style x:Key="SettingsLabeledInput" TargetType="controls:LabeledInput" BasedOn="{StaticResource LabeledInputBase}">
+        <Setter Property="Margin" Value="10 10 0 0"/>
+        <Setter Property="LabelWidth" Value="130"/>
+        <Setter Property="GapWidth" Value="10"/>
+        <Setter Property="InputWidth" Value="270"/>
+    </Style>
+
+    <Style x:Key="ServerLabeledInput" TargetType="controls:LabeledInput" BasedOn="{StaticResource SettingsLabeledInput}">
+        <Setter Property="LabelWidth" Value="80"/>
+        <Setter Property="InputWidth" Value="190"/>
+    </Style>
+
+    <Style x:Key="PortLabeledInput" TargetType="controls:LabeledInput" BasedOn="{StaticResource SettingsLabeledInput}">
+        <Setter Property="LabelWidth" Value="50"/>
+        <Setter Property="InputWidth" Value="60"/>
+    </Style>
+    
+    <!-- Button -->
+    <Style x:Key="SettingsCommitButton" TargetType="Button" BasedOn="{StaticResource ButtonBase}">
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="150"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Margin" Value="0 0 0 10"/>
+    </Style>
+
 </ResourceDictionary>

@@ -9,10 +9,7 @@
         Title="{Binding Path=WindowTitle}"
         MinHeight="650" MinWidth="920"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="CanResize"
-        AllowsTransparency="False"
-        WindowStyle="None"
-        Style="{DynamicResource CustomWindowStyle}">
+        Style="{DynamicResource MainWindowStyle}">
 
     <Grid Background="Black">
         <Grid>
@@ -21,32 +18,11 @@
                 <ColumnDefinition Width="*"  />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50" /> <!-- Header -->
+                <RowDefinition Height="50" />
+                <!-- Header -->
                 <RowDefinition Height="*"  />
                 <RowDefinition Height="15" />
             </Grid.RowDefinitions>
-
-            <!-- Header -->
-            <Grid Grid.Row="0" Grid.ColumnSpan="2" Background="{DynamicResource DarkBackgroundBrush}">
-                <TextBlock Text="{Binding Path=WindowTitle}"
-                           Style="{DynamicResource HeaderPanelText}"
-                           VerticalAlignment="Center"
-                           Margin="16,0" />
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Center"
-                            Margin="0,0,16,0">
-                    <Button Style="{DynamicResource MinimizeWindowButton}"
-                            Command="SystemCommands.MinimizeWindowCommand"
-                            CommandTarget="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
-                    <Button Style="{DynamicResource MaximizeWindowButton}"
-                            Command="SystemCommands.MaximizeWindowCommand"
-                            CommandTarget="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
-                    <Button Style="{DynamicResource CloseWindowButton}"
-                            Command="SystemCommands.CloseWindowCommand"
-                            CommandTarget="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
-                </StackPanel>
-            </Grid>
 
             <!-- Main Content -->
             <ContentControl Grid.Row="1"
@@ -69,7 +45,7 @@
                 </StackPanel>
                 
                 <!-- Нижний блок кнопок -->
-                <StackPanel Name="LeftPanel_BottomButtons" VerticalAlignment="Bottom" Style="{DynamicResource LeftPanelBottomButtons}">
+                <StackPanel Name="LeftPanel_BottomButtons" VerticalAlignment="Bottom" >
                     <Button Style="{DynamicResource HelpButton}" ToolTip="Руководство | F1">
                         <materialDesign:PackIcon Kind="HelpCircle" />
                     </Button>

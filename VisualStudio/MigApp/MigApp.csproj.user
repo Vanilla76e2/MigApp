@@ -4,6 +4,15 @@
     <_LastSelectedProfileId>C:\Users\Vanilla76e2\source\repos\MigApp\MigApp\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="Controls\LabeledInput.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\WindowButtonsControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\WindowHeaderControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="MVVM\View\CRWindows\ComputersWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
