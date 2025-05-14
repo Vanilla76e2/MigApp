@@ -5,24 +5,24 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:MigApp.Controls"
-             xmlns:helpers="clr-namespace:MigApp.Helpers"
+             xmlns:commands="clr-namespace:MigApp.Core.Commands"
              mc:Ignorable="d" x:Name="root"
              d:DesignHeight="40" d:DesignWidth="100">
     <StackPanel Orientation="Horizontal">
         <Button x:Name="MinimizeButton"
-                Command="{x:Static helpers:WindowCommands.MinimizeCommand}"
+                Command="{x:Static commands:WindowCommands.MinimizeCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                 Style="{Binding MinimizeButtonStyle, ElementName=root}"
                 Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=ResizeMode, Converter={StaticResource ResizeModeToVisibilityConverter}}"
                 ToolTip="Свернуть"/>
         <Button x:Name="MaximizeButton"
-                Command="{x:Static helpers:WindowCommands.ToggleMaximizeCommand}"
+                Command="{x:Static commands:WindowCommands.ToggleMaximizeCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                 Style="{Binding MaximizeButtonStyle, ElementName=root}"
                 Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=ResizeMode, Converter={StaticResource ResizeModeToVisibilityConverter}}"
                 ToolTip="Развернуть"/>
         <Button x:Name="CloseButton"
-                Command="{x:Static helpers:WindowCommands.CloseCommand}"
+                Command="{x:Static commands:WindowCommands.CloseCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                 Style="{Binding CloseButtonStyle, ElementName=root}"
                 ToolTip="Закрыть"/>

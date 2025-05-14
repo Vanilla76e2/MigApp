@@ -1,4 +1,4 @@
-﻿using MigApp.Helpers;
+﻿using MigApp.Core.Helpers;
 using MigApp.MVVM.Model;
 
 namespace MigApp.Core.Services

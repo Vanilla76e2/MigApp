@@ -1,18 +1,17 @@
 ﻿using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
+using System.Windows.Media;
 
-namespace MigApp.Helpers
+namespace MigApp.Core.Converters
 {
-    class ResizeModeToVisibilityConverter : IValueConverter
+    public class BoolToErrorBrushConverter : IValueConverter
     {
+        public Brush ErrorBrush { get; set; } = Brushes.Red;
+        public Brush NormalBrush { get; set; } = Brushes.Transparent;
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is ResizeMode resizeMode)
-            {
-                return resizeMode == ResizeMode.NoResize ? Visibility.Collapsed : Visibility.Visible;
-            }
-            return Visibility.Visible;
+            return value is bool b && b ? ErrorBrush : NormalBrush;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

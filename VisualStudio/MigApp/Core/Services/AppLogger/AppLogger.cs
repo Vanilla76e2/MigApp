@@ -20,7 +20,10 @@ namespace MigApp.Core.Services
             try
             {
                 _currentLogFilePath = GetLogFilePath("Logs");
-                var configuration = new LoggerConfiguration();
+                var configuration = new LoggerConfiguration()
+                    .Enrich.WithProperty("LogType", "APP")
+                    .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {SourceContext}: {Message:lj}{NewLine}")
+                    .WriteTo.File("Logs/app.log", outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {SourceContext}: {Message:lj}{NewLine}");
 #if DEBUG
                 // При отладке логи будут выводиться в консоль и окно Output Visual Studio.
                 configuration.MinimumLevel.Debug().WriteTo.Console().WriteTo.Debug();
@@ -182,6 +185,18 @@ namespace MigApp.Core.Services
         {
             var context = GetContextFromFilePath(filePath);
             _logger.Fatal($"{context}.{memberName}: {message}");
+        }
+
+        /// <summary>
+        /// Записывает сообщение о демонстрационном режиме в лог. Автоматически получает контекст.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="memberName"></param>
+        /// <param name="filePath"></param>
+        public void LogDemo(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string filePath = "")
+        {
+            var context = GetContextFromFilePath(filePath);
+            _logger.ForContext("LogType", "DEMO").Information($"{context}.{memberName}: {message}");
         }
 
         /// <summary>

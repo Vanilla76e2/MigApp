@@ -37,6 +37,7 @@ namespace MigApp.Core.Services
         /// <exception cref="Exception">Возникает в случае непредвиденной ошибки при попытке подключения к базе данных.</exception>
         public async Task<bool> TestConnectionAsync(DatabaseConnectionParameters databaseConnectionParameters)
         {
+
             _logger.LogInformation("Начало проверки подключения к БД");
             if (!ValidateParameters(databaseConnectionParameters))
                 return false;

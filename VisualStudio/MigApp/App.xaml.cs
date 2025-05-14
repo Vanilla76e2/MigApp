@@ -9,6 +9,7 @@ using System.Windows;
 using MigApp.Core.Services.AppUpdate;
 using MigApp.Core.Services.Installer;
 using Microsoft.EntityFrameworkCore;
+using MigApp.Core.Services.DemoModeManager;
 
 namespace MigApp;
 
@@ -39,6 +40,7 @@ public partial class App : Application
         services.AddSingleton<IUserSession, UserSession>();
         services.AddSingleton<CrashLogger>();
         services.AddSingleton<Dispatcher>(provider => Application.Current.Dispatcher);
+        services.AddSingleton<IDemoModeService, DemoModeService>();
         services.AddTransient<ISecurityService, SecurityService>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddTransient<IDispatcher, WpfDispatcher>();

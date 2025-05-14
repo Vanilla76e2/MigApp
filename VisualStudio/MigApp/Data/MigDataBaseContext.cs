@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MigApp.Demo.Helpers;
 
 namespace MigApp.Data;
 
@@ -22,11 +23,23 @@ public partial class MigDatabaseContext : DbContext
     //        optionsBuilder.UseNpgsql(_connectionString);
     //}
 
-    public virtual DbSet<Cctv> Cctvs { get; set; }
+    public virtual DbSet<Cctv> Cctvs =>
+        DbSetMockHelper.CreateMockDbSet(new List<Cctv>
+        {
 
-    public virtual DbSet<Computer> Computers { get; set; }
+        }).Object;
 
-    public virtual DbSet<ComputersComponent> ComputersComponents { get; set; }
+    public virtual DbSet<Computer> Computers =>
+        DbSetMockHelper.CreateMockDbSet(new List<Computer>
+        {
+
+        }).Object;
+
+    public virtual DbSet<ComputersComponent> ComputersComponents =>
+        DbSetMockHelper.CreateMockDbSet(new List<ComputersComponent>
+        {
+
+        }).Object;
 
     public virtual DbSet<ComputersDevice> ComputersDevices { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿using MaterialDesignThemes.Wpf;
 using MigApp.Core;
 using MigApp.Core.Services.AppUpdate;
+using MigApp.Core.Services.DemoModeManager;
 using MigApp.Helpers;
 using MigApp.MVVM.Model;
 using MigApp.Properties;
@@ -18,20 +19,26 @@ namespace MigApp.MVVM.ViewModel
     {
         // Сервисы
         private readonly ISecurityService _securityService;
-        private readonly IDatabaseService _DatabaseService;
+        private readonly IDatabaseService _databaseService;
         private readonly INavigationService _navigationService;
         private readonly IAppUpdateService _appUpdateService;
         private readonly IAuthService _authService;
         private readonly IUINotificationService _ui;
         private readonly IAppLogger _logger;
+        private readonly IDemoModeService _demoModeService;
 
         // Команды
         public RelayCommand LoginCommand { get; set; }
         public RelayCommand CommitSettingsCommand { get; set; }
         public RelayCommand ToggleSettingsCommand { get; set; }
         public RelayCommand ShowGuideCommand { get; set; }
+        public ICommand ToggleDemoModeCommand => _demoModeService.ToggleDemoModeCommand;
+
 
         #region Свойства
+
+        public bool IsDemoModeEnabled => _demoModeService.IsDemoModeEnabled;
+
         public string WindowTitle { get; } = $"MigApp {System.Reflection.Assembly.GetExecutingAssembly().GetName()?.Version?.ToString(3) ?? "Unknown Version"}";
 
         public ISnackbarMessageQueue SnackbarMessageQueue { get; }
@@ -225,15 +232,18 @@ namespace MigApp.MVVM.ViewModel
         /// <param name="authenticationService">Сервис аутентификации.</param>
         /// <param name="logger">Сервис логирования.</param>
         /// <param name="versionService">Сервис проверки версии приложения.</param>
-        public LoginWindowModel(IAppLogger logger, ISecurityService security, IDatabaseService Database, IAppUpdateService update, INavigationService navigation, IUINotificationService ui, IAuthService auth)
+        public LoginWindowModel(IAppLogger logger, ISecurityService security, IDatabaseService database, IAppUpdateService update, INavigationService navigation, IUINotificationService ui, IAuthService auth, IDemoModeService demoMode)
         {
             _logger = logger;
             _securityService = security;
-            _DatabaseService = Database;
+            _databaseService = database;
             _navigationService = navigation;
             _appUpdateService = update;
             _ui = ui;
             _authService = auth;
+            _demoModeService = demoMode;
+
+            _demoModeService.DemoModeChanged += OnDemoModeChanged;
 
             LoginCommand = new RelayCommand(async o => await AuthorizeUserAsync(), o => IsConnectionCorrect);
             CommitSettingsCommand = new RelayCommand(async o => await CommitSettingsChangings(), o => true);
@@ -242,6 +252,22 @@ namespace MigApp.MVVM.ViewModel
             SnackbarMessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
 
             Task.Run(async () => { await InitializeAsync(); });
+        }
+
+        private void OnDemoModeChanged(object? sender, bool isDemoModeEnabled)
+        {
+            if (isDemoModeEnabled)
+            {
+                Username = "DemoUser";
+                UserPassword = PasswordHelper.ConvertPasswordToSecureString("DemoPassword");
+                IsPasswordRemembered = true;
+            }
+            else
+            {
+                Username = string.Empty;
+                UserPassword = new SecureString();
+                IsPasswordRemembered = false;
+            }
         }
 
         /// <summary>
@@ -335,7 +361,7 @@ namespace MigApp.MVVM.ViewModel
                     DBUser.Trim(),
                     PasswordHelper.ConvertPasswordToString(DBPassword));
 
-                IsConnectionCorrect = await _DatabaseService.TestConnectionAsync(parameters);
+                IsConnectionCorrect = await _databaseService.TestConnectionAsync(parameters);
             }
             catch (Exception ex)
             {

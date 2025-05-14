@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace MigApp.Helpers
+namespace MigApp.Core.Helpers
 {
     /// <summary>
     /// Вспомогательный класс для шифрования данных.

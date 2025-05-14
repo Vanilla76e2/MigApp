@@ -1,6 +1,13 @@
 VisualStudio/MigApp/bin/
+VisualStudio/MigApp/obj/
 VisualStudio/packages/
 VisualStudio/Setup1/Debug/
 VisualStudio/Setup1/Release/
 VisualStudio/.vs
 VisualStudio/TestResults
+VisualStudio/MigApp.Tests/bin/
+VisualStudio/MigApp.Tests/obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates

@@ -2,7 +2,7 @@
 using MigApp.MVVM.Model;
 using System.Text.Json;
 
-namespace MigApp.Helpers
+namespace MigApp.Core.Helpers
 {
     public static class RegistrySecureHelper
     {

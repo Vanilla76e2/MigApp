@@ -1,5 +1,4 @@
-﻿using MigApp.Core;
-using MigApp.Helpers;
+﻿using MigApp.Core.Helpers;
 using System.Data;
 using System.Net;
 using System.Windows.Input;

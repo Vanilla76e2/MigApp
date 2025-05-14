@@ -15,6 +15,7 @@ namespace MigApp.Core.Services
         void LogError(Exception ex, string message, [CallerMemberName] string memberName = "", [CallerFilePath] string filePath = "");
         void LogCritical(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string filePath = "");
         void LogCritical(Exception ex, string message, [CallerMemberName] string memberName = "", [CallerFilePath] string filePath = "");
+        void LogDemo(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string filePath = "");
 
         void CreateCrashLog(Exception? ex, string message);
     }

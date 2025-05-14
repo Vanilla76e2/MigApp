@@ -1,4 +1,4 @@
-﻿namespace MigApp.Helpers
+﻿namespace MigApp.Core.Helpers
 {
     public class ByteArrayComparer : IComparer<byte[]>
     {

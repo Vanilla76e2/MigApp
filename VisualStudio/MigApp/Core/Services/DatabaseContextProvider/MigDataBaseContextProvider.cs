@@ -41,6 +41,7 @@ namespace MigApp.Core.Services
         /// <inheritdoc/>
         public void ResetContext()
         {
+
             _logger.LogInformation("Сброс контекста базы данных");
             _context?.Dispose();
             _context = _factory.CreateDbContext();
@@ -52,6 +53,7 @@ namespace MigApp.Core.Services
         /// </summary>
         public void Dispose()
         {
+
             _context?.Dispose();
         }
     }

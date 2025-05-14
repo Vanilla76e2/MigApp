@@ -5,7 +5,7 @@
              xmlns:viewModel="clr-namespace:MigApp.MVVM.ViewModel"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:view="clr-namespace:MigApp.MVVM.View"
-             xmlns:helpers="clr-namespace:MigApp.Helpers">
+             xmlns:converters="clr-namespace:MigApp.Core.Converters">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -35,10 +35,10 @@
                 <!--<ResourceDictionary Source="/Styles/DarkTheme.xaml"/>-->
             </ResourceDictionary.MergedDictionaries>
 
-            <helpers:BoolToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-            <helpers:BoolToErrorBrushConverter x:Key="BoolToErrorBrushConverter" ErrorBrush="Red" NormalBrush="Transparent"/>
-            <helpers:HorizontalOnlyVisibilityConverter x:Key="HorizontalOnlyVisibilityConverter"/>
-            <helpers:ResizeModeToVisibilityConverter x:Key="ResizeModeToVisibilityConverter"/>
+            <converters:BoolToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <converters:BoolToErrorBrushConverter x:Key="BoolToErrorBrushConverter" ErrorBrush="Red" NormalBrush="Transparent"/>
+            <converters:HorizontalOnlyVisibilityConverter x:Key="HorizontalOnlyVisibilityConverter"/>
+            <converters:ResizeModeToVisibilityConverter x:Key="ResizeModeToVisibilityConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

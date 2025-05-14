@@ -8,6 +8,7 @@
         xmlns:behaviors="clr-namespace:MigApp.Controls.Behaviors"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:controls="clr-namespace:MigApp.Controls"
+        xmlns:Properties="clr-namespace:MigApp.Properties"
         mc:Ignorable="d"
         Title="{Binding WindowTitle}" Height="310" Width="450"  WindowStartupLocation="CenterScreen"
         Style="{DynamicResource LoginWindowStyle}">
@@ -102,14 +103,14 @@
                 <Button Style="{DynamicResource InfoButton}"
                         Visibility="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Invert}"/>
 
-                <StackPanel HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Bottom">
+                <StackPanel HorizontalAlignment="Left" Margin="15 0 0 0" VerticalAlignment="Bottom" Visibility="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <ToggleButton Style="{DynamicResource DemoModeToggleButton}"
-                                  Visibility="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                  />
+                                  IsChecked="{Binding IsDemoModeEnabled, Mode=OneWay}"
+                                  Command="{Binding ToggleDemoModeCommand}"/>
                     <TextBlock Text="Demo" 
                                HorizontalAlignment="Center"
                                Style="{DynamicResource HintText}"
-                               Height="20" Padding="0" Margin="0 -4 0 0"/>
+                               Padding="0" Margin="0 0 0 0"/>
                 </StackPanel>
             </Grid>
             <!--#endregion-->

@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Data;
 
-namespace MigApp.Helpers
+namespace MigApp.Core.Converters
 {
     public class BoolToVisibilityConverter : IValueConverter
     {

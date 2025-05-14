@@ -1,8 +1,7 @@
-﻿using MigApp.Core;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 
-namespace MigApp.Helpers
+namespace MigApp.Core.Commands
 {
     static class WindowCommands
     {
