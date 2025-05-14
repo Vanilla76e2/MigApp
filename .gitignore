@@ -1,13 +1,40 @@
-VisualStudio/MigApp/bin/
-VisualStudio/MigApp/obj/
+# VS Artifacts
+.vs/
+TestResults/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build Folders
+**/bin/
+**/obj/
 VisualStudio/packages/
 VisualStudio/Setup1/Debug/
 VisualStudio/Setup1/Release/
-VisualStudio/.vs
-VisualStudio/TestResults
-VisualStudio/MigApp.Tests/bin/
-VisualStudio/MigApp.Tests/obj/
-*.user
-*.suo
-*.userosscache
-*.sln.docstates
+
+# Publish Profiles
+*.pubxml
+*.publishproj
+
+# Coverage & Analysis
+*.coverage
+*.coveragexml
+*.codecoverage
+*.msCoverage
+*.vsmdi
+*.testsettings
+
+# Logs & Temp
+*.log
+*.cache
+
+# Database & Local Settings
+*.dbmdl
+*.vshost.*
+*.pdb
+
+# Rider/Resharper/JetBrains
+.idea/
+*.DotSettings.user
+_ReSharper*/
