@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<ResourceDictionary xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <DrawingGroup x:Key="MigAppLogo_xaml">
+        <DrawingGroup.ClipGeometry>
+            <RectangleGeometry Rect="0.0,0.0,1080.0,1080.0"/>
+        </DrawingGroup.ClipGeometry>
+        <GeometryDrawing Brush="{DynamicResource PrimaryBrush}">
+            <GeometryDrawing.Pen>
+                <Pen Brush="{DynamicResource PrimaryBrush}" Thickness="1.0" DashCap="Flat"/>
+            </GeometryDrawing.Pen>
+            <GeometryDrawing.Geometry>
+                <PathGeometry Figures="M 705.994 755.494 L 903.315 633.578 L 909.562 756.961 L 708.8 882.994 Z"/>
+            </GeometryDrawing.Geometry>
+        </GeometryDrawing>
+        <GeometryDrawing Brush="{DynamicResource PrimaryBrush}">
+            <GeometryDrawing.Pen>
+                <Pen Brush="{DynamicResource PrimaryBrush}" Thickness="1.0" DashCap="Flat"/>
+            </GeometryDrawing.Pen>
+            <GeometryDrawing.Geometry>
+                <PathGeometry Figures="M 84.0313 290.317 L 541.245 36.4923 L 999.707 290.284 L 545.721 544.841 Z"/>
+            </GeometryDrawing.Geometry>
+        </GeometryDrawing>
+        <GeometryDrawing Brush="{DynamicResource PrimaryBrush}">
+            <GeometryDrawing.Pen>
+                <Pen Brush="{DynamicResource PrimaryBrush}" Thickness="1.0" DashCap="Flat"/>
+            </GeometryDrawing.Pen>
+            <GeometryDrawing.Geometry>
+                <PathGeometry Figures="M 64.0969 809.471 L 190.485 881.687 L 190 593 L 285.393 801.73 L 392.487 701.763 L 392.059 992.103 L 517.52 1062.9 L 517.455 583.355 L 384.523 510.157 L 300 601 L 218.4 418.4 L 64.4 334.3 Z"/>
+            </GeometryDrawing.Geometry>
+        </GeometryDrawing>
+        <GeometryDrawing Brush="{DynamicResource PrimaryBrush}">
+            <GeometryDrawing.Pen>
+                <Pen Brush="{DynamicResource PrimaryBrush}" Thickness="1.00097" DashCap="Flat"/>
+            </GeometryDrawing.Pen>
+            <GeometryDrawing.Geometry>
+                <PathGeometry Figures="m 568.68 1062.8 l 139.177 -79.1687 l 0.37601 -100.672 l -0.63576 -127.088 l 0.23217 -130.062 l 190.598 -110.173 l 1.35356 347.097 l 115.218 -54.5256 l 0.4045 -476.534 l -446.942 251.334 z"/>
+            </GeometryDrawing.Geometry>
+        </GeometryDrawing>
+    </DrawingGroup>
+    <DrawingImage Drawing="{StaticResource MigAppLogo_xaml}" x:Key="di_MigAppLogo_xaml"/>
+</ResourceDictionary>

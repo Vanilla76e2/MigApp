@@ -1,0 +1,152 @@
+﻿<Window x:Class="MigApp.MVVM.View.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MigApp.MVVM.View"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:behaviors="clr-namespace:MigApp.Controls.Behaviors"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:controls="clr-namespace:MigApp.Controls"
+        xmlns:Properties="clr-namespace:MigApp.Properties"
+        mc:Ignorable="d"
+        Title="{Binding WindowTitle}" Height="310" Width="450"  WindowStartupLocation="CenterScreen"
+        Style="{DynamicResource LoginWindowStyle}">
+
+    <Border CornerRadius="{DynamicResource BottomCornerRadiusLarge}" Background="{DynamicResource Surface3Brush}">
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+
+            <Grid Name="LoginGrid" Grid.Row="0">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+
+                    <controls:LabeledInput Label="Логин" Style="{DynamicResource LabeledInputBase}" LabelWidth="80" GapWidth="10" InputWidth="180">
+                        <TextBox Style="{DynamicResource TextBoxNormal}" Text="{Binding Username}"/>
+                    </controls:LabeledInput>
+
+                    <controls:LabeledInput Label="Пароль" Style="{DynamicResource LabeledInputBase}" LabelWidth="80" GapWidth="10" InputWidth="180">
+                        <PasswordBox Style="{DynamicResource PasswordBoxNormal}">
+                            <i:Interaction.Behaviors>
+                                <behaviors:PasswordBoxBehavior Password="{Binding UserPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </i:Interaction.Behaviors>
+                        </PasswordBox>
+                    </controls:LabeledInput>
+
+                    <Separator Background="{DynamicResource TransparentBrush}" Height="10"/>
+
+                    <CheckBox Content="Запомнить пароль" Style="{DynamicResource CheckBoxBase}" IsChecked="{Binding IsPasswordRemembered}"/>
+                
+                </StackPanel>
+
+            </Grid>
+
+            <Grid Name="SettingsGrid" Grid.Row="0" Background="#323232" Visibility="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <StackPanel Style="{DynamicResource SettingsStackPanel}">
+
+                    <StackPanel Style="{DynamicResource FormRowPanel}" Orientation="Horizontal">
+
+                        <controls:LabeledInput Label="Сервер" Style="{DynamicResource ServerLabeledInput}">
+                            <TextBox Style="{DynamicResource TextBoxNormal}" Text="{Binding DBServer}"/>
+                        </controls:LabeledInput>
+
+                        <controls:LabeledInput Label="Порт" Style="{DynamicResource PortLabeledInput}">
+                            <TextBox Style="{DynamicResource TextBoxNormal}" Text="{Binding DBPort}" MaxLength="4"/>
+                        </controls:LabeledInput>
+
+                    </StackPanel>
+
+                    <controls:LabeledInput Label="База данных" Style="{DynamicResource SettingsLabeledInput}">
+                        <TextBox Style="{DynamicResource TextBoxNormal}" Text="{Binding DBName}"/>
+                    </controls:LabeledInput>
+
+                    <controls:LabeledInput Label="Логин" Style="{DynamicResource SettingsLabeledInput}">
+                        <TextBox Style="{DynamicResource TextBoxNormal}" Text="{Binding DBUser}"/>
+                    </controls:LabeledInput>
+
+                    <controls:LabeledInput Label="Пароль" Style="{DynamicResource SettingsLabeledInput}">
+                        <PasswordBox Style="{DynamicResource PasswordBoxNormal}">
+                            <i:Interaction.Behaviors>
+                                <behaviors:PasswordBoxBehavior Password="{Binding DBPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </i:Interaction.Behaviors>
+                        </PasswordBox>
+                    </controls:LabeledInput>
+                
+                </StackPanel>
+
+            
+            </Grid>
+
+            <!--#region Footer-->
+            <Grid Grid.Row="1">
+                <Button x:Name="LoginButton" 
+                        Content="Вход" 
+                        Style="{DynamicResource LoginEnterButton}" 
+                        Command="{Binding LoginCommand}" 
+                        IsEnabled="{Binding IsConnectionCorrect}" 
+                        IsDefault="True"
+                        Visibility="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Invert}"/>
+            
+                <Button x:Name="CommitSettingsButton" 
+                        Content="Подтвердить" 
+                        Style="{DynamicResource SettingsCommitButton}" 
+                        Command="{Binding CommitSettingsCommand}" 
+                        Visibility="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            
+                <ToggleButton x:Name="SettingsToggle" 
+                              Style="{DynamicResource SettingsToggleButton}" 
+                              IsChecked="{Binding IsSettingsOn}"/>
+
+                <Button Style="{DynamicResource InfoButton}"
+                        Visibility="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Invert}"/>
+
+                <StackPanel HorizontalAlignment="Left" Margin="15 0 0 0" VerticalAlignment="Bottom" Visibility="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <ToggleButton Style="{DynamicResource DemoModeToggleButton}"
+                                  IsChecked="{Binding IsDemoModeEnabled, Mode=OneWay}"
+                                  Command="{Binding ToggleDemoModeCommand}"/>
+                    <TextBlock Text="Demo" 
+                               HorizontalAlignment="Center"
+                               Style="{DynamicResource HintText}"
+                               Padding="0" Margin="0 0 0 0"/>
+                </StackPanel>
+            </Grid>
+            <!--#endregion-->
+
+            <!--#region Loading    -->
+            <!--<Grid Name="LoadingBorder" Grid.Row="0" Grid.RowSpan="2" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">-->
+            <Grid Name="LoadingBorder" Grid.Row="0" Grid.RowSpan="2" Visibility="Collapsed" >
+                <Border Background="Black" Opacity="0.8"/>
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 50">
+                    <ProgressBar Style="{DynamicResource ProgresRing}"/>
+                    <TextBlock Text="Проверка подключения" Foreground="White" FontSize="20"/>
+                </StackPanel>
+            </Grid>
+            <!--#endregion-->
+
+            <materialDesign:Snackbar x:Name="MainSnackbar"
+                                      MessageQueue="{Binding SnackbarMessageQueue}"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Top"
+                                      FontSize="14"
+                                      Panel.ZIndex="99">
+            
+                <materialDesign:Snackbar.Style>
+                    <Style TargetType="materialDesign:Snackbar" BasedOn="{StaticResource {x:Type materialDesign:Snackbar}}">
+                        <Setter Property="Background" Value="#FF424242"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Padding" Value="12 6"/>
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.3"/>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </materialDesign:Snackbar.Style>
+            
+            </materialDesign:Snackbar>
+        </Grid>
+    </Border>
+</Window>
