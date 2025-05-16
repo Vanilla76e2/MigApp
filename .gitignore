@@ -38,3 +38,6 @@ VisualStudio/Setup1/Release/
 .idea/
 *.DotSettings.user
 _ReSharper*/
+
+# Private Notes
+/*.txt
