@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using MigApp.Core;
 using System.Windows.Threading;
 using MigApp.Core.Services.Dispathcer;
 using MigApp.Core.Session;
@@ -30,8 +29,8 @@ public partial class App : Application
 
         IServiceCollection services = new ServiceCollection();
 
-        services.AddSingleton<IDbContextFactory<MigDatabaseContext>, MigDatabaseContextFactory>();
-        services.AddSingleton<IDbContextProvider, MigDatabaseContextProvider>();
+        services.AddSingleton<IDbContextFactory<DbContext>, MigDatabaseContextFactory>();
+        services.AddTransient<IDbContextProvider, MigDatabaseContextProvider>();
 
         // Регистрация сервисов
         services.AddSingleton<INavigationService, NavigationService>();
@@ -41,8 +40,8 @@ public partial class App : Application
         services.AddSingleton<CrashLogger>();
         services.AddSingleton<Dispatcher>(provider => Application.Current.Dispatcher);
         services.AddSingleton<IDemoModeService, DemoModeService>();
-        services.AddTransient<ISecurityService, SecurityService>();
         services.AddScoped<IAuthService, AuthService>();
+        services.AddTransient<ISecurityService, SecurityService>();
         services.AddTransient<IDispatcher, WpfDispatcher>();
         services.AddTransient<IUINotificationService, UINotificationService>();
         services.AddTransient<IInternetService, InternetService>();

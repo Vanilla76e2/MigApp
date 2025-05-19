@@ -12,7 +12,7 @@ public partial class MigDatabaseContext : DbContext
     //    _connectionString = connectionString;
     //}
 
-    public MigDatabaseContext(DbContextOptions<MigDatabaseContext> options)
+    public MigDatabaseContext(DbContextOptions options)
         : base(options)
     {
     }

@@ -6,16 +6,16 @@ namespace MigApp.Core.Services
     public class AuthService : IAuthService
     {
         private readonly IDbContextProvider _provider;
-        private MigDatabaseContext _context;
+        private readonly IDbContextFactory<DbContext> _contextFactory;
         private readonly ISecurityService _securityService;
         private readonly IAppLogger _logger;
         private readonly IUserSession _userSession;
         private readonly IUINotificationService _ui;
 
-        public AuthService(IDbContextProvider provider, ISecurityService securityService, IAppLogger logger, IUserSession userSession, IUINotificationService ui)
+        public AuthService(IDbContextProvider provider, ISecurityService securityService, IAppLogger logger, IUserSession userSession, IUINotificationService ui, IDbContextFactory<DbContext> contextFactory)
         {
             _provider = provider;
-            _context = _provider.GetContext();
+            _contextFactory = contextFactory;
             _securityService = securityService;
             _userSession = userSession;
             _logger = logger;
@@ -24,11 +24,15 @@ namespace MigApp.Core.Services
 
         public async Task<AuthResult> AuthorizeUserAsync(string username, string password)
         {
+            if (Properties.Settings.Default.IsDemoMode)
+            {
+                _logger.LogInformation("Авторизация в демонстрационном режиме");
+                return new AuthResult(true, "Успешный вход", null);
+            }
+
             _logger.LogDebug($"Проверка входных параметров: username={username}, password={(string.IsNullOrEmpty(password) ? "пустой" : "задан")}");
             ArgumentNullException.ThrowIfNull(username, nameof(username));
             ArgumentNullException.ThrowIfNull(password, nameof(password));
-
-            _context = _provider.GetContext();
 
             try
             {

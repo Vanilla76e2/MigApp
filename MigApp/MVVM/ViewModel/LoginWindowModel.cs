@@ -18,13 +18,13 @@ namespace MigApp.MVVM.ViewModel
     public class LoginWindowModel : Core.ViewModel
     {
         // Сервисы
+        private readonly IAppLogger _logger;
+        private readonly IAuthService _authService;
         private readonly ISecurityService _securityService;
         private readonly IDatabaseService _databaseService;
         private readonly INavigationService _navigationService;
         private readonly IAppUpdateService _appUpdateService;
-        private readonly IAuthService _authService;
         private readonly IUINotificationService _ui;
-        private readonly IAppLogger _logger;
         private readonly IDemoModeService _demoModeService;
 
         // Команды

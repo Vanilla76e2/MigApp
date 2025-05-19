@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MigApp.Demo.Data;
 
-namespace MigApp.Data
+namespace MigApp.Core
 {
-    public class MigDatabaseContextFactory : IDbContextFactory<MigDatabaseContext>
+    public class MigDatabaseContextFactory : IDbContextFactory<DbContext>
     {
         private readonly ISecurityService _securityService;
         private readonly IAppLogger _logger;
@@ -13,8 +14,14 @@ namespace MigApp.Data
             _logger = logger;
         }
 
-        public MigDatabaseContext CreateDbContext()
+        public DbContext CreateDbContext()
         {
+            if (Properties.Settings.Default.IsDemoMode)
+            {
+                _logger.LogInformation("Создание контекста базы данных в демонстрационном режиме");
+                return new DemoDatabaseContext(new DbContextOptions<DemoDatabaseContext>());
+            }
+
             _logger.LogInformation("Создание контекста базы данных");
             var connectionString = _securityService.LoadDatabaseSettingsFromVault().ToConnectionString();
             var optionsBuilder = new DbContextOptionsBuilder<MigDatabaseContext>();

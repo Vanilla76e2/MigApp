@@ -10,10 +10,10 @@
         public RolePermission TechnicsAccessLevel { get; }
         public RolePermission FurnitureAccessLevel { get; }
 
-        public UserRole(string? id, string? Username, bool isAdmin, RolePermission employeeAccessLevel, RolePermission technicsAccessLevel, RolePermission furnitureAccessLevel)
+        public UserRole(string? id, string? username, bool isAdmin, RolePermission employeeAccessLevel, RolePermission technicsAccessLevel, RolePermission furnitureAccessLevel)
         {
             Id = id ?? throw new ArgumentNullException(nameof(id));
-            Username = Username ?? throw new ArgumentNullException(nameof(Username));
+            Username = username ?? throw new ArgumentNullException(nameof(Username));
             IsAdmin = isAdmin;
             EmployeeAccessLevel = employeeAccessLevel;
             TechnicsAccessLevel = technicsAccessLevel;

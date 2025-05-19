@@ -1,18 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Moq;
-using MigApp.Data;
 using MigApp.Demo.Helpers;
 
 namespace MigApp.Demo.Data
 {
-    internal class DemoDatabaseContext : MigDatabaseContext
+    public partial class DemoDatabaseContext : DbContext
     {
-        public DemoDatabaseContext(DbContextOptions<MigDatabaseContext> options)
+        public DemoDatabaseContext(DbContextOptions options)
             : base(options)
         {
         }
 
-        public override DbSet<Cctv> Cctvs =>
+        public virtual DbSet<Cctv> Cctvs =>
             DbSetMockHelper.CreateMockDbSet(new List<Cctv>
             {
                 new Cctv
@@ -114,7 +112,7 @@ namespace MigApp.Demo.Data
                     DelDate = new DateOnly(2025, 01, 15)
                 }
             }).Object;
-        public override DbSet<Computer> Computers =>
+        public virtual DbSet<Computer> Computers =>
             DbSetMockHelper.CreateMockDbSet(new List<Computer>
             {
                 new Computer
@@ -199,7 +197,7 @@ namespace MigApp.Demo.Data
                 }
             }).Object;
 
-        public override DbSet<ComputersComponent> ComputersComponents =>
+        public virtual DbSet<ComputersComponent> ComputersComponents =>
             DbSetMockHelper.CreateMockDbSet(new List<ComputersComponent>
             {
                 new ComputersComponent
@@ -267,7 +265,7 @@ namespace MigApp.Demo.Data
                 }
             }).Object;
 
-        public override DbSet<ComputersDevice> ComputersDevices =>
+        public virtual DbSet<ComputersDevice> ComputersDevices =>
             DbSetMockHelper.CreateMockDbSet(new List<ComputersDevice>
             {
                 new ComputersDevice
@@ -356,7 +354,7 @@ namespace MigApp.Demo.Data
                 }
             }).Object;
 
-        public override DbSet<ComputersServiceHistory> ComputersServiceHistories =>
+        public virtual DbSet<ComputersServiceHistory> ComputersServiceHistories =>
             DbSetMockHelper.CreateMockDbSet(new List<ComputersServiceHistory>
             {
                 new ComputersServiceHistory
@@ -406,7 +404,7 @@ namespace MigApp.Demo.Data
                 }
             }).Object;
 
-        public override DbSet<Department> Departments =>
+        public virtual DbSet<Department> Departments =>
             DbSetMockHelper.CreateMockDbSet(new List<Department>
             {
                 new Department
@@ -453,7 +451,7 @@ namespace MigApp.Demo.Data
                 }
             }).Object;
 
-        public override DbSet<Employee> Employees =>
+        public virtual DbSet<Employee> Employees =>
             DbSetMockHelper.CreateMockDbSet(new List<Employee>
             {
                 new Employee
@@ -542,7 +540,7 @@ namespace MigApp.Demo.Data
                 }
             }).Object;
 
-        public override DbSet<Favourite> Favourites =>
+        public virtual DbSet<Favourite> Favourites =>
             DbSetMockHelper.CreateMockDbSet(new List<Favourite>
             {
                 new Favourite
@@ -587,7 +585,7 @@ namespace MigApp.Demo.Data
                 }
             }).Object;
 
-        public override DbSet<FavouriteView> FavouriteViews =>
+        public virtual DbSet<FavouriteView> FavouriteViews =>
             DbSetMockHelper.CreateMockDbSet(new List<FavouriteView>
             {
                 new FavouriteView
@@ -632,7 +630,7 @@ namespace MigApp.Demo.Data
                 }
             }).Object;
 
-        public override DbSet<GenericDevice> GenericDevices =>
+        public virtual DbSet<GenericDevice> GenericDevices =>
             DbSetMockHelper.CreateMockDbSet(new List<GenericDevice>
             {
                 new GenericDevice
@@ -700,7 +698,7 @@ namespace MigApp.Demo.Data
                 }
             }).Object;
 
-        public override DbSet<IpAddressInfo> IpAddressInfos =>
+        public virtual DbSet<IpAddressInfo> IpAddressInfos =>
             DbSetMockHelper.CreateMockDbSet(new List<IpAddressInfo>
             {
                 new IpAddressInfo
@@ -750,7 +748,7 @@ namespace MigApp.Demo.Data
                 }
             }).Object;
 
-        public override DbSet<Laptop> Laptops =>
+        public virtual DbSet<Laptop> Laptops =>
             DbSetMockHelper.CreateMockDbSet(new List<Laptop>
             {
                 new Laptop
@@ -850,7 +848,7 @@ namespace MigApp.Demo.Data
                 }
             }).Object;
 
-        public override DbSet<LogEntry> Logs =>
+        public virtual DbSet<LogEntry> Logs =>
             DbSetMockHelper.CreateMockDbSet(new List<LogEntry>
             {
                 new LogEntry
@@ -925,7 +923,7 @@ namespace MigApp.Demo.Data
                 }
             }).Object;
 
-        public override DbSet<MigApp.Data.Monitor> Monitors =>
+        public virtual DbSet<MigApp.Data.Monitor> Monitors =>
             DbSetMockHelper.CreateMockDbSet(new List<MigApp.Data.Monitor>
             {
                 new MigApp.Data.Monitor
@@ -1010,7 +1008,7 @@ namespace MigApp.Demo.Data
                 }
             }).Object;
 
-        public override DbSet<Orgtechnic> Orgtechnics =>
+        public virtual DbSet<Orgtechnic> Orgtechnics =>
             DbSetMockHelper.CreateMockDbSet(new List<Orgtechnic>
             {
                 new Orgtechnic
@@ -1095,7 +1093,7 @@ namespace MigApp.Demo.Data
                 }
             }).Object;
 
-        public override DbSet<Role> Roles =>
+        public virtual DbSet<Role> Roles =>
             DbSetMockHelper.CreateMockDbSet(new List<Role>
             {
                 new Role
@@ -1150,7 +1148,7 @@ namespace MigApp.Demo.Data
                 }
             }).Object;
 
-        public override DbSet<RolesView> RolesViews =>
+        public virtual DbSet<RolesView> RolesViews =>
             DbSetMockHelper.CreateMockDbSet(new List<RolesView>
             {
                 new RolesView
@@ -1200,7 +1198,7 @@ namespace MigApp.Demo.Data
                 }
             }).Object;
 
-        public override DbSet<Router> Routers =>
+        public virtual DbSet<Router> Routers =>
             DbSetMockHelper.CreateMockDbSet(new List<Router>
             {
                 new Router
@@ -1273,7 +1271,7 @@ namespace MigApp.Demo.Data
                 }
             }).Object;
 
-        public override DbSet<MigApp.Data.Switch> Switches =>
+        public virtual DbSet<MigApp.Data.Switch> Switches =>
             DbSetMockHelper.CreateMockDbSet(new List<MigApp.Data.Switch>
             {
                 new MigApp.Data.Switch
@@ -1338,7 +1336,7 @@ namespace MigApp.Demo.Data
                 }
             }).Object;
 
-        public override DbSet<Tablet> Tablets =>
+        public virtual DbSet<Tablet> Tablets =>
             DbSetMockHelper.CreateMockDbSet(new List<Tablet>
             {
                 new Tablet
@@ -1428,7 +1426,7 @@ namespace MigApp.Demo.Data
                 }
             }).Object;
 
-        public override DbSet<UserProfileView> UserProfileViews =>
+        public virtual DbSet<UserProfileView> UserProfileViews =>
             DbSetMockHelper.CreateMockDbSet(new List<UserProfileView>
             {
                 new UserProfileView
@@ -1473,7 +1471,7 @@ namespace MigApp.Demo.Data
                 }
             }).Object;
 
-        public override DbSet<UsersProfile> UsersProfiles =>
+        public virtual DbSet<UsersProfile> UsersProfiles =>
             DbSetMockHelper.CreateMockDbSet(new List<UsersProfile>
             {
                 new UsersProfile
