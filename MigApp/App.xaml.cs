@@ -1,21 +1,35 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System.Windows.Threading;
-using MigApp.Core.Services.Dispathcer;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using MigApp.Core.Session;
+using MigApp.Demo.Services.DemoModeManager;
+using MigApp.Infrastructure.Data;
+using MigApp.Infrastructure.Repository.Common;
+using MigApp.Infrastructure.Repository.UsersProfiles;
+using MigApp.Infrastructure.Services.AppLogger;
+using MigApp.Infrastructure.Services.AppUpdate;
+using MigApp.Infrastructure.Services.DatabaseContextProvider;
+using MigApp.Infrastructure.Services.DatabaseService;
+using MigApp.Infrastructure.Services.DnsResolver;
+using MigApp.Infrastructure.Services.Installer;
+using MigApp.Infrastructure.Services.Internet;
+using MigApp.Infrastructure.Services.Security;
+using MigApp.Infrastructure.Services.Version;
 using MigApp.MVVM.View;
-using MigApp.MVVM.ViewModel;
+using MigApp.UI.Base;
+using MigApp.UI.MVVM.ViewModel;
+using MigApp.UI.MVVM.ViewModel.Pages;
+using MigApp.UI.Services.Dispathcer;
+using MigApp.UI.Services.Navigation;
+using MigApp.UI.Services.UINotification;
 using System.Windows;
-using MigApp.Core.Services.AppUpdate;
-using MigApp.Core.Services.Installer;
-using Microsoft.EntityFrameworkCore;
-using MigApp.Core.Services.DemoModeManager;
+using System.Windows.Threading;
 
 namespace MigApp;
 
 /// <summary>
 /// Interaction logic for App.xaml
 /// </summary>
-public partial class App : Application
+public partial class App : System.Windows.Application
 {
     private readonly ServiceProvider _serviceProvider;
     private readonly IAppLogger _logger;
@@ -38,18 +52,21 @@ public partial class App : Application
         services.AddSingleton<IAppLogger, AppLogger>();
         services.AddSingleton<IUserSession, UserSession>();
         services.AddSingleton<CrashLogger>();
-        services.AddSingleton<Dispatcher>(provider => Application.Current.Dispatcher);
+        services.AddSingleton<Dispatcher>(provider => Current.Dispatcher);
         services.AddSingleton<IDemoModeService, DemoModeService>();
-        services.AddScoped<IAuthService, AuthService>();
+
+        services.AddScoped(typeof(IDatabaseRepository<>), typeof(EfRepository<>));
+        services.AddScoped<IUsersProfilesRepository, UsersProfilesRepository>();
+
         services.AddTransient<ISecurityService, SecurityService>();
         services.AddTransient<IDispatcher, WpfDispatcher>();
         services.AddTransient<IUINotificationService, UINotificationService>();
         services.AddTransient<IInternetService, InternetService>();
-        services.AddTransient<IDatabaseService, DatabaseService>();
+        services.AddTransient<IDatabaseConnectionTester, DatabaseConnectionTester>();
         services.AddTransient<IAppUpdateService, AppUpdateService>();
         services.AddTransient<IDnsResolver, DnsResolver>();
         services.AddTransient<IInstallerService, InstallerService>();
-        
+
 
         services.AddScoped<LoginWindowModel>();
         services.AddScoped<MainWindowModel>();
@@ -74,7 +91,7 @@ public partial class App : Application
         services.AddScoped<RolesViewModel>();
         services.AddScoped<LogsViewModel>();
         services.AddScoped<IPViewModel>();
-        
+
         services.AddScoped<LoginWindow>(provider => new LoginWindow(provider.GetRequiredService<LoginWindowModel>()));
         //services.AddScoped<MainWindow>(provider => new MainWindow(provider.GetRequiredService<MainWindowModel>()));
 
@@ -123,15 +140,15 @@ public partial class App : Application
         var themeDict = new ResourceDictionary { Source = new Uri(themeUri, UriKind.Relative) };
 
         // Находим и заменяем словарь темы
-        var currentDict = Application.Current.Resources.MergedDictionaries
+        var currentDict = Current.Resources.MergedDictionaries
             .FirstOrDefault(d => d.Source?.OriginalString.Contains("Themes/") == true);
 
         if (currentDict != null)
         {
-            Application.Current.Resources.MergedDictionaries.Remove(currentDict);
+            Current.Resources.MergedDictionaries.Remove(currentDict);
         }
 
-        Application.Current.Resources.MergedDictionaries.Add(themeDict);
+        Current.Resources.MergedDictionaries.Add(themeDict);
     }
 }
 

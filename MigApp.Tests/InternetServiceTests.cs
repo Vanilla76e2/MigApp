@@ -1,4 +1,5 @@
-﻿using MigApp.Core.Services.DnsResolver;
+﻿using MigApp.Infrastructure.Services.DnsResolver;
+using MigApp.Infrastructure.Services.DnsResolver.DnsResolver;
 using MigApp.Services;
 using Moq;
 using System.Net;

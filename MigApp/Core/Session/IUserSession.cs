@@ -1,4 +1,6 @@
 ﻿
+using MigApp.Core.Models;
+
 namespace MigApp.Core.Session
 {
     public interface IUserSession

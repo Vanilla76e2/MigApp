@@ -1,4 +1,6 @@
-﻿using MigApp.Data;
+﻿using MigApp.Infrastructure.Data;
+using MigApp.Infrastructure.Services.AppLogger;
+using MigApp.Infrastructure.Services.DatabaseContextProvider;
 
 namespace MigApp.Demo.Services
 {

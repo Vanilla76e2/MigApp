@@ -4,9 +4,11 @@ using System.Net;
 using System.Configuration;
 using MigApp.Properties;
 using System.Reflection;
-using MigApp.Core.Services.DnsResolver;
-using MigApp.Core.Services.VersionService;
+using MigApp.Infrastructure.Services.DnsResolver.DnsResolver;
+using MigApp.Infrastructure.Services.Version.VersionService;
 using MigApp.Core.Services.Internet;
+using MigApp.Infrastructure.Services.DnsResolver;
+using MigApp.Infrastructure.Services.Version;
 
 namespace MigApp.Tests;
 

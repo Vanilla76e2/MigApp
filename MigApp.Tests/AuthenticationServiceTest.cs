@@ -7,7 +7,7 @@ using MigApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
-namespace MigApp.Tests.Services
+namespace MigApp.Tests
 {
     public class AuthenticationServiceTests
     {

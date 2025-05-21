@@ -1,4 +1,6 @@
 ﻿
+using MigApp.Core.Models;
+
 namespace MigApp.Core.Session
 {
     /// <summary>
@@ -41,6 +43,7 @@ namespace MigApp.Core.Session
 
             return this;
         }
+
         public void DisposeSession()
         {
             UserId = string.Empty;
@@ -51,21 +54,21 @@ namespace MigApp.Core.Session
         }
 
         /// <inheritdoc cref="UserRole.CanReadTechnics"/>
-        public bool CanReadTechnics() => IsAuthenticated == true ? Role!.CanReadTechnics() : throw new Exception("Empty session.");
+        public bool CanReadTechnics() => IsAuthenticated == true ? Role!.CanReadTechnics() : throw new InvalidOperationException("Cannot access permission: user is not authenticated.");
 
         /// <inheritdoc cref="UserRole.CanWriteTechnics"/>
-        public bool CanWriteTechnics() => IsAuthenticated == true ? Role!.CanWriteTechnics() : throw new Exception("Empty session.");
+        public bool CanWriteTechnics() => IsAuthenticated == true ? Role!.CanWriteTechnics() : throw new InvalidOperationException("Cannot access permission: user is not authenticated.");
 
         /// <inheritdoc cref="UserRole.CanReadEmployees"/>
-        public bool CanReadEmployees() => IsAuthenticated == true ? Role!.CanReadEmployees() : throw new Exception("Empty session.");
+        public bool CanReadEmployees() => IsAuthenticated == true ? Role!.CanReadEmployees() : throw new InvalidOperationException("Cannot access permission: user is not authenticated.");
 
         /// <inheritdoc cref="UserRole.CanWriteEmployees"/>
-        public bool CanWriteEmployees() => IsAuthenticated == true ? Role!.CanWriteEmployees() : throw new Exception("Empty session.");
+        public bool CanWriteEmployees() => IsAuthenticated == true ? Role!.CanWriteEmployees() : throw new InvalidOperationException("Cannot access permission: user is not authenticated.");
 
         /// <inheritdoc cref="UserRole.CanReadFurniture"/>
-        public bool CanReadFurniture() => IsAuthenticated == true ? Role!.CanReadFurniture() : throw new Exception("Empty session.");
+        public bool CanReadFurniture() => IsAuthenticated == true ? Role!.CanReadFurniture() : throw new InvalidOperationException("Cannot access permission: user is not authenticated.");
 
         /// <inheritdoc cref="UserRole.CanWriteFurniture"/>
-        public bool CanWriteFurniture() => IsAuthenticated == true ? Role!.CanWriteFurniture() : throw new Exception("Empty session.");
+        public bool CanWriteFurniture() => IsAuthenticated == true ? Role!.CanWriteFurniture() : throw new InvalidOperationException("Cannot access permission: user is not authenticated.");
     }
 }

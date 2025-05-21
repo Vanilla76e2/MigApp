@@ -1,9 +1,10 @@
-﻿using MigApp.MVVM.Model;
-using System.Printing;
+﻿using MigApp.Infrastructure.Services.AppLogger;
+using MigApp.Infrastructure.Services.DatabaseService;
+using MigApp.UI.MVVM.Model;
 
 namespace MigApp.Demo.Services
 {
-    internal class DemoDatabaseService : IDatabaseService
+    internal class DemoDatabaseService : IDatabaseConnectionTester
     {
         private IAppLogger _logger;
 
