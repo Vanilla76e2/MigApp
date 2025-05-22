@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MigApp.MVVM.View"
-             xmlns:vm="clr-namespace:MigApp.MVVM.ViewModel"
+             xmlns:vm="clr-namespace:MigApp.UI.MVVM.ViewModel"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -17,15 +17,15 @@
             <RowDefinition Height="15"/>
         </Grid.RowDefinitions>
 
-        <Border Style="{StaticResource MainPanelBorder}" Grid.Row="0">
+        <Border Grid.Row="0">
             <Grid>
                 <!-- Шапка -->
-                <Grid Style="{StaticResource MainPanelHeader}">
+                <Grid>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="IP адреса" Style="{StaticResource Header}"/>
+                        <TextBlock Text="IP адреса"/>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="50 0 0 10">
-                            <TextBlock Text="Подсеть:" Style="{StaticResource TextBlock_20}" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
-                            <TextBox Name="Subnet" Text="{Binding Subnet}" Style="{StaticResource SubnetTextBox}" PreviewTextInput="NumOnly" LostFocus="Subnet_LostFocus"/>
+                            <TextBlock Text="Подсеть:" Margin="0 0 10 0" VerticalAlignment="Bottom"/>
+                            <TextBox Name="Subnet" Text="{Binding Subnet}" PreviewTextInput="NumOnly" LostFocus="Subnet_LostFocus"/>
                         </StackPanel>
                         <StackPanel VerticalAlignment="Bottom" Margin="5 0 0 7">
                             <Button Width="19" Height="15" Margin="1" Command="{Binding AddSubnetCommand}">
@@ -50,13 +50,13 @@
 
                 <!-- Фильтр -->
                 <Grid Name="FilterPanel" HorizontalAlignment="Right" Width="70">
-                    <Border Style="{StaticResource FilterBody}">
+                    <Border>
                         <Grid>
 
                         </Grid>
                     </Border>
                     <Border Style="{DynamicResource FilterLatch}">
-                        <ToggleButton Name="Filter" Style="{StaticResource FilterButton}">
+                        <ToggleButton Name="Filter">
                             <ToggleButton.Triggers>
                                 <EventTrigger RoutedEvent="ToggleButton.Checked">
                                     <BeginStoryboard>
@@ -79,8 +79,8 @@
             </Grid>
         </Border>
 
-        <Border Style="{StaticResource Footer}">
-            <TextBlock Style="{StaticResource FooterSelectedRowsCounter}" Text="{Binding ElementName=IPTable, Path=SelectedItems.Count, StringFormat=Выбрано: {0}}"/>
+        <Border>
+            <TextBlock Text="{Binding ElementName=IPTable, Path=SelectedItems.Count, StringFormat=Выбрано: {0}}"/>
         </Border>
     </Grid>
 </UserControl>

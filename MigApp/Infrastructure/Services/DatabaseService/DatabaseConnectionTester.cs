@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MigApp.Core.Models;
 using MigApp.Infrastructure.Data;
 using MigApp.Infrastructure.Services.AppLogger;
 using MigApp.Infrastructure.Services.DatabaseContextProvider;
 using MigApp.Infrastructure.Services.Security;
-using MigApp.UI.MVVM.Model;
 using MigApp.UI.Services.UINotification;
 using Npgsql;
 
@@ -66,12 +66,12 @@ public class DatabaseConnectionTester : IDatabaseConnectionTester
         }
         catch (NpgsqlException npgEx)
         {
-            LogAndShowError(npgEx, $"Ошибка PostgreSQL (код: {npgEx.SqlState})");
+            await LogAndShowError(npgEx, $"Ошибка PostgreSQL (код: {npgEx.SqlState})");
             return false;
         }
         catch (Exception ex)
         {
-            LogAndShowError(ex, "Критическая ошибка подключения");
+            await LogAndShowError(ex, "Критическая ошибка подключения");
             return false;
         }
     }

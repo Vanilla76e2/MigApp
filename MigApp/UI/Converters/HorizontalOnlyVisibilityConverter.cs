@@ -5,7 +5,10 @@ using System.Windows.Data;
 
 namespace MigApp.UI.Converters
 {
-    public class HorizontalOnlyVisibilityConverter : IValueConverter
+    /// <summary>
+    /// Показывает Visible только если Orientation.Horizontal. Иначе Collapsed.
+    /// </summary>
+    public sealed class HorizontalOnlyVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -15,6 +18,6 @@ namespace MigApp.UI.Converters
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            => throw new NotImplementedException();
+            => Binding.DoNothing;
     }
 }

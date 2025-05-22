@@ -112,9 +112,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="MigApp.Application" />
     <Using Include="MigApp.Core" />
-    <Using Include="MigApp.Core.Services" />
-    <Using Include="MigApp.Data" />
+    <Using Include="MigApp.Infrastructure" />
+    <Using Include="MigApp.UI" />
     <Using Include="System.Diagnostics" />
   </ItemGroup>
 

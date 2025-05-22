@@ -7,7 +7,8 @@
             Cancelled,
             WeakPassword,
             Success,
-            MissedUser
+            MissedUser,
+            Failed
         }
     }
 }

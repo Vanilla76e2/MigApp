@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using MigApp.Application.Services.PasswodMange;
+using MigApp.Application.Services.SessionBuilder;
+using MigApp.Application.Services.StartupInitialize;
 using MigApp.Core.Session;
 using MigApp.Demo.Services.DemoModeManager;
 using MigApp.Infrastructure.Data;
@@ -32,7 +35,6 @@ namespace MigApp;
 public partial class App : System.Windows.Application
 {
     private readonly ServiceProvider _serviceProvider;
-    private readonly IAppLogger _logger;
 
     public App()
     {
@@ -46,51 +48,9 @@ public partial class App : System.Windows.Application
         services.AddSingleton<IDbContextFactory<DbContext>, MigDatabaseContextFactory>();
         services.AddTransient<IDbContextProvider, MigDatabaseContextProvider>();
 
-        // Регистрация сервисов
-        services.AddSingleton<INavigationService, NavigationService>();
-        services.AddSingleton<IVersionService, VersionService>();
-        services.AddSingleton<IAppLogger, AppLogger>();
-        services.AddSingleton<IUserSession, UserSession>();
-        services.AddSingleton<CrashLogger>();
-        services.AddSingleton<Dispatcher>(provider => Current.Dispatcher);
-        services.AddSingleton<IDemoModeService, DemoModeService>();
+        AddInterfacesToServices(services);
 
-        services.AddScoped(typeof(IDatabaseRepository<>), typeof(EfRepository<>));
-        services.AddScoped<IUsersProfilesRepository, UsersProfilesRepository>();
-
-        services.AddTransient<ISecurityService, SecurityService>();
-        services.AddTransient<IDispatcher, WpfDispatcher>();
-        services.AddTransient<IUINotificationService, UINotificationService>();
-        services.AddTransient<IInternetService, InternetService>();
-        services.AddTransient<IDatabaseConnectionTester, DatabaseConnectionTester>();
-        services.AddTransient<IAppUpdateService, AppUpdateService>();
-        services.AddTransient<IDnsResolver, DnsResolver>();
-        services.AddTransient<IInstallerService, InstallerService>();
-
-
-        services.AddScoped<LoginWindowModel>();
-        services.AddScoped<MainWindowModel>();
-
-        services.AddScoped<FavouriteViewModel>();
-
-        services.AddScoped<EmployeesViewModel>();
-        services.AddScoped<DepartmentViewModel>();
-        services.AddScoped<ComputersViewModel>();
-        services.AddScoped<LaptopsViewModel>();
-        services.AddScoped<TabletsViewModel>();
-        services.AddScoped<OrgtechViewModel>();
-        services.AddScoped<MonitorsViewModel>();
-        services.AddScoped<RoutersViewModel>();
-        services.AddScoped<SwitchesViewModel>();
-        services.AddScoped<CCTVViewModel>();
-
-        services.AddScoped<FurnitureViewModel>();
-        services.AddScoped<FurnitureTypeViewModel>();
-
-        services.AddScoped<UsersViewModel>();
-        services.AddScoped<RolesViewModel>();
-        services.AddScoped<LogsViewModel>();
-        services.AddScoped<IPViewModel>();
+        AddViewsToServices(services);
 
         services.AddScoped<LoginWindow>(provider => new LoginWindow(provider.GetRequiredService<LoginWindowModel>()));
         //services.AddScoped<MainWindow>(provider => new MainWindow(provider.GetRequiredService<MainWindowModel>()));
@@ -105,6 +65,7 @@ public partial class App : System.Windows.Application
         var loginWindow = _serviceProvider.GetRequiredService<LoginWindow>();
         Current.MainWindow = loginWindow;
         Current.MainWindow.Show();
+        Debug.WriteLine($"LoginWindowModel создан: {loginWindow.GetHashCode()}");
     }
 
     private string GetStartupBanner()
@@ -149,6 +110,61 @@ public partial class App : System.Windows.Application
         }
 
         Current.Resources.MergedDictionaries.Add(themeDict);
+    }
+
+    private void AddInterfacesToServices(IServiceCollection services)
+    {
+        services.AddSingleton<INavigationService, NavigationService>();
+        services.AddSingleton<IVersionService, VersionService>();
+        services.AddSingleton<IAppLogger, AppLogger>();
+        services.AddSingleton<IUserSession, UserSession>();
+        services.AddSingleton<CrashLogger>();
+        services.AddSingleton<Dispatcher>(provider => Current.Dispatcher);
+        services.AddSingleton<IDemoModeService, DemoModeService>();
+
+        services.AddScoped(typeof(IDatabaseRepository<>), typeof(EfRepository<>));
+        services.AddScoped<IUsersProfilesRepository, UsersProfilesRepository>();
+        services.AddScoped<IUnitOfWork, EfUnitOfWork>();
+        services.AddScoped<IPasswordChanger, PasswordChanger>();
+        services.AddScoped<IPasswordVerifier, PasswordVerifier>();
+        services.AddScoped<ISessionBuilder, SessionBuilder>();
+        services.AddScoped<IStartupInitializer, StartupInitializer>();
+
+        services.AddTransient<ISecurityService, SecurityService>();
+        services.AddTransient<IDispatcher, WpfDispatcher>();
+        services.AddTransient<IUINotificationService, UINotificationService>();
+        services.AddTransient<IInternetService, InternetService>();
+        services.AddTransient<IDatabaseConnectionTester, DatabaseConnectionTester>();
+        services.AddTransient<IAppUpdateService, AppUpdateService>();
+        services.AddTransient<IDnsResolver, DnsResolver>();
+        services.AddTransient<IInstallerService, InstallerService>();
+    }
+
+    private void AddViewsToServices(IServiceCollection services)
+    {
+        services.AddScoped<LoginWindowModel>();
+        services.AddScoped<MainWindowModel>();
+
+        services.AddScoped<FavouriteViewModel>();
+
+        services.AddScoped<EmployeesViewModel>();
+        services.AddScoped<DepartmentViewModel>();
+        services.AddScoped<ComputersViewModel>();
+        services.AddScoped<LaptopsViewModel>();
+        services.AddScoped<TabletsViewModel>();
+        services.AddScoped<OrgtechViewModel>();
+        services.AddScoped<MonitorsViewModel>();
+        services.AddScoped<RoutersViewModel>();
+        services.AddScoped<SwitchesViewModel>();
+        services.AddScoped<CCTVViewModel>();
+
+        services.AddScoped<FurnitureViewModel>();
+        services.AddScoped<FurnitureTypeViewModel>();
+
+        services.AddScoped<UsersViewModel>();
+        services.AddScoped<RolesViewModel>();
+        services.AddScoped<LogsViewModel>();
+        services.AddScoped<IPViewModel>();
     }
 }
 

@@ -1,4 +1,4 @@
-﻿using MigApp.UI.MVVM.Model;
+﻿using MigApp.Core.Models;
 
 namespace MigApp.Infrastructure.Services.DatabaseService;
 

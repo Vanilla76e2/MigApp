@@ -2,6 +2,7 @@
 using MigApp.Core.Enums;
 using MigApp.Demo.Helpers;
 using MigApp.Infrastructure.Data.Entities;
+using Entity = MigApp.Infrastructure.Data.Entities;
 
 namespace MigApp.Demo
 {
@@ -925,10 +926,10 @@ namespace MigApp.Demo
                 }
             }).Object;
 
-        public virtual DbSet<Entities.Monitor> Monitors =>
-            DbSetMockHelper.CreateMockDbSet(new List<Entities.Monitor>
+        public virtual DbSet<Entity.Monitor> Monitors =>
+            DbSetMockHelper.CreateMockDbSet(new List<Entity.Monitor>
             {
-                new Entities.Monitor
+                new Entity.Monitor
                 {
                     Id = 1,
                     InventoryNumber = 400000001,
@@ -944,7 +945,7 @@ namespace MigApp.Demo
                     HdmiPort = 1,
                     DpPort = 0
                 },
-                new Entities.Monitor
+                new Entity.Monitor
                 {
                     Id = 2,
                     InventoryNumber = 400000002,
@@ -960,7 +961,7 @@ namespace MigApp.Demo
                     HdmiPort = 1,
                     DpPort = 1
                 },
-                new Entities.Monitor
+                new Entity.Monitor
                 {
                     Id = 3,
                     InventoryNumber = 400000003,
@@ -976,7 +977,7 @@ namespace MigApp.Demo
                     HdmiPort = 2,
                     DpPort = 1
                 },
-                new Entities.Monitor
+                new Entity.Monitor
                 {
                     Id = 4,
                     InventoryNumber = 400000004,
@@ -992,7 +993,7 @@ namespace MigApp.Demo
                     HdmiPort = 0,
                     DpPort = 0
                 },
-                new Entities.Monitor
+                new Entity.Monitor
                 {
                     Id = 5,
                     InventoryNumber = 400000005,
@@ -1273,10 +1274,10 @@ namespace MigApp.Demo
                 }
             }).Object;
 
-        public virtual DbSet<Entities.Switch> Switches =>
-            DbSetMockHelper.CreateMockDbSet(new List<Entities.Switch>
+        public virtual DbSet<Entity.Switch> Switches =>
+            DbSetMockHelper.CreateMockDbSet(new List<Entity.Switch>
             {
-                new Entities.Switch
+                new Entity.Switch
                 {
                     Id = 1,
                     InventoryNumber = 700000001,
@@ -1291,7 +1292,7 @@ namespace MigApp.Demo
                     Deleted = false,
                     DelDate = null
                 },
-                new Entities.Switch
+                new Entity.Switch
                 {
                     Id = 2,
                     InventoryNumber = 700000002,
@@ -1306,7 +1307,7 @@ namespace MigApp.Demo
                     Deleted = false,
                     DelDate = null
                 },
-                new Entities.Switch
+                new Entity.Switch
                 {
                     Id = 3,
                     InventoryNumber = 700000003,
@@ -1321,7 +1322,7 @@ namespace MigApp.Demo
                     Deleted = false,
                     DelDate = null
                 },
-                new Entities.Switch
+                new Entity.Switch
                 {
                     Id = 4,
                     InventoryNumber = 700000004,

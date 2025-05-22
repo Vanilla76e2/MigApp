@@ -14,10 +14,10 @@ namespace MigApp.UI.Services.UINotification
         /// </summary>
         /// <param name="dispatcher">Диспетчер для выполнения в UI-потоке.</param>
         /// <param name="logger">Логгер для записи событий.</param>
-        public UINotificationService(IDispatcher dispathcer, IAppLogger logger)
+        public UINotificationService(IDispatcher dispatcher, IAppLogger logger)
         {
-            _dispatcher = dispathcer;
-            _logger = logger;
+            _dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         /// <summary>

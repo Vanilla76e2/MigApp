@@ -12,7 +12,7 @@ namespace MigApp.UI.Services.Navigation
     {
         private readonly Func<Type, ViewModel> _viewModelFactory;
         private readonly IServiceProvider _serviceProvider;
-        private ViewModel? _currentView = null!;
+        private ViewModel? _currentView = null;
         private readonly IAppLogger _logger;
         public ViewModel? CurrentView
         {
@@ -58,7 +58,7 @@ namespace MigApp.UI.Services.Navigation
 
                     if (viewModel is ILoadbleViewModel loadbleViewModel)
                     {
-                        _logger.LogDebug($"Обнаружен интерфейс ILoadableViewModel. Начинается загрузка даннх");
+                        _logger.LogDebug($"Обнаружен интерфейс ILoadableViewModel. Начинается загрузка данных");
                         await loadbleViewModel.LoadTableAsync();
                         _logger.LogInformation($"Данные {typeof(TViewModel).Name} успешно загружены");
                     }
@@ -94,15 +94,15 @@ namespace MigApp.UI.Services.Navigation
 
                 if (window == null)
                 {
-                    _logger.LogError($"Не удалось создать эеземпляр окна {typeof(TWindow).Name}");
-                    return;
+                    throw new InvalidOperationException($"Фабрика вернула null для окна {typeof(TWindow).Name}");
                 }
 
                 _logger.LogInformation($"Окно {typeof(TWindow).Name} успешно создано");
 
-                Application.Current.MainWindow = window;
+                System.Windows.Application.Current.MainWindow = window;
                 window.Show();
-                _logger.LogInformation($"Окно {typeof(TWindow).Name} установленно как главное");
+                _logger.LogInformation($"Окно {typeof(TWindow).Name} установлено как главное");
+                Debug.WriteLine($"LoginWindowModel создан: {window.GetHashCode()}");
 
                 if (postShowAction != null)
                 {
@@ -110,6 +110,11 @@ namespace MigApp.UI.Services.Navigation
                     await postShowAction();
                     _logger.LogInformation($"Post-действие для окна {typeof(TWindow).Name} выполнено");
                 }
+            }
+            catch (InvalidOperationException ex)
+            {
+                _logger.LogError(ex, $"Не удалось создать экземпляр окна {typeof(TWindow).Name}");
+                throw;
             }
             catch (Exception ex)
             {

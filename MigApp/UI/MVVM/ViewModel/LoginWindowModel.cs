@@ -1,5 +1,4 @@
 ﻿using MaterialDesignThemes.Wpf;
-using MigApp.Application.Services.Authorization;
 using MigApp.Core.Models;
 using MigApp.Core.Security;
 using MigApp.Demo.Services.DemoModeManager;
@@ -9,7 +8,6 @@ using MigApp.Infrastructure.Services.DatabaseService;
 using MigApp.Infrastructure.Services.Security;
 using MigApp.Properties;
 using MigApp.UI.Base;
-using MigApp.UI.MVVM.Model;
 using MigApp.UI.Services.Navigation;
 using MigApp.UI.Services.UINotification;
 using System.Runtime.InteropServices;
@@ -25,8 +23,6 @@ namespace MigApp.UI.MVVM.ViewModel
     {
         // Сервисы
         private readonly IAppLogger _logger;
-        private readonly IAuthService _authService;
-        private readonly ISecurityService _securityService;
         private readonly IDatabaseConnectionTester _databaseService;
         private readonly INavigationService _navigationService;
         private readonly IAppUpdateService _appUpdateService;
@@ -238,15 +234,19 @@ namespace MigApp.UI.MVVM.ViewModel
         /// <param name="authenticationService">Сервис аутентификации.</param>
         /// <param name="logger">Сервис логирования.</param>
         /// <param name="versionService">Сервис проверки версии приложения.</param>
-        public LoginWindowModel(IAppLogger logger, ISecurityService security, IDatabaseConnectionTester database, IAppUpdateService update, INavigationService navigation, IUINotificationService ui, IAuthService auth, IDemoModeService demoMode)
+        public LoginWindowModel(IAppLogger logger, 
+                                ISecurityService security, 
+                                IDatabaseConnectionTester database, 
+                                IAppUpdateService update, 
+                                INavigationService navigation, 
+                                IUINotificationService ui, 
+                                IDemoModeService demoMode)
         {
             _logger = logger;
-            _securityService = security;
             _databaseService = database;
             _navigationService = navigation;
             _appUpdateService = update;
             _ui = ui;
-            _authService = auth;
             _demoModeService = demoMode;
 
             _demoModeService.DemoModeChanged += OnDemoModeChanged;
@@ -312,21 +312,21 @@ namespace MigApp.UI.MVVM.ViewModel
         /// </summary>
         private void SetDatabaseConnectionParameters()
         {
-            _logger.LogDebug("Начата загрузка параметрова подключения");
-            try
-            {
-                var loadedData = _securityService.LoadDatabaseSettingsFromVault();
-                DatabaseConnectionParameters connectionParameters = loadedData;
-                DBServer = connectionParameters.Host ?? string.Empty;
-                DBPort = connectionParameters.Port ?? string.Empty;
-                DBName = connectionParameters.Database ?? string.Empty;
-                DBUser = connectionParameters.Username ?? string.Empty;
-                DBPassword = PasswordHelper.ConvertPasswordToSecureString(connectionParameters.Password);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Произошла ошибка при попытке загрузить параметры подключения");
-            }
+            //_logger.LogDebug("Начата загрузка параметрова подключения");
+            //try
+            //{
+            //    var loadedData = _securityService.LoadDatabaseSettingsFromVault();
+            //    DatabaseConnectionParameters connectionParameters = loadedData;
+            //    DBServer = connectionParameters.Host ?? string.Empty;
+            //    DBPort = connectionParameters.Port ?? string.Empty;
+            //    DBName = connectionParameters.Database ?? string.Empty;
+            //    DBUser = connectionParameters.Username ?? string.Empty;
+            //    DBPassword = PasswordHelper.ConvertPasswordToSecureString(connectionParameters.Password);
+            //}
+            //catch (Exception ex)
+            //{
+            //    _logger.LogError(ex, "Произошла ошибка при попытке загрузить параметры подключения");
+            //}
         }
 
         /// <summary>
@@ -334,23 +334,23 @@ namespace MigApp.UI.MVVM.ViewModel
         /// </summary>
         private void SetUsercredentials()
         {
-            var loadedData = _securityService.LoadUserCredentialsFromVault();
-            bool userRemembered = Settings.Default.userRemembered;
-            _logger.LogDebug($"Запомнить прользователя установлено на: {userRemembered}");
-            if (userRemembered)
-            {
-                UserCredentials userAuthData = loadedData;
-                Username = userAuthData.Username ?? string.Empty;
-                UserPassword = PasswordHelper.ConvertPasswordToSecureString(userAuthData.Password);
-                IsPasswordRemembered = true;
-                _logger.LogDebug("Учётные данные пользователя восстановлены");
-            }
-            else
-            {
-                Username = string.Empty;
-                UserPassword = new SecureString();
-                _logger.LogDebug("Учётные данные пользователя по умолчанию");
-            }
+            //var loadedData = _securityService.LoadUserCredentialsFromVault();
+            //bool userRemembered = Settings.Default.userRemembered;
+            //_logger.LogDebug($"Запомнить прользователя установлено на: {userRemembered}");
+            //if (userRemembered)
+            //{
+            //    UserCredentials userAuthData = loadedData;
+            //    Username = userAuthData.Username ?? string.Empty;
+            //    UserPassword = PasswordHelper.ConvertPasswordToSecureString(userAuthData.Password);
+            //    IsPasswordRemembered = true;
+            //    _logger.LogDebug("Учётные данные пользователя восстановлены");
+            //}
+            //else
+            //{
+            //    Username = string.Empty;
+            //    UserPassword = new SecureString();
+            //    _logger.LogDebug("Учётные данные пользователя по умолчанию");
+            //}
         }
 
         /// <summary>
@@ -381,33 +381,34 @@ namespace MigApp.UI.MVVM.ViewModel
         /// Асинхронно авторизует пользователя с использованием введенных учетных данных.
         /// </summary>
         /// <returns>Задача, представляющая асинхронную операцию авторизации.</returns>
-        private async Task AuthorizeUserAsync()
+        private Task AuthorizeUserAsync()
         {
-            try
-            {
-                AuthResult authResult = await _authService.AuthorizeUserAsync(Username, GetPasswordAsString());
+            //try
+            //{
+            //    AuthResult authResult = await _authService.AuthorizeUserAsync(Username, GetPasswordAsString());
 
-                if (authResult.Message != null && !authResult.IsAuthenticated)
-                {
-                    await _ui.ShowErrorAsync(authResult.Message);
-                    _logger.LogError(authResult.Message);
-                }
-                else if (authResult.IsAuthenticated)
-                {
-                    _logger.LogInformation($"Выполнен успешный вход пользователя: {Username}");
-                    if (IsPasswordRemembered)
-                    {
-                        SaveUserCredentials();
-                    }
-                    Settings.Default.userRemembered = IsPasswordRemembered;
-                    Settings.Default.Save();
-                    await _navigationService.NavigateToMainWindow();
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Ошибка при авторизации");
-            }
+            //    if (authResult.Message != null && !authResult.IsAuthenticated)
+            //    {
+            //        await _ui.ShowErrorAsync(authResult.Message);
+            //        _logger.LogError(authResult.Message);
+            //    }
+            //    else if (authResult.IsAuthenticated)
+            //    {
+            //        _logger.LogInformation($"Выполнен успешный вход пользователя: {Username}");
+            //        if (IsPasswordRemembered)
+            //        {
+            //            SaveUserCredentials();
+            //        }
+            //        Settings.Default.userRemembered = IsPasswordRemembered;
+            //        Settings.Default.Save();
+            //        await _navigationService.NavigateToMainWindow();
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    _logger.LogError(ex, "Ошибка при авторизации");
+            //}
+            throw new NotImplementedException("Авторизация не реализована");
         }
 
         /// <summary>
@@ -432,13 +433,13 @@ namespace MigApp.UI.MVVM.ViewModel
         {
             try
             {
-                UserCredentials userCredentials = new UserCredentials
-                {
-                    Username = Username,
-                    Password = PasswordHelper.ConvertPasswordToString(UserPassword)
-                };
-                _securityService.SaveUserCredentialsToVault(userCredentials);
-                _logger.LogInformation("Учётные данные успешно сохранены в хранилище");
+                //UserCredentials userCredentials = new UserCredentials
+                //{
+                //    Username = Username,
+                //    Password = PasswordHelper.ConvertPasswordToString(UserPassword)
+                //};
+                //_securityService.SaveUserCredentialsToVault(userCredentials);
+                //_logger.LogInformation("Учётные данные успешно сохранены в хранилище");
             }
             catch (Exception ex)
             {
@@ -462,8 +463,8 @@ namespace MigApp.UI.MVVM.ViewModel
                     DBUser,
                     PasswordHelper.ConvertPasswordToString(DBPassword)
                 );
-                _securityService.SaveDatabaseSettingsToVault(connectionParameters);
-                _logger.LogInformation("Параметры подключения к базе данных успешно сохранены в хранилище");
+                //_securityService.SaveDatabaseSettingsToVault(connectionParameters);
+                //_logger.LogInformation("Параметры подключения к базе данных успешно сохранены в хранилище");
             }
             catch (Exception ex)
             {

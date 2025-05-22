@@ -9,18 +9,8 @@ namespace MigApp.UI.MVVM.ViewModel.Pages
     internal class ComputersViewModel : Base.ViewModel
     {
         #region Таблица
-        private ObservableCollection<ComputersModel> _computers;
-        public ObservableCollection<ComputersModel> Computers
-        {
-            get => _computers;
-            set
-            {
-                _computers = value;
-                OnPropertyChanged();
-            }
-        }
 
-        public async void LoadTableAsync()
+        public void LoadTableAsync()
         {
             //try
             //{

@@ -4,7 +4,14 @@ using System.Windows.Media;
 
 namespace MigApp.UI.Converters
 {
-    public class BoolToErrorBrushConverter : IValueConverter
+    /// <summary>
+    /// Преобразует булевое значение в кисть для отображения ошибки.
+    /// </summary>
+    /// <remarks>
+    /// Если значение <see langword="true"/>, возвращается <see cref="ErrorBrush"/> (по умолчанию <see cref="Brushes.Red"/>),
+    /// иначе возвращается <see cref="NormalBrush"/> (по умолчанию <see cref="Brushes.Transparent"/>).
+    /// </remarks>
+    public sealed class BoolToErrorBrushConverter : IValueConverter
     {
         public Brush ErrorBrush { get; set; } = Brushes.Red;
         public Brush NormalBrush { get; set; } = Brushes.Transparent;
@@ -15,6 +22,6 @@ namespace MigApp.UI.Converters
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            => throw new NotImplementedException();
+            => Binding.DoNothing;
     }
 }

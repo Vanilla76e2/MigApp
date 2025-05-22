@@ -4,7 +4,10 @@ using System.Windows.Data;
 
 namespace MigApp.UI.Converters
 {
-    class ResizeModeToVisibilityConverter : IValueConverter
+    /// <summary>
+    /// Возвращает Collapsed, если ResizeMode == NoResize. Иначе Visible.
+    /// </summary>
+    public sealed class ResizeModeToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -16,6 +19,6 @@ namespace MigApp.UI.Converters
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            => throw new NotImplementedException();
+            => Binding.DoNothing;
     }
 }

@@ -1,6 +1,6 @@
-﻿using MigApp.Infrastructure.Services.AppLogger;
+﻿using MigApp.Core.Models;
+using MigApp.Infrastructure.Services.AppLogger;
 using MigApp.Infrastructure.Services.DatabaseService;
-using MigApp.UI.MVVM.Model;
 
 namespace MigApp.Demo.Services
 {

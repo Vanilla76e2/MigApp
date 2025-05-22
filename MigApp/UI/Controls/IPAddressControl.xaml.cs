@@ -154,14 +154,10 @@ namespace MigApp.Controls
 
         private void NumOnlyIP(object sender, TextCompositionEventArgs e)
         {
-            try
+            if (string.IsNullOrEmpty(e.Text) || !char.IsDigit(e.Text, 0))
             {
-                if (!Char.IsDigit(e.Text, 0))
-                {
-                    e.Handled = true;
-                }
+                e.Handled = true;
             }
-            catch { }
         }
 
         private void ControlLoaded(object sender, RoutedEventArgs e)

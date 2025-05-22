@@ -1,7 +1,7 @@
 ﻿using Npgsql;
 using System.Text.Json.Serialization;
 
-namespace MigApp.UI.MVVM.Model
+namespace MigApp.Core.Models
 {
     /// <summary>
     /// Запись, содержащая параметры подключения к БД.

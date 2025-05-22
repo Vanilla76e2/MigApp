@@ -4,7 +4,10 @@ using System.Windows.Data;
 
 namespace MigApp.UI.Converters
 {
-    public class BoolToVisibilityConverter : IValueConverter
+    /// <summary>
+    /// Преобразует bool в Visibility. Поддерживает инверсию через свойство Invert или параметр "Invert".
+    /// </summary>
+    public sealed class BoolToVisibilityConverter : IValueConverter
     {
         public bool Invert { get; set; } = false;
 
@@ -12,7 +15,7 @@ namespace MigApp.UI.Converters
         {
             bool boolValue = value is bool b && b;
 
-            if (parameter?.ToString() == "Invert" || Invert)
+            if (IsInverted(parameter))
                 boolValue = !boolValue;
 
             return boolValue ? Visibility.Visible : Visibility.Collapsed;
@@ -21,10 +24,14 @@ namespace MigApp.UI.Converters
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             bool result = value is Visibility v && v == Visibility.Visible;
-            if (parameter?.ToString() == "Invert" || Invert)
+            if (IsInverted(parameter))
                 result = !result;
 
             return result;
         }
+
+        private bool IsInverted(object parameter) =>
+            Invert || parameter?.ToString()?.Equals("Invert", StringComparison.OrdinalIgnoreCase) == true;
+
     }
 }

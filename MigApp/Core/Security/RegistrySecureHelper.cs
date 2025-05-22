@@ -1,5 +1,5 @@
 ﻿using Microsoft.Win32;
-using MigApp.UI.MVVM.Model;
+using MigApp.Core.Models;
 using System.Text.Json;
 
 namespace MigApp.Core.Security

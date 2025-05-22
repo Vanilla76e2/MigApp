@@ -7,7 +7,7 @@ namespace MigApp.UI.MVVM.ViewModel
 {
     class MainWindowModel : Base.ViewModel
     {
-        public string WindowTitle { get; set; } = "MigApp v" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
+        public string WindowTitle { get; set; } = $"MigApp v{System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(3)}";
         private string currentUser { get; set; }
         public string CurrentUser
         {
@@ -61,10 +61,6 @@ namespace MigApp.UI.MVVM.ViewModel
         // Конструктор класса с установкой команд командами
         public MainWindowModel(IServiceProvider serviceProvider, INavigationService navService)
         {
-#if DEBUG
-            CurrentUser = "Debug";
-#endif
-
             _serviceProvider = serviceProvider; // Установка сервис-провайдера для разрешения зависимостей
             Navigation = navService; // Установка сервиса навигации
 
@@ -101,7 +97,7 @@ namespace MigApp.UI.MVVM.ViewModel
             Navigation.NavigateToLoginWindow();
 
             // Закрыть окно MainWindow
-            var mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            var mainWindow = System.Windows.Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
             if (mainWindow != null) { mainWindow.Close(); }
         }
 

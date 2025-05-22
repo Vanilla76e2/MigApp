@@ -1,27 +1,29 @@
-﻿using System.Windows;
+﻿using MigApp.UI.Base;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MigApp.UI.Commands
 {
-    static class WindowCommands
+    static public class WindowCommands
     {
-        public static ICommand CloseCommand => CreateCommand(window => window.Close());
+        public static ICommand CloseCommand => CreateCommand<Window>(window => window.Close());
 
-        public static ICommand MinimizeCommand => CreateCommand(window =>
+        public static ICommand MinimizeCommand => CreateCommand<Window>(window =>
             window.WindowState = WindowState.Minimized);
 
-        public static ICommand ToggleMaximizeCommand => CreateCommand(window =>
+        public static ICommand ToggleMaximizeCommand => CreateCommand<Window>(window =>
             window.WindowState = window.WindowState == WindowState.Maximized
                 ? WindowState.Normal
                 : WindowState.Maximized);
 
-        private static ICommand CreateCommand(Action<Window> action) =>
-            new RelayCommand(param =>
+        public static ICommand CreateCommand<T>(Action<T> action) where T : class => new RelayCommand
+            (param =>
             {
-                if (param is Window window)
+                if (param is T target)
                 {
-                    action(window);
+                    action(target);
                 }
-            }, _ => true);
+            },
+            _ => true);
     }
 }

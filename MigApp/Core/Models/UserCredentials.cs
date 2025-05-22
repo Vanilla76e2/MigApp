@@ -1,4 +1,4 @@
-﻿namespace MigApp.UI.MVVM.Model
+﻿namespace MigApp.Core.Models
 {
     /// <summary>
     /// Запись, содержащая данные для аутентификации пользователя.

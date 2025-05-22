@@ -1,6 +1,6 @@
-﻿using MigApp.Core.Security;
+﻿using MigApp.Core.Models;
+using MigApp.Core.Security;
 using MigApp.Infrastructure.Services.AppLogger;
-using MigApp.UI.MVVM.Model;
 
 namespace MigApp.Infrastructure.Services.Security
 {

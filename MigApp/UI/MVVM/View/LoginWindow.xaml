@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MigApp.MVVM.View"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:behaviors="clr-namespace:MigApp.Controls.Behaviors"
+        xmlns:behaviors="clr-namespace:MigApp.UI.Behaviors"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:controls="clr-namespace:MigApp.Controls"
         xmlns:Properties="clr-namespace:MigApp.Properties"

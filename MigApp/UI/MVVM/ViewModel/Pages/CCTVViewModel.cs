@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MigApp.Infrastructure.Data.Entities;
 using MigApp.UI.Base;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -9,11 +10,9 @@ namespace MigApp.UI.MVVM.ViewModel.Pages
 {
     internal class CCTVViewModel : Base.ViewModel, ILoadbleViewModel
     {
-        private readonly MigDatabaseContext dbc;
 
-        public CCTVViewModel(MigDatabaseContext context)
+        public CCTVViewModel()
         {
-            dbc = context;
             AddCommand = new RelayCommand(o => AddEmployee(), o => true);
 
             ClearFilterCommand = new RelayCommand(o => ClearFilter(), o => { return Filter != "WHERE deleted = False"; });
@@ -39,21 +38,22 @@ namespace MigApp.UI.MVVM.ViewModel.Pages
             }
         }
 
-        public async Task LoadTableAsync()
+        public Task LoadTableAsync()
         {
-            try
-            {
-                IQueryable<Cctv> query = dbc.Cctvs;
+            //try
+            //{
+            //    IQueryable<Cctv> query = dbc.Cctvs;
 
-                query = query.Where(c => c.Deleted == false);
+            //    query = query.Where(c => c.Deleted == false);
 
-                Table = new ObservableCollection<Cctv>(await query.ToListAsync());
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"{ex.Source}: Ошибка при загрузке данных: {ex.Message}");
-                MessageBox.Show("Не удалось получить данные из базы данных.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            //    Table = new ObservableCollection<Cctv>(await query.ToListAsync());
+            //}
+            //catch (Exception ex)
+            //{
+            //    Debug.WriteLine($"{ex.Source}: Ошибка при загрузке данных: {ex.Message}");
+            //    MessageBox.Show("Не удалось получить данные из базы данных.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
+            throw new NotImplementedException("Метод LoadTableAsync не реализован.");
         }
 
         #endregion

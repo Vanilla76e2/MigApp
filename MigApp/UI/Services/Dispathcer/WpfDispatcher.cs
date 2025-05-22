@@ -19,7 +19,7 @@ namespace MigApp.UI.Services.Dispathcer
         /// <exception cref="ArgumentNullException">Вызывается, если <paramref name="dispatcher"/> равен null.</exception>
         public WpfDispatcher(Dispatcher dispatcher, IAppLogger logger)
         {
-            _dispatcher = dispatcher;
+            _dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
             _logger = logger;
         }
 
@@ -46,12 +46,12 @@ namespace MigApp.UI.Services.Dispathcer
             try
             {
                 Task _d = _dispatcher.InvokeAsync(action).Task;
-                _logger.LogDebug("Асинхронное действие успешно выполнено в UI-потоке");
+                _logger.LogDebug("Асинхронное действие отправлено в UI-поток");
                 return _d;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Ошибка при выполнении асинхронного действия в UI-потоке");
+                _logger.LogError(ex, "Ошибка при отправке асинхронного действия в UI-поток");
                 throw;
             }
         }
@@ -59,11 +59,11 @@ namespace MigApp.UI.Services.Dispathcer
         /// <inheritdoc/>
         public Task<T> InvokeAsync<T>(Func<T> func)
         {
-            //_logger.LogDebug($"Асинхронный вызов функции в UI-потоке (IsOnUiThread: {IsOnUiThread()})");
+            _logger.LogDebug($"Асинхронный вызов функции в UI-потоке (IsOnUiThread: {IsOnUiThread()})");
             try
             {
                 var task = _dispatcher.InvokeAsync(func).Task;
-                //_logger.LogDebug("Асинхронная функция отправлена в UI-поток");
+                _logger.LogDebug("Асинхронная функция отправлена в UI-поток");
                 return task;
             }
             catch (Exception ex)
