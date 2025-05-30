@@ -57,7 +57,7 @@ public class DatabaseConnectionTester : IDatabaseConnectionTester
                     await CheckConnectionStep(context, "Тестовый запрос", () => TestQuery(context));
             if (result)
             {
-                _securityService.SaveDatabaseSettingsToVault(databaseConnectionParameters);
+                await _securityService.SaveDatabaseSettingsToVaultAsync(databaseConnectionParameters);
                 _provider.ResetContext();
                 _logger.LogInformation("Подключение к базе данных успешно установлено");
             }

@@ -2,7 +2,7 @@
 
 namespace MigApp.Application.Services.Authorization
 {
-    internal interface IAuthorizationStrategy
+    public interface IAuthorizationStrategy
     {
         Task<AuthResult> AuthorizationAsync(string username, string password);
     }

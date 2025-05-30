@@ -1,4 +1,5 @@
-﻿using MigApp.UI.Base;
+﻿using MigApp.Core.Comparers;
+using MigApp.UI.Base;
 using System.Data;
 using System.Net;
 using System.Windows.Input;

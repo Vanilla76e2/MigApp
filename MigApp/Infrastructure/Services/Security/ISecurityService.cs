@@ -18,7 +18,7 @@ namespace MigApp.Infrastructure.Services.Security
         /// <exception cref="SecurityException">
         /// Возникает при ошибке сохранения данных в защищенное хранилище.
         /// </exception>
-        void SaveDatabaseSettingsToVault(DatabaseConnectionParameters DatabaseConnectionParameters);
+        Task SaveDatabaseSettingsToVaultAsync(DatabaseConnectionParameters DatabaseConnectionParameters);
 
         /// <summary>
         /// Сохраняет параметры учётные данные пользователя в защищенное хранилище.
@@ -31,7 +31,7 @@ namespace MigApp.Infrastructure.Services.Security
         /// <exception cref="SecurityException">
         /// Возникает при ошибке сохранения данных в защищенное хранилище.
         /// </exception>
-        void SaveUserCredentialsToVault(UserCredentials userCredentials);
+        Task SaveUserCredentialsToVaultAsync(UserCredentials userCredentials);
 
         /// <summary>
         /// Загружает сохраненные параметры подключения из защищенного хранилища.
@@ -39,7 +39,7 @@ namespace MigApp.Infrastructure.Services.Security
         /// <returns>
         /// <see cref="DatabaseConnectionParameters"/>.
         /// </returns>
-        DatabaseConnectionParameters LoadDatabaseSettingsFromVault();
+        Task<DatabaseConnectionParameters> LoadDatabaseSettingsFromVaultAsync();
 
         /// <summary>
         /// Загружает сохраненные учётные данные из защищенного хранилища.
@@ -47,7 +47,7 @@ namespace MigApp.Infrastructure.Services.Security
         /// <returns>
         /// <see cref="UserCredentials"/>.
         /// </returns>
-        UserCredentials LoadUserCredentialsFromVault();
+        Task<UserCredentials> LoadUserCredentialsFromVaultAsync();
 
         /// <summary>
         /// Вычисляет хеш указанного текста с использованием криптографического алгоритма.

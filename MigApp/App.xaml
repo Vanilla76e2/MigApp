@@ -13,21 +13,21 @@
                 <materialDesign:BundledTheme BaseTheme="Dark" PrimaryColor="Orange" SecondaryColor="Lime" />
 
                 <!-- 2. Мои цветовые ресурсы -->
-                <ResourceDictionary Source="Styles/Colors.xaml"/>
+                <ResourceDictionary Source="/UI/Styles/Colors.xaml"/>
 
                 <!-- 3. Material Design компоненты (должны идти после моих цветов) -->
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml"/>
                 <!-- Другие необходимые MD компоненты -->
 
                 <!-- 4. Ваши базовые стили -->
-                <ResourceDictionary Source="Styles/CoreStyles.xaml"/>
-                <ResourceDictionary Source="/Images/MigAppLogo.xaml"/>
-                <ResourceDictionary Source="Styles/ControlStyles.xaml"/>
-                <ResourceDictionary Source="Styles/WindowStyles.xaml"/>
+                <ResourceDictionary Source="/UI/Styles/CoreStyles.xaml"/>
+                <ResourceDictionary Source="Assets/Images/MigAppLogo.xaml"/>
+                <ResourceDictionary Source="/UI/Styles/ControlStyles.xaml"/>
+                <ResourceDictionary Source="/UI/Styles/WindowStyles.xaml"/>
 
                 <!-- 5. Уникальные стили окон -->
-                <ResourceDictionary Source="Styles/LoginWindowStyles.xaml"/>
-                <ResourceDictionary Source="Styles/MainWindowStyles.xaml"/>
+                <ResourceDictionary Source="/UI/Styles/LoginWindowStyles.xaml"/>
+                <ResourceDictionary Source="/UI/Styles/MainWindowStyles.xaml"/>
 
                 <!-- 6. Активная тема (имеет наивысший приоритет) -->
                 <!--<ResourceDictionary Source="Styles/DarkTheme.xaml"/>-->

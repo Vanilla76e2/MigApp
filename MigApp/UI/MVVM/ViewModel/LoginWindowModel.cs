@@ -1,11 +1,12 @@
 ﻿using MaterialDesignThemes.Wpf;
+using MigApp.Application.Services.Authorization;
+using MigApp.Application.Services.StartupInitialize;
 using MigApp.Core.Models;
 using MigApp.Core.Security;
 using MigApp.Demo.Services.DemoModeManager;
 using MigApp.Infrastructure.Services.AppLogger;
-using MigApp.Infrastructure.Services.AppUpdate;
-using MigApp.Infrastructure.Services.DatabaseService;
-using MigApp.Infrastructure.Services.Security;
+using MigApp.Infrastructure.Services.ConnectionSettingsManager;
+using MigApp.Infrastructure.Services.CredentialsManager;
 using MigApp.Properties;
 using MigApp.UI.Base;
 using MigApp.UI.Services.Navigation;
@@ -23,11 +24,13 @@ namespace MigApp.UI.MVVM.ViewModel
     {
         // Сервисы
         private readonly IAppLogger _logger;
-        private readonly IDatabaseConnectionTester _databaseService;
         private readonly INavigationService _navigationService;
-        private readonly IAppUpdateService _appUpdateService;
-        private readonly IUINotificationService _ui;
+        private readonly IStartupInitializer _initalizer;
+        private readonly ICredentialsManager _userManager;
+        private readonly IConnectionSettingsManager _connectionManager;
         private readonly IDemoModeService _demoModeService;
+        private readonly IAuthorizationStrategy _auth;
+        private readonly IUINotificationService _ui;
 
         // Команды
         public RelayCommand LoginCommand { get; set; }
@@ -234,18 +237,21 @@ namespace MigApp.UI.MVVM.ViewModel
         /// <param name="authenticationService">Сервис аутентификации.</param>
         /// <param name="logger">Сервис логирования.</param>
         /// <param name="versionService">Сервис проверки версии приложения.</param>
-        public LoginWindowModel(IAppLogger logger, 
-                                ISecurityService security, 
-                                IDatabaseConnectionTester database, 
-                                IAppUpdateService update, 
+        public LoginWindowModel(IAppLogger logger,  
+                                IConnectionSettingsManager connectionManager, 
+                                ICredentialsManager userManager,
+                                IStartupInitializer initializer, 
                                 INavigationService navigation, 
-                                IUINotificationService ui, 
+                                IUINotificationService ui,
+                                IAuthorizationStrategy auth,
                                 IDemoModeService demoMode)
         {
             _logger = logger;
-            _databaseService = database;
+            _auth = auth;
+            _userManager = userManager;
+            _connectionManager = connectionManager;
             _navigationService = navigation;
-            _appUpdateService = update;
+            _initalizer = initializer;
             _ui = ui;
             _demoModeService = demoMode;
 
@@ -265,8 +271,8 @@ namespace MigApp.UI.MVVM.ViewModel
         {
             if (isDemoModeEnabled)
             {
-                Username = "DemoUser";
-                UserPassword = PasswordHelper.ConvertPasswordToSecureString("DemoPassword");
+                Username = AppConstants.DemoMode.DefaultUsername;
+                UserPassword = PasswordHelper.ConvertPasswordToSecureString(AppConstants.DemoMode.DefaultPassword);
                 IsPasswordRemembered = true;
             }
             else
@@ -285,18 +291,11 @@ namespace MigApp.UI.MVVM.ViewModel
             IsLoading = true;
             try
             {
-                await _appUpdateService.UpdateApplicationAsync();
-
-                SetDatabaseConnectionParameters();
-                SetUsercredentials();
-
-                await GetDatabaseConnectionAsync();
-                if (!IsConnectionCorrect)
-                {
-                    IsSettingsOn = true;
-                }
-
-                await Task.CompletedTask;
+                var initData = await _initalizer.InitializeAsync();
+                SetDatabaseConnectionParameters(initData.Connection);
+                SetUserCredentials(initData.Credentials);
+                IsConnectionCorrect = initData.IsConnectionSuccessful;
+                _isSettingsVisible = !IsConnectionCorrect;
             }
             catch (Exception ex)
             {
@@ -308,107 +307,80 @@ namespace MigApp.UI.MVVM.ViewModel
         }
 
         /// <summary>
-        /// Устанавливает параметры подключения к базе данных, загруженные из защищенного хранилища.
+        /// Устанавливает параметры подключения к базе данных.
         /// </summary>
-        private void SetDatabaseConnectionParameters()
+        private void SetDatabaseConnectionParameters(DatabaseConnectionParameters parameters)
         {
-            //_logger.LogDebug("Начата загрузка параметрова подключения");
-            //try
-            //{
-            //    var loadedData = _securityService.LoadDatabaseSettingsFromVault();
-            //    DatabaseConnectionParameters connectionParameters = loadedData;
-            //    DBServer = connectionParameters.Host ?? string.Empty;
-            //    DBPort = connectionParameters.Port ?? string.Empty;
-            //    DBName = connectionParameters.Database ?? string.Empty;
-            //    DBUser = connectionParameters.Username ?? string.Empty;
-            //    DBPassword = PasswordHelper.ConvertPasswordToSecureString(connectionParameters.Password);
-            //}
-            //catch (Exception ex)
-            //{
-            //    _logger.LogError(ex, "Произошла ошибка при попытке загрузить параметры подключения");
-            //}
+            DBServer = parameters.Host ?? string.Empty;
+            DBPort = parameters.Port ?? string.Empty;
+            DBName = parameters.Database ?? string.Empty;
+            DBUser = parameters.Username ?? string.Empty;
+            DBPassword = PasswordHelper.ConvertPasswordToSecureString(parameters.Password) ?? new SecureString();
+        }
+
+        private DatabaseConnectionParameters GetDatabaseConnectionParameters()
+        {
+            return new DatabaseConnectionParameters
+            (
+                DBServer.Trim(),
+                DBPort.Trim(),
+                DBName.Trim(),
+                DBUser.Trim(),
+                PasswordHelper.ConvertPasswordToString(DBPassword)
+            );
         }
 
         /// <summary>
-        /// Устанавливает учетные данные пользователя, загруженные из защищенного хранилища.
+        /// Устанавливает учетные данные пользователя.
         /// </summary>
-        private void SetUsercredentials()
+        private void SetUserCredentials(UserCredentials credentials)
         {
-            //var loadedData = _securityService.LoadUserCredentialsFromVault();
-            //bool userRemembered = Settings.Default.userRemembered;
-            //_logger.LogDebug($"Запомнить прользователя установлено на: {userRemembered}");
-            //if (userRemembered)
-            //{
-            //    UserCredentials userAuthData = loadedData;
-            //    Username = userAuthData.Username ?? string.Empty;
-            //    UserPassword = PasswordHelper.ConvertPasswordToSecureString(userAuthData.Password);
-            //    IsPasswordRemembered = true;
-            //    _logger.LogDebug("Учётные данные пользователя восстановлены");
-            //}
-            //else
-            //{
-            //    Username = string.Empty;
-            //    UserPassword = new SecureString();
-            //    _logger.LogDebug("Учётные данные пользователя по умолчанию");
-            //}
+            Username = credentials.Username ?? string.Empty;
+            UserPassword = PasswordHelper.ConvertPasswordToSecureString(credentials.Password) ?? new SecureString();
         }
 
-        /// <summary>
-        /// Асинхронно проверяет подключение к базе данных с использованием текущих параметров подключения.
-        /// </summary>
-        /// <returns>Задача, представляющая асинхронную операцию проверки подключения.</returns>
-        private async Task GetDatabaseConnectionAsync()
+        private UserCredentials GetUserCredetials()
         {
-            try
+            return new UserCredentials
             {
-                var parameters = new DatabaseConnectionParameters(
-                    DBServer.Trim(),
-                    DBPort.Trim(),
-                    DBName.Trim(),
-                    DBUser.Trim(),
-                    PasswordHelper.ConvertPasswordToString(DBPassword));
-
-                IsConnectionCorrect = await _databaseService.TestConnectionAsync(parameters);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Ошибка при проверке подключения");
-                IsConnectionCorrect = false;
-            }
+                Username = Username,
+                Password = PasswordHelper.ConvertPasswordToString(UserPassword)
+            };
         }
 
         /// <summary>
         /// Асинхронно авторизует пользователя с использованием введенных учетных данных.
         /// </summary>
         /// <returns>Задача, представляющая асинхронную операцию авторизации.</returns>
-        private Task AuthorizeUserAsync()
+        private async Task AuthorizeUserAsync()
         {
-            //try
-            //{
-            //    AuthResult authResult = await _authService.AuthorizeUserAsync(Username, GetPasswordAsString());
+            try
+            {
+                AuthResult authResult = await _auth.AuthorizationAsync(Username, PasswordHelper.ConvertPasswordToString(UserPassword));
 
-            //    if (authResult.Message != null && !authResult.IsAuthenticated)
-            //    {
-            //        await _ui.ShowErrorAsync(authResult.Message);
-            //        _logger.LogError(authResult.Message);
-            //    }
-            //    else if (authResult.IsAuthenticated)
-            //    {
-            //        _logger.LogInformation($"Выполнен успешный вход пользователя: {Username}");
-            //        if (IsPasswordRemembered)
-            //        {
-            //            SaveUserCredentials();
-            //        }
-            //        Settings.Default.userRemembered = IsPasswordRemembered;
-            //        Settings.Default.Save();
-            //        await _navigationService.NavigateToMainWindow();
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    _logger.LogError(ex, "Ошибка при авторизации");
-            //}
-            throw new NotImplementedException("Авторизация не реализована");
+                if (authResult.Message != null && !authResult.IsAuthenticated)
+                {
+                    await _ui.ShowErrorAsync(authResult.Message);
+                    _logger.LogError(authResult.Message);
+                }
+                else if (authResult.IsAuthenticated)
+                {
+                    _logger.LogInformation($"Выполнен успешный вход пользователя: {Username}");
+                    if (IsPasswordRemembered)
+                    {
+                        await _userManager.SaveUserCredentialsAsync(GetUserCredetials());
+                    }
+
+                    Settings.Default.userRemembered = IsPasswordRemembered;
+                    Settings.Default.Save();
+
+                    await _navigationService.NavigateToMainWindow();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Ошибка при авторизации");
+            }
         }
 
         /// <summary>
@@ -417,59 +389,17 @@ namespace MigApp.UI.MVVM.ViewModel
         private async Task CommitSettingsChangings()
         {
             IsLoading = true;
-            await GetDatabaseConnectionAsync();
-            if (IsConnectionCorrect)
-            {
-                //SaveSettings();
-                IsSettingsOn = false;
-            }
-            IsLoading = false;
-        }
-
-        /// <summary>
-        /// Сохраняет учетные данные пользователя в защищенное хранилище.
-        /// </summary>
-        private void SaveUserCredentials()
-        {
             try
             {
-                //UserCredentials userCredentials = new UserCredentials
-                //{
-                //    Username = Username,
-                //    Password = PasswordHelper.ConvertPasswordToString(UserPassword)
-                //};
-                //_securityService.SaveUserCredentialsToVault(userCredentials);
-                //_logger.LogInformation("Учётные данные успешно сохранены в хранилище");
+                _isConnectionCorrect = await _connectionManager.TestAndSaveNewConnectionAsync(GetDatabaseConnectionParameters());
+                _isSettingsVisible = !_isConnectionCorrect;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Не удалось сохранить учётные данные в хранилище");
+                _logger.LogError(ex, "Ошибка при применении настроек подключения к базе данных");
             }
-
-        }
-
-        /// <summary>
-        /// Сохраняет параметры подключения к базе данных в защищенное хранилище.
-        /// </summary>
-        private void SaveSettings()
-        {
-            try
-            {
-                DatabaseConnectionParameters connectionParameters = new DatabaseConnectionParameters
-                (
-                    DBServer,
-                    DBPort,
-                    DBName,
-                    DBUser,
-                    PasswordHelper.ConvertPasswordToString(DBPassword)
-                );
-                //_securityService.SaveDatabaseSettingsToVault(connectionParameters);
-                //_logger.LogInformation("Параметры подключения к базе данных успешно сохранены в хранилище");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Не удалось сохнать параметры подключения к базе данных в хранилище");
-            }
+            finally
+            { IsLoading = false; }
         }
 
         private void ShowGuide()
@@ -493,28 +423,6 @@ namespace MigApp.UI.MVVM.ViewModel
 
             _dbPassword?.Dispose();
             _dbPassword = new SecureString();
-        }
-
-        public bool HasPassword()
-        {
-            return _userPassword != null && _userPassword.Length > 0;
-        }
-
-        public string GetPasswordAsString()
-        {
-            if (!HasPassword()) return string.Empty;
-
-            nint ptr = nint.Zero;
-            try
-            {
-                ptr = Marshal.SecureStringToBSTR(_userPassword);
-                return Marshal.PtrToStringBSTR(ptr) ?? string.Empty;
-            }
-            finally
-            {
-                if (ptr != nint.Zero)
-                    Marshal.ZeroFreeBSTR(ptr);
-            }
         }
     }
 }

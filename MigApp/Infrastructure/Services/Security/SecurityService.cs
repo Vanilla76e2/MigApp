@@ -13,7 +13,7 @@ namespace MigApp.Infrastructure.Services.Security
             _logger = logger;
         }
 
-        public void SaveDatabaseSettingsToVault(DatabaseConnectionParameters DatabaseConnectionParameters)
+        public async Task SaveDatabaseSettingsToVaultAsync(DatabaseConnectionParameters DatabaseConnectionParameters)
         {
             _logger.LogInformation("Сохранение параметров подключения к БД в хранилище");
             try
@@ -34,10 +34,15 @@ namespace MigApp.Infrastructure.Services.Security
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Ошибка при сохранении параметров подключения");
+                throw;
+            }
+            finally
+            {
+                await Task.CompletedTask;
             }
         }
 
-        public void SaveUserCredentialsToVault(UserCredentials userCredentials)
+        public async Task SaveUserCredentialsToVaultAsync(UserCredentials userCredentials)
         {
             _logger.LogInformation("Сохранение учётных данных в хранилище");
             try
@@ -55,10 +60,15 @@ namespace MigApp.Infrastructure.Services.Security
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Ошибка при сохранении параметров подключения");
+                throw;
+            }
+            finally
+            {
+                await Task.CompletedTask;
             }
         }
 
-        public DatabaseConnectionParameters LoadDatabaseSettingsFromVault()
+        public async Task<DatabaseConnectionParameters> LoadDatabaseSettingsFromVaultAsync()
         {
             _logger.LogInformation("Загрузка параметров подключения из хранилища");
             try
@@ -83,9 +93,13 @@ namespace MigApp.Infrastructure.Services.Security
                 _logger.LogError(ex, "Ошибка при получении параметров подключения");
                 throw;
             }
+            finally
+            {
+                await Task.CompletedTask;
+            }
         }
 
-        public UserCredentials LoadUserCredentialsFromVault()
+        public async Task<UserCredentials> LoadUserCredentialsFromVaultAsync()
         {
             _logger.LogInformation("Загрузка учётных данных из хранилища");
 
@@ -107,6 +121,10 @@ namespace MigApp.Infrastructure.Services.Security
             {
                 _logger.LogError(ex, "Ошибка при получении учётных данных");
                 throw;
+            }
+            finally
+            {
+                await Task.CompletedTask;
             }
         }
 

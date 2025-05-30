@@ -4,6 +4,7 @@ using MigApp.Infrastructure.Services.Installer;
 using MigApp.Infrastructure.Services.Internet;
 using MigApp.Infrastructure.Services.Version;
 using MigApp.UI.Services.UINotification;
+using System;
 
 namespace MigApp.Infrastructure.Services.AppUpdate
 {
@@ -67,13 +68,13 @@ namespace MigApp.Infrastructure.Services.AppUpdate
             ArgumentNullException.ThrowIfNull(releaseInfo, nameof(releaseInfo));
             _logger.LogDebug($"Текущая версия={_versionService.GetCurrentVersion()}, новая версия={releaseInfo.Version}");
 
-            if (!Version.TryParse(_versionService.GetCurrentVersion(), out var currentVersion))
+            if (!System.Version.TryParse(_versionService.GetCurrentVersion(), out var currentVersion))
             {
                 _logger.LogWarning($"Не удалось разобрать текущую версию: {_versionService.GetCurrentVersion()}");
                 return false;
             }
 
-            if (!Version.TryParse(releaseInfo.Version, out var newVersion))
+            if (!System.Version.TryParse(releaseInfo.Version, out var newVersion))
             {
                 _logger.LogWarning($"Не удалось разобрать новую версию: {releaseInfo.Version}");
                 return false;

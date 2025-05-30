@@ -10,7 +10,7 @@ using MigApp.UI.Services.AuthNotifier;
 
 namespace MigApp.Application.Services.Authorization
 {
-    internal class RealAuthorizationStrategy : IAuthorizationStrategy
+    public class RealAuthorizationStrategy : IAuthorizationStrategy
     {
         private readonly IUsersProfilesRepository _userRepo;
         private readonly ISessionBuilder _sessionBuilder;

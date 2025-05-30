@@ -60,7 +60,7 @@ namespace MigApp.Infrastructure.Services.Installer
                 }
 
                 _logger.LogInformation($"Процесс установки успешно запущен (PID: {process.Id})");
-                Application.Current.Shutdown();
+                System.Windows.Application.Current.Shutdown();
             }
             catch (ArgumentNullException ex)
             {

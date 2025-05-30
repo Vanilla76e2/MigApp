@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using System.Resources;
 using System.Windows;
 
 [assembly: InternalsVisibleTo("MigApp.Tests")]

@@ -22,7 +22,6 @@ namespace MigApp.MVVM.View
             InitializeComponent();
             MaxWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
             MaxHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
-            DataContext = new MainWindowModel(serviceProvider, serviceProvider.GetRequiredService<INavigationService>());
         }
 
         private void CustomUI_CloseMenu(object sender, MouseButtonEventArgs e)

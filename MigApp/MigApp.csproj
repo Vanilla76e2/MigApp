@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>Images\MigAppIcon.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\Images\MigAppIcon.ico</ApplicationIcon>
     <PlatformTarget>x64</PlatformTarget>
     <NeutralLanguage>ru</NeutralLanguage>
     <AssemblyVersion>2.0.0.12</AssemblyVersion>
@@ -87,11 +87,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Assets\Localization\Strings.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Strings.resx</DependentUpon>
-    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -120,10 +115,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Assets\Localization\Strings.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

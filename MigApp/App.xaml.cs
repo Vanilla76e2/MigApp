@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using MigApp.Application.Services.Authorization;
 using MigApp.Application.Services.PasswodMange;
 using MigApp.Application.Services.SessionBuilder;
 using MigApp.Application.Services.StartupInitialize;
@@ -10,6 +11,8 @@ using MigApp.Infrastructure.Repository.Common;
 using MigApp.Infrastructure.Repository.UsersProfiles;
 using MigApp.Infrastructure.Services.AppLogger;
 using MigApp.Infrastructure.Services.AppUpdate;
+using MigApp.Infrastructure.Services.ConnectionSettingsManager;
+using MigApp.Infrastructure.Services.CredentialsManager;
 using MigApp.Infrastructure.Services.DatabaseContextProvider;
 using MigApp.Infrastructure.Services.DatabaseService;
 using MigApp.Infrastructure.Services.DnsResolver;
@@ -24,6 +27,7 @@ using MigApp.UI.MVVM.ViewModel.Pages;
 using MigApp.UI.Services.Dispathcer;
 using MigApp.UI.Services.Navigation;
 using MigApp.UI.Services.UINotification;
+using System.Net;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -129,6 +133,9 @@ public partial class App : System.Windows.Application
         services.AddScoped<IPasswordVerifier, PasswordVerifier>();
         services.AddScoped<ISessionBuilder, SessionBuilder>();
         services.AddScoped<IStartupInitializer, StartupInitializer>();
+        services.AddScoped<IConnectionSettingsManager, ConnectionSettingsManager>();
+        services.AddScoped<ICredentialsManager, CredentialsManager>();
+        services.AddScoped<IAuthorizationStrategy, RealAuthorizationStrategy>();
 
         services.AddTransient<ISecurityService, SecurityService>();
         services.AddTransient<IDispatcher, WpfDispatcher>();
