@@ -1,18 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MigApp.Infrastructure.Data;
 using MigApp.Infrastructure.Services.AppLogger;
+using MigApp.Infrastructure.Services.DatabaseContextProvider;
 using System.Linq.Expressions;
 
 namespace MigApp.Infrastructure.Repository.Common
 {
     public class EfRepository<T> : IDatabaseRepository<T> where T : class
     {
-        private readonly IDbContextFactory<MigDatabaseContext> _contextFactory;
+        private readonly IDatabaseContextProvider _contextProvider;
         private readonly IAppLogger _logger;
 
-        public EfRepository(IDbContextFactory<MigDatabaseContext> contextFactory, IAppLogger logger)
+        public EfRepository(IDatabaseContextProvider contextProvider, IAppLogger logger)
         {
-            _contextFactory = contextFactory;
+            _contextProvider = contextProvider;
             _logger = logger;
         }
 
@@ -20,7 +21,7 @@ namespace MigApp.Infrastructure.Repository.Common
         {
             try
             {
-                await using var context = await _contextFactory.CreateDbContextAsync();
+                await using var context = await _contextProvider.GetDbContextAsync();
                 await context.Set<T>().AddAsync(entity);
                 await context.SaveChangesAsync();
                 _logger.LogDebug($"Добавлена сущность типа {typeof(T).Name}");
@@ -36,7 +37,7 @@ namespace MigApp.Infrastructure.Repository.Common
         {
             try
             {
-                await using var context = await _contextFactory.CreateDbContextAsync();
+                await using var context = await _contextProvider.GetDbContextAsync();
                 context.Set<T>().Remove(entity);
                 await context.SaveChangesAsync();
                 _logger.LogDebug($"Удалена сущность типа {typeof(T).Name}"); 
@@ -50,19 +51,19 @@ namespace MigApp.Infrastructure.Repository.Common
 
         public async Task<T?> FindAsync(Expression<Func<T, bool>> predicate)
         {
-            await using var context = await _contextFactory.CreateDbContextAsync();
+            await using var context = await _contextProvider.GetDbContextAsync();
             return await context.Set<T>().FirstOrDefaultAsync(predicate);
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            await using var context = await _contextFactory.CreateDbContextAsync();
+            await using var context = await _contextProvider.GetDbContextAsync();
             return await context.Set<T>().ToListAsync();
         }
 
         public async Task<T?> GetByIdAsync(int id)
         {
-            await using var context = await _contextFactory.CreateDbContextAsync();
+            await using var context = await _contextProvider.GetDbContextAsync();
             return await context.Set<T>().FindAsync(id);
         }
 
@@ -70,7 +71,7 @@ namespace MigApp.Infrastructure.Repository.Common
         {
             try
             {
-                await using var context = await _contextFactory.CreateDbContextAsync();
+                await using var context = await _contextProvider.GetDbContextAsync();
                 context.Set<T>().Update(entity);
                 await context.SaveChangesAsync();
                 _logger.LogDebug($"Изменена сущность типа {typeof(T).Name}");

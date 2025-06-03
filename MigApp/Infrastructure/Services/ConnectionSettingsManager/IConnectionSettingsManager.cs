@@ -7,7 +7,7 @@ namespace MigApp.Infrastructure.Services.ConnectionSettingsManager
         Task<bool> TestAndSaveNewConnectionAsync(DatabaseConnectionParameters parameters);
         Task<bool> TestNewConnectionAsync(DatabaseConnectionParameters parameters);
 
-        Task SaveParametersAsync(DatabaseConnectionParameters parameters);
-        Task<DatabaseConnectionParameters> LoadParametersAsync();
+        void SaveParametersAsync(DatabaseConnectionParameters parameters);
+        DatabaseConnectionParameters LoadParametersAsync();
     }
 }

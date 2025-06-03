@@ -6,6 +6,7 @@ using MigApp.Infrastructure.Data.Entities;
 using MigApp.Core.Models;
 using MigApp.Core.Enums;
 using MigApp.UI.Services.AuthNotifier;
+using MigApp.Infrastructure.Services.DatabaseContextProvider;
 
 namespace MigApp.Application.Services.PasswodMange
 {
@@ -18,7 +19,6 @@ namespace MigApp.Application.Services.PasswodMange
 
         public PasswordVerifier(IAuthNotifier notifier,
                                 IAppLogger logger,
-                                IDbContextFactory<MigDatabaseContext> dbContextFactory, 
                                 ISecurityService securityService,
                                 IPasswordChanger passwordChanger)
         {

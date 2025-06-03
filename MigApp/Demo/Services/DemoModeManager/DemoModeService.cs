@@ -1,6 +1,5 @@
-﻿using MigApp.Infrastructure.Services.AppLogger;
-using MigApp.UI.Base;
-using System.Windows.Input;
+﻿using MigApp.Core.Session;
+using MigApp.Infrastructure.Services.AppLogger;
 
 namespace MigApp.Demo.Services.DemoModeManager
 {
@@ -22,11 +21,6 @@ namespace MigApp.Demo.Services.DemoModeManager
 
             DemoModeChanged?.Invoke(this, IsDemoModeEnabled);
             _logger.LogInformation($"Демонстрационный режим был {(IsDemoModeEnabled ? "включен" : "отключен")}");
-        }
-
-        public string GetUserDisplayName()
-        {
-            return IsDemoModeEnabled ? "Demo Mode" : "UserName";
         }
     }
 }

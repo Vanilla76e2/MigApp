@@ -2,7 +2,6 @@
 using MigApp.Application.Services.Authorization;
 using MigApp.Application.Services.StartupInitialize;
 using MigApp.Core.Models;
-using MigApp.Core.Security;
 using MigApp.Demo.Services.DemoModeManager;
 using MigApp.Infrastructure.Services.AppLogger;
 using MigApp.Infrastructure.Services.ConnectionSettingsManager;
@@ -11,7 +10,6 @@ using MigApp.Properties;
 using MigApp.UI.Base;
 using MigApp.UI.Services.Navigation;
 using MigApp.UI.Services.UINotification;
-using System.Runtime.InteropServices;
 using System.Security;
 using System.Windows.Input;
 
@@ -101,51 +99,11 @@ namespace MigApp.UI.MVVM.ViewModel
         private SecureString _userPassword = new SecureString();
         public SecureString UserPassword
         {
-            get
-            {
-                var secureCopy = new SecureString();
-                nint ptr = nint.Zero;
-                try
-                {
-                    ptr = Marshal.SecureStringToBSTR(_userPassword);
-                    string plainText = Marshal.PtrToStringBSTR(ptr);
-                    foreach (char c in plainText ?? "")
-                    {
-                        secureCopy.AppendChar(c);
-                    }
-                }
-                finally
-                {
-                    if (ptr != nint.Zero)
-                        Marshal.ZeroFreeBSTR(ptr);
-                }
-                secureCopy.MakeReadOnly();
-                return secureCopy;
-            }
+            get => _userPassword.Copy();
             set
             {
                 _userPassword?.Dispose();
-                _userPassword = new SecureString();
-
-                if (value != null && value.Length > 0)
-                {
-                    nint ptr = nint.Zero;
-                    try
-                    {
-                        ptr = Marshal.SecureStringToBSTR(value);
-                        string plainText = Marshal.PtrToStringBSTR(ptr);
-                        foreach (char c in plainText ?? "")
-                        {
-                            _userPassword.AppendChar(c);
-                        }
-                    }
-                    finally
-                    {
-                        if (ptr != nint.Zero)
-                            Marshal.ZeroFreeBSTR(ptr);
-                    }
-                }
-
+                _userPassword = value?.Copy() ?? new SecureString();
                 _userPassword.MakeReadOnly();
                 OnPropertyChanged();
             }
@@ -208,23 +166,14 @@ namespace MigApp.UI.MVVM.ViewModel
         }
 
         private SecureString _dbPassword { get; set; } = new SecureString();
-        private bool _dbPasswordInitialized;
         public SecureString DBPassword
         {
-            get
-            {
-                if (!_dbPasswordInitialized)
-                {
-                    _dbPassword = new SecureString();
-                    _dbPasswordInitialized = true;
-                }
-                return _dbPassword.Copy();
-            }
+            get => _dbPassword.Copy();
             set
             {
                 _dbPassword?.Dispose();
                 _dbPassword = value?.Copy() ?? new SecureString();
-                _dbPasswordInitialized = true;
+                _dbPassword.MakeReadOnly();
                 OnPropertyChanged();
             }
         }
@@ -261,10 +210,8 @@ namespace MigApp.UI.MVVM.ViewModel
             CommitSettingsCommand = new RelayCommand(async o => await CommitSettingsChangings(), o => true);
             ToggleSettingsCommand = new RelayCommand(o => ToggleSettings(), o => true);
             ShowGuideCommand = new RelayCommand(o => ShowGuide(), o => true);
-            ToggleDemoModeCommand = new RelayCommand(_ => _demoModeService.ToggleDemoMode(), _ => true);
+            ToggleDemoModeCommand = new RelayCommand(o => _demoModeService.ToggleDemoMode(), o => true);
             SnackbarMessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
-
-            Task.Run(async () => { await InitializeAsync(); });
         }
 
         private void OnDemoModeChanged(object? sender, bool isDemoModeEnabled)
@@ -286,7 +233,7 @@ namespace MigApp.UI.MVVM.ViewModel
         /// <summary>
         /// Инициализирует асинхронные процессы, такие как обновление приложения и установка параметров подключения.
         /// </summary>
-        private async Task InitializeAsync()
+        public async Task InitializeAsync()
         {
             IsLoading = true;
             try
@@ -295,7 +242,7 @@ namespace MigApp.UI.MVVM.ViewModel
                 SetDatabaseConnectionParameters(initData.Connection);
                 SetUserCredentials(initData.Credentials);
                 IsConnectionCorrect = initData.IsConnectionSuccessful;
-                _isSettingsVisible = !IsConnectionCorrect;
+                IsSettingsOn = !IsConnectionCorrect;
             }
             catch (Exception ex)
             {
@@ -318,6 +265,9 @@ namespace MigApp.UI.MVVM.ViewModel
             DBPassword = PasswordHelper.ConvertPasswordToSecureString(parameters.Password) ?? new SecureString();
         }
 
+        /// <summary>
+        /// Передаёт параметры подключения к базе данных в виде объекта <see cref="DatabaseConnectionParameters"/>.
+        /// </summary>
         private DatabaseConnectionParameters GetDatabaseConnectionParameters()
         {
             return new DatabaseConnectionParameters
@@ -339,6 +289,9 @@ namespace MigApp.UI.MVVM.ViewModel
             UserPassword = PasswordHelper.ConvertPasswordToSecureString(credentials.Password) ?? new SecureString();
         }
 
+        /// <summary>
+        /// Передаёт учетные данные пользователя в виде объекта <see cref="UserCredentials"/>.
+        /// </summary>
         private UserCredentials GetUserCredetials()
         {
             return new UserCredentials
@@ -386,13 +339,16 @@ namespace MigApp.UI.MVVM.ViewModel
         /// <summary>
         /// Асинхронно применяет изменения настроек, проверяя подключение к базе данных и сохраняя параметры при успешном подключении.
         /// </summary>
+        /// <remarks>
+        /// Привязка к комманде <see cref="CommitSettingsCommand"/>.
+        /// </remarks>
         private async Task CommitSettingsChangings()
         {
             IsLoading = true;
             try
             {
                 _isConnectionCorrect = await _connectionManager.TestAndSaveNewConnectionAsync(GetDatabaseConnectionParameters());
-                _isSettingsVisible = !_isConnectionCorrect;
+                IsSettingsOn = !_isConnectionCorrect;
             }
             catch (Exception ex)
             {
@@ -402,20 +358,43 @@ namespace MigApp.UI.MVVM.ViewModel
             { IsLoading = false; }
         }
 
+        /// <summary>
+        /// Открывает руководство пользователя в браузере по умолчанию.
+        /// </summary>
+        /// <remarks>
+        /// Привязка к комманде <see cref="ShowGuideCommand"/>.
+        /// </remarks>
         private void ShowGuide()
         {
-            SnackbarMessageQueue.Enqueue("Тестовое сообщение", "Открыть", () => Process.Start(new ProcessStartInfo
+            try
             {
-                FileName = "https://example.com",
-                UseShellExecute = true
-            }));
+                SnackbarMessageQueue.Enqueue("Тестовое сообщение", "Открыть", () => Process.Start(new ProcessStartInfo
+                {
+                    FileName = "https://example.com",
+                    UseShellExecute = true
+                }));
+            }
+            catch (Exception ex)
+            {
+                _ui.ShowErrorAsync("Не удалось открыть руководство пользователя.\nПроверьте подключение к интернету или наличие браузера.");
+                _logger.LogError(ex, "Ошибка при открытии руководства пользователя");
+            }
         }
 
+        /// <summary>
+        /// Переключает видимость настроек подключения к базе данных.
+        /// </summary>
+        /// <remarks>
+        /// Привязка к комманде <see cref="ToggleSettingsCommand"/>.
+        /// </remarks> 
         private void ToggleSettings()
         {
             IsSettingsOn = !IsSettingsOn;
         }
 
+        /// <summary>
+        /// Освобождает ресурсы, связанные с паролями пользователя и базы данных.
+        /// </summary>
         public void DisposePasswords()
         {
             _userPassword?.Dispose();

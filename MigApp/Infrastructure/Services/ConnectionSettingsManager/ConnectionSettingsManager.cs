@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using MigApp.Core.Models;
 using MigApp.Infrastructure.Services.AppLogger;
-using MigApp.Infrastructure.Services.DatabaseService;
+using MigApp.Infrastructure.Services.ConnectionTester;
+using MigApp.Infrastructure.Services.RegistryService;
 using MigApp.Infrastructure.Services.Security;
 
 namespace MigApp.Infrastructure.Services.ConnectionSettingsManager
@@ -10,24 +11,24 @@ namespace MigApp.Infrastructure.Services.ConnectionSettingsManager
     public class ConnectionSettingsManager : IConnectionSettingsManager
     {
         private readonly IAppLogger _logger;
-        private readonly ISecurityService _securityService;
+        private readonly IRegistryService _regService;
         private readonly IDatabaseConnectionTester _connectionTester;
 
-        public ConnectionSettingsManager(IAppLogger logger, ISecurityService securityService, IDatabaseConnectionTester connectionTester)
+        public ConnectionSettingsManager(IAppLogger logger, IRegistryService regService, IDatabaseConnectionTester connectionTester)
         {
             _logger = logger;
-            _securityService = securityService;
+            _regService = regService;
             _connectionTester = connectionTester;
         }
 
-        public async Task<DatabaseConnectionParameters> LoadParametersAsync()
+        public DatabaseConnectionParameters LoadParametersAsync()
         {
-            return await _securityService.LoadDatabaseSettingsFromVaultAsync();
+            return _regService.LoadDatabaseSettingsFromRegistry();
         }
 
-        public async Task SaveParametersAsync(DatabaseConnectionParameters parameters)
+        public void SaveParametersAsync(DatabaseConnectionParameters parameters)
         {
-            await _securityService.SaveDatabaseSettingsToVaultAsync(parameters);
+            _regService.SaveDatabaseSettingsToRegistry(parameters);
         }
 
         public async Task<bool> TestAndSaveNewConnectionAsync(DatabaseConnectionParameters parameters)
@@ -40,7 +41,7 @@ namespace MigApp.Infrastructure.Services.ConnectionSettingsManager
                 return false;
             }
             _logger.LogInformation("Сохранение настроек подключения к базе данных");
-            await _securityService.SaveDatabaseSettingsToVaultAsync(parameters);
+            _regService.SaveDatabaseSettingsToRegistry(parameters);
             return true;
         }
 

@@ -7,6 +7,5 @@ namespace MigApp.Demo.Services.DemoModeManager
         event EventHandler<bool> DemoModeChanged;
         bool IsDemoModeEnabled { get; }
         void ToggleDemoMode();
-        string GetUserDisplayName();
     }
 }

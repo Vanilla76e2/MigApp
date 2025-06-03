@@ -1,6 +1,6 @@
 ﻿using MigApp.Core.Models;
 using MigApp.Infrastructure.Services.AppLogger;
-using MigApp.Infrastructure.Services.DatabaseService;
+using MigApp.Infrastructure.Services.ConnectionTester;
 
 namespace MigApp.Demo.Services
 {

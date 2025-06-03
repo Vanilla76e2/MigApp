@@ -2,14 +2,15 @@
 using MigApp.Infrastructure.Data;
 using MigApp.Infrastructure.Data.Entities;
 using MigApp.Infrastructure.Services.AppLogger;
+using MigApp.Infrastructure.Services.DatabaseContextProvider;
 namespace MigApp.Infrastructure.Repository.Common
 {
     public class EfUnitOfWork : IUnitOfWork
     {
-        public EfUnitOfWork(IDbContextFactory<MigDatabaseContext> contextFactory, IAppLogger logger)
+        public EfUnitOfWork(IDatabaseContextProvider contextProvider, IAppLogger logger)
         {
-            UsersProfiles = new EfRepository<UsersProfile>(contextFactory, logger);
-            Computers = new EfRepository<Computer>(contextFactory, logger);
+            UsersProfiles = new EfRepository<UsersProfile>(contextProvider, logger);
+            Computers = new EfRepository<Computer>(contextProvider, logger);
         }
 
         public IDatabaseRepository<UsersProfile> UsersProfiles { get; }

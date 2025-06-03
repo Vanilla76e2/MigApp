@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MigApp.Application.Services.PasswordConverter;
 using MigApp.Core.Models;
+using MigApp.Demo;
 using MigApp.Infrastructure.Data;
 using MigApp.Infrastructure.Services.AppLogger;
 using MigApp.Infrastructure.Services.DatabaseContextProvider;
@@ -7,16 +9,16 @@ using MigApp.Infrastructure.Services.Security;
 using MigApp.UI.Services.UINotification;
 using Npgsql;
 
-namespace MigApp.Infrastructure.Services.DatabaseService;
+namespace MigApp.Infrastructure.Services.ConnectionTester;
 
 public class DatabaseConnectionTester : IDatabaseConnectionTester
 {
-    private readonly IDbContextProvider _provider;
+    private readonly IDatabaseContextProvider _provider;
     private readonly ISecurityService _securityService;
     private IAppLogger _logger;
     private IUINotificationService _ui;
 
-    public DatabaseConnectionTester(IAppLogger logger, IUINotificationService ui, IDbContextProvider provider, ISecurityService securityService)
+    public DatabaseConnectionTester(IAppLogger logger, IUINotificationService ui, IDatabaseContextProvider provider, ISecurityService securityService)
     {
         _logger = logger;
         _ui = ui;
@@ -44,12 +46,18 @@ public class DatabaseConnectionTester : IDatabaseConnectionTester
         if (!ValidateParameters(databaseConnectionParameters))
             return false;
 
+        await using var _context = _provider.GetDbContext(databaseConnectionParameters.ToConnectionString());
+        if (_context is DemoDatabaseContext)
+        {
+            _logger.LogDemo("Пропуск проверки подключения к БД в демонстрационном режиме");
+            return true;
+        }
+        var context = _context as MigDatabaseContext ?? throw new InvalidOperationException("Не удалось получить контекст данных");
+
         try
         {
             var connectionString = databaseConnectionParameters.ToConnectionString();
             _logger.LogDebug($"Используется строка подключения: {databaseConnectionParameters.ToSecureConnectionString()}");
-
-            var context = CreateDbContext(connectionString);
 
             bool result = await CheckConnectionStep(context, "Базовое подключение", () => GetConnection(context)) &&
                     await CheckConnectionStep(context, "Существование БД", () => IsDatabaseExist(context, databaseConnectionParameters.Database)) &&
@@ -58,7 +66,6 @@ public class DatabaseConnectionTester : IDatabaseConnectionTester
             if (result)
             {
                 await _securityService.SaveDatabaseSettingsToVaultAsync(databaseConnectionParameters);
-                _provider.ResetContext();
                 _logger.LogInformation("Подключение к базе данных успешно установлено");
             }
             else await _ui.ShowWarningAsync("Не удалось установить соединение с базой данных.");
@@ -170,13 +177,5 @@ public class DatabaseConnectionTester : IDatabaseConnectionTester
             return false;
         }
         return true;
-    }
-
-    private MigDatabaseContext CreateDbContext(string connectionString)
-    {
-        var options = new DbContextOptionsBuilder<MigDatabaseContext>()
-            .UseNpgsql(connectionString)
-            .Options;
-        return new MigDatabaseContext(options);
     }
 }

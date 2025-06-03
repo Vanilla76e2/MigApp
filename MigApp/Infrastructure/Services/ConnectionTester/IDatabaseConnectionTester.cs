@@ -1,6 +1,6 @@
 ﻿using MigApp.Core.Models;
 
-namespace MigApp.Infrastructure.Services.DatabaseService;
+namespace MigApp.Infrastructure.Services.ConnectionTester;
 
 public interface IDatabaseConnectionTester
 {
