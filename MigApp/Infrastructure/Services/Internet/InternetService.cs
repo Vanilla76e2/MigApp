@@ -50,10 +50,12 @@ namespace MigApp.Infrastructure.Services.Internet
 
             try
             {
-                _httpClient.BaseAddress = new Uri(uri);
-                _httpClient.DefaultRequestHeaders.Add(headerName, value);
+                var request = new HttpRequestMessage(HttpMethod.Get, uri);
 
-                var response = await _httpClient.GetAsync("");
+                request.Headers.Clear();
+                request.Headers.Add(headerName, value);
+
+                var response = await _httpClient.SendAsync(request);
                 _logger.LogInformation($"HTTP-запрос к {uri} завершен со статусом {(int)response.StatusCode}");
 
                 response.EnsureSuccessStatusCode();

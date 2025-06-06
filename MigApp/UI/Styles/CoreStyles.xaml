@@ -22,6 +22,7 @@
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
     <Thickness x:Key="ThicknessNone">0</Thickness>
+    <Thickness x:Key="ThicknessEdge">1</Thickness>
     <Thickness x:Key="ThicknessSmall">4</Thickness>
     <Thickness x:Key="ThicknessNormal">8</Thickness>
     <Thickness x:Key="ThicknessLarge">16</Thickness>

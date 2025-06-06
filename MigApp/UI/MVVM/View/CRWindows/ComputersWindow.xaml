@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MigApp.MVVM.View.CRWindows"
-        xmlns:controls="clr-namespace:MigApp.Controls"
+        xmlns:controls="clr-namespace:MigApp.UI.Controls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MigApp - Компьютер" Height="620" Width="950" WindowStyle="None" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">

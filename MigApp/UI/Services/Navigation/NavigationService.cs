@@ -91,30 +91,32 @@ namespace MigApp.UI.Services.Navigation
             try
             {
                 var window = windowFactory(_serviceProvider);
-
                 if (window == null)
                 {
                     throw new InvalidOperationException($"Фабрика вернула null для окна {typeof(TWindow).Name}");
                 }
 
-                _logger.LogInformation($"Окно {typeof(TWindow).Name} успешно создано");
+                // Передача ресурсов из App.xaml
+                window.Resources = System.Windows.Application.Current.Resources;
+                _logger.LogDebug($"Окно {typeof(TWindow).Name} успешно создано");
+
+                // Закрываем старое MainWindow
+                var oldMainWindow = System.Windows.Application.Current.MainWindow;
+                if (oldMainWindow != null && oldMainWindow != window)
+                {
+                    oldMainWindow.Close();
+                    _logger.LogDebug($"Старое окно закрыто");
+                }
 
                 System.Windows.Application.Current.MainWindow = window;
                 window.Show();
-                _logger.LogInformation($"Окно {typeof(TWindow).Name} установлено как главное");
-                Debug.WriteLine($"LoginWindowModel создан: {window.GetHashCode()}");
+                _logger.LogDebug($"Окно {typeof(TWindow).Name} установлено как главное");
 
                 if (postShowAction != null)
                 {
-                    _logger.LogDebug($"Выполнение post-действия для окна.");
                     await postShowAction();
-                    _logger.LogInformation($"Post-действие для окна {typeof(TWindow).Name} выполнено");
+                    _logger.LogDebug($"Post-действие для окна {typeof(TWindow).Name} выполнено");
                 }
-            }
-            catch (InvalidOperationException ex)
-            {
-                _logger.LogError(ex, $"Не удалось создать экземпляр окна {typeof(TWindow).Name}");
-                throw;
             }
             catch (Exception ex)
             {
@@ -128,7 +130,7 @@ namespace MigApp.UI.Services.Navigation
         /// </summary>
         public async Task NavigateToMainWindow()
         {
-            await ShowWindow(sp => new MainWindow(sp), async () => await NavigateTo<FavouriteViewModel>());
+            await ShowWindow(sp => new MainWindow(sp.GetRequiredService<MainWindowModel>()));
         }
 
         /// <summary>

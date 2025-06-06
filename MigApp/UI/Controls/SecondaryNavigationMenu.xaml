@@ -1,0 +1,219 @@
+﻿<UserControl x:Class="MigApp.UI.Controls.SecondaryNavigationMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MigApp.UI.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <!-- Определите эти кисти в App.xaml или в словаре ресурсов этого контрола -->
+        <!-- Пример:-->
+        <SolidColorBrush x:Key="WhiteBrush" Color="White"/>
+        <SolidColorBrush x:Key="TransparentBrush" Color="Transparent"/>
+        <SolidColorBrush x:Key="HoverBrush" Color="#4A4A4E"/>
+        <SolidColorBrush x:Key="PressedBrush" Color="#5A5A5E"/>
+        <SolidColorBrush x:Key="BorderBrush" Color="#555555"/>
+        
+
+        <!-- Стиль для кнопок навигации -->
+        <Style x:Key="NavButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource TransparentBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource WhiteBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource TransparentBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="Center"
+                                              Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource HoverBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource PressedBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Стиль для Expander'ов -->
+        <Style x:Key="NavExpanderStyle" TargetType="Expander">
+            <Setter Property="Foreground" Value="{DynamicResource WhiteBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource TransparentBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Expander">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto" x:Name="ContentRow"/>
+                            </Grid.RowDefinitions>
+                            <Border x:Name="HeaderBorder"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{DynamicResource BorderBrush}"
+                                    BorderThickness="0,0,0,1">
+                                <ToggleButton x:Name="HeaderSite"
+                                              IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                              Foreground="{TemplateBinding Foreground}"
+                                              Padding="10,10"
+                                              HorizontalContentAlignment="Stretch"
+                                              FontWeight="SemiBold">
+                                    <ToggleButton.Style>
+                                        <Style TargetType="ToggleButton">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ToggleButton">
+                                                        <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <ContentPresenter Grid.Column="0" Content="{TemplateBinding Content}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                                                <Path x:Name="Arrow" Grid.Column="1"
+                                                                      Data="M 0 0 L 4 4 L 8 0 Z"
+                                                                      Fill="{TemplateBinding Foreground}"
+                                                                      VerticalAlignment="Center"
+                                                                      HorizontalAlignment="Right"
+                                                                      Margin="0,0,8,0"
+                                                                      RenderTransformOrigin="0.5,0.5">
+                                                                    <Path.RenderTransform>
+                                                                        <RotateTransform Angle="0"/>
+                                                                    </Path.RenderTransform>
+                                                                </Path>
+                                                            </Grid>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Background" Value="{DynamicResource HoverBrush}"/>
+                                                            </Trigger>
+                                                            <Trigger Property="IsChecked" Value="True">
+                                                                <Setter TargetName="Arrow" Property="Data" Value="M 0 4 L 4 0 L 8 4 Z"/>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ToggleButton.Style>
+                                    <ContentPresenter ContentSource="Header" />
+                                </ToggleButton>
+                            </Border>
+
+                            <Border x:Name="ContentSite"
+                                    Grid.Row="1"
+                                    Visibility="Collapsed"
+                                    Background="{DynamicResource TransparentBrush}"
+                                    Margin="15,5,5,5">
+                                <ContentPresenter Focusable="False"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsExpanded" Value="True">
+                                <Setter TargetName="ContentSite" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+
+                <!-- Секция: Обычное Меню -->
+                <!-- По умолчанию эта секция видима для демонстрации, остальные скрыты -->
+                <StackPanel x:Name="MainMenuContent" Visibility="Visible">
+                    <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,1" Margin="0,0,0,5">
+                        <TextBlock Text="Меню" FontSize="20" FontWeight="Bold" Foreground="#ff8200" Margin="10"/>
+                    </Border>
+                    <StackPanel Margin="5">
+                        <Expander Header="Сотрудники" Style="{StaticResource NavExpanderStyle}">
+                            <StackPanel>
+                                <Button Content="Сотрудники" Style="{StaticResource NavButtonStyle}"/>
+                                <Button Content="Отделы" Style="{StaticResource NavButtonStyle}"/>
+                            </StackPanel>
+                        </Expander>
+                        <Expander Header="Техника" Style="{StaticResource NavExpanderStyle}">
+                            <StackPanel>
+                                <Button Content="Компьютеры" Style="{StaticResource NavButtonStyle}"/>
+                                <Button Content="Ноутбуки" Style="{StaticResource NavButtonStyle}"/>
+                                <Button Content="Планшеты" Style="{StaticResource NavButtonStyle}"/>
+                                <Button Content="Оргтехника" Style="{StaticResource NavButtonStyle}"/>
+                                <Button Content="Мониторы" Style="{StaticResource NavButtonStyle}"/>
+                                <Button Content="Роутеры" Style="{StaticResource NavButtonStyle}"/>
+                                <Button Content="Коммутаторы" Style="{StaticResource NavButtonStyle}"/>
+                                <Button Content="CCTV" Style="{StaticResource NavButtonStyle}"/>
+                                <Button Content="Прочее" Style="{StaticResource NavButtonStyle}"/>
+                            </StackPanel>
+                        </Expander>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Секция: Админ-меню -->
+                <StackPanel x:Name="AdminMenuContent" Visibility="Collapsed">
+                    <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,1" Margin="0,0,0,5">
+                        <TextBlock Text="Админ-меню" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource PrimaryBrush}" Margin="10"/>
+                    </Border>
+                    <StackPanel Margin="5">
+                        <Button Content="Пользователи" Style="{StaticResource NavButtonStyle}" Margin="5,0,5,5"/>
+                        <Button Content="Роли" Style="{StaticResource NavButtonStyle}" Margin="5,0,5,5"/>
+                        <Button Content="Логи" Style="{StaticResource NavButtonStyle}" Margin="5,0,5,5"/>
+                        <Button Content="IP адреса" Style="{StaticResource NavButtonStyle}" Margin="5,0,5,5"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Секция: Архив -->
+                <StackPanel x:Name="ArchiveMenuContent" Visibility="Collapsed">
+                    <Border BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,1" Margin="0,0,0,5">
+                        <TextBlock Text="Архив" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource PrimaryBrush}" Margin="10"/>
+                    </Border>
+                    <StackPanel Margin="5">
+                        <Expander Header="Сотрудники (Архив)" Style="{StaticResource NavExpanderStyle}">
+                            <StackPanel>
+                                <Button Content="Сотрудники" Style="{StaticResource NavButtonStyle}"/>
+                                <Button Content="Отделы" Style="{StaticResource NavButtonStyle}"/>
+                            </StackPanel>
+                        </Expander>
+                        <Expander Header="Техника (Архив)" Style="{StaticResource NavExpanderStyle}">
+                            <StackPanel>
+                                <Button Content="Компьютеры" Style="{StaticResource NavButtonStyle}"/>
+                                <Button Content="Ноутбуки" Style="{StaticResource NavButtonStyle}"/>
+                                <Button Content="Планшеты" Style="{StaticResource NavButtonStyle}"/>
+                                <Button Content="Оргтехника" Style="{StaticResource NavButtonStyle}"/>
+                                <Button Content="Мониторы" Style="{StaticResource NavButtonStyle}"/>
+                                <Button Content="Роутеры" Style="{StaticResource NavButtonStyle}"/>
+                                <Button Content="Коммутаторы" Style="{StaticResource NavButtonStyle}"/>
+                                <Button Content="CCTV" Style="{StaticResource NavButtonStyle}"/>
+                                <Button Content="Прочее" Style="{StaticResource NavButtonStyle}"/>
+                            </StackPanel>
+                        </Expander>
+                    </StackPanel>
+                </StackPanel>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

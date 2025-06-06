@@ -5,61 +5,68 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MigApp.MVVM.View"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:controls="clr-namespace:MigApp.UI.Controls"
+        xmlns:enums="clr-namespace:MigApp.Core.Enums"
         mc:Ignorable="d"
-        Title="{Binding Path=WindowTitle}"
+        Title="{Binding WindowTitle}"
         MinHeight="650" MinWidth="920"
         WindowStartupLocation="CenterScreen"
         Style="{DynamicResource MainWindowStyle}">
 
-    <Grid Background="Black">
+    <Grid>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="70" />
                 <ColumnDefinition Width="*"  />
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
-                <!-- Header -->
-                <RowDefinition Height="*"  />
-                <RowDefinition Height="15" />
-            </Grid.RowDefinitions>
 
-            <!-- Main Content -->
-            <ContentControl Grid.Row="1"
-                            Grid.Column="1"
-                            Grid.RowSpan="2"
-                            Content="{Binding Navigation.CurrentView}"
-                            MouseDown="CustomUI_CloseMenu"/>
+            <Border Grid.Column="1" ClipToBounds="True">
+                <Grid>
+                    <!-- Main Content Placeholder -->
+                    <Border Grid.Column="1"
+                            Background="{DynamicResource Surface2Brush}"
+                            CornerRadius="0 0 8 0">
+                        <TextBlock VerticalAlignment="Center" 
+                                   HorizontalAlignment="Center" 
+                                   FontSize="30" 
+                                   FontFamily="{DynamicResource BaseFontFamily}" 
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource ForegroundBrush}"
+                                   Text="Здесь пока ничего нет :("/>
+                    </Border>
+
+                    <!-- Main Content -->
+                    <ContentControl Grid.Column="1"
+                                    Content="{Binding Navigation.CurrentView}"/>
+
+                    <Border BorderThickness="0 1 0 0 " BorderBrush="{DynamicResource Surface1Brush}"/>
+                    <!-- Secondary Navigation Menu -->
+                    <controls:SlidingPanel Style="{DynamicResource SlidePanelStyle}"
+                       HorizontalAlignment="Left"
+                       IsOpen="{Binding IsNavigationOpen}"/>
+
+
+                </Grid>
+            </Border>
 
             <!-- Навигационная панель: Sidebar -->
-            <Grid Name="LeftPanel" Grid.Row="1" Grid.Column="0" Style="{DynamicResource LeftNavigationPanel}">
-                
-                <!-- Верхний блок кнопок -->
-                <StackPanel Name="LeftPanel_TopButtons" Style="{DynamicResource LeftPanelTopButtons}">
-                    <ToggleButton Name="MenuButton" Style="{DynamicResource MenuToggleButton}" ToolTip="Меню" />
-                    <Button Name="FavouriteButton" Style="{DynamicResource FavoriteButton}" ToolTip="Избранное" Command="{Binding NavigateToFavouriteCommand}">
-                        <materialDesign:PackIcon Kind="Star" />
-                    </Button>
-                    <ToggleButton Name="AdminButton" Style="{DynamicResource AdminToggleButton}" ToolTip="Администрирование" />
-                    <ToggleButton Name="ArchiveButton" Style="{DynamicResource ArchiveToggleButton}" ToolTip="Архив" />
-                </StackPanel>
-                
-                <!-- Нижний блок кнопок -->
-                <StackPanel Name="LeftPanel_BottomButtons" VerticalAlignment="Bottom" >
-                    <Button Style="{DynamicResource HelpButton}" ToolTip="Руководство | F1">
-                        <materialDesign:PackIcon Kind="HelpCircle" />
-                    </Button>
-                    <Button Style="{DynamicResource RefreshButton}" ToolTip="Обновить | F5">
-                        <materialDesign:PackIcon Kind="Reload" />
-                    </Button>
-                    <Button Style="{DynamicResource LogoutButton}" ToolTip="Выход" Command="{Binding LogOutCommand}">
-                        <materialDesign:PackIcon Kind="Logout" />
-                    </Button>
-                </StackPanel>
-            </Grid>
-            <!-- ... -->
+            <controls:MainNavigationPanel Grid.Column="0"
+                                          Style="{DynamicResource NavigationPanelStyle}"
+                                          OpenMenuCommand="{Binding SetNavigationPanelCommand}"
+                                          MenuCommandParameter="{x:Static enums:NavigationPanelType.Menu}"
+                                          OpenAdminMenuCommand="{Binding SetNavigationPanelCommand}"
+                                          AdminmenuCommandParameter="{x:Static enums:NavigationPanelType.AdminMenu}"
+                                          OpenArchiveCommand="{Binding SetNavigationPanelCommand}"
+                                          ArchiveCommandParameter="{x:Static enums:NavigationPanelType.Archive}"
+                                          OpenSettingsCommand=""
+                                          LogoutCommand="{Binding LogOutCommand}"/>
+
+
         </Grid>
 
-        <Border Name="Blindfall" Style="{DynamicResource BlindfallOverlayStyle}" />
+        <Border Name="Blindfall" Style="{DynamicResource BlindfallOverlayStyle}"/>
     </Grid>
+    
+    
+    
 </Window>

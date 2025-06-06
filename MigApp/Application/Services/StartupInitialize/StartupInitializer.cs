@@ -54,8 +54,7 @@ namespace MigApp.Application.Services.StartupInitialize
                 }
 
                 _logger.LogInformation($"Проверка подключения к БД");
-                var isConnected = await _connectionManager.TestAndSaveNewConnectionAsync(dbSettings);
-                _logger.LogInformation($"Проверка подключения к БД завершена. Результат: {isConnected}");
+                var isConnected = await _connectionManager.TestNewConnectionAsync(dbSettings);
 
                 return new StartupResult
                 {

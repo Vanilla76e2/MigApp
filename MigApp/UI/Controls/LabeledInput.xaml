@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="MigApp.Controls.LabeledInput"
+﻿<UserControl x:Class="MigApp.UI.Controls.LabeledInput"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:controls="clr-namespace:MigApp.Controls"
+             xmlns:controls="clr-namespace:MigApp.UI.Controls"
              mc:Ignorable="d" 
              x:Name="root"
              d:DesignHeight="50" d:DesignWidth="300">

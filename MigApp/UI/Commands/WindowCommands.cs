@@ -25,5 +25,23 @@ namespace MigApp.UI.Commands
                 }
             },
             _ => true);
+
+        public static ICommand OpenGuideCommand => new RelayCommand(param => OpenGuide(), _ => true);
+
+        private static void OpenGuide()
+        {
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = AppConstants.Urls.ManualLink,
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[{DateTime.Now} ERR] WindowCommands.OpenGuide: Произошла ошибка при попытке открыть руководство. ЭТО СООБЩЕНИЕ НЕ ПОПАДЁТ В ЛОГИ!\n{ex.Message}");
+            }
+        }
     }
 }

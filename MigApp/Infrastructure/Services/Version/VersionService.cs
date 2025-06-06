@@ -13,7 +13,7 @@ namespace MigApp.Infrastructure.Services.Version
         private readonly IInternetService _internetService;
         private readonly IAppLogger _logger;
         private string _currentVersion;
-        private string releasesUrl = Settings.Default.GitApiReleasesUrl.ToString();
+        private string releasesUrl = AppConstants.Urls.ReleasesLink;
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="VersionService"/>.
@@ -51,7 +51,6 @@ namespace MigApp.Infrastructure.Services.Version
                 string json = await response.Content.ReadAsStringAsync();
                 _logger.LogDebug($"Полученные JSON-данные (первые 100 символов): {json[..Math.Min(100, json.Length)]}...");
 
-                // Парсим JSON-ответ
                 using (JsonDocument document = JsonDocument.Parse(json))
                 {
                     JsonElement root = document.RootElement;
@@ -62,21 +61,15 @@ namespace MigApp.Infrastructure.Services.Version
                         return null;
                     }
 
-                    ReleaseInfo? latestReleaseInfo = null;
-                    int releaseCount = 0;
-
                     foreach (JsonElement release in root.EnumerateArray())
                     {
-                        releaseCount++;
-
-                        if (release.TryGetProperty("prerelease", out JsonElement preReleaseElement) && preReleaseElement.ValueKind == JsonValueKind.True)
+                        if (release.TryGetProperty("prerelease", out JsonElement preReleaseElement) && preReleaseElement.GetBoolean())
                         {
-                            _logger.LogDebug($"Пропуск pre-release версии №{releaseCount}");
+                            _logger.LogDebug($"Пропуск pre-release версии: {release.GetProperty("tag_name").GetString()}");
                             continue;
                         }
 
                         string? version = release.GetProperty("tag_name").GetString();
-                        bool isPreRelease = release.GetProperty("prerelease").GetBoolean();
                         string? downloadUrl = null;
 
                         _logger.LogDebug($"Обработка релиза {version}");
@@ -88,30 +81,31 @@ namespace MigApp.Infrastructure.Services.Version
                                 string? assetName = asset.GetProperty("name").GetString();
                                 if (assetName != null && assetName.EndsWith(".msi", StringComparison.OrdinalIgnoreCase))
                                 {
-                                    string? url = asset.GetProperty("browser_download_url").GetString();
-                                    if (url != null)
-                                    {
-                                        downloadUrl = url;
-                                        _logger.LogDebug($"Найден MSI-установщик: {downloadUrl}");
-                                        break;
-                                    }
+                                    downloadUrl = asset.GetProperty("browser_download_url").GetString();
+                                    _logger.LogDebug($"Найден MSI-установщик: {downloadUrl}");
+                                    break;
                                 }
                             }
                         }
-                        else _logger.LogDebug($"MSI-установщик не найден");
-
-                        if (latestReleaseInfo == null)
+                        else
                         {
-                            latestReleaseInfo = new ReleaseInfo
+                            _logger.LogDebug($"MSI-установщик не найден для релиза {version}");
+                        }
+
+                        if (version != null)
+                        {
+                            _logger.LogInformation($"Получена информация о релизе: {version}");
+                            return new ReleaseInfo
                             {
                                 Version = version,
-                                IsPreRelease = isPreRelease,
+                                IsPreRelease = false,
                                 DownloadUrl = downloadUrl
                             };
                         }
                     }
 
-                    return latestReleaseInfo;
+                    _logger.LogWarning("Не найдено подходящих релизов");
+                    return null;
                 }
             }
             catch (HttpRequestException ex)

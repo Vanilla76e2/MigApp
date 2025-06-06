@@ -93,7 +93,13 @@ namespace MigApp.Infrastructure.Services.AppUpdate
                 _logger.LogDebug($"Запуск процесса обновления приложения");
                 await GetLatestReleaseInfoAsync();
 
-                _logger.LogDebug($"Проверка наличия версии: {_latestReleaseInfo != null}");
+                if(_latestReleaseInfo == null)
+                {
+                    _logger.LogError("latestReleaseInfo оказался null");
+                    _niotificationService.ShowErrorAsync("Не удалось получить список версий.");
+                    return;
+                }
+
                 if (IsNewerVersionAvailable(_latestReleaseInfo ?? throw new NullReferenceException(nameof(_latestReleaseInfo))))
                 {
                     _logger.LogInformation($"Обнаружена версия: {_latestReleaseInfo.Version}");

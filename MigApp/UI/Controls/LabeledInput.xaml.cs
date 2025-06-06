@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Markup;
 
-namespace MigApp.Controls
+namespace MigApp.UI.Controls
 {
     [ContentProperty(nameof(InputContent))]
     public partial class LabeledInput : UserControl

@@ -6,15 +6,14 @@ using MigApp.Application.Services.SessionBuilder;
 using MigApp.Application.Services.StartupInitialize;
 using MigApp.Core.Session;
 using MigApp.Demo.Services.DemoModeManager;
-using MigApp.Infrastructure.Data;
 using MigApp.Infrastructure.Repository.Common;
 using MigApp.Infrastructure.Repository.UsersProfiles;
 using MigApp.Infrastructure.Services.AppLogger;
 using MigApp.Infrastructure.Services.AppUpdate;
 using MigApp.Infrastructure.Services.ConnectionSettingsManager;
+using MigApp.Infrastructure.Services.ConnectionTester;
 using MigApp.Infrastructure.Services.CredentialsManager;
 using MigApp.Infrastructure.Services.DatabaseContextProvider;
-using MigApp.Infrastructure.Services.DatabaseService;
 using MigApp.Infrastructure.Services.DnsResolver;
 using MigApp.Infrastructure.Services.Installer;
 using MigApp.Infrastructure.Services.Internet;
@@ -24,6 +23,7 @@ using MigApp.MVVM.View;
 using MigApp.UI.Base;
 using MigApp.UI.MVVM.ViewModel;
 using MigApp.UI.MVVM.ViewModel.Pages;
+using MigApp.UI.Services.AuthNotifier;
 using MigApp.UI.Services.Dispathcer;
 using MigApp.UI.Services.Navigation;
 using MigApp.UI.Services.UINotification;
@@ -49,9 +49,6 @@ public partial class App : System.Windows.Application
 
         IServiceCollection services = new ServiceCollection();
 
-        services.AddSingleton<IDbContextFactory<DbContext>, MigDatabaseContextFactory>();
-        services.AddTransient<IDbContextProvider, MigDatabaseContextProvider>();
-
         AddInterfacesToServices(services);
 
         AddViewsToServices(services);
@@ -69,7 +66,6 @@ public partial class App : System.Windows.Application
         var loginWindow = _serviceProvider.GetRequiredService<LoginWindow>();
         Current.MainWindow = loginWindow;
         Current.MainWindow.Show();
-        Debug.WriteLine($"LoginWindowModel создан: {loginWindow.GetHashCode()}");
     }
 
     private string GetStartupBanner()
@@ -119,7 +115,6 @@ public partial class App : System.Windows.Application
     private void AddInterfacesToServices(IServiceCollection services)
     {
         services.AddSingleton<INavigationService, NavigationService>();
-        services.AddSingleton<IVersionService, VersionService>();
         services.AddSingleton<IAppLogger, AppLogger>();
         services.AddSingleton<IUserSession, UserSession>();
         services.AddSingleton<CrashLogger>();
@@ -136,6 +131,9 @@ public partial class App : System.Windows.Application
         services.AddScoped<IConnectionSettingsManager, ConnectionSettingsManager>();
         services.AddScoped<ICredentialsManager, CredentialsManager>();
         services.AddScoped<IAuthorizationStrategy, RealAuthorizationStrategy>();
+        services.AddScoped<IDatabaseContextProvider, DatabaseContextProvider>();
+        services.AddScoped<IAuthNotifier, AuthNotifier>();
+        services.AddScoped<IVersionService, VersionService>();
 
         services.AddTransient<ISecurityService, SecurityService>();
         services.AddTransient<IDispatcher, WpfDispatcher>();

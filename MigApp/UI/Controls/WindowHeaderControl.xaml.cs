@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-namespace MigApp.Controls
+
+namespace MigApp.UI.Controls
 {
     /// <summary>
     /// Логика взаимодействия для WindowHeader.xaml

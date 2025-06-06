@@ -7,7 +7,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:behaviors="clr-namespace:MigApp.UI.Behaviors"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:controls="clr-namespace:MigApp.Controls"
+        xmlns:controls="clr-namespace:MigApp.UI.Controls"
         xmlns:Properties="clr-namespace:MigApp.Properties"
         mc:Ignorable="d"
         Title="{Binding WindowTitle}" Height="310" Width="450"  WindowStartupLocation="CenterScreen"
@@ -44,7 +44,7 @@
 
             </Grid>
 
-            <Grid Name="SettingsGrid" Grid.Row="0" Background="#323232" Visibility="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid Name="SettingsGrid" Grid.Row="0" Background="{DynamicResource Surface3Brush}" Visibility="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <StackPanel Style="{DynamicResource SettingsStackPanel}">
 
                     <StackPanel Style="{DynamicResource FormRowPanel}" Orientation="Horizontal">
@@ -80,7 +80,6 @@
             
             </Grid>
 
-            <!--#region Footer-->
             <Grid Grid.Row="1">
                 <Button x:Name="LoginButton" 
                         Content="Вход" 
@@ -89,21 +88,22 @@
                         IsEnabled="{Binding IsConnectionCorrect}" 
                         IsDefault="True"
                         Visibility="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Invert}"/>
-            
+
                 <Button x:Name="CommitSettingsButton" 
                         Content="Подтвердить" 
                         Style="{DynamicResource SettingsCommitButton}" 
                         Command="{Binding CommitSettingsCommand}" 
                         Visibility="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-            
+
                 <ToggleButton x:Name="SettingsToggle" 
                               Style="{DynamicResource SettingsToggleButton}" 
                               IsChecked="{Binding IsSettingsOn}"/>
 
-                <Button Style="{DynamicResource InfoButton}"
-                        Visibility="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Invert}"/>
+                <StackPanel HorizontalAlignment="Left" 
+                            Margin="15 0 0 0" 
+                            VerticalAlignment="Bottom" 
+                            Visibility="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}}">
 
-                <StackPanel HorizontalAlignment="Left" Margin="15 0 0 0" VerticalAlignment="Bottom" Visibility="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <ToggleButton Style="{DynamicResource DemoModeToggleButton}"
                                   IsChecked="{Binding IsDemoModeEnabled, Mode=OneWay}"
                                   Command="{Binding ToggleDemoModeCommand}"/>
@@ -113,40 +113,16 @@
                                Padding="0" Margin="0 0 0 0"/>
                 </StackPanel>
             </Grid>
-            <!--#endregion-->
 
-            <!--#region Loading    -->
             <Grid Name="LoadingBorder" Grid.Row="0" Grid.RowSpan="2" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <!--<Grid Name="LoadingBorder" Grid.Row="0" Grid.RowSpan="2" Visibility="Collapsed" >-->
-                <Border Background="Black" Opacity="0.8"/>
+                <!--<Grid Name="LoadingBorder" Grid.Row="0" Grid.RowSpan="2" Visibility="Collapsed" >-->
+                <Border Background="Black" Opacity="0.8" CornerRadius="{DynamicResource BottomCornerRadiusLarge}"/>
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 50">
-                    <ProgressBar Style="{DynamicResource ProgresRing}"/>
+                    <ProgressBar Style="{DynamicResource LoadingImage}"/>
                     <TextBlock Text="Проверка подключения" Foreground="White" FontSize="20"/>
                 </StackPanel>
             </Grid>
-            <!--#endregion-->
 
-            <materialDesign:Snackbar x:Name="MainSnackbar"
-                                      MessageQueue="{Binding SnackbarMessageQueue}"
-                                      HorizontalAlignment="Center"
-                                      VerticalAlignment="Top"
-                                      FontSize="14"
-                                      Panel.ZIndex="99">
-            
-                <materialDesign:Snackbar.Style>
-                    <Style TargetType="materialDesign:Snackbar" BasedOn="{StaticResource {x:Type materialDesign:Snackbar}}">
-                        <Setter Property="Background" Value="#FF424242"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Padding" Value="12 6"/>
-                        <Setter Property="Effect">
-                            <Setter.Value>
-                                <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.3"/>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </materialDesign:Snackbar.Style>
-            
-            </materialDesign:Snackbar>
         </Grid>
     </Border>
 </Window>

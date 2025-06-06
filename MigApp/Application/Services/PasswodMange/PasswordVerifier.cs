@@ -43,11 +43,11 @@ namespace MigApp.Application.Services.PasswodMange
         /// </remarks>
         public async Task<AuthResult> VerifyPasswordAsync(UsersProfile userProfile, string plainPassword)
         {
-            _logger.LogInformation($"Проверка пароля для {userProfile.Username}");
+            _logger.LogInformation($"Проверка пароля для '{userProfile.Username}'");
 
             if (string.IsNullOrEmpty(userProfile.UserPassword))
             {
-                _logger.LogDebug($"Пароль для пользователя {userProfile.Username} не установлен.");
+                _logger.LogDebug($"Пароль для пользователя '{userProfile.Username}' не установлен.");
                 
                 bool confirmed = await _notifier.ConfirmPasswordChangeAsync();
                 if(!confirmed)
@@ -71,11 +71,10 @@ namespace MigApp.Application.Services.PasswodMange
 
             if (!_securityService.VerifyHash(plainPassword, userProfile.UserPassword))
             {
-                _logger.LogWarning($"Пароль для пользователя {userProfile.Username} неверный.");
                 return new AuthResult(false, "Неверный логин или пароль.", null);
             }
 
-            _logger.LogInformation($"Пароль пользователя {userProfile.Username} подтверждён.");
+            _logger.LogInformation($"Пароль пользователя '{userProfile.Username}' подтверждён.");
             return new AuthResult(true, null, null);
         }
 

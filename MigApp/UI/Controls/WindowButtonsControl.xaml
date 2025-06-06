@@ -1,14 +1,19 @@
-﻿<UserControl x:Class="MigApp.Controls.WindowButtonsControl"
+﻿<UserControl x:Class="MigApp.UI.Controls.WindowButtonsControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:local="clr-namespace:MigApp.Controls"
+             xmlns:local="clr-namespace:MigApp.UI.Controls"
              xmlns:commands="clr-namespace:MigApp.UI.Commands"
              mc:Ignorable="d" x:Name="root"
              d:DesignHeight="40" d:DesignWidth="100">
     <StackPanel Orientation="Horizontal">
+        <Button x:Name="InfoButton"
+                Command="{x:Static commands:WindowCommands.OpenGuideCommand}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                Style="{Binding InfoButtonStyle, ElementName=root}"
+                ToolTip="Справка"/>
         <Button x:Name="MinimizeButton"
                 Command="{x:Static commands:WindowCommands.MinimizeCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"

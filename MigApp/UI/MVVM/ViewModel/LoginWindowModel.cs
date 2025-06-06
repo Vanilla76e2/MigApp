@@ -2,6 +2,7 @@
 using MigApp.Application.Services.Authorization;
 using MigApp.Application.Services.StartupInitialize;
 using MigApp.Core.Models;
+using MigApp.Core.Security;
 using MigApp.Demo.Services.DemoModeManager;
 using MigApp.Infrastructure.Services.AppLogger;
 using MigApp.Infrastructure.Services.ConnectionSettingsManager;
@@ -31,11 +32,10 @@ namespace MigApp.UI.MVVM.ViewModel
         private readonly IUINotificationService _ui;
 
         // Команды
-        public RelayCommand LoginCommand { get; set; }
-        public RelayCommand CommitSettingsCommand { get; set; }
-        public RelayCommand ToggleSettingsCommand { get; set; }
-        public RelayCommand ShowGuideCommand { get; set; }
-        public ICommand ToggleDemoModeCommand { get; }
+        public ICommand LoginCommand => new RelayCommand(async o => await AuthorizeUserAsync(), o => IsConnectionCorrect && !IsLoading);
+        public ICommand CommitSettingsCommand => new RelayCommand(async o => await CommitSettingsChangings(), o => IsSettingsOn && !IsLoading);
+        public ICommand ToggleSettingsCommand => new RelayCommand(o => ToggleSettings(), o => !IsLoading);
+        public ICommand ToggleDemoModeCommand => new RelayCommand(o => _demoModeService.ToggleDemoMode(), o => !IsLoading && !IsSettingsOn && !IsDemoModeEnabled);
 
 
         #region Свойства
@@ -110,7 +110,7 @@ namespace MigApp.UI.MVVM.ViewModel
         }
 
 
-        private bool _isPasswordRemembered { get; set; } = false;
+        private bool _isPasswordRemembered { get; set; } = Properties.Settings.Default.userRemembered;
         public bool IsPasswordRemembered
         {
             get => _isPasswordRemembered;
@@ -205,13 +205,6 @@ namespace MigApp.UI.MVVM.ViewModel
             _demoModeService = demoMode;
 
             _demoModeService.DemoModeChanged += OnDemoModeChanged;
-
-            LoginCommand = new RelayCommand(async o => await AuthorizeUserAsync(), o => IsConnectionCorrect);
-            CommitSettingsCommand = new RelayCommand(async o => await CommitSettingsChangings(), o => true);
-            ToggleSettingsCommand = new RelayCommand(o => ToggleSettings(), o => true);
-            ShowGuideCommand = new RelayCommand(o => ShowGuide(), o => true);
-            ToggleDemoModeCommand = new RelayCommand(o => _demoModeService.ToggleDemoMode(), o => true);
-            SnackbarMessageQueue = new SnackbarMessageQueue(TimeSpan.FromSeconds(1));
         }
 
         private void OnDemoModeChanged(object? sender, bool isDemoModeEnabled)
@@ -356,29 +349,6 @@ namespace MigApp.UI.MVVM.ViewModel
             }
             finally
             { IsLoading = false; }
-        }
-
-        /// <summary>
-        /// Открывает руководство пользователя в браузере по умолчанию.
-        /// </summary>
-        /// <remarks>
-        /// Привязка к комманде <see cref="ShowGuideCommand"/>.
-        /// </remarks>
-        private void ShowGuide()
-        {
-            try
-            {
-                SnackbarMessageQueue.Enqueue("Тестовое сообщение", "Открыть", () => Process.Start(new ProcessStartInfo
-                {
-                    FileName = "https://example.com",
-                    UseShellExecute = true
-                }));
-            }
-            catch (Exception ex)
-            {
-                _ui.ShowErrorAsync("Не удалось открыть руководство пользователя.\nПроверьте подключение к интернету или наличие браузера.");
-                _logger.LogError(ex, "Ошибка при открытии руководства пользователя");
-            }
         }
 
         /// <summary>

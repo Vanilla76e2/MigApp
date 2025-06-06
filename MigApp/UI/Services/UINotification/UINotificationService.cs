@@ -27,18 +27,18 @@ namespace MigApp.UI.Services.UINotification
         /// <returns><see langword="true"/>, если нажата кнопка "Да". <see langword="false"/>, если нажата кнопка "Нет".</returns>
         public async Task<bool> ShowConfirmation(string message)
         {
-            _logger.LogInformation($"Отображение диалога подтверждения: {message}");
+            _logger.LogDebug($"Отображение диалога подтверждения '{message}'");
             try
             {
                 var result = await _dispatcher.InvokeAsync(() =>
                     MessageBox.Show(message, "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes);
 
-                _logger.LogDebug($"Пользователь выбрал: {(result ? "Да" : "Нет")}");
+                _logger.LogDebug($"Пользователь выбрал '{(result ? "Да" : "Нет")}'");
                 return result;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Ошибка при отображении диалога подтверждения: {message}");
+                _logger.LogError(ex, $"Ошибка при отображении диалога подтверждения '{message}'");
                 throw;
             }
         }
@@ -49,7 +49,7 @@ namespace MigApp.UI.Services.UINotification
         /// <param name="message"></param>
         public async Task ShowErrorAsync(string message)
         {
-            _logger.LogDebug($"Отображение ошибки: {message}");
+            _logger.LogDebug($"Отображение ошибки '{message}'");
             try
             {
                 await _dispatcher.InvokeAsync(() =>
@@ -59,7 +59,7 @@ namespace MigApp.UI.Services.UINotification
             }
             catch (Exception ex)
             {
-                _logger.LogCritical(ex, $"Не удалось отобразить ошибку: {message}");
+                _logger.LogCritical(ex, $"Не удалось отобразить ошибку '{message}'");
                 throw;
             }
         }
@@ -79,7 +79,7 @@ namespace MigApp.UI.Services.UINotification
         /// <param name="message"></param>
         public async Task ShowWarningAsync(string message)
         {
-            _logger.LogWarning($"Отображение предупреждения: {message}");
+            _logger.LogDebug($"Отображение предупреждения '{message}'");
             try
             {
                 await _dispatcher.InvokeAsync(() =>
@@ -89,7 +89,7 @@ namespace MigApp.UI.Services.UINotification
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Не удалось отобразить предупреждение: {message}");
+                _logger.LogError(ex, $"Не удалось отобразить предупреждение '{message}'");
                 throw;
             }
         }

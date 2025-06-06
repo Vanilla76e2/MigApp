@@ -65,6 +65,9 @@ namespace MigApp.UI.Behaviors
             var behavior = (PasswordBoxBehavior)d;
             if (behavior._isUpdating) return;
 
+            if (behavior.AssociatedObject == null)
+                return;
+
             behavior._isUpdating = true;
             try
             {

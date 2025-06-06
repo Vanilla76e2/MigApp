@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MigApp.Application.Services.PasswordConverter;
 using MigApp.Core.Models;
 using MigApp.Demo;
 using MigApp.Infrastructure.Data;
@@ -65,7 +64,6 @@ public class DatabaseConnectionTester : IDatabaseConnectionTester
                     await CheckConnectionStep(context, "Тестовый запрос", () => TestQuery(context));
             if (result)
             {
-                await _securityService.SaveDatabaseSettingsToVaultAsync(databaseConnectionParameters);
                 _logger.LogInformation("Подключение к базе данных успешно установлено");
             }
             else await _ui.ShowWarningAsync("Не удалось установить соединение с базой данных.");
@@ -85,7 +83,7 @@ public class DatabaseConnectionTester : IDatabaseConnectionTester
 
     private async Task<bool> CheckConnectionStep(MigDatabaseContext context, string stepName, Func<Task<bool>> checkAction)
     {
-        _logger.LogDebug($"Проверка: {stepName}");
+        _logger.LogDebug($"Проверка на {stepName}");
 
         try
         {
@@ -96,7 +94,7 @@ public class DatabaseConnectionTester : IDatabaseConnectionTester
                 return true;
             }
 
-            _logger.LogWarning($"{stepName}: проверка не пройдена");
+            _logger.LogWarning($"Проверка на {stepName} не пройдена");
             return false;
         }
         catch (PostgresException pgEx)

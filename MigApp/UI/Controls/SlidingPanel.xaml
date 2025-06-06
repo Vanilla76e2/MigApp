@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="MigApp.UI.Controls.SlidingPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MigApp.UI.Controls"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="250">
+    <UserControl.RenderTransform>
+        <TranslateTransform x:Name="SlideTransform" X="-300"/>
+    </UserControl.RenderTransform>
+    
+    <Border x:Name="PanelRoot"
+            Style="{Binding PanelStyle, RelativeSource={RelativeSource AncestorType=UserControl}}">
+        
+
+        <Grid Margin="{Binding ContentMargin, RelativeSource={RelativeSource AncestorType=UserControl}}">
+
+            <ContentControl Content="{Binding CurrentContent, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            HorizontalAlignment="{Binding ContentHorizontalAlignment, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+
+        </Grid>
+    </Border>
+    
+</UserControl>

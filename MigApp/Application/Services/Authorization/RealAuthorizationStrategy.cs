@@ -51,12 +51,12 @@ namespace MigApp.Application.Services.Authorization
             ArgumentNullException.ThrowIfNull(username, nameof(username));
             ArgumentNullException.ThrowIfNull(password, nameof(password));
 
-            _logger.LogInformation($"Начата авторизация пользователя: {username}");
+            _logger.LogInformation($"Начата авторизация пользователя '{username}'");
 
             var user = await _userRepo.GetByUsernameAsync(username);
             if (user == null)
             {
-                _logger.LogWarning($"Пользлватель {username} не найден");
+                _logger.LogWarning($"Пользлватель '{username}' не найден");
                 return new AuthResult(false, "Неверное имя пользователя или пароль.", null);
             }
 

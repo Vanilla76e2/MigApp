@@ -27,6 +27,7 @@ namespace MigApp.Core
         public static class Urls
         {
             public const string ManualLink = "https://vanilla76e2.github.io/MigApp_Manual/";
+            public const string ReleasesLink = "https://api.github.com/repos/Vanilla76e2/MigApp/releases";
         }
     }
 }
