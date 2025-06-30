@@ -25,7 +25,9 @@
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
 
                     <controls:LabeledInput Label="Логин" Style="{DynamicResource LabeledInputBase}" LabelWidth="80" GapWidth="10" InputWidth="180">
-                        <TextBox Style="{DynamicResource TextBoxNormal}" Text="{Binding Username}"/>
+                        <TextBox Style="{DynamicResource TextBoxNormal}" 
+                                 Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+                                 KeyDown="EnterDown_NextElement"/>
                     </controls:LabeledInput>
 
                     <controls:LabeledInput Label="Пароль" Style="{DynamicResource LabeledInputBase}" LabelWidth="80" GapWidth="10" InputWidth="180">
@@ -50,21 +52,26 @@
                     <StackPanel Style="{DynamicResource FormRowPanel}" Orientation="Horizontal">
 
                         <controls:LabeledInput Label="Сервер" Style="{DynamicResource ServerLabeledInput}">
-                            <TextBox Style="{DynamicResource TextBoxNormal}" Text="{Binding DBServer}"/>
+                            <TextBox Style="{DynamicResource TextBoxNormal}" 
+                                     Text="{Binding DBServer, UpdateSourceTrigger=PropertyChanged}"/>
                         </controls:LabeledInput>
 
                         <controls:LabeledInput Label="Порт" Style="{DynamicResource PortLabeledInput}">
-                            <TextBox Style="{DynamicResource TextBoxNormal}" Text="{Binding DBPort}" MaxLength="4"/>
+                            <TextBox Style="{DynamicResource TextBoxNormal}" 
+                                     Text="{Binding DBPort, UpdateSourceTrigger=PropertyChanged}" 
+                                     MaxLength="4"/>
                         </controls:LabeledInput>
 
                     </StackPanel>
 
                     <controls:LabeledInput Label="База данных" Style="{DynamicResource SettingsLabeledInput}">
-                        <TextBox Style="{DynamicResource TextBoxNormal}" Text="{Binding DBName}"/>
+                        <TextBox Style="{DynamicResource TextBoxNormal}" 
+                                 Text="{Binding DBName, UpdateSourceTrigger=PropertyChanged}"/>
                     </controls:LabeledInput>
 
                     <controls:LabeledInput Label="Логин" Style="{DynamicResource SettingsLabeledInput}">
-                        <TextBox Style="{DynamicResource TextBoxNormal}" Text="{Binding DBUser}"/>
+                        <TextBox Style="{DynamicResource TextBoxNormal}" 
+                                 Text="{Binding DBUser, UpdateSourceTrigger=PropertyChanged}"/>
                     </controls:LabeledInput>
 
                     <controls:LabeledInput Label="Пароль" Style="{DynamicResource SettingsLabeledInput}">
@@ -86,18 +93,20 @@
                         Style="{DynamicResource LoginEnterButton}" 
                         Command="{Binding LoginCommand}" 
                         IsEnabled="{Binding IsConnectionCorrect}" 
-                        IsDefault="True"
+                        IsDefault="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Invert}"
                         Visibility="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Invert}"/>
 
                 <Button x:Name="CommitSettingsButton" 
                         Content="Подтвердить" 
                         Style="{DynamicResource SettingsCommitButton}" 
                         Command="{Binding CommitSettingsCommand}" 
+                        IsDefault="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}}"
                         Visibility="{Binding IsSettingsOn, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 
                 <ToggleButton x:Name="SettingsToggle" 
                               Style="{DynamicResource SettingsToggleButton}" 
-                              IsChecked="{Binding IsSettingsOn}"/>
+                              IsChecked="{Binding IsSettingsOn}"
+                              Focusable="False"/>
 
                 <StackPanel HorizontalAlignment="Left" 
                             Margin="15 0 0 0" 

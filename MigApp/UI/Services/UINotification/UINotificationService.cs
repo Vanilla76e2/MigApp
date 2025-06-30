@@ -1,97 +1,62 @@
-﻿using MigApp.Infrastructure.Services.AppLogger;
+﻿using MaterialDesignThemes.Wpf;
+using MigApp.Application.Services.EventAgregator;
+using MigApp.Infrastructure.Services.AppLogger;
+using MigApp.UI.Base;
+using MigApp.UI.Models.NotificationEvent;
 using MigApp.UI.Services.Dispathcer;
-using System.Windows;
+using System.Threading.Tasks;
 
 namespace MigApp.UI.Services.UINotification
 {
-    internal class UINotificationService : IUINotificationService
+    public class UINotificationService : IUINotificationService
     {
         private readonly IDispatcher _dispatcher;
         private readonly IAppLogger _logger;
+        private readonly ISnackbarHost _snackbarHost;
+        private readonly IModalDialogHost _modalHost;
 
-        /// <summary>
-        /// Инициализирует новый экземпляр сервиса уведомлений.
-        /// </summary>
-        /// <param name="dispatcher">Диспетчер для выполнения в UI-потоке.</param>
-        /// <param name="logger">Логгер для записи событий.</param>
-        public UINotificationService(IDispatcher dispatcher, IAppLogger logger)
+        public UINotificationService(IDispatcher dispatcher, 
+                                    IAppLogger logger, 
+                                    INotificationEventBus eventBus,
+                                    ISnackbarHost snackbarHost,
+                                    IModalDialogHost modalHost)
         {
-            _dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _dispatcher = dispatcher;
+            _logger = logger;
+            _snackbarHost = snackbarHost;
+            _modalHost = modalHost;
+
+            eventBus.Subscribe<SnackbarNotificationEvent>(OnSnackbar);
+            eventBus.Subscribe<ModalDialogNotificationEvent>(notification => _ = OnModal(notification));
         }
 
-        /// <summary>
-        /// Отображает диалоговое окно с подтверждением.
-        /// </summary>
-        /// <param name="message">Текст сообщения.</param>
-        /// <returns><see langword="true"/>, если нажата кнопка "Да". <see langword="false"/>, если нажата кнопка "Нет".</returns>
-        public async Task<bool> ShowConfirmation(string message)
+        private void OnSnackbar(SnackbarNotificationEvent notification)
         {
-            _logger.LogDebug($"Отображение диалога подтверждения '{message}'");
-            try
+            _dispatcher.Invoke(() =>
             {
-                var result = await _dispatcher.InvokeAsync(() =>
-                    MessageBox.Show(message, "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes);
-
-                _logger.LogDebug($"Пользователь выбрал '{(result ? "Да" : "Нет")}'");
-                return result;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Ошибка при отображении диалога подтверждения '{message}'");
-                throw;
-            }
+                _logger.LogDebug($"Snackbar: {notification.Message}");
+                _snackbarHost.Show(notification.Message, notification.Type, notification.Duration);
+            });
         }
 
-        /// <summary>
-        /// Выводит уведомление об ошибке.
-        /// </summary>
-        /// <param name="message"></param>
-        public async Task ShowErrorAsync(string message)
+        private async Task OnModal(ModalDialogNotificationEvent notification)
         {
-            _logger.LogDebug($"Отображение ошибки '{message}'");
-            try
+            await _dispatcher.InvokeAsync(async () =>
             {
-                await _dispatcher.InvokeAsync(() =>
+                bool result = await _modalHost.ShowAsync(
+                    notification.Title,
+                    notification.Message,
+                    notification.Type);
+
+                if (result)
                 {
-                    MessageBox.Show(message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogCritical(ex, $"Не удалось отобразить ошибку '{message}'");
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Выводит информационное уведомление.
-        /// </summary>
-        /// <param name="message"></param>
-        public async Task ShowInfoAsync(string message)
-        {
-            await _dispatcher.InvokeAsync(() => { MessageBox.Show(message, "Информация", MessageBoxButton.OK, MessageBoxImage.Information); });
-        }
-
-        /// <summary>
-        /// Выводит предупреждение.
-        /// </summary>
-        /// <param name="message"></param>
-        public async Task ShowWarningAsync(string message)
-        {
-            _logger.LogDebug($"Отображение предупреждения '{message}'");
-            try
-            {
-                await _dispatcher.InvokeAsync(() =>
+                    notification.OnConfirmed?.Invoke();
+                }
+                else
                 {
-                    MessageBox.Show(message, "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
-                });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Не удалось отобразить предупреждение '{message}'");
-                throw;
-            }
+                    notification.OnCancelled?.Invoke();
+                }
+            });
         }
     }
 }

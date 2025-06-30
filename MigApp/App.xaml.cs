@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MigApp.Application.Services.Authorization;
+using MigApp.Application.Services.EventAgregator;
 using MigApp.Application.Services.PasswodMange;
 using MigApp.Application.Services.SessionBuilder;
 using MigApp.Application.Services.StartupInitialize;
@@ -26,6 +27,7 @@ using MigApp.UI.MVVM.ViewModel.Pages;
 using MigApp.UI.Services.AuthNotifier;
 using MigApp.UI.Services.Dispathcer;
 using MigApp.UI.Services.Navigation;
+using MigApp.UI.Services.TargetWindowResolver;
 using MigApp.UI.Services.UINotification;
 using System.Net;
 using System.Windows;
@@ -120,6 +122,8 @@ public partial class App : System.Windows.Application
         services.AddSingleton<CrashLogger>();
         services.AddSingleton<Dispatcher>(provider => Current.Dispatcher);
         services.AddSingleton<IDemoModeService, DemoModeService>();
+        services.AddSingleton<ITargetWindowResolver, TargetWindowResolver>();
+        services.AddSingleton<INotificationEventBus, NotificationEventBus>();
 
         services.AddScoped(typeof(IDatabaseRepository<>), typeof(EfRepository<>));
         services.AddScoped<IUsersProfilesRepository, UsersProfilesRepository>();

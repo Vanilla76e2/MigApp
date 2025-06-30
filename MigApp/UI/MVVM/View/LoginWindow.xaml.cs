@@ -1,5 +1,7 @@
 ﻿using MigApp.UI.MVVM.ViewModel;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace MigApp.MVVM.View
 {
@@ -31,6 +33,16 @@ namespace MigApp.MVVM.View
             {
                 LoginButton.IsDefault = true;
                 CommitSettingsButton.IsDefault = false;
+            }
+        }
+
+        private void EnterDown_NextElement(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                var textBox = sender as TextBox;
+                textBox?.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+                e.Handled = true;
             }
         }
     }

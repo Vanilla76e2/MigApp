@@ -34,7 +34,7 @@
                     MaxWidth="{Binding LabelMaxWidth, ElementName=root}">
 
             <TextBlock Text="{Binding Label, ElementName=root}"
-                       Style="{DynamicResource TextBlockBase}" />
+                       Style="{DynamicResource TextBlockBase}"/>
 
             <TextBlock Text="*"
                        Foreground="Red"
@@ -60,7 +60,7 @@
                 MinWidth="{Binding InputMinWidth, ElementName=root}"
                 MaxWidth="{Binding InputMaxWidth, ElementName=root}">
 
-            <ContentControl Content="{Binding InputContent, ElementName=root}"/>
+            <ContentControl Content="{Binding InputContent, ElementName=root}" Focusable="False"/>
         </Border>
     </StackPanel>
 </UserControl>

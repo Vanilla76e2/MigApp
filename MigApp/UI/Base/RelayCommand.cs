@@ -32,6 +32,10 @@ namespace MigApp.UI.Base
             return;
         }
 
+        public void RaiseCanExecuteChanged()
+        {
+            CommandManager.InvalidateRequerySuggested();
+        }
     }
 
     public class RelayCommand<T> : ICommand
@@ -65,6 +69,11 @@ namespace MigApp.UI.Base
         {
             add => CommandManager.RequerySuggested += value!;
             remove => CommandManager.RequerySuggested -= value!;
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            CommandManager.InvalidateRequerySuggested();
         }
     }
 }

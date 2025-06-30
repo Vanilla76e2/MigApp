@@ -12,7 +12,7 @@
             Background="{Binding PanelBackground, RelativeSource={RelativeSource AncestorType=UserControl}}">
         <DockPanel VerticalAlignment="Stretch" LastChildFill="True" Width="{Binding PanelWidth, RelativeSource={RelativeSource AncestorType=UserControl}}">
             <!-- Верхние кнопки -->
-            <StackPanel x:Name="TopStackPanel" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20">
+            <StackPanel x:Name="TopStackPanel" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="-5,20">
                 <ToggleButton Style="{Binding NavigationButtonStyle, RelativeSource={RelativeSource AncestorType=UserControl}}"
                               Command="{Binding OpenMenuCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                               CommandParameter="{Binding MenuCommandParameter, RelativeSource={RelativeSource AncestorType=UserControl}}"

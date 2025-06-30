@@ -32,10 +32,10 @@ namespace MigApp.UI.MVVM.ViewModel
         private readonly IUINotificationService _ui;
 
         // Команды
-        public ICommand LoginCommand => new RelayCommand(async o => await AuthorizeUserAsync(), o => IsConnectionCorrect && !IsLoading);
-        public ICommand CommitSettingsCommand => new RelayCommand(async o => await CommitSettingsChangings(), o => IsSettingsOn && !IsLoading);
-        public ICommand ToggleSettingsCommand => new RelayCommand(o => ToggleSettings(), o => !IsLoading);
-        public ICommand ToggleDemoModeCommand => new RelayCommand(o => _demoModeService.ToggleDemoMode(), o => !IsLoading && !IsSettingsOn && !IsDemoModeEnabled);
+        public RelayCommand LoginCommand => new RelayCommand(async o => await AuthorizeUserAsync(), o => IsConnectionCorrect || IsDemoModeEnabled);
+        public RelayCommand CommitSettingsCommand => new RelayCommand(async o => await CommitSettingsChangings(), o => true);
+        public RelayCommand ToggleSettingsCommand => new RelayCommand(o => ToggleSettings(), o => true);
+        public RelayCommand ToggleDemoModeCommand => new RelayCommand(o => _demoModeService.ToggleDemoMode(), o => true);
 
 
         #region Свойства
@@ -60,6 +60,7 @@ namespace MigApp.UI.MVVM.ViewModel
             {
                 _isSettingsVisible = value;
                 OnPropertyChanged();
+
             }
         }
 
@@ -71,6 +72,7 @@ namespace MigApp.UI.MVVM.ViewModel
             {
                 _isConnectionCorrect = value;
                 OnPropertyChanged();
+                LoginCommand?.RaiseCanExecuteChanged();
             }
         }
 

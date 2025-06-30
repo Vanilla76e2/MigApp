@@ -18,8 +18,8 @@
                 Command="{x:Static commands:WindowCommands.MinimizeCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                 Style="{Binding MinimizeButtonStyle, ElementName=root}"
-                Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=ResizeMode, Converter={StaticResource ResizeModeToVisibilityConverter}}"
                 ToolTip="Свернуть"/>
+                <!--Visibility="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=ResizeMode, Converter={StaticResource ResizeModeToVisibilityConverter}}"-->
         <Button x:Name="MaximizeButton"
                 Command="{x:Static commands:WindowCommands.ToggleMaximizeCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"

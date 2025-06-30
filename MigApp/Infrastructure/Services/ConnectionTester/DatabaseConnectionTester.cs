@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MigApp.Application.Services.MessagesPublisher;
 using MigApp.Core.Models;
 using MigApp.Demo;
 using MigApp.Infrastructure.Data;
@@ -15,12 +16,12 @@ public class DatabaseConnectionTester : IDatabaseConnectionTester
     private readonly IDatabaseContextProvider _provider;
     private readonly ISecurityService _securityService;
     private IAppLogger _logger;
-    private IUINotificationService _ui;
+    private IMessagePublisher _messagePublisher;
 
-    public DatabaseConnectionTester(IAppLogger logger, IUINotificationService ui, IDatabaseContextProvider provider, ISecurityService securityService)
+    public DatabaseConnectionTester(IAppLogger logger, IMessagePublisher messagePublisher, IDatabaseContextProvider provider, ISecurityService securityService)
     {
         _logger = logger;
-        _ui = ui;
+        _messagePublisher = messagePublisher;
         _provider = provider;
         _securityService = securityService;
     }
@@ -66,7 +67,7 @@ public class DatabaseConnectionTester : IDatabaseConnectionTester
             {
                 _logger.LogInformation("Подключение к базе данных успешно установлено");
             }
-            else await _ui.ShowWarningAsync("Не удалось установить соединение с базой данных.");
+            else await _messagePublisher.ShowWarningAsync("Не удалось установить соединение с базой данных.");
             return result;
         }
         catch (NpgsqlException npgEx)
@@ -112,7 +113,7 @@ public class DatabaseConnectionTester : IDatabaseConnectionTester
     private async Task LogAndShowError(Exception ex, string message)
     {
         _logger.LogError(ex, message);
-        await _ui.ShowErrorAsync($"{message}: {ex.Message}");
+        await _messagePublisher.ShowErrorAsync($"{message}: {ex.Message}");
     }
 
     private async Task<bool> GetConnection(MigDatabaseContext context)
@@ -146,32 +147,32 @@ public class DatabaseConnectionTester : IDatabaseConnectionTester
         if (parameters == null)
         {
             _logger.LogWarning("Параметры подключения не указаны");
-            _ui.ShowWarningAsync("Не указаны параметры подключения").Wait();
+            _messagePublisher.ShowWarningAsync("Не указаны параметры подключения").Wait();
             return false;
         }
 
         if (string.IsNullOrWhiteSpace(parameters.Host))
         {
             _logger.LogWarning("Не указан сервер базы данных");
-            _ui.ShowWarningAsync("Не указан сервер базы данных").Wait();
+            _messagePublisher.ShowWarningAsync("Не указан сервер базы данных").Wait();
             return false;
         }
         else if (string.IsNullOrEmpty(parameters.Database))
         {
             _logger.LogWarning("Не указана база данных");
-            _ui.ShowWarningAsync("Не указана база данных").Wait();
+            _messagePublisher.ShowWarningAsync("Не указана база данных").Wait();
             return false;
         }
         else if (string.IsNullOrEmpty(parameters.Username))
         {
             _logger.LogWarning("Не указан пользователь базы данных");
-            _ui.ShowWarningAsync("Не указан пользователь базы данных").Wait();
+            _messagePublisher.ShowWarningAsync("Не указан пользователь базы данных").Wait();
             return false;
         }
         else if (string.IsNullOrEmpty(parameters.Password))
         {
             _logger.LogWarning("Не указан пароль базы данных");
-            _ui.ShowWarningAsync("Не указан пароль базы данных").Wait();
+            _messagePublisher.ShowWarningAsync("Не указан пароль базы данных").Wait();
             return false;
         }
         return true;
